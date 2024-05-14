@@ -24,8 +24,13 @@ dependencies {
     runtimeOnly 'com.h2database:h2'
     testImplementation 'org.springframework.security:spring-security-test'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    runtimeOnly('org.springframework.boot:spring-boot-devtools')
 }
 
 tasks.named('test') {
     useJUnitPlatform()
+}
+
+bootRun {
+    sourceResources(sourceSets.main)
 }
