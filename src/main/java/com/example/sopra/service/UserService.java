@@ -1,6 +1,7 @@
 package com.example.sopra.service;
 
 
+import com.example.sopra.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -22,11 +23,11 @@ public class UserService implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
 
-    public User saveUser(User user) {
+    public com.example.sopra.entity.User saveUser(com.example.sopra.entity.User user) {
         return userRepository.save(user);
     }
 
-    public List<User> findAllUsers() {
+    public List<com.example.sopra.entity.User> findAllUsers() {
         return userRepository.findAll();
     }
 
@@ -36,7 +37,7 @@ public class UserService implements UserDetailsService {
      * @param username der username.
      * @return User-Objekt.
      */
-    public User getUserByUsername(String username) {
+    public com.example.sopra.entity.User getUserByUsername(String username) {
         return userRepository.findByUsername(username);
     }
 
@@ -49,9 +50,9 @@ public class UserService implements UserDetailsService {
      *
      * @return User.
      */
-    public Benutzer getCurrentUser() {
-        return getBenutzerByUsername(((org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext()
-                .getAuthentication().getPrincipal()).getUsername());
+    public com.example.sopra.entity.User getCurrentUser() {
+        return getUserByUsername((((org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext()
+                .getAuthentication().getPrincipal()).getUsername()));
     }
 
     /**
@@ -74,7 +75,7 @@ public class UserService implements UserDetailsService {
      */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Benutzer user = userRepository.findByUsername(username);
+        com.example.sopra.entity.User user = userRepository.findByUsername(username);
         if (Objects.isNull(user)) {
             throw new UsernameNotFoundException("Could not find the user for username " + username);
         }
