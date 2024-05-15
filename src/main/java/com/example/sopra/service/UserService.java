@@ -75,13 +75,22 @@ public class UserService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Benutzer user = userRepository.findByUsername(username);
-        if (Objects.isNull(User)) {
+        if (Objects.isNull(user)) {
             throw new UsernameNotFoundException("Could not find the user for username " + username);
         }
         List<GrantedAuthority> grantedAuthorities = getUserAuthorities(user.getRoles());
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
                 user.isEnabled(), true, true, user.isEnabled(), grantedAuthorities);
     }
+
+    private List<GrantedAuthority> getUserAuthorities(Set<Rolle> roleSet) {
+        List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
+        for (Rolle role : roleSet) {
+            grantedAuthorities.add(new SimpleGrantedAuthority(role.getRolename()));
+        }
+        return grantedAuthorities;
+    }
+
 
     private List<GrantedAuthority> getUserAuthorities(Set<Rolle> roleSet) {
         List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
