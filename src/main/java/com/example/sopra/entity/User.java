@@ -4,26 +4,37 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import org.springframework.data.annotation.Id;
 
+
+import jakarta.persistence.FetchType;
+import jakarta.persistence.ManyToMany;
+
+
 @Entity
 public class User {
+
     @Id
     @GeneratedValue
-    private Integer userID;
+    private Integer userId;
 
     private String username;
 
     private String password;
 
+    private boolean enabled = true;
+
+
+
+
     public User() {
-
+        // empty constructor for Hibernate
     }
 
-    public Integer getUserID() {
-        return userID;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setUserID(Integer userID) {
-        this.userID = userID;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     public String getUsername() {
@@ -41,4 +52,14 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
+
 }
