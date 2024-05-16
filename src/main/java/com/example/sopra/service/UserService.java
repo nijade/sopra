@@ -4,9 +4,9 @@ package com.example.sopra.service;
 import com.example.sopra.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
+
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
+
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -79,25 +79,17 @@ public class UserService implements UserDetailsService {
         if (Objects.isNull(user)) {
             throw new UsernameNotFoundException("Could not find the user for username " + username);
         }
-        List<GrantedAuthority> grantedAuthorities = getUserAuthorities(user.getRoles());
+        List<GrantedAuthority> grantedAuthorities = getUserAuthorities();
+
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
                 user.isEnabled(), true, true, user.isEnabled(), grantedAuthorities);
     }
 
-    private List<GrantedAuthority> getUserAuthorities(Set<Rolle> roleSet) {
+    // returning an empty list "grantedAuthorities" to match Constructors requirements
+    private List<GrantedAuthority> getUserAuthorities() {
         List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
-        for (Rolle role : roleSet) {
-            grantedAuthorities.add(new SimpleGrantedAuthority(role.getRolename()));
-        }
+
         return grantedAuthorities;
     }
 
-
-    private List<GrantedAuthority> getUserAuthorities(Set<Rolle> roleSet) {
-        List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
-        for (Rolle role : roleSet) {
-            grantedAuthorities.add(new SimpleGrantedAuthority(role.getRolename()));
-        }
-        return grantedAuthorities;
-    }
 }
