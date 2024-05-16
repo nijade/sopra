@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+import org.springframework.stereotype.Component;
 
+@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+@Component
 public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent> {
 
     private static final Logger logger = LoggerFactory.getLogger(TestDataLoader.class);

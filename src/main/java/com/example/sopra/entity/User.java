@@ -1,7 +1,6 @@
 package com.example.sopra.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.*;
 import org.springframework.data.annotation.Id;
 
 
@@ -10,8 +9,10 @@ import jakarta.persistence.ManyToMany;
 
 
 @Entity
+@Table(name = "app_user")
 public class User {
 
+    @jakarta.persistence.Id
     @Id
     @GeneratedValue
     private Integer userId;
@@ -60,6 +61,5 @@ public class User {
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }
-
 
 }
