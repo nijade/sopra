@@ -1,8 +1,22 @@
-Members within Project:
-nijade - Nils Denk
-PhilippBurowStutgart - Philipp Burow
-lino-antonino - Lino Mühlhäuser
-jplutz - Jonas Lutz
+# "SoPra"
+Basic web application that allows registered users to communicate with each other to trade second-hand plants. Based on the idea of "Kleinanzeigen".
+
+## Details
+Developer of "SoPra" (GitHub-Username, full name):
+- nijade, Nils Denk
+- PhilippBurowStutgart, Philipp Burow
+- lino-antonino, Lino Mühlhäuser
+- jplutz, Jonas Lutz
+
+## Build
+- Ensure gradle is installed
+
+## Run
+- Build project
+- For Run the project following this procedure:
+  - click on the gradle symbol on the top right
+  - click "sopra [bootRun]" in the folder "Run Configuration"
+  - open "localhost:8080/" in your browser (good option is firefox or chrome)
 
 
 
