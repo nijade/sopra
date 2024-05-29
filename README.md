@@ -27,7 +27,7 @@ Developer of "SoPra" (GitHub-Username, full name):
    - BEFORE MERGING with Main: create a BackupBranch of the latest stable Version (Main) with versions date (time , date, month) + Index (incremental).
      
  - Development Branch:
-   - Branch for implementing new features on top of the currently stable version (same as Main).
+   - Branch for implementing new features on top of the currently stable version (same as Main). PUSHED ON MAIN when milestone is reached successfully.
      
  - BackUpOfDev_hh/dd/mm_Index:
    - BEFORE PUSHING your Changes, create a BackupBranch of the currently latest Version of the DevelopementBranch (time, date, month) + Index (incremental).
