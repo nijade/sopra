@@ -33,7 +33,8 @@ Developer of "SoPra" (GitHub-Username, full name):
    - BEFORE PUSHING your Changes, create a BackupBranch of the currently latest Version of the DevelopementBranch (time, date, month) + Index (incremental).
 
  ## Developement
-  
+
+     3.2:
     - Nils: Auf der eingeloggten Startseite können die User Pflanzen über ein Suchfeld suchen und
       gefundene Pflanzen tabellarisch ansehen.
     - Jonas: User können Pflanzen einstellen, bearbeiten und löschen.
