@@ -23,7 +23,7 @@ Developer of "SoPra" (GitHub-Username, full name):
  - Main Branch:
    - latest stable Version.
      
- - BackupBranch_hh/dd/mm_Index:
+ - BackUpOfMain_hh/dd/mm_Index:
    - BEFORE MERGING with Main: create a BackupBranch of the latest stable Version (Main) with versions date (time , date, month) + Index (incremental).
      
  - Development Branch:
