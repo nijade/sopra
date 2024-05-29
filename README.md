@@ -32,7 +32,8 @@ Developer of "SoPra" (GitHub-Username, full name):
  - BackUpOfDev_hh/dd/mm_Index:
    - BEFORE PUSHING your Changes, create a BackupBranch of the currently latest Version of the DevelopementBranch (time, date, month) + Index (incremental).
 
-  ##Developement
+ ## Developement
+  
     - Nils: Auf der eingeloggten Startseite können die User Pflanzen über ein Suchfeld suchen und
       gefundene Pflanzen tabellarisch ansehen.
     - Jonas: User können Pflanzen einstellen, bearbeiten und löschen.
