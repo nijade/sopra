@@ -4,7 +4,7 @@ Basic web application that allows registered users to communicate with each othe
 ## Details
 Developer of "SoPra" (GitHub-Username, full name):
 - nijade, Nils Denk
-- PhilippBurowStutgart, Philipp Burow
+- PhilippBurowStuttgart, Philipp Burow
 - lino-antonino, Lino Mühlhäuser
 - jplutz, Jonas Lutz
 
