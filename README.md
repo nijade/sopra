@@ -19,9 +19,14 @@ Developer of "SoPra" (GitHub-Username, full name):
   - open "localhost:8080/" in your browser (good option is firefox or chrome)
 
  ## Branches
- - Main Branch: latest stable Version.
- - BackupBranch_hh/dd/mm/: latest BackupBranch of the stable Version (Main) with versions date (time , date, month).
- - Developement Branch: Branch for implementing new features on top of the currently stable version (branched from Main).
+ - Main Branch:
+   - latest stable Version.
+     
+ - BackupBranch_hh/dd/mm/:
+   - latest BackupBranch of the stable Version (Main) with versions date (time , date, month).
+     
+ - Developement Branch:
+   - Branch for implementing new features on top of the currently stable version (branched from Main).
 
 
 
