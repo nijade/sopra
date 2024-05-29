@@ -25,7 +25,7 @@ Developer of "SoPra" (GitHub-Username, full name):
  - BackupBranch_hh/dd/mm/:
    - latest BackupBranch of the stable Version (Main) with versions date (time , date, month).
      
- - Developement Branch:
+ - Development Branch:
    - Branch for implementing new features on top of the currently stable version (same as Main).
 
 
