@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Entity
+@Table(name = "plant")
 public class Plant {
 
     @Id
@@ -36,6 +37,9 @@ public class Plant {
     @ElementCollection
     private List<String> tags;
 
+    public Plant(){
+        // empty constructor for Hibernate
+    }
     public Integer getPlantID() {
         return plantID;
     }

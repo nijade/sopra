@@ -1,5 +1,6 @@
 package com.example.sopra.service;
 
+import com.example.sopra.entity.Plant;
 import com.example.sopra.entity.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,6 +9,9 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
 @Component
@@ -20,6 +24,9 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private PlantService plantService;
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
@@ -53,6 +60,51 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
         user5.setUsername("user5");
         user5.setPassword(passwordEncoder.encode("ijkl"));
         userService.saveUser(user5);
+
+        // Beispielpflanze: Rose
+        Plant rose = new Plant();
+        rose.setTitle("rote Rose");
+        rose.setPhotos(Arrays.asList("images/rose.jpg"));
+        rose.setHeight(50);
+        rose.setPrice(15.99);
+        rose.setHasPlanter(true);
+        rose.setDescription("Eine wunderschöne rote Rose.");
+        rose.setPotCircumference(20.0);
+        rose.setPlantCircumference(30.0);
+        rose.setTags(Arrays.asList("blume", "garten", "romantisch"));
+        rose.setUser(user1);
+
+        plantService.savePlant(rose);
+
+        // Beispielpflanze: Tulpe
+        Plant tulip = new Plant();
+        tulip.setTitle("Tulpe");
+        tulip.setPhotos(Arrays.asList("images/tulip.jpg"));
+        tulip.setHeight(30);
+        tulip.setPrice(8.99);
+        tulip.setHasPlanter(false);
+        tulip.setDescription("Eine bunte Tulpe, ideal für den Frühlingsgarten.");
+        tulip.setPotCircumference(0.0);
+        tulip.setPlantCircumference(10.0);
+        tulip.setTags(Arrays.asList("blume", "frühling", "garten"));
+        tulip.setUser(user2);
+
+        plantService.savePlant(tulip);
+
+        // Beispielpflanze: Kaktus
+        Plant cactus = new Plant();
+        cactus.setTitle("Kakteen Echinopsis Lobivia cacti hybrid Lobivia cactus");
+        cactus.setPhotos(Arrays.asList("images/cactus.jpg", "images/cactus2.jpg"));
+        cactus.setHeight(40);
+        cactus.setPrice(90.49);
+        cactus.setHasPlanter(true);
+        cactus.setDescription("");
+        cactus.setPotCircumference(30.0);
+        cactus.setPlantCircumference(20.0);
+        cactus.setTags(Arrays.asList("sukkulent", "wohnung", "pflegeleicht"));
+        cactus.setUser(user3);
+
+        plantService.savePlant(cactus);
     }
 
     @Override
