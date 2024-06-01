@@ -76,7 +76,7 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
 
         plantService.savePlant(rose);
 
-        // Beispielpflanze: Tulpe
+        // Beispielpflanze: Tulpe groß
         Plant tulip = new Plant();
         tulip.setTitle("Tulpe");
         tulip.setPhotos(Arrays.asList("images/tulip.jpg"));
@@ -90,6 +90,22 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
         tulip.setUser(user2);
 
         plantService.savePlant(tulip);
+
+        // Beispielpflanze: Tulpe medium
+        Plant tulipMedium = new Plant();
+        tulipMedium.setTitle("Tulpe Medium");
+        tulipMedium.setPhotos(Arrays.asList("images/tulip.jpg"));
+        tulipMedium.setHeight(20);
+        tulipMedium.setPrice(8.99);
+        tulipMedium.setHasPlanter(false);
+        tulipMedium.setDescription("Eine bunte medium Tulpe, ideal für den Frühlingsgarten.");
+        tulipMedium.setPotCircumference(0.0);
+        tulipMedium.setPlantCircumference(10.0);
+        tulipMedium.setTags(Arrays.asList("blume", "frühling", "garten"));
+        tulipMedium.setUser(user2);
+
+
+        plantService.savePlant(tulipMedium);
 
         // Beispielpflanze: Kaktus
         Plant cactus = new Plant();

@@ -1,12 +1,49 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <th:block th:insert="~{fragments/htmlHead :: head}"></th:block>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            height: 100%;
+            padding-top: 10%;
+        }
+        .search-box {
+            text-align: center;
+        }
+        .search-box input[type="text"] {
+            width: 300px;
+            padding: 10px;
+            font-size: 16px;
+        }
+        .search-box input[type="submit"] {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
-<p th:text="'Dies ist Ihre initiale Startseite'"></p>
+<div class="container">
+    <div class="search-box">
+        <form action="/searchPlants" method="get">
+            <input type="text" name="title" placeholder="Enter plant name...">
+            <input type="submit" value="Search">
+        </form>
+    </div>
+</div>
+<p th:text="'This is your initial home page'"></p>
 <p th:text="${message}"></p>
 </body>
 </html>

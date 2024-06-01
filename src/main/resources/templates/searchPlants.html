@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <th:block th:insert="~{fragments/htmlHead :: head}"></th:block>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plant Search Results</title>
+  <style>
+    body, html {
+      height: 100%;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+    .container {
+      padding: 20px;
+    }
+    .plant {
+      border: 1px solid #ddd;
+      margin-bottom: 10px;
+      padding: 10px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <h2>Search Results </h2>
+  <div th:if="${plants != null && !plants.isEmpty()}">
+    <div th:each="plant : ${plants}" class="plant">
+      <h3 th:text="${plant.title}">Plant Name</h3>
+      <p th:if="${!plant.photos.isEmpty()}">
+        <strong>Photo:</strong>
+        <img th:src="${plant.photos[0]}" alt="Plant Photo">
+      </p>
+      <p><strong>Height:</strong> <span th:text="${plant.height}">Height</span></p>
+      <p><strong>Price:</strong> <span th:text="${plant.price}">Price</span></p>
+    </div>
+  </div>
+  <div th:if="${plants == null || plants.isEmpty()}">
+    <p>No plants found</p>
+  </div>
+</div>
+</body>
+</html>
+
