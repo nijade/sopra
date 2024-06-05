@@ -29,7 +29,7 @@ Developer of "SoPra" (GitHub-Username, full name):
  - Development Branch:
    - Branch for implementing new features on top of the currently stable version (same as Main). PUSHED ON MAIN when milestone is reached successfully.
      
- - BackUpOfDev_hh/dd/mm_Index:
+ - BackUpOfDev_hh/dd/mm_-Version_Index:
    - BEFORE PUSHING your Changes, create a BackupBranch of the currently latest Version of the DevelopementBranch (time, date, month) + Index (incremental).
 
  ## Developement
