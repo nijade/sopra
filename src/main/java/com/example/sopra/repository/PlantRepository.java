@@ -12,6 +12,6 @@ import java.util.List;
 public interface PlantRepository extends JpaRepository<Plant, Integer> {
 
     @Query("SELECT p FROM Plant p WHERE p.title LIKE %:title%")
-    List<Plant> findByTitleContaining(@Param("title") String title);
+    List<Plant> findByTitleContainingIgnoreCase(@Param("title") String title);
 
 }

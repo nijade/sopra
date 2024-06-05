@@ -28,6 +28,6 @@ public class PlantService {
 
     //Method for searching for plants by their title
     public List<Plant> searchPlantsByTitle(String title) {
-        return plantRepository.findByTitleContaining(title);
+        return plantRepository.findByTitleContainingIgnoreCase(title);
     }
 }

@@ -29,10 +29,17 @@
   <div th:if="${plants != null && !plants.isEmpty()}">
     <div th:each="plant : ${plants}" class="plant">
       <h3 th:text="${plant.title}">Plant Name</h3>
+
+
       <p th:if="${!plant.photos.isEmpty()}">
         <strong>Photo:</strong>
-        <img th:src="${plant.photos[0]}" alt="Plant Photo">
+
+          <img style="height: 15rem" th:src="${plant.photos.get(0)}" alt="Plant Photo">
+
+
       </p>
+      <p><strong>Number of Photos </strong></p>
+      <p th:text="${plant.photos.size()}"> Number of Photos</p>
       <p><strong>Height:</strong> <span th:text="${plant.height}">Height</span></p>
       <p><strong>Price:</strong> <span th:text="${plant.price}">Price</span></p>
     </div>
