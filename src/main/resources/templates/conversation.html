@@ -1,8 +1,12 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <title>Konversation</title>
+    <meta charset="UTF-8">
+    <title>Konversation</title>
+    <style>
+        #messageContainer { border: 1px solid #ccc; padding: 10px; height: 300px; overflow-y: auto; }
+        #messageInput { width: 100%; box-sizing: border-box; }
+    </style>
 </head>
 <body>
 <h2>Konversation</h2>
@@ -12,14 +16,45 @@
 <button onclick="endConversation()">Konversation Beenden</button>
 
 <script>
-  function sendMessage() {
-    var messageText = document.getElementById('messageInput').value;
-    // Implementieren Sie die Logik, um die Nachricht zu senden
-  }
+    document.addEventListener('DOMContentLoaded', loadConversation);
 
-  function endConversation() {
-    // Implementieren Sie die Logik, um die Konversation zu beenden
-  }
+    function sendMessage() {
+        var messageText = document.getElementById('messageInput').value;
+        fetch('/api/messages', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ text: messageText })
+        }).then(response => {
+            if (response.ok) {
+                document.getElementById('messageInput').value = '';  // Clear input after sending
+                loadConversation();  // Reload messages to display the new one
+            }
+        });
+    }
+
+    function endConversation() {
+        fetch('/api/conversations/end', { method: 'POST' })
+            .then(response => {
+                if (response.ok) {
+                    alert("Konversation beendet.");
+                    document.getElementById('messageContainer').innerHTML = '';  // Clear messages
+                }
+            });
+    }
+
+    function loadConversation() {
+        fetch('/api/messages')
+            .then(response => response.json())
+            .then(messages => {
+                const container = document.getElementById('messageContainer');
+                container.innerHTML = '';  // Clear previous messages
+                messages.forEach(message => {
+                    const messageDiv = document.createElement('div');
+                    messageDiv.textContent = message.text;
+                    container.appendChild(messageDiv);
+                });
+            });
+    }
 </script>
 </body>
 </html>
