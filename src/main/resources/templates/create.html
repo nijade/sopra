@@ -1,100 +1,132 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pflanze Erstellen</title>
+    <title>Create Plant</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #f2f2f2;
+            background-color: #f8f9fa;
         }
         .container {
-            background-color: white;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            width: 300px;
+            margin-top: 50px;
         }
         .form-group {
             margin-bottom: 15px;
         }
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
+        .form-control, .btn {
+            border-radius: 5px;
         }
-        .form-group input,
-        .form-group textarea,
-        .form-group select {
-            width: 100%;
-            padding: 8px;
-            box-sizing: border-box;
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 20px;
+            max-height: 500px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            padding: 15px;
+            background-color: #ffffff;
         }
-        .form-group input[type="checkbox"] {
-            width: auto;
-        }
-        .form-group button {
-            background-color: #4CAF50;
-            color: white;
+        .gallery-item {
+            text-align: center;
             padding: 10px;
-            border: none;
-            cursor: pointer;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f8f9fa;
+        }
+        .gallery-item img {
             width: 100%;
+            height: auto;
+            max-height: 150px; /* Skalierung der Bilder */
+            object-fit: cover; /* Verhindert Verzerrung */
+        }
+        .gallery-item .form-check {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 10px;
+        }
+        .gallery-item .form-check-label {
+            margin-top: 5px;
+        }
+        .gallery-item .photo-name {
+            margin-top: 10px;
         }
     </style>
 </head>
 <body>
-
 <div class="container">
-    <h2>Pflanze Erstellen</h2>
-    <form action="/plants" method="post">
+    <h1 class="text-center">Create Plant</h1>
+    <form th:action="@{/create}" method="post" class="mt-4">
+        <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+
         <div class="form-group">
-            <label for="photos">Fotos (URLs, kommasepariert)</label>
-            <input type="text" id="photos" name="photos">
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title" class="form-control" required>
         </div>
+
         <div class="form-group">
-            <label for="title">Titel</label>
-            <input type="text" id="title" name="title" required>
+            <label for="photos">Photos:</label>
+            <div class="gallery">
+                <div th:each="photo, iterStat : ${photos}" class="gallery-item">
+                    <img th:src="@{'/images/' + ${photo}}" th:alt="${photo}">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" th:id="${'photo_' + iterStat.index}" th:name="photos" th:value="${photo}">
+                    </div>
+                    <div class="photo-name" th:text="${photo}"></div> <!-- Zeigt den Namen des Bildes an -->
+                </div>
+            </div>
         </div>
+
         <div class="form-group">
-            <label for="height">Höhe (cm)</label>
-            <input type="number" id="height" name="height" step="0.01" required>
+            <label for="height">Height (cm):</label>
+            <input type="number" id="height" name="height" class="form-control" step="0.01" required>
         </div>
+
         <div class="form-group">
-            <label for="price">Preis (€)</label>
-            <input type="number" id="price" name="price" step="0.01" required>
+            <label for="price">Price (€):</label>
+            <input type="number" id="price" name="price" class="form-control" step="0.01" required>
         </div>
+
+        <div class="form-group form-check">
+            <input type="checkbox" id="hasPlanter" name="hasPlanter" class="form-check-input">
+            <label for="hasPlanter" class="form-check-label">Has Planter</label>
+        </div>
+
         <div class="form-group">
-            <label for="hasPot">Übertopf vorhanden?</label>
-            <input type="checkbox" id="hasPot" name="hasPot">
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" class="form-control"></textarea>
         </div>
+
         <div class="form-group">
-            <label for="description">Beschreibung</label>
-            <textarea id="description" name="description"></textarea>
+            <label for="potCircumference">Pot Circumference (cm):</label>
+            <input type="number" id="potCircumference" name="potCircumference" class="form-control" step="0.01">
         </div>
+
         <div class="form-group">
-            <label for="potCircumference">Umfang vom Topf (cm)</label>
-            <input type="number" id="potCircumference" name="potCircumference" step="0.01">
+            <label for="plantCircumference">Plant Circumference (cm):</label>
+            <input type="number" id="plantCircumference" name="plantCircumference" class="form-control" step="0.01">
         </div>
+
         <div class="form-group">
-            <label for="plantCircumference">Umfang der Pflanze (cm)</label>
-            <input type="number" id="plantCircumference" name="plantCircumference" step="0.01">
+            <label for="tags">Tags (comma separated):</label>
+            <input type="text" id="tags" name="tags" class="form-control">
         </div>
-        <div class="form-group">
-            <label for="tags">Tags (kommasepariert)</label>
-            <input type="text" id="tags" name="tags">
-        </div>
-        <div class="form-group">
-            <button type="submit">Erstellen</button>
-        </div>
+
+        <button type="submit" class="btn btn-primary btn-block">Create Plant</button>
     </form>
 </div>
 
+<div th:if="${param.successMessage}" class="alert alert-success" role="alert">
+    <p th:text="${param.successMessage}"></p>
+</div>
+<div th:if="${param.errorMessage}" class="alert alert-danger" role="alert">
+    <p th:text="${param.errorMessage}"></p>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
