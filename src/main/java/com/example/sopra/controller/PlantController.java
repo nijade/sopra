@@ -24,6 +24,7 @@ public class PlantController {
     @Autowired
     private ImageService imageService;
 
+
     @GetMapping("/create")
     public String showCreate(Model model) {
         List<String> photos = imageService.getImageNames();
