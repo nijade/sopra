@@ -25,27 +25,27 @@
 <body>
 <div class="container">
 
-  <h2>Search Results </h2>
+  <h2>Suchergebnisse </h2>
   <div th:if="${plants != null && !plants.isEmpty()}">
     <div th:each="plant : ${plants}" class="plant">
-      <h3 th:text="${plant.title}">Plant Name</h3>
+      <h3 th:text="${plant.title}">Pflanzen Name</h3>
 
 
       <p th:if="${!plant.photos.isEmpty()}">
-        <strong>Photo:</strong>
+        <strong>Foto:</strong>
 
           <img style="height: 15rem" th:src="${plant.photos.get(0)}" alt="Plant Photo">
 
 
       </p>
-      <p><strong>Number of Photos </strong></p>
-      <p th:text="${plant.photos.size()}"> Number of Photos</p>
-      <p><strong>Height:</strong> <span th:text="${plant.height}">Height</span></p>
-      <p><strong>Price:</strong> <span th:text="${plant.price}">Price</span></p>
+      <p><strong>Anzahl an Bildern</strong></p>
+      <p th:text="${plant.photos.size()}">Anzahl an Bildern</p>
+      <p><strong>Höhe:</strong> <span th:text="${plant.height}">Höhe</span></p>
+      <p><strong>Preis:</strong> <span th:text="${plant.price}">Preis</span></p>
     </div>
   </div>
   <div th:if="${plants == null || plants.isEmpty()}">
-    <p>No plants found</p>
+    <p>Keine Pflanze gefunden. Bitte auf Groß- und Kleinschreibung achten!</p>
   </div>
 </div>
 </body>
