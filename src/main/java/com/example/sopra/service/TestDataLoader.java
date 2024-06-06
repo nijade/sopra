@@ -64,7 +64,7 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
         // Beispielpflanze: Rose
         Plant rose = new Plant();
         rose.setTitle("rote Rose");
-        rose.setPhotos(Arrays.asList("images/rose.jpg"));
+        rose.setPhotos(Arrays.asList("rose.jpg"));
         rose.setHeight(50);
         rose.setPrice(15.99);
         rose.setHasPlanter(true);
@@ -79,7 +79,7 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
         // Beispielpflanze: Tulpe groß
         Plant tulip = new Plant();
         tulip.setTitle("Tulpe");
-        tulip.setPhotos(Arrays.asList("images/tulip.jpg"));
+        tulip.setPhotos(Arrays.asList("tulip.jpg"));
         tulip.setHeight(30);
         tulip.setPrice(8.99);
         tulip.setHasPlanter(false);
@@ -94,7 +94,7 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
         // Beispielpflanze: Tulpe medium
         Plant tulipMedium = new Plant();
         tulipMedium.setTitle("Tulpe Medium");
-        tulipMedium.setPhotos(Arrays.asList("images/tulip.jpg"));
+        tulipMedium.setPhotos(Arrays.asList("tulip.jpg"));
         tulipMedium.setHeight(20);
         tulipMedium.setPrice(8.99);
         tulipMedium.setHasPlanter(false);
@@ -110,7 +110,7 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
         // Beispielpflanze: Kaktus
         Plant cactus = new Plant();
         cactus.setTitle("Kakteen Echinopsis Lobivia cacti hybrid Lobivia cactus");
-        cactus.setPhotos(Arrays.asList("images/cactus.jpg", "images/cactus2.jpg"));
+        cactus.setPhotos(Arrays.asList("cactus.jpg", "cactus2.jpg"));
         cactus.setHeight(40);
         cactus.setPrice(90.49);
         cactus.setHasPlanter(true);

@@ -59,7 +59,7 @@
 <div class="container">
   <h1 class="text-center">Edit Plant</h1>
   <form th:action="@{/edit/{id}(id=${plant.plantID})}" method="post" class="mt-4">
-  <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+    <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
     <input type="hidden" id="plantID" name="plantID" th:value="${plant.plantID}"/>
 
     <div class="form-group">

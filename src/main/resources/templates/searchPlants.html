@@ -34,7 +34,7 @@
       <p th:if="${!plant.photos.isEmpty()}">
         <strong>Foto:</strong>
 
-          <img style="height: 15rem" th:src="${plant.photos.get(0)}" alt="Plant Photo">
+          <img style="height: 15rem" th:src="'images/' + ${plant.photos.get(0)}" alt="Plant Photo">
 
 
       </p>

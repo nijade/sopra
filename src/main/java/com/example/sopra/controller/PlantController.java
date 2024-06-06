@@ -76,4 +76,13 @@ public class PlantController {
                               Model model) {
         return plantService.updatePlant(id, title, photos, height, price, hasPlanter, description, potCircumference, plantCircumference, tags, model);
     }
+
+    @GetMapping("/plants/{id}")
+    public String showPlant(@PathVariable int id, Model model){
+        Plant plant = plantService.findPlantByID(id);
+        model.addAttribute("plant", plant);
+        List<String> photos =imageService.getImageNames();
+        model.addAttribute("photos", photos);
+        return "advert";
+    }
 }
