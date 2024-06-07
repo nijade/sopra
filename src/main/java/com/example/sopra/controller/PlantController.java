@@ -34,7 +34,7 @@ public class PlantController {
 
     @GetMapping("/searchPlants")
     public String searchResults(@RequestParam String title, Model model) {
-        List<Plant> plants = plantService.searchPlantsByTitle(title);
+        List<Plant> plants = plantService.searchPlantsByTitleContainingIgnoreCase(title);
         model.addAttribute("plants", plants);
         model.addAttribute("searchTerm", title);
         return "searchPlants";

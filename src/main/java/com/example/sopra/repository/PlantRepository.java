@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 public interface PlantRepository extends JpaRepository<Plant, Integer> {
 
-    @Query("SELECT p FROM Plant p WHERE p.title LIKE %:title%")
+    @Query("SELECT p FROM Plant p WHERE UPPER(p.title) LIKE UPPER(CONCAT('%', :title, '%'))")
     List<Plant> findByTitleContainingIgnoreCase(@Param("title") String title);
 
     @Query("SELECT p FROM Plant p WHERE p.plantID = :plantID")
