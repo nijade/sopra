@@ -2,7 +2,6 @@ package com.example.sopra.service;
 
 
 import com.example.sopra.repository.UserRepository;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 
@@ -12,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +39,7 @@ public class UserService implements UserDetailsService {
         return userRepository.save(user);
     }
 
+    @Transactional
     public List<com.example.sopra.entity.User> findAllUsers() {
         return userRepository.findAll();
     }
@@ -49,6 +50,7 @@ public class UserService implements UserDetailsService {
      * @param username der username
      * @return User-Objekt
      */
+    @Transactional
     public com.example.sopra.entity.User getUserByUsername(String username) {
         return userRepository.findByUsername(username);
     }
@@ -62,6 +64,7 @@ public class UserService implements UserDetailsService {
      *
      * @return User
      */
+    @Transactional
     public com.example.sopra.entity.User getCurrentUser() {
         return getUserByUsername((((org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext()
                 .getAuthentication().getPrincipal()).getUsername()));
@@ -73,6 +76,7 @@ public class UserService implements UserDetailsService {
      *
      * @return UserDetails Objekt der Spring Security
      */
+    @Transactional
     public org.springframework.security.core.userdetails.User getCurrentUserDetails() {
         return (org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext()
                 .getAuthentication().getPrincipal();
@@ -86,6 +90,7 @@ public class UserService implements UserDetailsService {
      * @throws UsernameNotFoundException exception
      */
     @Override
+    @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         com.example.sopra.entity.User user = userRepository.findByUsername(username);
         if (Objects.isNull(user)) {
