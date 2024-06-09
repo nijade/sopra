@@ -80,10 +80,11 @@ public class PlantController {
 
     @GetMapping("/plants/{id}")
     public String showPlant(@PathVariable int id, Model model){
-        Plant plant = plantService.findPlantByID(id);
-        model.addAttribute("plant", plant);
-        List<String> photos =imageService.getImageNames();
-        model.addAttribute("photos", photos);
-        return "advert";
+        return plantService.getPlantPage(id, model);
+    }
+
+    @PostMapping("/delete/{id}")
+    public String deletePlant(@PathVariable int id, Model model){
+        return plantService.deletePlant(id, model);
     }
 }

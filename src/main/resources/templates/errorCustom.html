@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="refresh" content="2;url=/">
+  <meta http-equiv="refresh" content="2;url=/" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Success</title>
+  <title>Error</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -14,7 +14,7 @@
     }
     .message {
       padding: 20px;
-      background-color: #4CAF50;
+      background-color: #FF5733;
       color: white;
       border-radius: 5px;
     }
@@ -22,8 +22,8 @@
 </head>
 <body>
 <div class="message">
-  <h2>Ihr Inserat wurde erfolgreich erstellt/bearbeitet!</h2>
-  <p>Sie werden in Kürze zur Homepage weitergeleitet......</p>
+  <h2 th:text="${errorMessage}">Etwas ist schiefgelaufen!</h2>
+  <p>Sie werden in Kürze zur Homepage weitergeleitet...</p>
 </div>
 </body>
 </html>

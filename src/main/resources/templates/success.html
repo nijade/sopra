@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="refresh" content="2;url=/">
+  <meta http-equiv="refresh" content="2;url=/" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Error</title>
+  <title>Success</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -14,7 +14,7 @@
     }
     .message {
       padding: 20px;
-      background-color: #FF5733;
+      background-color: #4CAF50;
       color: white;
       border-radius: 5px;
     }
@@ -22,8 +22,8 @@
 </head>
 <body>
 <div class="message">
-  <h2>Bei der Erstellung/Bearbeitung ist ein Fehler aufgetreten!</h2>
-  <p>Sie werden in Kürze zur Homepage weitergeleitet......</p>
+  <h2 th:text="${successMessage}">Das hat geklappt!</h2>
+  <p>Sie werden in Kürze zur Homepage weitergeleitet...</p>
 </div>
 </body>
 </html>
