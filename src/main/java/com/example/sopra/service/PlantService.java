@@ -24,6 +24,9 @@ public class PlantService {
     @Autowired
     UserService userService;
 
+    @Autowired
+    ImageService imageService;
+
     public String createPlant(String title,
                               List<String> photos,
                               Integer height,
@@ -35,7 +38,8 @@ public class PlantService {
                               String tags,
                               Model model) {
         if(photos == null || photos.isEmpty()){
-            return "errorCreation";
+            model.addAttribute("errorMessage", "Bitte wählen Sie mindestens ein Bild aus!");
+            return "errorCustom";
         }
         try {
             User user = userService.getCurrentUser();
@@ -43,9 +47,11 @@ public class PlantService {
             setAllPlantValues(plant, title, photos, height, price, hasPlanter, description, potCircumference, plantCircumference, tags, user);
 
             plantRepository.save(plant);
-            return "successfulCreation";
+            model.addAttribute("successMessage", "Ihr Inserat wurde erfolgreich erstellt!");
+            return "success";
         } catch (Exception e) {
-            return "errorCreation";
+            model.addAttribute("errorMessage", "Es ist ein Fehler aufgetreten!");
+            return "errorCustom";
         }
     }
 
@@ -53,9 +59,22 @@ public class PlantService {
         return plantRepository.findByPlantID(plantID);
     }
 
-    public void deletePlant(Plant plant){
-        plantRepository.delete(plant);
+    public String deletePlant(int id, Model model) {
+        Plant plant = findPlantByID(id);
+        if (plant != null && userService.getCurrentUser().getUserId().equals(plant.getUser().getUserId())) {
+            try {
+                plantRepository.deleteById(id);
+                model.addAttribute("successMessage","Das Inserat wurde erfolgreich gelöscht!");
+                return "success";
+            } catch (Exception e) {
+                model.addAttribute("errorMessage", "Es ist ein Fehler aufgetreten!");
+                return "errorCustom";
+            }
+        }
+        model.addAttribute("errorMessage", "Das Inserat existiert nicht oder wurde nicht von Ihnen erstellt!");
+        return "errorCustom";
     }
+
 
 
     public Plant savePlant(Plant plant){
@@ -83,22 +102,26 @@ public class PlantService {
                             String tags,
                             Model model) {
         if(photos == null || photos.isEmpty()){
-            model.addAttribute("You must select at least one photo");
-            return "errorCreation";
+            model.addAttribute("errorMessage", "Bitte wählen Sie mindestens ein Bild aus!");
+            return "errorCustom";
         }
         try {
             Plant plant = findPlantByID(id);
-            deletePlant(plant);
+
             User user = userService.getCurrentUser();
-            if(user.getUserId() != plant.getUser().getUserId()){
-                return "errorCreation";
+            if(!(user.getUserId().equals(plant.getUser().getUserId()))){
+                model.addAttribute("errorMessage", "Sie konnten nicht als Anbieter authentifiziert werden!");
+                return "errorCustom";
             }
+            deletePlant(id, model);
             setAllPlantValues(plant, title, photos, height, price, hasPlanter, description, potCircumference, plantCircumference, tags, user);
             savePlant(plant);
 
-            return "successfulCreation";
+            model.addAttribute("successMessage", "Ihr Inserat wurde erfolgreich bearbeitet!");
+            return "success";
         } catch (Exception e) {
-            return "errorCreation";
+            model.addAttribute("errorMessage", "Etwas ist schiefgelaufen!");
+            return "errorCustom";
         }
 
     }
@@ -116,4 +139,20 @@ public class PlantService {
         plant.setUser(user);
     }
 
+    public String getPlantPage(int id, Model model) {
+        Plant plant = findPlantByID(id);
+        if(plant == null){
+            model.addAttribute("errorMessage","Dieses Inserat existiert leider nicht");
+            return "errorCustom";
+        }
+        model.addAttribute("plant", plant);
+        List<String> photos =imageService.getImageNames();
+        model.addAttribute("photos", photos);
+
+        if(userService.getCurrentUser().getUserId().equals(plant.getUser().getUserId())){
+            return "advertAsOwner";
+        } else{
+            return "advert";
+        }
+    }
 }

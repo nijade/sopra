@@ -52,7 +52,10 @@
       <p><strong>Umfang der Pflanze:</strong> <span th:text="${plant.plantCircumference}"></span></p>
       <p><strong>Beschreibung:</strong> <span th:text="${plant.description}"></span></p>
       <p><strong>Tags:</strong> <span th:text="${plant.getTagsAsString()}"></span></p>
-      <a href="#" class="btn btn-primary">Nachricht schreiben</a>
+      <a th:href="@{'/edit/' + ${plant.plantID}}" class="btn btn-secondary">Inserat bearbeiten</a>
+      <form method="POST" th:action="@{/delete/{id}(id=${plant.plantID})}" style="display: inline;">
+        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this plant?');">Inserat löschen</button>
+      </form>
     </div>
   </div>
 </div>
