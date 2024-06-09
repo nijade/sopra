@@ -1,6 +1,7 @@
 package com.example.sopra.service;
 
 
+import com.example.sopra.entity.User;
 import com.example.sopra.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -25,7 +26,7 @@ public class UserService implements UserDetailsService {
     private UserRepository userRepository;
 
     @Transactional
-    public com.example.sopra.entity.User saveUser(com.example.sopra.entity.User user) {
+    public User saveUser(User user) {
         return userRepository.save(user);
     }
 
@@ -35,12 +36,12 @@ public class UserService implements UserDetailsService {
      * @return das aktualisierte Benutzerobjekt
      */
     @Transactional
-    public com.example.sopra.entity.User updateUser(com.example.sopra.entity.User user) {
+    public User updateUser(User user) {
         return userRepository.save(user);
     }
 
     @Transactional
-    public List<com.example.sopra.entity.User> findAllUsers() {
+    public List<User> findAllUsers() {
         return userRepository.findAll();
     }
 
@@ -51,7 +52,7 @@ public class UserService implements UserDetailsService {
      * @return User-Objekt
      */
     @Transactional
-    public com.example.sopra.entity.User getUserByUsername(String username) {
+    public User getUserByUsername(String username) {
         return userRepository.findByUsername(username);
     }
 
@@ -65,7 +66,7 @@ public class UserService implements UserDetailsService {
      * @return User
      */
     @Transactional
-    public com.example.sopra.entity.User getCurrentUser() {
+    public User getCurrentUser() {
         return getUserByUsername((((org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext()
                 .getAuthentication().getPrincipal()).getUsername()));
     }
@@ -92,7 +93,7 @@ public class UserService implements UserDetailsService {
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        com.example.sopra.entity.User user = userRepository.findByUsername(username);
+        User user = userRepository.findByUsername(username);
         if (Objects.isNull(user)) {
             throw new UsernameNotFoundException("Could not find the user for username " + username);
         }
