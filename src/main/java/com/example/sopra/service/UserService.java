@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -108,6 +109,26 @@ public class UserService implements UserDetailsService {
         List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
 
         return grantedAuthorities;
+    }
+
+    @Transactional
+    public void updateUserProfile(User currentUser, User updatedUser) {
+        if (updatedUser.getName() != null && !updatedUser.getName().isEmpty()) {
+            currentUser.setName(updatedUser.getName());
+        }
+        if (updatedUser.getEmail() != null && !updatedUser.getEmail().isEmpty()) {
+            currentUser.setEmail(updatedUser.getEmail());
+        }
+        if (updatedUser.getAge() != null) {
+            currentUser.setAge(updatedUser.getAge());
+        }
+        if (updatedUser.getGender() != null && !updatedUser.getGender().isEmpty()) {
+            currentUser.setGender(updatedUser.getGender());
+        }
+        if (updatedUser.getProfileDescription() != null && !updatedUser.getProfileDescription().isEmpty()) {
+            currentUser.setProfileDescription(updatedUser.getProfileDescription());
+        }
+        updateUser(currentUser);
     }
 
 }

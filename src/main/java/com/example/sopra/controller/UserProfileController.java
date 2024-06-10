@@ -16,7 +16,7 @@ public class UserProfileController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/viewProfile")
+    @GetMapping("/view")
     public String viewProfile(Model model) {
         User currentUser = userService.getCurrentUser();
         if (currentUser == null) {
@@ -36,27 +36,13 @@ public class UserProfileController {
         return "profile/edit";
     }
 
-    @PostMapping("/editProfile")
+    @PostMapping("/edit")
     public String saveProfile(@ModelAttribute("user") User updatedUser) {
         User currentUser = userService.getCurrentUser();
         if (currentUser == null) {
             return "redirect:/login";
         }
-        if (updatedUser.getName() != null && !updatedUser.getName().isEmpty()) {
-            currentUser.setName(updatedUser.getName());
-        }
-        if (updatedUser.getEmail() != null && !updatedUser.getEmail().isEmpty()) {
-            currentUser.setEmail(updatedUser.getEmail());
-        }
-        if (updatedUser.getAge() != null) {
-            currentUser.setAge(updatedUser.getAge());
-        }
-        if (updatedUser.getGender() != null && !updatedUser.getGender().isEmpty()) {
-            currentUser.setGender(updatedUser.getGender());
-        }
-        if (updatedUser.getProfileDescription() != null && !updatedUser.getProfileDescription().isEmpty()) {
-            currentUser.setProfileDescription(updatedUser.getProfileDescription());
-        }
+        userService.updateUserProfile(currentUser, updatedUser);
         return "redirect:/profile/view";
     }
 }
