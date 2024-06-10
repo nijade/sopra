@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <th:block th:insert="~{fragments/htmlHead :: head}"></th:block>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+        crossorigin="anonymous"/>
+  <title th:text="#{profile.viewTitle}">User Profile</title>
+</head>
+<body>
+<div class="container mt-5">
+  <div class="card">
+    <div class="card-body">
+      <h4 class="card-title" th:text="#{profile.viewTitle}">User Profile</h4>
+
+      <div class="form-group">
+        <label th:text="#{profile.username}">Username</label>
+        <p th:text="${user.username}"></p>
+      </div>
+
+      <div class="form-group">
+        <label th:text="#{profile.name}">Name</label>
+        <p th:text="${user.name}"></p>
+      </div>
+
+      <div class="form-group">
+        <label th:text="#{profile.email}">Email</label>
+        <p th:text="${user.email}"></p>
+      </div>
+
+      <div class="form-group">
+        <label th:text="#{profile.age}">Age</label>
+        <p th:text="${user.age}"></p>
+      </div>
+
+      <div class="form-group">
+        <label th:text="#{profile.gender}">Gender</label>
+        <p th:text="${user.gender}"></p>
+      </div>
+
+      <div class="form-group">
+        <label th:text="#{profile.description}">Profile Description</label>
+        <p th:text="${user.description}"></p>
+      </div>
+    </div>
+    <div class="card-footer">
+      <a th:href="@{/profile/edit}" class="btn btn-primary" th:text="#{profile.editButton}">Edit Profile</a>
+    </div>
+  </div>
+</div>
+</body>
+</html>

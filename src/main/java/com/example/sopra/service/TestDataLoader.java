@@ -61,6 +61,18 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
         user5.setPassword(passwordEncoder.encode("ijkl"));
         userService.saveUser(user5);
 
+        // Nutzer 6
+        User Hans = new User();
+        Hans.setUsername("Hans");
+        Hans.setPassword(passwordEncoder.encode("0987"));
+        Hans.setName("Hans Bauer");
+        Hans.setEmail("bauer@exmaple.com");
+        //Hans.setPhoto("");
+        Hans.setAge(33);
+        Hans.setGender("Male");
+        Hans.setProfileDescription("aufgewachsen in stuttgart, Sicherheitsingenieur, Naturfreund");
+        userService.saveUser(Hans);
+
         // Beispielpflanze: Rose
         Plant rose = new Plant();
         rose.setTitle("rote Rose");

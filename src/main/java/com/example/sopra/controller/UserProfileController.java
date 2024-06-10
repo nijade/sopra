@@ -37,18 +37,26 @@ public class UserProfileController {
     }
 
     @PostMapping("/editProfile")
-    public String saveProfile(@ModelAttribute("user") User user) {
+    public String saveProfile(@ModelAttribute("user") User updatedUser) {
         User currentUser = userService.getCurrentUser();
         if (currentUser == null) {
             return "redirect:/login";
         }
-        currentUser.setName(user.getName());
-        currentUser.setEmail(user.getEmail());
-        //currentUser.setPhoto(user.getPhoto());
-        currentUser.setAge(user.getAge());
-        currentUser.setGender(user.getGender());
-        currentUser.setProfileDescription(user.getProfileDescription());
-        userService.updateUser(currentUser);
+        if (updatedUser.getName() != null && !updatedUser.getName().isEmpty()) {
+            currentUser.setName(updatedUser.getName());
+        }
+        if (updatedUser.getEmail() != null && !updatedUser.getEmail().isEmpty()) {
+            currentUser.setEmail(updatedUser.getEmail());
+        }
+        if (updatedUser.getAge() != null) {
+            currentUser.setAge(updatedUser.getAge());
+        }
+        if (updatedUser.getGender() != null && !updatedUser.getGender().isEmpty()) {
+            currentUser.setGender(updatedUser.getGender());
+        }
+        if (updatedUser.getProfileDescription() != null && !updatedUser.getProfileDescription().isEmpty()) {
+            currentUser.setProfileDescription(updatedUser.getProfileDescription());
+        }
         return "redirect:/profile/viewProfile";
     }
 }

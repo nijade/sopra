@@ -14,7 +14,9 @@ public class HomeController {
     @GetMapping("/")
     public String showHome(Model model){
         model.addAttribute("message", "Und hier sehen Sie ein ModelAttribut");
-        return "home";
+        return "profile/viewProfile";
+        //return "profile/viewWithoutLayout";
+        //return "home";
     }
 }
 
