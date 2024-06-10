@@ -27,6 +27,7 @@ public class SecurityConfiguration {
                                 // have to use "ROLE_ADMIN" here, which we define in the TestDatabaseLoader.
                                 .requestMatchers("/admin/**").hasRole("ADMIN")
                                 // all other URLs (except the ones above) require authentication too
+                                .requestMatchers("/profile/**").authenticated()
                                 .anyRequest().authenticated())
                 // include CSRF token, which may be required while performing AJAX-requests
                 .csrf(csrf -> csrf.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())

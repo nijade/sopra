@@ -23,17 +23,17 @@ public class UserProfileController {
             return "redirect:/login";
         }
         model.addAttribute("user", currentUser);
-        return "profile/viewProfile";
+        return "profile/view";
     }
 
-    @GetMapping("/editProfile")
+    @GetMapping("/edit")
     public String editProfile(Model model) {
         User currentUser = userService.getCurrentUser();
         if (currentUser == null) {
             return "redirect:/login";
         }
         model.addAttribute("user", currentUser);
-        return "profile/editProfile";
+        return "profile/edit";
     }
 
     @PostMapping("/editProfile")
@@ -57,6 +57,6 @@ public class UserProfileController {
         if (updatedUser.getProfileDescription() != null && !updatedUser.getProfileDescription().isEmpty()) {
             currentUser.setProfileDescription(updatedUser.getProfileDescription());
         }
-        return "redirect:/profile/viewProfile";
+        return "redirect:/profile/view";
     }
 }
