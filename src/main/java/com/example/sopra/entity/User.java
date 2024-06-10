@@ -35,6 +35,8 @@ public class User {
 
     private String profileDescription;
 
+    private String profileImage;
+
 
     public User() {
         // empty constructor for Hibernate
@@ -88,15 +90,6 @@ public class User {
         this.email = email;
     }
 
-    // TODO: Foto als Bilddatei darstellen
-    /*public String getPhoto() {
-        return photo;
-    }
-
-    public void setPhoto(String photo) {
-        this.photo = photo;
-    }*/
-
     public Integer getAge() {
         return age;
     }
@@ -119,5 +112,13 @@ public class User {
 
     public void setProfileDescription(String profileDescription) {
         this.profileDescription = profileDescription;
+    }
+
+    public String getProfileImage() {
+        return profileImage;
+    }
+
+    public void setProfileImage(String profileImage) {
+        this.profileImage = profileImage;
     }
 }

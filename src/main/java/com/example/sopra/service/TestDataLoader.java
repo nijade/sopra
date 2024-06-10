@@ -71,6 +71,7 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
         Hans.setAge(33);
         Hans.setGender("Male");
         Hans.setProfileDescription("aufgewachsen in stuttgart, Sicherheitsingenieur, Naturfreund");
+        Hans.setProfileImage("profilbild_schafStrecktZunge.jpeg");
         userService.saveUser(Hans);
 
         // Beispielpflanze: Rose

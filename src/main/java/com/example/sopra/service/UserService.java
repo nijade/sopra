@@ -14,7 +14,10 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -112,7 +115,7 @@ public class UserService implements UserDetailsService {
     }
 
     @Transactional
-    public void updateUserProfile(User currentUser, User updatedUser) {
+    public void updateUserProfile(User currentUser, User updatedUser, MultipartFile profileImage) throws IOException {
         if (updatedUser.getName() != null && !updatedUser.getName().isEmpty()) {
             currentUser.setName(updatedUser.getName());
         }
@@ -127,6 +130,13 @@ public class UserService implements UserDetailsService {
         }
         if (updatedUser.getProfileDescription() != null && !updatedUser.getProfileDescription().isEmpty()) {
             currentUser.setProfileDescription(updatedUser.getProfileDescription());
+        }
+        if (profileImage != null && !profileImage.isEmpty()) {
+            // Speichern Sie das Bild im Dateisystem oder in einer Datenbank
+            String fileName = profileImage.getOriginalFilename();
+            File destinationFile = new File("path/to/save/images/" + fileName);
+            profileImage.transferTo(destinationFile);
+            currentUser.setProfileImage(fileName);
         }
         updateUser(currentUser);
     }
