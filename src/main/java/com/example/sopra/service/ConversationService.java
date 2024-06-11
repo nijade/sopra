@@ -8,36 +8,39 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
-public class ChatService {
+public class ConversationService {
     @Autowired
     private ConversationRepository conversationRepository;
     @Autowired
     private MessageRepository messageRepository;
 
-    public Conversation startConversation(Long advertId, Long sellerId, Long buyerId) {
+    public Conversation startConversation(Integer plantId, Integer buyerId) {
         Conversation conversation = new Conversation();
-        conversation.setAdvertId(advertId);
-        conversation.setSellerId(sellerId);
+        conversation.setPlantId(plantId);
+        conversation.setMessageList(new ArrayList<>());
         conversation.setBuyerId(buyerId);
         return conversationRepository.save(conversation);
     }
 
-    public Message sendMessage(Long conversationId, Long senderId, String content) {
+    public Message sendMessage(Integer senderId, String content) {
         Message message = new Message();
-        message.setConversation(conversationRepository.findById(conversationId).orElseThrow());
         message.setSenderId(senderId);
         message.setContent(content);
         message.setTimestamp(LocalDateTime.now());
         return messageRepository.save(message);
     }
 
-    public void endConversation(Long conversationId) {
-        if (conversationRepository.existsById(conversationId)) {
-            conversationRepository.deleteById(conversationId);
-        } else {
-            throw new IllegalStateException("Konversation mit ID " + conversationId + " nicht gefunden.");
-        }
+
+    public Conversation addMessageToConversation(Integer conversationId, Message message){
+        Conversation conversation = conversationRepository.findConversationById(conversationId);
+        conversation.getMessageList().add(message);
+        return conversationRepository.save(conversation);
     }
+
+
+
 }

@@ -53,34 +53,14 @@
       <p><strong>Umfang der Pflanze:</strong> <span th:text="${plant.plantCircumference}"></span></p>
       <p><strong>Beschreibung:</strong> <span th:text="${plant.description}"></span></p>
       <p><strong>Tags:</strong> <span th:text="${plant.getTagsAsString()}"></span></p>
-      <a href="#" class="btn btn-primary" id="startConversationButton" onclick="startConversation(); return false;">Nachricht schreiben</a>
+      <a th:href="@{/conversation(plantId=${plant.plantID})}" class="btn btn-primary" id="startConversationButton" >Nachricht schreiben</a>
     </div>
   </div>
 </div>
 
 
 
-<script>
-  function startConversation() {
-    const advertId = 123; //ID automatisch vom Server ermittelt?
-    const sellerId = 456; //ID automatisch vom Server ermittelt?
-    const buyerId = 789;  //ID automatisch vom Server ermittelt?
 
-    fetch('/conversations/start', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      body: `advertId=${advertId}&sellerId=${sellerId}&buyerId=${buyerId}`
-    })
-            .then(response => response.json())
-            .then(data => {
-              console.log('Konversation gestartet:', data);
-              window.location.href = '/conversation'; // Weiterleitung zur Konversationsseite
-            })
-            .catch(error => console.error('Fehler beim Starten der Konversation:', error));
-  }
-</script>
 
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"

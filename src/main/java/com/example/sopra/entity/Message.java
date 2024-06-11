@@ -1,5 +1,6 @@
 package com.example.sopra.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import org.springframework.data.annotation.Id;
 
@@ -10,35 +11,20 @@ public class Message {
     @jakarta.persistence.Id
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long messageId;
+    private Integer messageId;
     private String content;
-    private Long senderId;
+    private Integer senderId;
+
+
+
+
     private LocalDateTime timestamp;
 
-    @ManyToOne
-    @JoinColumn(name = "conversationId")
-    private Conversation conversation;
+
+
 
     public Message() {
     }
-
-    public void setConversation(Conversation conversation) {
-        this.conversation = conversation;
-    }
-
-    public Conversation getConversation() {
-        return conversation;
-    }
-
-
-    public Long getMessageId() {
-        return messageId;
-    }
-
-    public void setMessageId(Long messageId) {
-        this.messageId = messageId;
-    }
-
 
     public String getContent() {
         return content;
@@ -49,18 +35,10 @@ public class Message {
     }
 
 
-    public Long getSenderId() {
-        return senderId;
-    }
-
-    public void setSenderId(Long senderId) {
+    public void setSenderId(Integer senderId) {
         this.senderId = senderId;
     }
 
-
-    public LocalDateTime getTimestamp() {
-        return timestamp;
-    }
 
     public void setTimestamp(LocalDateTime timestamp) {
         this.timestamp = timestamp;

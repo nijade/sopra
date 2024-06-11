@@ -2,58 +2,45 @@ package com.example.sopra.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import org.springframework.data.annotation.Id;
+import jakarta.persistence.OneToMany;
+
+import java.util.List;
 
 @Entity
 public class Conversation {
     @jakarta.persistence.Id
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    private Long advertId;
-    private Long sellerId;
-    private Long buyerId;
+    @GeneratedValue
+    private Integer id;
+    private Integer plantId;
+    private Integer buyerId;
+    @OneToMany
+    private List <Message> messageList;
+
+
 
 
     public Conversation() {
     }
 
-    public void setConversationId(Long conversationId) {
-        this.id = conversationId;
-    }
 
-    public Long getConversationId() {
+    public Integer getConversationId() {
         return id;
     }
 
-
-    public Long getAdvertId() {
-        return advertId;
+    public void setPlantId(Integer advertId) {
+        this.plantId = advertId;
     }
 
-
-    public void setAdvertId(Long advertId) {
-        this.advertId = advertId;
-    }
-
-
-    public Long getSellerId() {
-        return sellerId;
-    }
-
-
-    public void setSellerId(Long sellerId) {
-        this.sellerId = sellerId;
-    }
-
-
-    public Long getBuyerId() {
-        return buyerId;
-    }
-
-
-    public void setBuyerId(Long buyerId) {
+    public void setBuyerId(Integer buyerId) {
         this.buyerId = buyerId;
+    }
+
+
+    public List<Message> getMessageList() {
+        return messageList;
+    }
+
+    public void setMessageList(List<Message> messageList) {
+        this.messageList = messageList;
     }
 }
