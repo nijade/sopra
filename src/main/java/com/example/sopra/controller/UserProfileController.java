@@ -40,12 +40,12 @@ public class UserProfileController {
     }
 
     @PostMapping("/edit")
-    public String saveProfile(@ModelAttribute("user") User updatedUser, @RequestParam("profileImage") MultipartFile profileImage) throws IOException {
+    public String saveProfile(@ModelAttribute("user") User updatedUser) {
         User currentUser = userService.getCurrentUser();
         if (currentUser == null) {
             return "redirect:/login";
         }
-        userService.updateUserProfile(currentUser, updatedUser, profileImage);
+        userService.updateUserProfile(currentUser, updatedUser);
         return "redirect:/profile/view";
     }
 }

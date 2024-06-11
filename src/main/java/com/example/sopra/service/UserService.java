@@ -115,7 +115,7 @@ public class UserService implements UserDetailsService {
     }
 
     @Transactional
-    public void updateUserProfile(User currentUser, User updatedUser, MultipartFile profileImage) throws IOException {
+    public void updateUserProfile(User currentUser, User updatedUser) {
         if (updatedUser.getName() != null && !updatedUser.getName().isEmpty()) {
             currentUser.setName(updatedUser.getName());
         }
@@ -130,13 +130,6 @@ public class UserService implements UserDetailsService {
         }
         if (updatedUser.getProfileDescription() != null && !updatedUser.getProfileDescription().isEmpty()) {
             currentUser.setProfileDescription(updatedUser.getProfileDescription());
-        }
-        if (profileImage != null && !profileImage.isEmpty()) {
-            // Speichern Sie das Bild im Dateisystem oder in einer Datenbank
-            String fileName = profileImage.getOriginalFilename();
-            File destinationFile = new File("path/to/save/images/" + fileName);
-            profileImage.transferTo(destinationFile);
-            currentUser.setProfileImage(fileName);
         }
         updateUser(currentUser);
     }
