@@ -2,8 +2,12 @@ package com.example.sopra.service;
 
 import com.example.sopra.entity.Conversation;
 import com.example.sopra.entity.Message;
+import com.example.sopra.entity.Plant;
+import com.example.sopra.entity.User;
 import com.example.sopra.repository.ConversationRepository;
 import com.example.sopra.repository.MessageRepository;
+import com.example.sopra.repository.PlantRepository;
+import com.example.sopra.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,12 +21,19 @@ public class ConversationService {
     private ConversationRepository conversationRepository;
     @Autowired
     private MessageRepository messageRepository;
+    @Autowired
+    private PlantRepository plantRepository;
+    @Autowired
+    private UserRepository userRepository;
+
 
     public Conversation startConversation(Integer plantId, Integer buyerId) {
         Conversation conversation = new Conversation();
-        conversation.setPlantId(plantId);
+        Plant plant = plantRepository.findByPlantID(plantId);
+        conversation.setPlant(plant);
         conversation.setMessageList(new ArrayList<>());
-        conversation.setBuyerId(buyerId);
+        User buyer = userRepository.findByUserId(buyerId);
+        conversation.setBuyer(buyer);
         return conversationRepository.save(conversation);
     }
 
@@ -41,6 +52,16 @@ public class ConversationService {
         return conversationRepository.save(conversation);
     }
 
+    public List<Conversation> getAllConversationsOfUser(User currentUser){
+        List<Conversation> conversations = new ArrayList<>();
+        conversations.addAll(conversationRepository.findAllByBuyerUserId(currentUser.getUserId()));
+        conversations.addAll(conversationRepository.findAllByPlantSellerUserId(currentUser.getUserId()));
+        return conversations;
+    }
 
+
+    public Conversation getConversationById(Integer conversationId){
+        return conversationRepository.findConversationById(conversationId);
+    }
 
 }

@@ -84,7 +84,7 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
         rose.setPotCircumference(20.0);
         rose.setPlantCircumference(30.0);
         rose.setTags(Arrays.asList("blume", "garten", "romantisch"));
-        rose.setUser(user1);
+        rose.setSeller(user1);
 
         plantService.savePlant(rose);
 
@@ -99,7 +99,7 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
         tulip.setPotCircumference(0.0);
         tulip.setPlantCircumference(10.0);
         tulip.setTags(Arrays.asList("blume", "frühling", "garten"));
-        tulip.setUser(user2);
+        tulip.setSeller(user2);
 
         plantService.savePlant(tulip);
 
@@ -114,7 +114,7 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
         tulipMedium.setPotCircumference(0.0);
         tulipMedium.setPlantCircumference(10.0);
         tulipMedium.setTags(Arrays.asList("blume", "frühling", "garten"));
-        tulipMedium.setUser(user2);
+        tulipMedium.setSeller(user2);
 
 
         plantService.savePlant(tulipMedium);
@@ -130,7 +130,7 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
         cactus.setPotCircumference(30.0);
         cactus.setPlantCircumference(20.0);
         cactus.setTags(Arrays.asList("sukkulent", "wohnung", "pflegeleicht"));
-        cactus.setUser(user3);
+        cactus.setSeller(user3);
 
         plantService.savePlant(cactus);
     }

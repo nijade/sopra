@@ -2,6 +2,7 @@ package com.example.sopra.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 
 import java.util.List;
@@ -11,8 +12,10 @@ public class Conversation {
     @jakarta.persistence.Id
     @GeneratedValue
     private Integer id;
-    private Integer plantId;
-    private Integer buyerId;
+    @ManyToOne
+    private Plant plant;
+    @ManyToOne
+    private User buyer;
     @OneToMany
     private List <Message> messageList;
 
@@ -22,19 +25,33 @@ public class Conversation {
     public Conversation() {
     }
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Plant getPlant() {
+        return plant;
+    }
+
+    public void setPlant(Plant plant) {
+        this.plant = plant;
+    }
 
     public Integer getConversationId() {
         return id;
     }
 
-    public void setPlantId(Integer advertId) {
-        this.plantId = advertId;
+    public User getBuyer() {
+        return buyer;
     }
 
-    public void setBuyerId(Integer buyerId) {
-        this.buyerId = buyerId;
+    public void setBuyer(User buyer) {
+        this.buyer = buyer;
     }
-
 
     public List<Message> getMessageList() {
         return messageList;

@@ -7,4 +7,8 @@ import java.util.List;
 
 public interface ConversationRepository extends JpaRepository<Conversation, Integer> {
     public Conversation findConversationById(Integer id);
+
+    public List<Conversation> findAllByBuyerUserId(Integer id);
+
+    public List<Conversation> findAllByPlantSellerUserId(Integer id);
 }

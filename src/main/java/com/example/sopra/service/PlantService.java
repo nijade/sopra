@@ -61,7 +61,7 @@ public class PlantService {
 
     public String deletePlant(int id, Model model) {
         Plant plant = findPlantByID(id);
-        if (plant != null && userService.getCurrentUser().getUserId().equals(plant.getUser().getUserId())) {
+        if (plant != null && userService.getCurrentUser().getUserId().equals(plant.getSeller().getUserId())) {
             try {
                 plantRepository.deleteById(id);
                 model.addAttribute("successMessage","Das Inserat wurde erfolgreich gelöscht!");
@@ -113,7 +113,7 @@ public class PlantService {
             Plant plant = findPlantByID(id);
 
             User user = userService.getCurrentUser();
-            if(!(user.getUserId().equals(plant.getUser().getUserId()))){
+            if(!(user.getUserId().equals(plant.getSeller().getUserId()))){
                 model.addAttribute("errorMessage", "Sie konnten nicht als Anbieter authentifiziert werden!");
                 return "errorCustom";
             }
@@ -140,7 +140,7 @@ public class PlantService {
         plant.setPotCircumference(potCircumference);
         plant.setPlantCircumference(plantCircumference);
         plant.setTags(Arrays.asList(tags.split(",")));
-        plant.setUser(user);
+        plant.setSeller(user);
     }
 
     public String getPlantPage(int id, Model model) {
@@ -153,7 +153,7 @@ public class PlantService {
         List<String> photos =imageService.getImageNames();
         model.addAttribute("photos", photos);
 
-        if(userService.getCurrentUser().getUserId().equals(plant.getUser().getUserId())){
+        if(userService.getCurrentUser().getUserId().equals(plant.getSeller().getUserId())){
             return "advertAsOwner";
         } else{
             return "advert";

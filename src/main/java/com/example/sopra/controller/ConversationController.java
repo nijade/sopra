@@ -31,13 +31,23 @@ public class ConversationController {
         return "conversation";
     }
 
+    @GetMapping("/showConversation")
+    public String showExistingChatPage(@RequestParam("conversationId") Integer conversationId, Model model) {
+        Conversation conversation = conversationService.getConversationById(conversationId);
+        model.addAttribute("specificConversation", conversation);
+        return "conversation";
+    }
+
     @GetMapping("/endConversation")
     public String endConversationLinkToHome() {
         return "home";
     }
 
     @GetMapping("/ownConversations")
-    public String showOwnConversations() {
+    public String showOwnConversations(Model model) {
+        User currentUser = userService.getCurrentUser();
+        List<Conversation> conservationsOfUser = conversationService.getAllConversationsOfUser(currentUser);
+        model.addAttribute("conversations", conservationsOfUser);
         return "ownConversations";
     }
 

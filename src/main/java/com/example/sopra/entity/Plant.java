@@ -3,7 +3,6 @@ package com.example.sopra.entity;
 import jakarta.persistence.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @Entity
 @Table(name = "plant")
@@ -15,7 +14,7 @@ public class Plant {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User user;
+    private User seller;
 
     private String title;
     private Double price;
@@ -48,12 +47,12 @@ public class Plant {
         this.plantID = plantID;
     }
 
-    public User getUser() {
-        return user;
+    public User getSeller() {
+        return seller;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setSeller(User user) {
+        this.seller = user;
     }
 
     public String getTitle() {

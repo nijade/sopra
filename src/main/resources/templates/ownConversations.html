@@ -1,62 +1,66 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <th:block th:insert="~{fragments/htmlHead :: head}"></th:block>
-  <meta charset="UTF-8">
-  <title>Nachrichtenanzeige</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
+    <th:block th:insert="~{fragments/htmlHead :: head}"></th:block>
+    <meta charset="UTF-8">
+    <title>Nachrichtenanzeige</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
 
-    .container {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      position: relative;
-    }
+        .container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
 
+         .container {
+           position: relative;
+           height: 100vh;
+           width: 100vw;
+         }
+        .container::after {
+          content: '';
+          position: absolute;
+          left: 33.33%;
+          top: 0;
+          bottom: 0;
+          width: 2px;
+          background-color: black;
+        }
+        .col-8 {
+          position: absolute;
+          left: 34%;
+          width: 66%;
+        }
 
-
-
-
-    .vertical-line {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 33.33%;
-      width: 2px;
-      background-color: gray;
-      z-index: 1;
-    }
-
-    .header {
-      z-index: 2;
-    }
-
-    .line-container {
-      flex: 1;
-      position: relative;
-    }
-
-    .line-container .vertical-line {
-      top: 0;
-      bottom: 0;
-    }
-  </style>
+    </style>
 </head>
 <body>
 <div th:replace="fragments/header :: header"></div>
 
 <div class="container">
-  <div class="left-background"></div>
-  <div class="line-container">
-    <div class="vertical-line"></div>
-  </div>
+
+    <div class="col-4">
+     
+    </div>
+    <div class="col-8">
+        <div th:each="conversation : ${conversations}">
+            <div class="card">
+                <div class="card-body">
+                    <a th:text="'Pflanze: ' + ${conversation.getPlant().getTitle()}" th:href="@{/showConversation(conversationId=${conversation.getConversationId()})}"></a>
+                    <p th:text="'Käufer: ' + ${conversation.getBuyer().getUsername()}"></p>
+                    <p th:text="'Verkäufer: ' + ${conversation.getPlant().getSeller().getUsername()}"></p>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 </html>
