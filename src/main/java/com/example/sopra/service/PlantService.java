@@ -90,6 +90,10 @@ public class PlantService {
         return plantRepository.findByTitleContainingIgnoreCase(title);
     }
 
+    public List<Plant> findPlantsByUser(){
+        return plantRepository.findPlantsByUser(userService.getCurrentUser());
+    }
+
     public String updatePlant(int id,
                             String title,
                             List<String> photos,

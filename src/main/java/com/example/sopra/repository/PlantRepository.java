@@ -18,4 +18,6 @@ public interface PlantRepository extends JpaRepository<Plant, Integer> {
     @Query("SELECT p FROM Plant p WHERE p.plantID = :plantID")
     Plant findByPlantID(@Param("plantID") Integer plantID);
 
+    @Query("SELECT p FROM Plant p WHERE p.user = :currentUser")
+    List<Plant> findPlantsByUser(@Param("currentUser") User user);
 }
