@@ -36,6 +36,11 @@ public class ConversationController {
         return "home";
     }
 
+    @GetMapping("/ownConversations")
+    public String showOwnConversations() {
+        return "ownConversations";
+    }
+
     @PostMapping("/sendMessage")
     public String sendMessage(@RequestParam("messageInput") String messageInput,
                               @RequestParam("conversationId") Integer conversationId, Model model) {
