@@ -4,7 +4,7 @@
   <th:block th:insert="~{fragments/htmlHead :: head}"></th:block>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Suchergebnisse</title>
+  <title>Meine Inserate</title>
   <style>
 
     body, html {
@@ -23,11 +23,11 @@
       border-radius: 5px;
     }
     .searchResultDivFiller {
-     position: absolute;
-     display: block;
-     height: 100%;
-     width: 100%;
-     text-decoration: none;
+      position: absolute;
+      display: block;
+      height: 100%;
+      width: 100%;
+      text-decoration: none;
 
     }
   </style>
@@ -35,7 +35,7 @@
 <body>
 <div th:replace="fragments/header :: header"> </div>
 <div class="container">
-  <h2>Suchergebnisse </h2>
+  <h2>Meine Inserate: </h2>
   <div  th:if="${plants != null && !plants.isEmpty()}">
     <div th:each="plant : ${plants}" class="plant">
       <a class="searchResultDivFiller" style="color:black" th:href="@{/plants/{id}(id=${plant.plantID})}" ></a>
@@ -43,7 +43,7 @@
 
       <p th:if="${!plant.photos.isEmpty()}">
         <strong>Foto:</strong>
-          <img style="height: 15rem" th:src="'images/' + ${plant.photos.get(0)}" alt="Plant Photo">
+        <img style="height: 15rem" th:src="'images/' + ${plant.photos.get(0)}" alt="Plant Photo">
       </p>
       <p><strong>Anzahl an Bildern</strong></p>
       <p th:text="${plant.photos.size()}">Anzahl an Bildern</p>
@@ -53,7 +53,7 @@
   </div>
 
   <div th:if="${plants == null || plants.isEmpty()}">
-    <p>Keine Pflanze mit diesem Titel gefunden.</p>
+    <p>Sie haben bislang kein Inserat erstellt!</p>
   </div>
 </div>
 </body>

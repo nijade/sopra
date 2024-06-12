@@ -53,10 +53,15 @@
       <p><strong>Umfang der Pflanze:</strong> <span th:text="${plant.plantCircumference}"></span></p>
       <p><strong>Beschreibung:</strong> <span th:text="${plant.description}"></span></p>
       <p><strong>Tags:</strong> <span th:text="${plant.getTagsAsString()}"></span></p>
-      <a href="#" class="btn btn-primary">Nachricht schreiben</a>
+      <a th:href="@{/conversation(plantId=${plant.plantID})}" class="btn btn-primary" id="startConversationButton" >Nachricht schreiben</a>
     </div>
   </div>
 </div>
+
+
+
+
+
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"

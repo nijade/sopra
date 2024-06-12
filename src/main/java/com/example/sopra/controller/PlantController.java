@@ -40,6 +40,13 @@ public class PlantController {
         return "searchPlants";
     }
 
+    @GetMapping("/myplants")
+    public String listMyPlants(Model model){
+        List<Plant> plants = plantService.findPlantsByUser();
+        model.addAttribute("plants", plants);
+        return "myPlants";
+    }
+
     @PostMapping("/create")
     public String createPlant(@RequestParam String title,
                               @RequestParam(required = false) List<String> photos,

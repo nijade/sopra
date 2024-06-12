@@ -1,68 +1,48 @@
 package com.example.sopra.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
+import org.springframework.data.annotation.Id;
 
-//import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "messages")
 public class Message {
+    @jakarta.persistence.Id
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer messageId;
+    private String content;
+    private Integer senderId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "conversation_id", nullable = false)
-    private Conversation conversation;
 
-    @Column(name = "sender_id")
-    private Long senderId;
 
-    @Column(name = "message_text")
-    private String messageText;
 
-    @Column(name = "timestamp")
     private LocalDateTime timestamp;
 
-    // Getter und Setter
-    public Long getId() {
-        return id;
+
+
+
+    public Message() {
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public String getContent() {
+        return content;
     }
 
-    public Conversation getConversation() {
-        return conversation;
+    public void setContent(String content) {
+        this.content = content;
     }
 
-    public void setConversation(Conversation conversation) {
-        this.conversation = conversation;
-    }
 
-    public Long getSenderId() {
-        return senderId;
-    }
-
-    public void setSenderId(Long senderId) {
+    public void setSenderId(Integer senderId) {
         this.senderId = senderId;
     }
 
-    public String getMessageText() {
-        return messageText;
-    }
-
-    public void setMessageText(String messageText) {
-        this.messageText = messageText;
-    }
-
-    public LocalDateTime getTimestamp() {
-        return timestamp;
-    }
 
     public void setTimestamp(LocalDateTime timestamp) {
         this.timestamp = timestamp;
     }
+
 }
+

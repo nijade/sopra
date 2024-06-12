@@ -1,80 +1,46 @@
 package com.example.sopra.entity;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.OneToMany;
 
-import jakarta.persistence.*;
-
-//import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 @Entity
-@Table(name = "conversations")
 public class Conversation {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @jakarta.persistence.Id
+    @GeneratedValue
+    private Integer id;
+    private Integer plantId;
+    private Integer buyerId;
+    @OneToMany
+    private List <Message> messageList;
 
-    @Column(name = "plant_id")
-    private Long plantId;
 
-    @Column(name = "buyer_id")
-    private Long buyerId;
 
-    @Column(name = "seller_id")
-    private Long sellerId;
 
-    @Column(name = "is_active")
-    private boolean isActive;
+    public Conversation() {
+    }
 
-    @OneToMany(mappedBy = "conversation", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Message> messages = new HashSet<>();
 
-    // Getter und Setter
-    public Long getId() {
+    public Integer getConversationId() {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setPlantId(Integer advertId) {
+        this.plantId = advertId;
     }
 
-    public Long getPlantId() {
-        return plantId;
-    }
-
-    public void setPlantId(Long plantId) {
-        this.plantId = plantId;
-    }
-
-    public Long getBuyerId() {
-        return buyerId;
-    }
-
-    public void setBuyerId(Long buyerId) {
+    public void setBuyerId(Integer buyerId) {
         this.buyerId = buyerId;
     }
 
-    public Long getSellerId() {
-        return sellerId;
+
+    public List<Message> getMessageList() {
+        return messageList;
     }
 
-    public void setSellerId(Long sellerId) {
-        this.sellerId = sellerId;
-    }
-
-    public boolean isActive() {
-        return isActive;
-    }
-
-    public void setActive(boolean active) {
-        isActive = active;
-    }
-
-    public Set<Message> getMessages() {
-        return messages;
-    }
-
-    public void setMessages(Set<Message> messages) {
-        this.messages = messages;
+    public void setMessageList(List<Message> messageList) {
+        this.messageList = messageList;
     }
 }
