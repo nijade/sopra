@@ -7,14 +7,35 @@
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
         crossorigin="anonymous"/>
   <title>Sopra Demo Project</title>
+  <style>
+    body {
+      background-color: #58845a;
+    }
+    .center-form {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    .card {
+      width: 100%;
+      max-width: 600px;
+    }
+
+    .btn-login {
+      background-color: #58845a;
+      border: none;
+      color: white;
+    }
+  </style>
 </head>
 <body>
 
-<div class="container">
+<div class="container center-form">
   <form th:action="@{/login}" method="POST" class="form-horizontal">
     <div class="card">
       <div class="card-body">
-        <h4 class="card-title" th:text="'Sopra Demo Login'"></h4>
+        <h4 class="card-title" th:text="'Bei PlantBay24 anmelden'"></h4>
         <div th:if="${param.error}" class="alert alert-danger">
           <span th:text="'Login fehlgeschlagen.'"></span>
         </div>
@@ -22,23 +43,25 @@
           <span th:text="'Logout erfolgreich.'"></span>
         </div>
         <div class="row form-group">
-          <div class="col-12 col-md-6">
+          <div class="col-12">
             <label>Username</label>
             <input type="text" id="username" name="username"  th:placeholder="'Username'" class="form-control"/><br/>
           </div>
         </div>
         <div class="row form-group">
-          <div class="col-12 col-md-6">
+          <div class="col-12">
             <label>Password</label>
             <input type="password"  th:placeholder="'Password'" id="password" name="password" class="form-control"/><br/>
           </div>
         </div>
       </div>
       <div class="card-footer">
-        <button name="Submit" value="Login" type="Submit" th:text="'Login'" class="btn btn-primary"></button>
+        <!-- Apply the custom class to the Login button -->
+        <button name="Submit" value="Login" type="Submit" th:text="'Login'" class="btn btn-login"></button>
       </div>
     </div>
   </form>
 </div>
+
 </body>
 </html>

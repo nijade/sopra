@@ -52,7 +52,12 @@
                     <p class="form-control-plaintext" th:text="${user.profileDescription}">Profile Description</p>
                 </div>
             </div>
-            <a href="/profile/edit" class="btn btn-primary" th:text="#{profile.editButton}">Edit Profile</a>
+            <div class="btn-group">
+                <a href="/profile/edit" class="btn btn-primary mr-2" th:text="#{profile.editButton}">Edit Profile</a>
+                <form th:action="@{/logout}" method="POST" style="display:inline;">
+                    <button type="submit" class="btn btn-secondary" th:text="#{profile.logoutButton}">Logout</button>
+                </form>
+            </div>
         </div>
     </div>
 </div>
