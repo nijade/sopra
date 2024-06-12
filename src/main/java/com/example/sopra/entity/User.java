@@ -27,8 +27,6 @@ public class User {
 
     private String email;
 
-    //private String photo;
-
     private Integer age;
 
     private String gender;
