@@ -2,8 +2,10 @@ package com.example.sopra.controller;
 
 import com.example.sopra.entity.Conversation;
 import com.example.sopra.entity.Message;
+import com.example.sopra.entity.Plant;
 import com.example.sopra.entity.User;
 import com.example.sopra.service.ConversationService;
+import com.example.sopra.service.PlantService;
 import com.example.sopra.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,13 +23,20 @@ public class ConversationController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private PlantService plantService;
+
 
 
     @GetMapping("/conversation")
     public String showChatPage(@RequestParam("plantId") Integer plantId, Model model) {
         User currentUser = userService.getCurrentUser();
-        Conversation conversation = conversationService.startConversation(plantId, currentUser.getUserId());
-        model.addAttribute("specificConversation", conversation);
+        Plant plant = plantService.findPlantByID(plantId);
+        Conversation alreadyExistingConversation = conversationService.getConversationByPlantAndBuyer(plant, currentUser);
+        if(alreadyExistingConversation == null){
+            alreadyExistingConversation = conversationService.startConversation(plantId, currentUser.getUserId());
+        }
+        model.addAttribute("specificConversation", alreadyExistingConversation);
         return "conversation";
     }
 
@@ -40,7 +49,7 @@ public class ConversationController {
 
     @GetMapping("/endConversation")
     public String endConversationLinkToHome() {
-        return "home";
+        return "redirect:/";
     }
 
     @GetMapping("/ownConversations")

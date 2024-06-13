@@ -39,7 +39,8 @@ public class ConversationService {
 
     public Message sendMessage(Integer senderId, String content) {
         Message message = new Message();
-        message.setSenderId(senderId);
+        User sender = userRepository.findByUserId(senderId);
+        message.setSender(sender);
         message.setContent(content);
         message.setTimestamp(LocalDateTime.now());
         return messageRepository.save(message);
@@ -62,6 +63,10 @@ public class ConversationService {
 
     public Conversation getConversationById(Integer conversationId){
         return conversationRepository.findConversationById(conversationId);
+    }
+
+    public Conversation getConversationByPlantAndBuyer(Plant plant, User user){
+       return conversationRepository.findConversationByPlantAndBuyer(plant, user);
     }
 
 }

@@ -13,7 +13,8 @@ public class Message {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer messageId;
     private String content;
-    private Integer senderId;
+    @ManyToOne
+    private User sender;
 
 
 
@@ -34,9 +35,11 @@ public class Message {
         this.content = content;
     }
 
-
-    public void setSenderId(Integer senderId) {
-        this.senderId = senderId;
+    public User getSender() {
+        return sender;
+    }
+    public void setSender(User sender) {
+        this.sender = sender;
     }
 
 
