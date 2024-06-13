@@ -66,7 +66,6 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
         Hans.setPassword(passwordEncoder.encode("0987"));
         Hans.setName("Hans Bauer");
         Hans.setEmail("bauer@exmaple.com");
-        //Hans.setPhoto("");
         Hans.setAge(33);
         Hans.setGender("Male");
         Hans.setProfileDescription("aufgewachsen in stuttgart, Sicherheitsingenieur, Naturfreund");
