@@ -55,13 +55,17 @@ public class ConversationController {
     public String sendMessage(@RequestParam("messageInput") String messageInput,
                               @RequestParam("conversationId") Integer conversationId, Model model) {
         Conversation conversation = conversationService.getConversationById(conversationId);
-        if (messageInput != null && messageInput.length()>0 && messageInput.length()<250) {
+        boolean messageSent = false;
+        if (messageInput != null && messageInput.length() > 0 && messageInput.length() < 250) {
             User currentUser = userService.getCurrentUser();
             Message message = conversationService.sendMessage(currentUser.getUserId(), messageInput);
             conversation = conversationService.addMessageToConversation(conversationId, message);
+            messageSent = true;
         }
         model.addAttribute("specificConversation", conversation);
+        model.addAttribute("messageSent", messageSent);
         return "conversation";
     }
+
 
 }

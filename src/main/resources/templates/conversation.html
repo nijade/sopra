@@ -74,6 +74,18 @@
         beenden</a>
 </div>
 
-</div>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    function validateMessage() {
+        var messageInput = document.getElementById('messageInput').value.trim();
+        if (messageInput === "" || messageInput.length < 1 || messageInput.length > 250) {
+            alert("Ihre Nachricht konnte nicht gesendet werden. Bitte halten Sie die Länge zwischen 1 und 250 Zeichen!");
+            return false;
+        }
+        return true;
+    }
+    /*]]>*/
+</script>
+
 </body>
 </html>
