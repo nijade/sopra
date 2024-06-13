@@ -53,7 +53,8 @@
 <body>
 <div th:replace="fragments/header :: header"></div>
 <div class="container">
-    <div id="messages" style="height: auto" th:each="message: ${specificConversation.getMessageList()}">
+    <div id="messages" style="height: auto"
+         th:each="message: ${specificConversation.getMessageList()}">
         <div th:text="${message.getContent()}">
         </div>
     </div>

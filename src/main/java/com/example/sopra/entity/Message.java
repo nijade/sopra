@@ -39,6 +39,10 @@ public class Message {
         this.senderId = senderId;
     }
 
+    public Integer getSenderId(){
+        this.senderId = senderId;
+        return senderId;
+    }
 
     public void setTimestamp(LocalDateTime timestamp) {
         this.timestamp = timestamp;
