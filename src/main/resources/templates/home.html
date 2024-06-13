@@ -45,14 +45,21 @@
       gap: 10px;
       justify-content: flex-start; /* Align items to the start of each row */
     }
-    img {
+    .plant img {
       width: 100%; /* Make images responsive */
       height: auto; /* Maintain aspect ratio */
       max-height: 200px; /* Limit image height */
       display: block; /* Ensure the image is treated as a block element */
-      object-fit: cover; /* Ensure the image covers the box without distortion */
+      object-fit: contain; /* Ensure the image covers the box without distortion */
+      border-radius: 5px; /* Match the border-radius of the container */
     }
-  </style>
+    .image-container {
+      height: 200px; /* Set a fixed height for image containers */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    </style>
 </head>
 <body>
 <div th:replace="fragments/header :: header"> </div>
@@ -63,10 +70,9 @@
         <div th:each="plant : ${plants}" class="plant">
             <a class="searchResultDivFiller" style="color:black" th:href="@{/plants/{id}(id=${plant.plantID})}"></a>
             <h3 th:text="${plant.title}">Pflanzen Name</h3>
-            <p th:if="${!plant.photos.isEmpty()}">
-                <strong>Foto:</strong>
-                <img th:src="'images/' + ${plant.photos.get(0)}" alt="Plant Photo">
-            </p>
+            <div class="image-container" th:if="${!plant.photos.isEmpty()}">
+                <img th:src="'/images/' + ${plant.photos.get(0)}" alt="Plant Photo">
+            </div>
             <p><strong>Anzahl an Bildern:</strong> <span th:text="${plant.photos.size()}"></span></p>
             <p><strong>Höhe:</strong> <span th:text="${plant.height}">Höhe</span></p>
             <p><strong>Preis:</strong> <span th:text="${plant.price}">Preis</span></p>
