@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Suchergebnisse</title>
   <style>
-
     body, html {
       height: 100%;
       margin: 0;
@@ -21,41 +20,62 @@
       margin-bottom: 10px;
       padding: 10px;
       border-radius: 5px;
+      display: flex;
+      align-items: flex-start;
+    }
+    .plant img {
+      flex-shrink: 0;
+      height: 15rem;
+      margin-right: 20px;
+      align-self: center;
+    }
+    .plant-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      width: 100%;
+    }
+    .plant-title {
+      margin: 0;
+      font-weight: bold;
+      align-self: flex-start;
+      margin-bottom: 10px;
+    }
+    .plant-details {
+      text-align: left;
     }
     .searchResultDivFiller {
-     position: absolute;
-     display: block;
-     height: 100%;
-     width: 100%;
-     text-decoration: none;
-
+      position: absolute;
+      display: block;
+      height: 100%;
+      width: 100%;
+      text-decoration: none;
     }
   </style>
 </head>
 <body>
 <div th:replace="fragments/header :: header"> </div>
 <div class="container">
-  <h2>Suchergebnisse </h2>
-  <div  th:if="${plants != null && !plants.isEmpty()}">
+  <h2>Suchergebnisse</h2>
+  <div th:if="${plants != null && !plants.isEmpty()}">
     <div th:each="plant : ${plants}" class="plant">
-      <a class="searchResultDivFiller" style="color:black" th:href="@{/plants/{id}(id=${plant.plantID})}" ></a>
-      <h3 th:text="${plant.title}">Pflanzen Name</h3>
-
-      <p th:if="${!plant.photos.isEmpty()}">
-        <strong>Foto:</strong>
-          <img style="height: 15rem" th:src="'images/' + ${plant.photos.get(0)}" alt="Plant Photo">
-      </p>
-      <p><strong>Anzahl an Bildern</strong></p>
-      <p th:text="${plant.photos.size()}">Anzahl an Bildern</p>
-      <p><strong>Höhe:</strong> <span th:text="${plant.height}">Höhe</span></p>
-      <p><strong>Preis:</strong> <span th:text="${plant.price}">Preis</span></p>
+      <a class="searchResultDivFiller" style="color:black" th:href="@{/plants/{id}(id=${plant.plantID})}"></a>
+      <img th:if="${!plant.photos.isEmpty()}" th:src="'images/' + ${plant.photos.get(0)}" alt="Plant Photo">
+      <div class="plant-info">
+        <h3 class="plant-title" th:text="${plant.title}">Pflanzen Name</h3>
+        <div class="plant-details">
+          <p><strong>Anzahl an Bildern:</strong> <span th:text="${plant.photos.size()}">Anzahl an Bildern</span></p>
+          <p><strong>Höhe:</strong> <span th:text="${plant.height}">Höhe</span></p>
+          <p><strong>Preis:</strong> <span th:text="${plant.price}">Preis</span></p>
+        </div>
+      </div>
     </div>
   </div>
-
   <div th:if="${plants == null || plants.isEmpty()}">
     <p>Keine Pflanze mit diesem Titel gefunden.</p>
   </div>
 </div>
 </body>
 </html>
+
 

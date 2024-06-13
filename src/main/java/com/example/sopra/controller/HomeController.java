@@ -11,19 +11,19 @@ import java.util.List;
 
 @Controller
 public class HomeController {
+
+    @Autowired
+    private PlantService plantService;
+
     /**
      * Zeigt die Startseite der Anwendung
      * @param model enthält alle ModelAttribute
      * @return home-Seite
      */
-
-    @Autowired
-    private PlantService plantService;
-
     @GetMapping("/")
     public String showHome(Model model){
-        model.addAttribute("message", "Und hier sehen Sie ein ModelAttribut");
         List<Plant> plants = plantService.findAllPlants();
+        model.addAttribute("message", "Und hier sehen Sie ein ModelAttribut");
         model.addAttribute("plants", plants);
         return "home";
     }
