@@ -19,51 +19,77 @@
             display: flex;
             flex-direction: column;
             position: relative;
+            margin-top: 20px; /* Add margin-top to create space from the navbar */
         }
 
-         .container {
-           position: relative;
-           height: 100vh;
-           width: 100vw;
-         }
+        .container {
+            position: relative;
+            height: 100vh;
+            width: 100vw;
+        }
+
         .container::after {
-          content: '';
-          position: absolute;
-          left: 33.33%;
-          top: 0;
-          bottom: 0;
-          width: 2px;
-          background-color: black;
-        }
-        .col-8 {
-          position: absolute;
-          left: 34%;
-          width: 66%;
+            content: '';
+            position: absolute;
+            left: 33.33%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: black;
         }
 
-        .card{
+        .col-8 {
+            position: absolute;
+            left: 34%;
+            width: 66%;
+        }
+
+        .card {
             background-color: white;
         }
 
+        .card-body {
+            display: flex;
+            flex-direction: column;
+            padding: 15px;
+        }
+
+        .clickable {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .clickable:hover, .clickable:focus, .clickable:active {
+            text-decoration: none;
+        }
+
+        .clickable .card-body p {
+            margin: 0;
+            color: black; /* Ensures the text is black and not styled as a link */
+        }
+
+        .clickable .card-body p:hover {
+            text-decoration: none; /* Ensures no underline on hover */
+        }
     </style>
 </head>
 <body>
 <div th:replace="fragments/header :: header"></div>
 
 <div class="container">
-
-    <div class="col-4">
-     
-    </div>
+    <div class="col-4"></div>
     <div class="col-8">
         <div th:each="conversation : ${conversations}">
-            <div class="card">
-                <div class="card-body">
-                    <a th:text="'Pflanze: ' + ${conversation.getPlant().getTitle()}" th:href="@{/showConversation(conversationId=${conversation.getConversationId()})}"></a>
-                    <p th:text="'Käufer: ' + ${conversation.getBuyer().getUsername()}"></p>
-                    <p th:text="'Verkäufer: ' + ${conversation.getPlant().getSeller().getUsername()}"></p>
+            <a class="clickable" th:href="@{/showConversation(conversationId=${conversation.getConversationId()})}">
+                <div class="card">
+                    <div class="card-body">
+                        <p th:text="'Pflanze: ' + ${conversation.getPlant().getTitle()}"></p>
+                        <p th:text="'Käufer: ' + ${conversation.getBuyer().getUsername()}"></p>
+                        <p th:text="'Verkäufer: ' + ${conversation.getPlant().getSeller().getUsername()}"></p>
+                    </div>
                 </div>
-            </div>
+            </a>
         </div>
     </div>
 </div>
