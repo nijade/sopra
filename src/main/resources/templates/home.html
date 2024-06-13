@@ -57,7 +57,7 @@
 <body>
 <div th:replace="fragments/header :: header"> </div>
 <div class="container">
-    <h2>Willkommen bei PflanzenBay24 !</h2>
+    <h2>Willkommen bei PlantBay24!</h2>
     <h3>Aktuelle Inserate:</h3>
     <div th:if="${plants != null && !plants.isEmpty()}" class="plant-container">
         <div th:each="plant : ${plants}" class="plant">
