@@ -44,19 +44,18 @@
         </div>
         <div class="row form-group">
           <div class="col-12">
-            <label>Username</label>
-            <input type="text" id="username" name="username"  th:placeholder="'Username'" class="form-control"/><br/>
+            <label th:text="#{username}">Username</label>
+            <input type="text" id="username" name="username"  th:placeholder="#{username}" class="form-control"/><br/>
           </div>
         </div>
         <div class="row form-group">
           <div class="col-12">
-            <label>Password</label>
-            <input type="password"  th:placeholder="'Password'" id="password" name="password" class="form-control"/><br/>
+            <label th:text="#{password}">Password</label>
+            <input type="password"  th:placeholder="#{password}" id="password" name="password" class="form-control"/><br/>
           </div>
         </div>
       </div>
       <div class="card-footer">
-        <!-- Apply the custom class to the Login button -->
         <button name="Submit" value="Login" type="Submit" th:text="'Login'" class="btn btn-login"></button>
       </div>
     </div>

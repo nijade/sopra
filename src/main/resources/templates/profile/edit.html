@@ -16,31 +16,31 @@
       <h4 class="card-title" th:text="#{profile.editTitle}">Edit Profile</h4>
       <form th:action="@{/profile/edit}" th:object="${user}" method="post">
         <div class="form-group row">
-          <label for="username" class="col-sm-2 col-form-label">Username</label>
+          <label for="username" class="col-sm-2 col-form-label" th:text="#{profile.username}">Username</label>
           <div class="col-sm-10">
             <input type="text" class="form-control-plaintext" id="username" name="username" th:value="${user.username}" readonly>
           </div>
         </div>
         <div class="form-group row">
-          <label for="name" class="col-sm-2 col-form-label">Name</label>
+          <label for="name" class="col-sm-2 col-form-label" th:text="#{profile.name}">Name</label>
           <div class="col-sm-10">
             <input type="text" class="form-control" id="name" name="name" th:value="${user.name}">
           </div>
         </div>
         <div class="form-group row">
-          <label for="email" class="col-sm-2 col-form-label">Email</label>
+          <label for="email" class="col-sm-2 col-form-label" th:text="#{profile.email}">Email</label>
           <div class="col-sm-10">
             <input type="email" class="form-control" id="email" name="email" th:value="${user.email}">
           </div>
         </div>
         <div class="form-group row">
-          <label for="age" class="col-sm-2 col-form-label">Age</label>
+          <label for="age" class="col-sm-2 col-form-label" th:text="#{profile.age}">Age</label>
           <div class="col-sm-10">
             <input type="number" class="form-control" id="age" name="age" th:value="${user.age}">
           </div>
         </div>
         <div class="form-group row">
-          <label for="gender" class="col-sm-2 col-form-label">Gender</label>
+          <label for="gender" class="col-sm-2 col-form-label" th:text="#{profile.gender}">Gender</label>
           <div class="col-sm-10">
             <select class="form-control" id="gender" name="gender">
               <option th:selected="${user.gender == 'Male'}" th:text="#{profile.male}" >Male</option>
@@ -50,7 +50,7 @@
           </div>
         </div>
         <div class="form-group row">
-          <label for="profileDescription" class="col-sm-2 col-form-label">Profile Description</label>
+          <label for="profileDescription" class="col-sm-2 col-form-label" th:text="#{profile.description}">Profile Description</label>
           <div class="col-sm-10">
             <textarea class="form-control" id="profileDescription" name="profileDescription" rows="3" th:text="${user.profileDescription}"></textarea>
           </div>
