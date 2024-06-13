@@ -61,16 +61,16 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
         userService.saveUser(user5);
 
         // Nutzer 6
-        User Hans = new User();
-        Hans.setUsername("Hans");
-        Hans.setPassword(passwordEncoder.encode("0987"));
-        Hans.setName("Hans Bauer");
-        Hans.setEmail("bauer@exmaple.com");
-        Hans.setAge(33);
-        Hans.setGender("Male");
-        Hans.setProfileDescription("aufgewachsen in stuttgart, Sicherheitsingenieur, Naturfreund");
-        Hans.setProfileImage("profilbild_schafStrecktZunge.jpeg");
-        userService.saveUser(Hans);
+        User hans = new User();
+        hans.setUsername("Hans");
+        hans.setPassword(passwordEncoder.encode("0987"));
+        hans.setName("Hans Bauer");
+        hans.setEmail("bauer@exmaple.com");
+        hans.setAge(33);
+        hans.setGender("Male");
+        hans.setProfileDescription("aufgewachsen in stuttgart, Sicherheitsingenieur, Naturfreund");
+        hans.setProfileImage("profilbild_schafStrecktZunge.jpeg");
+        userService.saveUser(hans);
 
         // Beispielpflanze: Rose
         Plant rose = new Plant();
@@ -132,6 +132,21 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
         cactus.setSeller(user3);
 
         plantService.savePlant(cactus);
+
+        // Beispielpflanze: Palme
+        Plant palme = new Plant();
+        rose.setTitle("Yucca Palme");
+        rose.setPhotos(Arrays.asList("yucca-palme.jpg"));
+        rose.setHeight(110);
+        rose.setPrice(40.00);
+        rose.setHasPlanter(true);
+        rose.setDescription("Die Studenten-Pflanze: Pflegeleicht und prachtvoll.");
+        rose.setPotCircumference(36.0);
+        rose.setPlantCircumference(70.0);
+        rose.setTags(Arrays.asList("palme", "zimmerpflanze", "urlaub"));
+        rose.setSeller(hans);
+
+        plantService.savePlant(palme);
     }
 
     @Override
