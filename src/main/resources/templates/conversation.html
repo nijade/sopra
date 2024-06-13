@@ -58,9 +58,8 @@
         <div th:text="${message.getContent()}">
         </div>
     </div>
-    <form th:action="@{/sendMessage}" method="post">
-
-            <input name="messageInput" id="messageInput" type="text" placeholder="Nachricht eingeben"/>
+    <form th:action="@{/sendMessage}" method="post" onsubmit="return validateMessage()">
+    <input name="messageInput" id="messageInput" type="text" placeholder="Nachricht eingeben"/>
 
             <input name="conversationId" type="hidden" th:value="${specificConversation.getConversationId()}"/>
 
