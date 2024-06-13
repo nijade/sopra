@@ -83,6 +83,7 @@ public class PlantService {
 
     public List<Plant> findAllPlants() {
         return plantRepository.findAll();
+
     }
 
     //Method for searching for plants by their title
@@ -159,4 +160,5 @@ public class PlantService {
             return "advert";
         }
     }
+
 }
