@@ -15,6 +15,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * Conversation-Klasse zur Festlegung der Conversation-Funktionalität und
+ * Weiterleitung zwischen Frontend und Backend.
+ */
 @Controller
 public class ConversationController {
     @Autowired
@@ -27,7 +31,14 @@ public class ConversationController {
     private PlantService plantService;
 
 
-
+    /**
+     * Zeigt eine spezifische Konversation zugehörig zum User und überprüft, das User keine
+     * doppelten Konversationen starten kann
+     *
+     * @param plantId
+     * @param model
+     * @return
+     */
     @GetMapping("/conversation")
     public String showChatPage(@RequestParam("plantId") Integer plantId, Model model) {
         User currentUser = userService.getCurrentUser();
@@ -40,6 +51,13 @@ public class ConversationController {
         return "conversation";
     }
 
+    /**
+     * Zeigt eine spezifische Konversation
+     *
+     * @param conversationId
+     * @param model
+     * @return
+     */
     @GetMapping("/showConversation")
     public String showExistingChatPage(@RequestParam("conversationId") Integer conversationId, Model model) {
         Conversation conversation = conversationService.getConversationById(conversationId);
@@ -47,11 +65,22 @@ public class ConversationController {
         return "conversation";
     }
 
+    /**
+     * verlinkt bei Beendigung einer Konversation auf die Home-Seite
+     *
+     * @return
+     */
     @GetMapping("/endConversation")
     public String endConversationLinkToHome() {
         return "redirect:/";
     }
 
+    /**
+     * Zeigt alle zum eingeloggten User zugehörigen Konversationen an
+     *
+     * @param model
+     * @return
+     */
     @GetMapping("/ownConversations")
     public String showOwnConversations(Model model) {
         User currentUser = userService.getCurrentUser();
@@ -60,6 +89,14 @@ public class ConversationController {
         return "ownConversations";
     }
 
+    /**
+     * Zeigt die geschriebenen Messages an, deren Logik im @ChatService verarbeitet wird
+     *
+     * @param messageInput
+     * @param conversationId
+     * @param model
+     * @return
+     */
     @PostMapping("/sendMessage")
     public String sendMessage(@RequestParam("messageInput") String messageInput,
                               @RequestParam("conversationId") Integer conversationId, Model model) {
