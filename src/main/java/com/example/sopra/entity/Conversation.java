@@ -20,10 +20,12 @@ public class Conversation {
     private List <Message> messageList;
 
 
-
-
     public Conversation() {
     }
+
+    /**
+     * Die nachfolgenden Methoden sind die Getter und Setter der Conversation Attribute.
+     */
 
     public Integer getId() {
         return id;

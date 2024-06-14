@@ -39,6 +39,11 @@ public class Plant {
     public Plant(){
         // empty constructor for Hibernate
     }
+
+    /**
+     * Die nachfolgenden Methoden sind die Getter und Setter der Plant Attribute.
+     */
+
     public Integer getPlantID() {
         return plantID;
     }

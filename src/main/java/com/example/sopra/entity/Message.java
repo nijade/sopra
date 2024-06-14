@@ -12,20 +12,19 @@ public class Message {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer messageId;
+
     private String content;
     @ManyToOne
     private User sender;
 
-
-
-
     private LocalDateTime timestamp;
-
-
-
 
     public Message() {
     }
+
+    /**
+     * Die nachfolgenden Methoden sind die Getter und Setter der Message Attribute.
+     */
 
     public String getContent() {
         return content;

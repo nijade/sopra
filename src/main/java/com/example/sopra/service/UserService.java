@@ -110,6 +110,13 @@ public class UserService implements UserDetailsService {
         return grantedAuthorities;
     }
 
+    /**
+     * Zu jedem Attribut das geändert werden soll wird geprüft, ob der geänderte Wert kein nicht Null ist. So wird
+     * sichergestellt, dass sich nur Attribute ändern wenn deren Felder ausgefüllt sind. Die veränderten Attribute,
+     * die in updatedUser übergeben werden, werden auf den currentUser überschrieben.
+     * @param currentUser aktuell eingeloggter Benutzer
+     * @param updatedUser Nachstellung eines Nutzers mit den veränderten Attributen
+     */
     @Transactional
     public void updateUserProfile(User currentUser, User updatedUser) {
         if (updatedUser.getName() != null && !updatedUser.getName().isEmpty()) {

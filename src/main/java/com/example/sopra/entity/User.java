@@ -40,6 +40,10 @@ public class User {
         // empty constructor for Hibernate
     }
 
+    /**
+     * Die nachfolgenden Methoden sind die Getter und Setter der User Attribute.
+     */
+
     public Integer getUserId() {
         return userId;
     }
