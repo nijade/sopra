@@ -7,7 +7,14 @@ Abgabe Version auf main branch.
   Login u.a. mit folgenden Accounts möglich:
 
 - Benutzername: User1 , Passwort:1234
-- Benutzername: User2 , Passwort:5678 
+- Benutzername: User2 , Passwort:5678
+- Benutzername: Hans , Passwort:0987
+
+ Sonstiges:
+
+Und wie abgesprochen ist aus Gründen der Zugriffsrechte auf den PC der Endanwender (z.B. wir) die Möglichkeit Bilder 
+hochzuladen reduziert auf Bilder einfügen per Drag&Drop in 'resources/static/images', 
+um ein Bild für eine neue Anzeige einzustellen.
 
 ## Details
 Developer of "SoPra" (GitHub-Username, full name):
