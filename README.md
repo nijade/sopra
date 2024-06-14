@@ -2,8 +2,9 @@
 Basic web application that allows registered users to communicate with each other to trade second-hand plants. Based on the idea of "Kleinanzeigen".
 
 ## Abgabehinweise
-Abgabe Version auf main branch
-Login u.a. mit folgenden Accounts möglich:
+Abgabe Version auf main branch.
+
+  Login u.a. mit folgenden Accounts möglich:
 
 - Benutzername: User1 , Passwort:1234
 - Benutzername: User2 , Passwort:5678 
