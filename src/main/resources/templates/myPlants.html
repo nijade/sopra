@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <th:block th:insert="~{fragments/htmlHead :: head}"></th:block>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meine Inserate</title>
+  <style>
+
+    body, html {
+      height: 100%;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+    .container {
+      padding: 20px;
+    }
+    .plant {
+      position: relative;
+      border: 1px solid #ddd;
+      margin-bottom: 10px;
+      padding: 10px;
+      border-radius: 5px;
+    }
+    .searchResultDivFiller {
+      position: absolute;
+      display: block;
+      height: 100%;
+      width: 100%;
+      text-decoration: none;
+
+    }
+  </style>
+</head>
+<body>
+<div th:replace="fragments/header :: header"> </div>
+<div class="container">
+  <h2>Meine Inserate: </h2>
+  <div  th:if="${plants != null && !plants.isEmpty()}">
+    <div th:each="plant : ${plants}" class="plant">
+      <a class="searchResultDivFiller" style="color:black" th:href="@{/plants/{id}(id=${plant.plantID})}" ></a>
+      <h3 th:text="${plant.title}">Pflanzen Name</h3>
+
+      <p th:if="${!plant.photos.isEmpty()}">
+        <strong>Foto:</strong>
+        <img style="height: 15rem" th:src="'images/' + ${plant.photos.get(0)}" alt="Plant Photo">
+      </p>
+      <p><strong>Anzahl an Bildern</strong></p>
+      <p th:text="${plant.photos.size()}">Anzahl an Bildern</p>
+      <p><strong>Höhe:</strong> <span th:text="${plant.height}">Höhe</span></p>
+      <p><strong>Preis:</strong> <span th:text="${plant.price}">Preis</span></p>
+    </div>
+  </div>
+
+  <div th:if="${plants == null || plants.isEmpty()}">
+    <p>Sie haben bislang kein Inserat erstellt!</p>
+  </div>
+</div>
+</body>
+</html>
+

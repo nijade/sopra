@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Plant</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+    .container {
+      margin-top: 50px;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    .form-control, .btn {
+      border-radius: 5px;
+    }
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 20px;
+      max-height: 500px;
+      overflow-y: auto;
+      border: 1px solid #ddd;
+      padding: 15px;
+      background-color: #ffffff;
+    }
+    .gallery-item {
+      text-align: center;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      background-color: #f8f9fa;
+    }
+    .gallery-item img {
+      width: 100%;
+      height: auto;
+      max-height: 150px;
+      object-fit: cover;
+    }
+    .gallery-item .form-check {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 10px;
+    }
+    .gallery-item .form-check-label {
+      margin-top: 5px;
+    }
+    .gallery-item .photo-name {
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+<div th:replace="fragments/header :: header"> </div>
+<div class="container">
+  <h1 class="text-center">Edit Plant</h1>
+  <form th:action="@{/edit/{id}(id=${plant.plantID})}" method="post" class="mt-4">
+    <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+    <input type="hidden" id="plantID" name="plantID" th:value="${plant.plantID}"/>
+
+    <div class="form-group">
+      <label for="title">Title:</label>
+      <input type="text" id="title" name="title" class="form-control" th:value="${plant.title}" required>
+    </div>
+
+    <div class="form-group">
+      <label for="photos">Photos:</label>
+      <div class="gallery">
+        <div th:each="photo, iterStat : ${photos}" class="gallery-item">
+          <img th:src="@{'/images/' + ${photo}}" th:alt="${photo}">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" th:id="${'photo_' + iterStat.index}" th:name="photos" th:value="${photo}">
+          </div>
+          <div class="photo-name" th:text="${photo}"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="height">Height (cm):</label>
+      <input type="number" id="height" name="height" class="form-control" th:value="${plant.height}" step="0.01" required>
+    </div>
+
+    <div class="form-group">
+      <label for="price">Price (€):</label>
+      <input type="number" id="price" name="price" class="form-control" th:value="${plant.price}" step="0.01" required>
+    </div>
+
+    <div class="form-group form-check">
+      <input type="checkbox" id="hasPlanter" name="hasPlanter" class="form-check-input" th:checked="${plant.hasPlanter}">
+      <label for="hasPlanter" class="form-check-label">Has Planter</label>
+    </div>
+
+    <div class="form-group">
+      <label for="description">Description:</label>
+      <textarea id="description" name="description" class="form-control" th:text="${plant.description}"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="potCircumference">Pot Circumference (cm):</label>
+      <input type="number" id="potCircumference" name="potCircumference" class="form-control" th:value="${plant.potCircumference}" step="0.01">
+    </div>
+
+    <div class="form-group">
+      <label for="plantCircumference">Plant Circumference (cm):</label>
+      <input type="number" id="plantCircumference" name="plantCircumference" class="form-control" th:value="${plant.plantCircumference}" step="0.01">
+    </div>
+
+    <div class="form-group">
+      <label for="tags">Tags (comma separated):</label>
+      <input type="text" id="tags" name="tags" class="form-control" th:value="${plant.getTagsAsString()}">
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-block">Update Plant</button>
+  </form>
+</div>
+
+<div th:if="${param.successMessage}" class="alert alert-success" role="alert">
+  <p th:text="${param.successMessage}"></p>
+</div>
+<div th:if="${param.errorMessage}" class="alert alert-danger" role="alert">
+  <p th:text="${param.errorMessage}"></p>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
