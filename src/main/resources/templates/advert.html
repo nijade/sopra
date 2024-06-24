@@ -46,10 +46,16 @@
     </div>
     <div class="col-md-8">
       <h2 th:text="${plant.title}"></h2>
+
       <p><strong>Preis:</strong> <span th:text="${plant.price}"></span></p>
       <p><strong>Höhe:</strong> <span th:text="${plant.height}"></span></p>
-      <p><strong>Übertopf?:</strong> <span th:text="${plant.hasPlanter} ? 'Yes' : 'No'"></span></p>
-      <p><strong>Umfang des Topfes:</strong> <span th:text="${plant.potCircumference}"></span></p>
+      <p>
+        <strong>Mit Topf:</strong>
+        <span th:text="${plant.hasPlanter ? 'Ja, ' : 'Nein'}">Mit Topf</span>
+        <span th:if="${plant.hasPlanter} == true">Topfumfang:</span>
+        <span th:if="${plant.hasPlanter} == true"   th:text="${plant.potCircumference}">Topfumfang</span>
+        <span th:if="${plant.hasPlanter} == true"> cm</span></span>
+      </p>
       <p><strong>Umfang der Pflanze:</strong> <span th:text="${plant.plantCircumference}"></span></p>
       <p><strong>Beschreibung:</strong> <span th:text="${plant.description}"></span></p>
       <p><strong>Tags:</strong> <span th:text="${plant.getTagsAsString()}"></span></p>
