@@ -49,7 +49,7 @@ Developer of "SoPra" (GitHub-Username, full name):
 
  ## Developement
 
-     3.3: 
+    3.3: 
     - 1. Sortieren nach Preis (auf/absteigend) und Filtern, gemäß "anderen Online-Shops" {Nils}
     - 2. Merkliste {Lino}
     - 3. Pflegetipps für gekaufte Ware {Phillip}
@@ -61,7 +61,7 @@ Developer of "SoPra" (GitHub-Username, full name):
         4. Levelanzeige {Jonas}
 
 
-        3.2:
+    3.2:
     - Nils: Auf der eingeloggten Startseite können die User Pflanzen über ein Suchfeld suchen und
       gefundene Pflanzen tabellarisch ansehen.
     - Jonas: User können Pflanzen einstellen, bearbeiten und löschen.
