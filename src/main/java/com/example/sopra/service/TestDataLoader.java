@@ -72,7 +72,10 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
         hans.setProfileImage("profilbild_schafStrecktZunge.jpeg");
         userService.saveUser(hans);
 
+
+        //Beispielpflanzen ***********************************************************************+
         // Beispielpflanze: Rose
+
         Plant rose = new Plant();
         rose.setTitle("rote Rose");
         rose.setPhotos(Arrays.asList("rose.jpg"));
@@ -82,13 +85,12 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
         rose.setDescription("Eine wunderschöne rote Rose.");
         rose.setPotCircumference(20.0);
         rose.setPlantCircumference(30.0);
-        rose.setTags(Arrays.asList("blume", "garten", "romantisch"));
+        rose.setTags(Arrays.asList("Sommerblumen", "Rosen", "Garten"));
         rose.setSeller(user1);
-
         plantService.savePlant(rose);
 
-        //Start of tulips
-        // Beispielpflanze: Tulpe groß
+        // Tulpen
+        // Tulpe groß
         Plant tulip = new Plant();
         tulip.setTitle("Tulpe");
         tulip.setPhotos(Arrays.asList("tulip.jpg"));
@@ -98,12 +100,11 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
         tulip.setDescription("Eine bunte Tulpe, ideal für den Frühlingsgarten.");
         tulip.setPotCircumference(0.0);
         tulip.setPlantCircumference(10.0);
-        tulip.setTags(Arrays.asList("blume", "frühling", "garten"));
+        tulip.setTags(Arrays.asList("Blume", "Frühling", "Garten"));
         tulip.setSeller(user2);
-
         plantService.savePlant(tulip);
 
-        // Beispielpflanze: Tulpe medium
+        // Tulpe medium
         Plant tulipMedium = new Plant();
         tulipMedium.setTitle("Tulpe Medium");
         tulipMedium.setPhotos(Arrays.asList("tulip.jpg"));
@@ -113,12 +114,11 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
         tulipMedium.setDescription("Eine bunte medium Tulpe, ideal für den Frühlingsgarten.");
         tulipMedium.setPotCircumference(0.0);
         tulipMedium.setPlantCircumference(10.0);
-        tulipMedium.setTags(Arrays.asList("blume", "frühling", "garten"));
+        tulipMedium.setTags(Arrays.asList("Blume", "Frühling", "Garten"));
         tulipMedium.setSeller(user2);
-
-
         plantService.savePlant(tulipMedium);
 
+        // Weiße Spätblühende Tulpe
         Plant tulipThree = new Plant();
         tulipThree.setTitle("Weiße Spätblühende Tulpe");
         tulipThree.setPhotos(Arrays.asList("tulip.jpg"));
@@ -128,11 +128,11 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
         tulipThree.setDescription("Eine spätblühende weiße Tulpe, perfekt für den Spätsommergarten.");
         tulipThree.setPotCircumference(12.0); // Beispiel für den Pflanztopfumfang
         tulipThree.setPlantCircumference(13.5);
-        tulipThree.setTags(Arrays.asList("blume", "weiß", "spätsommer", "garten"));
+        tulipThree.setTags(Arrays.asList("Blume", "Sommer", "Garten"));
         tulipThree.setSeller(user1);
-
         plantService.savePlant(tulipThree);
 
+       // Pinkfarbene Zwergtulpe
         Plant tulipFour = new Plant();
         tulipFour.setTitle("Pinkfarbene Zwergtulpe");
         tulipFour.setPhotos(Arrays.asList("tulip.jpg"));
@@ -142,11 +142,11 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
         tulipFour.setDescription("Eine niedrige pinkfarbene Zwergtulpe, ideal für den Vorgarten.");
         tulipFour.setPotCircumference(8.0); // Beispiel für den Pflanztopfumfang
         tulipFour.setPlantCircumference(8.0);
-        tulipFour.setTags(Arrays.asList("blume", "pink", "zwerg", "garten"));
+        tulipFour.setTags(Arrays.asList("Blume", "Frühling", "Zwiebel- und Knollenpflanzen"));
         tulipFour.setSeller(user2);
-
         plantService.savePlant(tulipFour);
 
+        // Orangene Darwin-Tulpe
         Plant tulipFive = new Plant();
         tulipFive.setTitle("Orangene Darwin-Tulpe");
         tulipFive.setPhotos(Arrays.asList("tulip.jpg"));
@@ -156,11 +156,11 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
         tulipFive.setDescription("Eine kräftige orangefarbene Darwin-Tulpe, die im Frühling aufblüht.");
         tulipFive.setPotCircumference(0.0);
         tulipFive.setPlantCircumference(11.0);
-        tulipFive.setTags(Arrays.asList("blume", "orange", "frühling", "garten"));
+        tulipFive.setTags(Arrays.asList("Blume", "Frühling", "Garten"));
         tulipFive.setSeller(user1);
-
         plantService.savePlant(tulipFive);
 
+        // Gefüllte Lilien-Tulpe
         Plant tulipSix = new Plant();
         tulipSix.setTitle("Gefüllte Lilien-Tulpe");
         tulipSix.setPhotos(Arrays.asList("tulip.jpg"));
@@ -170,11 +170,11 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
         tulipSix.setDescription("Eine prächtige gefüllte Lilien-Tulpe, die im Frühling besonders schön blüht.");
         tulipSix.setPotCircumference(10.0); // Beispiel für den Pflanztopfumfang
         tulipSix.setPlantCircumference(10.5);
-        tulipSix.setTags(Arrays.asList("blume", "gefüllt", "lilie", "frühling"));
+        tulipSix.setTags(Arrays.asList("Blume", "Frühling", "Zwiebel- und Knollenpflanzen"));
         tulipSix.setSeller(user2);
-
         plantService.savePlant(tulipSix);
 
+        // Zweifarbige Rembrandt-Tulpe
         Plant tulipSeven = new Plant();
         tulipSeven.setTitle("Zweifarbige Rembrandt-Tulpe");
         tulipSeven.setPhotos(Arrays.asList("tulip.jpg"));
@@ -184,11 +184,11 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
         tulipSeven.setDescription("Eine elegante zweifarbige Rembrandt-Tulpe, die im Mai blüht.");
         tulipSeven.setPotCircumference(0.0);
         tulipSeven.setPlantCircumference(12.0);
-        tulipSeven.setTags(Arrays.asList("blume", "zweifarbig", "rembrandt", "mai"));
+        tulipSeven.setTags(Arrays.asList("Blume", "Sommerblumen", "Garten"));
         tulipSeven.setSeller(user1);
-
         plantService.savePlant(tulipSeven);
 
+        // Gefranste Papageien-Tulpe
         Plant tulipEight = new Plant();
         tulipEight.setTitle("Gefranste Papageien-Tulpe");
         tulipEight.setPhotos(Arrays.asList("tulip.jpg"));
@@ -198,11 +198,11 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
         tulipEight.setDescription("Eine spektakuläre gefranste Papageien-Tulpe, die im Frühling für Aufsehen sorgt.");
         tulipEight.setPotCircumference(12.0); // Beispiel für den Pflanztopfumfang
         tulipEight.setPlantCircumference(12.5);
-        tulipEight.setTags(Arrays.asList("blume", "gefranst", "papagei", "frühling"));
+        tulipEight.setTags(Arrays.asList("Blume", "Frühling", "Zwiebel- und Knollenpflanzen"));
         tulipEight.setSeller(user2);
-
         plantService.savePlant(tulipEight);
 
+        // Gelbe Triumph-Tulpe
         Plant tulipNine = new Plant();
         tulipNine.setTitle("Gelbe Triumph-Tulpe");
         tulipNine.setPhotos(Arrays.asList("tulip.jpg"));
@@ -212,11 +212,11 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
         tulipNine.setDescription("Eine leuchtende gelbe Triumph-Tulpe, die im April blüht.");
         tulipNine.setPotCircumference(0.0);
         tulipNine.setPlantCircumference(10.0);
-        tulipNine.setTags(Arrays.asList("blume", "gelb", "triumph", "april"));
+        tulipNine.setTags(Arrays.asList("Blume", "Frühling", "Gemüse"));
         tulipNine.setSeller(user1);
-
         plantService.savePlant(tulipNine);
 
+        // Weiße Gefüllte Viridiflora-Tulpe
         Plant tulipTen = new Plant();
         tulipTen.setTitle("Weiße Gefüllte Viridiflora-Tulpe");
         tulipTen.setPhotos(Arrays.asList("tulip.jpg"));
@@ -226,17 +226,11 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
         tulipTen.setDescription("Eine elegante weiße gefüllte Viridiflora-Tulpe mit grünen Akzenten.");
         tulipTen.setPotCircumference(10.0); // Beispiel für den Pflanztopfumfang
         tulipTen.setPlantCircumference(11.0);
-        tulipTen.setTags(Arrays.asList("blume", "gefüllt", "viridiflora", "grün"));
+        tulipTen.setTags(Arrays.asList("Blume", "Frühling", "Zwiebel- und Knollenpflanzen"));
         tulipTen.setSeller(user2);
-
         plantService.savePlant(tulipTen);
 
-
-
-
-        //end of Tulips
-
-        // Beispielpflanze: Kaktus
+        // Kaktus
         Plant cactus = new Plant();
         cactus.setTitle("Kakteen Echinopsis Lobivia cacti hybrid Lobivia cactus");
         cactus.setPhotos(Arrays.asList("cactus.jpg", "cactus2.jpg"));
@@ -246,12 +240,11 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
         cactus.setDescription("");
         cactus.setPotCircumference(30.0);
         cactus.setPlantCircumference(20.0);
-        cactus.setTags(Arrays.asList("sukkulent", "wohnung", "pflegeleicht"));
+        cactus.setTags(Arrays.asList("Kübelpflanzen", "Sommerblumen", "Zimmerpflanzen"));
         cactus.setSeller(user3);
-
         plantService.savePlant(cactus);
 
-        // Beispielpflanze: Palme
+        // Palme
         Plant palme = new Plant();
         palme.setTitle("Yucca Palme");
         palme.setPhotos(Arrays.asList("yucca-palme.jpg"));
@@ -261,10 +254,12 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
         palme.setDescription("Die Studenten-Pflanze: Pflegeleicht und prachtvoll.");
         palme.setPotCircumference(36.0);
         palme.setPlantCircumference(70.0);
-        palme.setTags(Arrays.asList("palme", "zimmerpflanze", "urlaub"));
+        palme.setTags(Arrays.asList("Bäume und Sträucher", "Sommerblumen", "Zimmerpflanzen"));
         palme.setSeller(hans);
-
         plantService.savePlant(palme);
+
+
+        //*********************************************************************************
     }
 
     @Override
