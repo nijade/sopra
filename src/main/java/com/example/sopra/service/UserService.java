@@ -25,6 +25,11 @@ public class UserService implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
 
+    /**
+     * Fügt einen Benutzer zur Datenbank hinzu. (Entwickler-Option)
+     * @param user Der neu hinzuzufügende Benutzer.
+     * @return Übergibt Repository Anweisung zum Hinzufügen und gibt den entsprechenden Benutzer zurück.
+     */
     @Transactional
     public User saveUser(User user) {
         return userRepository.save(user);

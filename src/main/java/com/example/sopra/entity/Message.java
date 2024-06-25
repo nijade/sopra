@@ -6,6 +6,9 @@ import org.springframework.data.annotation.Id;
 
 import java.time.LocalDateTime;
 
+/**
+ * KLasse zur Definition von Messages
+ */
 @Entity
 public class Message {
     @jakarta.persistence.Id

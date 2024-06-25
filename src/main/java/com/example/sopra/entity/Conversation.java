@@ -7,6 +7,10 @@ import jakarta.persistence.OneToMany;
 
 import java.util.List;
 
+/**
+ * Klasse zur Definiton von Konversationen
+ *
+ */
 @Entity
 public class Conversation {
     @jakarta.persistence.Id
