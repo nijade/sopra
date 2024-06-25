@@ -49,12 +49,49 @@ public class PlantController {
      * @return der Name der Ansicht für die Suchergebnisse
      */
     @GetMapping("/searchPlants")
-    public String searchResults(@RequestParam String title, Model model) {
-        List<Plant> plants = plantService.searchPlantsByTitleContainingIgnoreCase(title);
+    public String searchResults(@RequestParam String title,String category, Model model) {
+        List<Plant> plants;
+        String chosenSorting = "Am relevantesten";
+        String alternativeSortingOne = "Günstigste Zuerst";
+        String alternativeSortingTwo = "Teuerste Zuerst";
+        if(category.equals("Alle Kategorien")){
+            plants = plantService.searchPlantsByTitleContainingIgnoreCase(title);
+        }else{
+            plants = plantService.searchPlantsByTitleContainingIgnoreCaseSpecificCategory(title, category);
+        }
+        model.addAttribute("chosenSorting", chosenSorting);
+        model.addAttribute("alternativeSortingOne",alternativeSortingOne);
+        model.addAttribute("alternativeSortingTwo",alternativeSortingTwo);
         model.addAttribute("plants", plants);
+        model.addAttribute("category", category);
         model.addAttribute("searchTerm", title);
         return "searchPlants";
     }
+
+
+    @GetMapping("/searchPlantsPriceAscending")
+    public String searchResultsPriceAscending(@RequestParam String title, Model model , String category) {
+        List<Plant> plants;
+        String chosenSorting = "Günstigste Zuerst";
+        String alternativeSortingOne = "Am relevantesten";
+        String alternativeSortingTwo = "Teuerste Zuerst";
+        if(category.equals("Alle Kategorien")){
+            plants = plantService.searchPlantsByTitleContainingIgnoreCasePriceAscending(title);
+        }else{
+            plants = plantService.searchPlantsByTitleContainingIgnoreCasePriceAscendingSpecificCategory(title, category);
+        }
+        model.addAttribute("chosenSorting", chosenSorting);
+        model.addAttribute("alternativeSortingOne",alternativeSortingOne);
+        model.addAttribute("alternativeSortingTwo",alternativeSortingTwo);
+        model.addAttribute("category", category);
+        model.addAttribute("plants", plants);
+        model.addAttribute("searchTerm", title);
+        return "searchPlants";
+
+    }
+
+
+
 
     /**
      * Listet alle Pflanzen des aktuellen Benutzers auf.

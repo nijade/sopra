@@ -141,6 +141,20 @@ public class PlantService {
         return plantRepository.findByTitleContainingIgnoreCase(title);
     }
 
+    public List<Plant> searchPlantsByTitleContainingIgnoreCasePriceAscending(String title) {
+        return plantRepository.findByTitleContainingIgnoreCasePriceAscending(title);
+    }
+
+    public List<Plant> searchPlantsByTitleContainingIgnoreCaseSpecificCategory(String title, String category) {
+        return plantRepository.findByTitleContainingIgnoreCaseSpecificCategory(title, category);
+    }
+
+    public List<Plant> searchPlantsByTitleContainingIgnoreCasePriceAscendingSpecificCategory(String title, String category) {
+        return plantRepository.findByTitleContainingIgnoreCasePriceAscendingSpecificCategory(title, category);
+    }
+
+
+
     /**
      * Findet alle Pflanzeninserate eines Benutzers.
      *

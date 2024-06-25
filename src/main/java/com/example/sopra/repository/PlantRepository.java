@@ -12,8 +12,26 @@ import java.util.List;
 @Repository
 public interface PlantRepository extends JpaRepository<Plant, Integer> {
 
+    //Queries without specified category
+    //Standard Query for finding Plants by searching for their title
     @Query("SELECT p FROM Plant p WHERE UPPER(p.title) LIKE UPPER(CONCAT('%', :title, '%'))")
     List<Plant> findByTitleContainingIgnoreCase(@Param("title") String title);
+
+    //Standard Query for finding Plants by searching for their title and sorting them by Ascending Price
+    @Query("SELECT p FROM Plant p WHERE UPPER(p.title) LIKE UPPER(CONCAT('%', :title, '%')) ORDER BY p.price ASC")
+    List<Plant> findByTitleContainingIgnoreCasePriceAscending(@Param("title") String title);
+
+    //Specific category queries
+    //Standard Query for finding Plants by searching for their title and Category
+    @Query("SELECT p FROM Plant p WHERE UPPER(p.title) LIKE UPPER(CONCAT('%', :title, '%')) AND :category MEMBER OF p.tags")
+    List<Plant> findByTitleContainingIgnoreCaseSpecificCategory(@Param("title") String title, @Param("category") String category);
+
+    //Standard Query for finding Plants by searching for their title and Category then sorting them by ascending Price
+    @Query("SELECT p FROM Plant p WHERE UPPER(p.title) LIKE UPPER(CONCAT('%', :title, '%')) AND :category MEMBER OF p.tags ORDER BY p.price ASC")
+    List<Plant> findByTitleContainingIgnoreCasePriceAscendingSpecificCategory(@Param("title") String title, @Param("category") String category);
+
+
+
 
     @Query("SELECT p FROM Plant p WHERE p.plantID = :plantID")
     Plant findByPlantID(@Param("plantID") Integer plantID);
