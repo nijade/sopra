@@ -49,7 +49,19 @@ Developer of "SoPra" (GitHub-Username, full name):
 
  ## Developement
 
-     3.2:
+     3.3: 
+    - 1. Sortieren nach Preis (auf/absteigend) und Filtern, gemäß "anderen Online-Shops" {Nils}
+    - 2. Merkliste {Lino}
+    - 3. Pflegetipps für gekaufte Ware {Phillip}
+    - 4. Eines der zusätzlichen Features. Zurzeit haben wir die gamifizierten Elemente. Dazu wiefolgt
+
+        1. Prozentanzeige der Profilvollständigkeit {Lino}  
+        2. Kauf/Verkaufstatistiken im Leaderboard o.Ä. {Jonas}
+        3. Quiz des Tages/WOche/Monat whatever, nur zur Unterhaltung {Nils}
+        4. Levelanzeige {Jonas}
+
+
+        3.2:
     - Nils: Auf der eingeloggten Startseite können die User Pflanzen über ein Suchfeld suchen und
       gefundene Pflanzen tabellarisch ansehen.
     - Jonas: User können Pflanzen einstellen, bearbeiten und löschen.
