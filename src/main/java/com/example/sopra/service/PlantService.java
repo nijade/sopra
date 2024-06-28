@@ -65,6 +65,7 @@ public class PlantService {
             setAllPlantValues(plant, title, photos, height, price, hasPlanter, description, potCircumference, plantCircumference, tags, user);
 
             plantRepository.save(plant);
+            userService.getCurrentUser().addXp(20);
             model.addAttribute("successMessage", "Ihr Inserat wurde erfolgreich erstellt!");
             return "success";
         } catch (Exception e) {
@@ -177,7 +178,7 @@ public class PlantService {
                 model.addAttribute("errorMessage", "Sie konnten nicht als Anbieter authentifiziert werden!");
                 return "errorCustom";
             }
-            //Entfernen der Pflanze und erneutes Hinzufügen nach Änderung der Attributeum Aktualisierung zu garantieren
+            //Entfernen der Pflanze und erneutes Hinzufügen nach Änderung der Attribute, um Aktualisierung zu garantieren
             deletePlant(id, model);
             setAllPlantValues(plant, title, photos, height, price, hasPlanter, description, potCircumference, plantCircumference, tags, user);
             savePlant(plant);
