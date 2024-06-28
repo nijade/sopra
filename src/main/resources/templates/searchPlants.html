@@ -180,6 +180,12 @@
       padding: 8px;
       font-size: 14px;
     }
+    /* Added CSS for the no-plant message */
+    .no-plants-message {
+      margin-top: 20px; /* Add margin to separate from sorted message */
+      font-size: 16px;
+      color: #ff0000; /* Optional: Add color to make it stand out */
+    }
   </style>
 </head>
 <body>
@@ -268,7 +274,7 @@
       </div>
     </div>
     <div th:if="${plants == null || plants.isEmpty()}">
-      <p>Keine Pflanze mit diesem Titel gefunden.</p>
+      <p class="no-plants-message">Keine Pflanze mit diesem Titel in dieser Kategorie gefunden.</p>
     </div>
   </div>
 </div>

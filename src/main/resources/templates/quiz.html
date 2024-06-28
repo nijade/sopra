@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="de">
+<head>
+    <th:block th:insert="~{fragments/htmlHead :: head}"></th:block>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<p>Quizseite</p>
+
+<!-- Anzeige der Quizzes -->
+<div>
+    <h2>Verfügbare Quizzes</h2>
+    <ul>
+        <li th:each="quiz : ${quizzes}">
+
+
+            <!-- Frage 1 -->
+            <div>
+                <h4 th:text="'Frage 1: ' + ${quiz.questionOne}">Frage 1</h4>
+                <p>Mögliche Antworten:</p>
+                <ul>
+                    <li th:each="answer : ${quiz.possibleAnswersQuestionOne}" th:text="${answer}">Antwort</li>
+                </ul>
+                <p>Richtige Antworten:</p>
+                <ul>
+                    <li th:each="answer : ${quiz.rightAnswersQuestionOne}" th:text="${answer}">Richtige Antwort</li>
+                </ul>
+            </div>
+
+            <!-- Frage 2 -->
+            <div>
+                <h4 th:text="'Frage 2: ' + ${quiz.questionTwo}">Frage 2</h4>
+                <p>Mögliche Antworten:</p>
+                <ul>
+                    <li th:each="answer : ${quiz.possibleAnswersQuestionTwo}" th:text="${answer}">Antwort</li>
+                </ul>
+                <p>Richtige Antworten:</p>
+                <ul>
+                    <li th:each="answer : ${quiz.rightAnswersQuestionTwo}" th:text="${answer}">Richtige Antwort</li>
+                </ul>
+            </div>
+
+            <!-- Frage 3 -->
+            <div>
+                <h4 th:text="'Frage 3: ' + ${quiz.questionThree}">Frage 3</h4>
+                <p>Mögliche Antworten:</p>
+                <ul>
+                    <li th:each="answer : ${quiz.possibleAnswersQuestionThree}" th:text="${answer}">Antwort</li>
+                </ul>
+                <p>Richtige Antworten:</p>
+                <ul>
+                    <li th:each="answer : ${quiz.rightAnswersQuestionThree}" th:text="${answer}">Richtige Antwort</li>
+                </ul>
+            </div>
+
+        </li>
+    </ul>
+</div>
+
+</body>
+</html>
+
