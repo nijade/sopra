@@ -1,5 +1,4 @@
 package com.example.sopra.service;
-
 import com.example.sopra.entity.Plant;
 import com.example.sopra.entity.User;
 import com.example.sopra.repository.PlantRepository;
@@ -7,7 +6,6 @@ import com.example.sopra.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
-
 import java.util.Arrays;
 import java.util.List;
 
@@ -132,30 +130,6 @@ public class PlantService {
     }
 
     /**
-     * Sucht nach Pflanzen anhand des Titels (case-insensitive).
-     *
-     * @param title der Titel der Pflanze
-     * @return List<Plant> die Liste der gefundenen Pflanzen
-     */
-    public List<Plant> searchPlantsByTitleContainingIgnoreCase(String title) {
-        return plantRepository.findByTitleContainingIgnoreCase(title);
-    }
-
-    public List<Plant> searchPlantsByTitleContainingIgnoreCasePriceAscending(String title) {
-        return plantRepository.findByTitleContainingIgnoreCasePriceAscending(title);
-    }
-
-    public List<Plant> searchPlantsByTitleContainingIgnoreCaseSpecificCategory(String title, String category) {
-        return plantRepository.findByTitleContainingIgnoreCaseSpecificCategory(title, category);
-    }
-
-    public List<Plant> searchPlantsByTitleContainingIgnoreCasePriceAscendingSpecificCategory(String title, String category) {
-        return plantRepository.findByTitleContainingIgnoreCasePriceAscendingSpecificCategory(title, category);
-    }
-
-
-
-    /**
      * Findet alle Pflanzeninserate eines Benutzers.
      *
      * @return List<Plant> die Liste der Pflanzeninserate des Benutzers
@@ -270,4 +244,45 @@ public class PlantService {
         }
     }
 
+
+
+    //Search Methods
+
+    /**
+     * Sucht nach Pflanzen anhand des Titels (case-insensitive).
+     *
+     * @param title der Titel der Pflanze
+     * @return List<Plant> die Liste der gefundenen Pflanzen
+     */
+    public List<Plant> searchPlantsByTitleContainingIgnoreCase(String title) {
+        return plantRepository.findByTitleContainingIgnoreCase(title);
+    }
+
+    public List<Plant> searchPlantsByTitleContainingIgnoreCaseSpecificCategory(String title, String category) {
+        return plantRepository.findByTitleContainingIgnoreCaseSpecificCategory(title, category);
+    }
+
+    public List<Plant> searchPlantsByTitleContainingIgnoreCaseAdditionalFilters(String title, Double priceMin, Double priceMax, Integer heightMin, Integer heightMax, Double circumferenceMin, Double circumferenceMax) {
+        return plantRepository.searchPlantsByTitleContainingIgnoreCaseAdditionalFilters(title, priceMin, priceMax, heightMin ,heightMax, circumferenceMin, circumferenceMax);
+    }
+
+    public List<Plant> searchPlantsByTitleContainingIgnoreCaseAdditionalFiltersPriceASC(String title, Double priceMinQueryReady, Double priceMaxQueryReady, Integer heightMinQueryReady, Integer heightMaxQueryReady, Double circumferenceMinQueryReady, Double circumferenceMaxQueryReady) {
+        return plantRepository.searchPlantsByTitleContainingIgnoreCaseAdditionalFiltersPriceASC(title, priceMinQueryReady, priceMaxQueryReady, heightMinQueryReady, heightMaxQueryReady, circumferenceMinQueryReady, circumferenceMaxQueryReady);
+    }
+
+    public List<Plant> searchPlantsByTitleContainingIgnoreCaseAdditionalFiltersPriceDSC(String title, Double priceMinQueryReady, Double priceMaxQueryReady, Integer heightMinQueryReady, Integer heightMaxQueryReady, Double circumferenceMinQueryReady, Double circumferenceMaxQueryReady) {
+        return plantRepository.searchPlantsByTitleContainingIgnoreCaseAdditionalFiltersPriceDSC(title, priceMinQueryReady, priceMaxQueryReady, heightMinQueryReady, heightMaxQueryReady, circumferenceMinQueryReady, circumferenceMaxQueryReady);
+    }
+
+    public List<Plant> searchPlantsByTitleContainingIgnoreCaseSpecificCategoryAdditionalFiltersSpecificCategory(String title, String category, Double priceMinQueryReady, Double priceMaxQueryReady, Integer heightMinQueryReady, Integer heightMaxQueryReady, Double circumferenceMinQueryReady, Double circumferenceMaxQueryReady) {
+        return plantRepository.searchPlantsByTitleContainingIgnoreCaseAdditionalFiltersSpecificCategory(title, category, priceMinQueryReady, priceMaxQueryReady, heightMinQueryReady, heightMaxQueryReady, circumferenceMinQueryReady, circumferenceMaxQueryReady);
+    }
+
+    public List<Plant> searchPlantsByTitleContainingIgnoreCaseAdditionalFiltersSpecificCategoryPriceASC(String title, String category, Double priceMinQueryReady, Double priceMaxQueryReady, Integer heightMinQueryReady, Integer heightMaxQueryReady, Double circumferenceMinQueryReady, Double circumferenceMaxQueryReady) {
+        return plantRepository.searchPlantsByTitleContainingIgnoreCaseAdditionalFiltersSpecificCategoryASC(title, category, priceMinQueryReady, priceMaxQueryReady, heightMinQueryReady, heightMaxQueryReady, circumferenceMinQueryReady, circumferenceMaxQueryReady);
+    }
+
+    public List<Plant> searchPlantsByTitleContainingIgnoreCaseAdditionalFiltersSpecificCategoryPriceDSC(String title, String category, Double priceMinQueryReady, Double priceMaxQueryReady, Integer heightMinQueryReady, Integer heightMaxQueryReady, Double circumferenceMinQueryReady, Double circumferenceMaxQueryReady) {
+        return plantRepository.searchPlantsByTitleContainingIgnoreCaseAdditionalFiltersSpecificCategoryDSC(title, category, priceMinQueryReady, priceMaxQueryReady, heightMinQueryReady, heightMaxQueryReady, circumferenceMinQueryReady, circumferenceMaxQueryReady);
+    }
 }
