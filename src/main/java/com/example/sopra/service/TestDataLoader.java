@@ -1,5 +1,6 @@
 package com.example.sopra.service;
 
+import com.example.sopra.entity.CareInstruction;
 import com.example.sopra.entity.Plant;
 import com.example.sopra.entity.Quiz;
 import com.example.sopra.entity.User;
@@ -30,6 +31,9 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
 
     @Autowired
     private QuizService quizService;
+
+    @Autowired
+    private CareInstructionService careInstructionService;
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
@@ -269,7 +273,119 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
         plantService.savePlant(palme);
 
 
+        //*******************
+        //Care Instruction
+        CareInstruction summerPlantInstruction = new CareInstruction();
+        summerPlantInstruction.setTagTitle("Sommerblumen");
+        summerPlantInstruction.setWater("Sommerblumen regelmäßig gießen, die Erde sollte stets leicht feucht bleiben.");
+        summerPlantInstruction.setFertilize("Wöchentlich mit einem Blühpflanzendünger düngen, um eine reiche Blüte zu fördern.");
+        summerPlantInstruction.setLocation("Ein sonniger bis halbschattiger Platz fördert das Blühen und die Gesundheit der Pflanzen.");
+        careInstructionService.save(summerPlantInstruction);
 
+        CareInstruction balconyFlowerInstruction = new CareInstruction();
+        balconyFlowerInstruction.setTagTitle("Balkonblumen");
+        balconyFlowerInstruction.setWater("Balkonblumen regelmäßig gießen, besonders während heißer und trockener Perioden.");
+        balconyFlowerInstruction.setFertilize("Einmal pro Woche mit einem flüssigen Blumendünger düngen.");
+        balconyFlowerInstruction.setLocation("Einen sonnigen bis halbschattigen Standort wählen, der vor starkem Wind geschützt ist.");
+        careInstructionService.save(balconyFlowerInstruction);
+
+        CareInstruction medicinalPlantInstruction = new CareInstruction();
+        medicinalPlantInstruction.setTagTitle("Heilpflanzen");
+        medicinalPlantInstruction.setWater("Heilpflanzen nur mäßig gießen, die Erde zwischen den Wassergaben leicht antrocknen lassen.");
+        medicinalPlantInstruction.setFertilize("Im Frühjahr und Sommer alle zwei Wochen mit einem organischen Dünger versorgen.");
+        medicinalPlantInstruction.setLocation("Ein heller, sonniger Standort fördert das Wachstum und die Wirkstoffbildung.");
+        careInstructionService.save(medicinalPlantInstruction);
+
+        CareInstruction wildPlantInstruction = new CareInstruction();
+        wildPlantInstruction.setTagTitle("Wildpflanzen");
+        wildPlantInstruction.setWater("Wildpflanzen benötigen meist nur wenig zusätzliche Bewässerung, je nach Art.");
+        wildPlantInstruction.setFertilize("Düngen ist selten notwendig, natürliche Böden bieten oft genug Nährstoffe.");
+        wildPlantInstruction.setLocation("Ein naturnaher Standort mit ausreichend Licht und Platz zur Ausbreitung ist ideal.");
+        careInstructionService.save(wildPlantInstruction);
+
+        CareInstruction treeAndShrubInstruction = new CareInstruction();
+        treeAndShrubInstruction.setTagTitle("Bäume und Sträucher");
+        treeAndShrubInstruction.setWater("In den ersten Jahren nach der Pflanzung regelmäßig gießen, später nur bei langer Trockenheit.");
+        treeAndShrubInstruction.setFertilize("Im Frühjahr mit einem organischen Langzeitdünger düngen.");
+        treeAndShrubInstruction.setLocation("Ein Standort mit ausreichend Platz und Licht ist wichtig für ein gesundes Wachstum.");
+        careInstructionService.save(treeAndShrubInstruction);
+
+        CareInstruction climbingPlantInstruction = new CareInstruction();
+        climbingPlantInstruction.setTagTitle("Kletterpflanzen");
+        climbingPlantInstruction.setWater("Kletterpflanzen gleichmäßig feucht halten, aber Staunässe vermeiden.");
+        climbingPlantInstruction.setFertilize("Im Frühling und Sommer alle zwei Wochen mit einem stickstoffreichen Dünger versorgen.");
+        climbingPlantInstruction.setLocation("Einen sonnigen bis halbschattigen Standort mit einer stabilen Kletterhilfe wählen.");
+        careInstructionService.save(climbingPlantInstruction);
+
+        CareInstruction herbInstruction = new CareInstruction();
+        herbInstruction.setTagTitle("Kräuter");
+        herbInstruction.setWater("Kräuter regelmäßig gießen, aber Staunässe vermeiden, die Erde sollte gut durchlässig sein.");
+        herbInstruction.setFertilize("Während der Wachstumsperiode alle vier bis sechs Wochen leicht düngen.");
+        herbInstruction.setLocation("Ein sonniger bis halbschattiger Platz fördert das Aroma und das Wachstum.");
+        careInstructionService.save(herbInstruction);
+
+        CareInstruction containerPlantInstruction = new CareInstruction();
+        containerPlantInstruction.setTagTitle("Kübelpflanzen");
+        containerPlantInstruction.setWater("Kübelpflanzen regelmäßig gießen, besonders im Sommer, die Erde sollte gleichmäßig feucht bleiben.");
+        containerPlantInstruction.setFertilize("Wöchentlich mit einem flüssigen Kübelpflanzendünger versorgen.");
+        containerPlantInstruction.setLocation("Ein heller Standort, der den Bedürfnissen der spezifischen Pflanze entspricht, ist ideal.");
+        careInstructionService.save(containerPlantInstruction);
+
+        CareInstruction roseInstruction = new CareInstruction();
+        roseInstruction.setTagTitle("Rosen");
+        roseInstruction.setWater("Rosen regelmäßig gießen, insbesondere bei Trockenheit, aber nicht über die Blätter.");
+        roseInstruction.setFertilize("Im Frühjahr und Sommer mit speziellem Rosendünger alle vier bis sechs Wochen düngen.");
+        roseInstruction.setLocation("Ein sonniger und luftiger Platz, der vor starkem Wind geschützt ist, ist ideal.");
+        careInstructionService.save(roseInstruction);
+
+        CareInstruction perennialInstruction = new CareInstruction();
+        perennialInstruction.setTagTitle("Stauden");
+        perennialInstruction.setWater("Stauden regelmäßig gießen, besonders während trockener Perioden im Sommer.");
+        perennialInstruction.setFertilize("Im Frühjahr und Sommer mit einem Langzeitdünger versorgen.");
+        perennialInstruction.setLocation("Ein sonniger bis halbschattiger Standort, der den speziellen Bedürfnissen der Staude entspricht, ist ideal.");
+        careInstructionService.save(perennialInstruction);
+
+        CareInstruction waterPlantInstruction = new CareInstruction();
+        waterPlantInstruction.setTagTitle("Wasserpflanzen");
+        waterPlantInstruction.setWater("Wasserpflanzen brauchen keine zusätzliche Bewässerung, solange sie im Wasser stehen.");
+        waterPlantInstruction.setFertilize("Im Frühjahr mit einem speziellen Wasserpflanzendünger düngen.");
+        waterPlantInstruction.setLocation("Ein sonniger bis halbschattiger Platz im Teich oder Wasserbecken ist ideal.");
+        careInstructionService.save(waterPlantInstruction);
+
+        CareInstruction ornamentalGrasInstruction = new CareInstruction();
+        ornamentalGrasInstruction.setTagTitle("Ziergräser");
+        ornamentalGrasInstruction.setWater("Ziergräser regelmäßig gießen, besonders in Trockenperioden.");
+        ornamentalGrasInstruction.setFertilize("Im Frühjahr mit einem Langzeitdünger versorgen.");
+        ornamentalGrasInstruction.setLocation("Ein sonniger bis halbschattiger Standort fördert das Wachstum und die Farbentwicklung.");
+        careInstructionService.save(ornamentalGrasInstruction);
+
+        CareInstruction housePlantInstruction = new CareInstruction();
+        housePlantInstruction.setTagTitle("Zimmerpflanzen");
+        housePlantInstruction.setWater("Zimmerpflanzen regelmäßig gießen, die Erde leicht feucht halten und Staunässe vermeiden.");
+        housePlantInstruction.setFertilize("Alle zwei Wochen mit einem Zimmerpflanzendünger düngen.");
+        housePlantInstruction.setLocation("Ein heller Platz ohne direkte Mittagssonne ist ideal für die meisten Zimmerpflanzen.");
+        careInstructionService.save(housePlantInstruction);
+
+        CareInstruction onionPlantInstruction = new CareInstruction();
+        onionPlantInstruction.setTagTitle("Zwiebel- und Knollenpflanzen");
+        onionPlantInstruction.setWater("Während der Wachstumsperiode regelmäßig gießen, die Erde sollte nicht austrocknen.");
+        onionPlantInstruction.setFertilize("Im Frühjahr und Sommer mit einem speziellen Zwiebel- und Knollendünger versorgen.");
+        onionPlantInstruction.setLocation("Ein sonniger bis halbschattiger Platz fördert die Blüte und das Wachstum.");
+        careInstructionService.save(onionPlantInstruction);
+
+        CareInstruction vegetablesInstruction = new CareInstruction();
+        vegetablesInstruction.setTagTitle("Gemüse");
+        vegetablesInstruction.setWater("Gemüse regelmäßig gießen, die Erde sollte stets gleichmäßig feucht bleiben.");
+        vegetablesInstruction.setFertilize("Alle zwei Wochen mit einem Gemüsedünger düngen, um das Wachstum zu unterstützen.");
+        vegetablesInstruction.setLocation("Ein sonniger Platz mit gut durchlässigem Boden ist ideal.");
+        careInstructionService.save(vegetablesInstruction);
+
+        CareInstruction fruitInstruction = new CareInstruction();
+        fruitInstruction.setTagTitle("Obst");
+        fruitInstruction.setWater("Obstpflanzen regelmäßig gießen, besonders während der Fruchtbildung.");
+        fruitInstruction.setFertilize("Im Frühjahr mit einem organischen Dünger versorgen.");
+        fruitInstruction.setLocation("Ein sonniger Standort fördert eine reiche Ernte und gesunde Pflanzen.");
+        careInstructionService.save(fruitInstruction);
         //*********************************************************************************
 
         // Test Quizze

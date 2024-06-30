@@ -134,4 +134,6 @@ public interface PlantRepository extends JpaRepository<Plant, Integer> {
             @Param("heightMaxQueryReady") Integer heightMaxQueryReady,
             @Param("circumferenceMinQueryReady") Double circumferenceMinQueryReady,
             @Param("circumferenceMaxQueryReady") Double circumferenceMaxQueryReady);
+
+    List<Plant> findAllByBuyerFinal(User buyer);
 }

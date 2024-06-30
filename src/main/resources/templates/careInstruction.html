@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <th:block th:insert="~{fragments/htmlHead :: head}"></th:block>
+    <title>Pflegehinweise</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-color: #9fc2aa;
+        }
+
+        .container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            margin-top: 20px; /* Add margin-top to create space from the navbar */
+        }
+
+
+        .card {
+            background-color: white;
+        }
+
+        .card-body {
+            display: flex;
+            flex-direction: column;
+            padding: 15px;
+        }
+    </style>
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+
+<div class="container">
+    <div class="card">
+        <div th:if="${careAvailable}" class="card-body">
+            <h2 th:text="'Pflegehinweise für die Pflanze ' + ${plant.getTitle()}"></h2>
+            <p th:text="'Kategorie: ' + ${careInstruction.getTagTitle()}" style="font-weight: bold"></p>
+            <p th:text="'Gießen: ' + ${careInstruction.getWater()}"></p>
+            <p th:text="'Dünger: ' + ${careInstruction.getFertilize()}"></p>
+            <p th:text="'Standort: ' + ${careInstruction.getLocation()}"></p>
+        </div>
+        <div th:if="${!careAvailable}" class="card-body">
+            <h2 th:text="'Pflegehinweise für die Pflanze ' + ${plant.getTitle()}"></h2>
+            <p>Für diese Pflanze ist keine Kategorie hinterlegt. Daher können an dieser Stelle keine geeigneten Pflegetipps angezeigt werden.</p>
+        </div>
+    </div>
+</div>
+</body>
+</html>
