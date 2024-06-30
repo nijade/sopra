@@ -84,38 +84,8 @@
         </div>
 
         <div class="form-group">
-            <label for="height">Höhe (cm):</label>
-            <input type="number" id="height" name="height" class="form-control" step="1" required>
-        </div>
-
-        <div class="form-group">
-            <label for="price">Preis (€):</label>
-            <input type="number" id="price" name="price" class="form-control" step="0.01" required>
-        </div>
-
-        <div class="form-group form-check">
-            <input type="checkbox" id="hasPlanter" name="hasPlanter" class="form-check-input">
-            <label for="hasPlanter" class="form-check-label">Übertopf vorhanden</label>
-        </div>
-
-        <div class="form-group">
-            <label for="description">Beschreibung:</label>
-            <textarea id="description" name="description" class="form-control" maxlength="250"></textarea>
-        </div>
-
-        <div class="form-group">
-            <label for="potCircumference">Umfang des Topfes (cm):</label>
-            <input type="number" id="potCircumference" name="potCircumference" class="form-control" step="1">
-        </div>
-
-        <div class="form-group">
-            <label for="plantCircumference">Umfang der Pflanze (cm):</label>
-            <input type="number" id="plantCircumference" name="plantCircumference" class="form-control" step="1">
-        </div>
-
-        <div class="form-group">
             <label for="tags">Tags:</label>
-            <select id="tags" name="tags" class="selectpicker form-control" multiple data-live-search="true" title="Tags auswählen">
+            <select id="tags" name="tags" class="selectpicker form-control" multiple data-live-search="true" title="Tags auswählen" required>
                 <option value="Balkonblumen">Balkonblumen</option>
                 <option value="Heilpflanzen">Heilpflanzen</option>
                 <option value="Wildpflanzen">Wildpflanzen</option>
@@ -132,6 +102,37 @@
                 <option value="Obst">Obst</option>
             </select>
         </div>
+
+        <div class="form-group">
+            <label for="height">Höhe (cm):</label>
+            <input type="number" id="height" name="height" class="form-control" step="1" required>
+        </div>
+
+        <div class="form-group">
+            <label for="price">Preis (€):</label>
+            <input type="number" id="price" name="price" class="form-control" step="0.01" required>
+        </div>
+
+        <div class="form-group form-check">
+            <input type="checkbox" id="hasPlanter" name="hasPlanter" class="form-check-input">
+            <label for="hasPlanter" class="form-check-label">Übertopf vorhanden? (Optional)</label>
+        </div>
+
+        <div class="form-group">
+            <label for="description">Beschreibung (Optional):</label>
+            <textarea id="description" name="description" class="form-control" maxlength="250"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="potCircumference">Umfang des Topfes (cm) (Optional):</label>
+            <input type="number" id="potCircumference" name="potCircumference" class="form-control" step="1">
+        </div>
+
+        <div class="form-group">
+            <label for="plantCircumference">Umfang der Pflanze (cm) (Optional):</label>
+            <input type="number" id="plantCircumference" name="plantCircumference" class="form-control" step="1">
+        </div>
+
 
         <button type="submit" class="btn btn-primary btn-block">Pflanze inserieren</button>
     </form>
