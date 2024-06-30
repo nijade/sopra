@@ -108,7 +108,7 @@ public class ConversationController {
             conversation = conversationService.addMessageToConversation(conversationId, message);
             messageSent = true;
 
-            userService.getCurrentUser().addXp(5);
+            userService.addXp(userService.getCurrentUser(), 5);
         }
         model.addAttribute("specificConversation", conversation);
         model.addAttribute("messageSent", messageSent);

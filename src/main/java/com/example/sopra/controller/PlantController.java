@@ -191,7 +191,7 @@ public class PlantController {
                               @RequestParam(required = false) String description,
                               @RequestParam(required = false) Double potCircumference,
                               @RequestParam(required = false) Double plantCircumference,
-                              @RequestParam(required = false) String tags,
+                              @RequestParam(required = false) List<String> tags,
                               Model model) {
         return plantService.createPlant(title, photos, height, price, hasPlanter, description, potCircumference, plantCircumference, tags, model);
     }
@@ -238,7 +238,7 @@ public class PlantController {
                               @RequestParam(required = false) String description,
                               @RequestParam(required = false) Double potCircumference,
                               @RequestParam(required = false) Double plantCircumference,
-                              @RequestParam(required = false) String tags,
+                              @RequestParam(required = false) List<String> tags,
                               Model model) {
         return plantService.updatePlant(id, title, photos, height, price, hasPlanter, description, potCircumference, plantCircumference, tags, model);
     }

@@ -53,7 +53,7 @@ public class PlantService {
                               String description,
                               Double potCircumference,
                               Double plantCircumference,
-                              String tags,
+                              List<String> tags,
                               Model model) {
         if(photos == null || photos.isEmpty()){
             model.addAttribute("errorMessage", "Bitte wählen Sie mindestens ein Bild aus!");
@@ -65,7 +65,7 @@ public class PlantService {
             setAllPlantValues(plant, title, photos, height, price, hasPlanter, description, potCircumference, plantCircumference, tags, user);
 
             plantRepository.save(plant);
-            userService.getCurrentUser().addXp(20);
+            userService.addXp(userService.getCurrentUser(), 20);
             model.addAttribute("successMessage", "Ihr Inserat wurde erfolgreich erstellt!");
             return "success";
         } catch (Exception e) {
@@ -164,7 +164,7 @@ public class PlantService {
                             String description,
                             Double potCircumference,
                             Double plantCircumference,
-                            String tags,
+                            List<String> tags,
                             Model model) {
         if(photos == null || photos.isEmpty()){
             model.addAttribute("errorMessage", "Bitte wählen Sie mindestens ein Bild aus!");
@@ -207,7 +207,7 @@ public class PlantService {
      * @param tags              die Tags des Inserats
      * @param user              der Benutzer, der das Inserat erstellt
      */
-    private void setAllPlantValues(Plant plant, String title, List<String> photos, Integer height, Double price, Boolean hasPlanter, String description, Double potCircumference, Double plantCircumference, String tags, User user) {
+    private void setAllPlantValues(Plant plant, String title, List<String> photos, Integer height, Double price, Boolean hasPlanter, String description, Double potCircumference, Double plantCircumference, List<String> tags, User user) {
         plant.setTitle(title);
         plant.setPhotos(photos);
         plant.setHeight(height);
@@ -216,7 +216,7 @@ public class PlantService {
         plant.setDescription(description);
         plant.setPotCircumference(potCircumference);
         plant.setPlantCircumference(plantCircumference);
-        plant.setTags(Arrays.asList(tags.split(",")));
+        plant.setTags(tags);
         plant.setSeller(user);
     }
 

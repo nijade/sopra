@@ -158,4 +158,14 @@ public class UserService implements UserDetailsService {
                 .collect(Collectors.toList());
     }
 
+    public void addXp(User user, Integer xp){
+        user.xp += xp;
+        if(user.xp > user.xpToNextLevel){
+            user.xp = user.xp - user.xpToNextLevel;
+            user.level++;
+            user.xpToNextLevel = user.calculateXpToNextLevel();
+        }
+        userRepository.save(user);
+    }
+
 }

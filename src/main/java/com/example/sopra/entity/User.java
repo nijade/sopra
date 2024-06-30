@@ -41,11 +41,11 @@ public class User {
 
     public int sales = 0;
 
-    private int xp = 0;
+    public int xp = 0;
 
     public int level = 1;
 
-    private int xpToNextLevel = 50;
+    public int xpToNextLevel = 50;
 
     @ElementCollection
     private List<Integer> reviews;

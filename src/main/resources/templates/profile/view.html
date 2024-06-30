@@ -8,15 +8,55 @@
           crossorigin="anonymous"/>
     <link rel="stylesheet" href="/css/styles.css">
     <title th:text="#{profile.title}">User Profile</title>
+    <style>
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            margin-right: 20px;
+        }
+        .xp-bar {
+            width: 80%;
+            margin-top: 20px;
+            background-color: #e9ecef; /* Light gray background */
+        }
+        .xp-bar .progress {
+            height: 30px;
+        }
+        .progress-bar {
+            background-color: #28a745; /* Nice green color for progress */
+            color: black; /* Black text color for visibility */
+        }
+        .edit-profile-btn {
+            background-color: #28a745; /* Green background for button */
+            border-color: #28a745;
+        }
+        .edit-profile-btn:hover {
+            background-color: #218838; /* Slightly darker green on hover */
+            border-color: #1e7e34;
+        }
+    </style>
 </head>
 <body>
-<div th:replace="fragments/header :: header"> </div>
+<div th:replace="fragments/header :: header"></div>
 <div class="container mt-5">
     <div class="card">
         <div class="card-body">
-            <h4 class="card-title" th:text="#{profile.title}">User Profile</h4>
-            <img th:src="@{'/images/profiles/' + ${user.profileImage}}" alt class="profile-image">
-            <div class="form-group row">
+            <div class="d-flex align-items-center justify-content-start">
+                <img th:src="@{'/images/profiles/' + ${user.profileImage}}" alt="Profile Image" class="profile-image">
+                <div>
+                    <h4 class="card-title" th:text="#{profile.title}">User Profile</h4>
+                </div>
+            </div>
+            <div class="xp-bar">
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar"
+                         th:style="'width: ' + (${user.xp} / ${user.xpToNextLevel} * 100) + '%;'"
+                         th:text="${user.title} + ' - Level ' + ${user.level} + ' - ' + ${user.xp} + ' / ' + ${user.xpToNextLevel} + ' XP'">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row mt-4">
                 <label class="col-sm-2 col-form-label" th:text="#{profile.username}">Username</label>
                 <div class="col-sm-10">
                     <p class="form-control-plaintext" th:text="${user.username}">Username</p>
@@ -35,12 +75,6 @@
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label" th:text="#{profile.age}">Age</label>
-                <div class="col-sm-10">
-                    <p class="form-control-plaintext" th:text="${user.age}">Age</p>
-                </div>
-            </div>
-            <div class="form-group row">
                 <label class="col-sm-2 col-form-label" th:text="#{profile.gender}">Gender</label>
                 <div class="col-sm-10">
                     <p class="form-control-plaintext" th:text="${user.gender}">Gender</p>
@@ -53,7 +87,7 @@
                 </div>
             </div>
             <div class="btn-group">
-                <a href="/profile/edit" class="btn btn-primary mr-2" th:text="#{profile.editButton}">Edit Profile</a>
+                <a href="/profile/edit" class="btn edit-profile-btn mr-2" th:text="#{profile.editButton}">Edit Profile</a>
                 <form th:action="@{/logout}" method="POST" style="display:inline;">
                     <button type="submit" class="btn btn-secondary" th:text="#{profile.logoutButton}">Logout</button>
                 </form>
