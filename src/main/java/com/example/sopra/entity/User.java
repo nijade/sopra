@@ -35,7 +35,7 @@ public class User {
 
     private String profileDescription;
 
-    private String profileImage;
+    private String profileImage = "default.jpg";
 
     private int buys = 0;
 
