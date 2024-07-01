@@ -12,6 +12,7 @@ import java.util.List;
 @Service
 public class QuizService {
 
+
     @Autowired
     QuizRepository quizRepository;
 
@@ -19,11 +20,21 @@ public class QuizService {
         return quizRepository.save(quiz);
     }
 
+
+
     public Quiz findQuizByID(int quizID){
         return quizRepository.findByQuizID(quizID);
     }
 
     public List<Quiz> findAll(){
         return quizRepository.findAll();
+    }
+
+    public Quiz findChosenQuiz(){
+        return quizRepository.findChosenQuiz();
+    }
+
+    public void setIsChosen(Integer quizID, boolean state) {
+        quizRepository.setIsChosen(quizID, state);
     }
 }

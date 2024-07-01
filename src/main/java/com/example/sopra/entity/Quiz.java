@@ -17,22 +17,40 @@ public class Quiz {
 
     }
 
+    private boolean isChosen;
+
     @Lob
     private String questionOne;
-    private List<String> rightAnswersQuestionOne;
+    private String rightAnswersQuestionOne;
     private List<String> possibleAnswersQuestionOne;
 
 
     @Lob
     private String questionTwo;
-    private List<String> rightAnswersQuestionTwo;
+    private String rightAnswersQuestionTwo;
     private List<String> possibleAnswersQuestionTwo;
 
 
     @Lob
     private String questionThree;
-    private List<String> rightAnswersQuestionThree;
+    private String rightAnswersQuestionThree;
     private List<String> possibleAnswersQuestionThree;
+
+    public void setIsChosen(boolean chosen){
+        this.isChosen = chosen;
+
+    }
+
+    public boolean getIsChosen(){
+        return isChosen;
+
+    }
+
+    public void setQuizID(Integer quizID) {
+        this.quizID = quizID;
+    }
+
+    public Integer getQuizID(){return quizID;}
 
     // Getter und Setter für questionOne
     public String getQuestionOne() {
@@ -44,11 +62,11 @@ public class Quiz {
     }
 
     // Getter und Setter für rightAnswersQuestionOne
-    public List<String> getRightAnswersQuestionOne() {
+    public String getRightAnswersQuestionOne() {
         return rightAnswersQuestionOne;
     }
 
-    public void setRightAnswersQuestionOne(List<String> rightAnswersQuestionOne) {
+    public void setRightAnswersQuestionOne(String rightAnswersQuestionOne) {
         this.rightAnswersQuestionOne = rightAnswersQuestionOne;
     }
 
@@ -71,11 +89,11 @@ public class Quiz {
     }
 
     // Getter und Setter für rightAnswersQuestionTwo
-    public List<String> getRightAnswersQuestionTwo() {
+    public String getRightAnswersQuestionTwo() {
         return rightAnswersQuestionTwo;
     }
 
-    public void setRightAnswersQuestionTwo(List<String> rightAnswersQuestionTwo) {
+    public void setRightAnswersQuestionTwo(String rightAnswersQuestionTwo) {
         this.rightAnswersQuestionTwo = rightAnswersQuestionTwo;
     }
 
@@ -98,11 +116,11 @@ public class Quiz {
     }
 
     // Getter und Setter für rightAnswersQuestionThree
-    public List<String> getRightAnswersQuestionThree() {
+    public String getRightAnswersQuestionThree() {
         return rightAnswersQuestionThree;
     }
 
-    public void setRightAnswersQuestionThree(List<String> rightAnswersQuestionThree) {
+    public void setRightAnswersQuestionThree(String rightAnswersQuestionThree) {
         this.rightAnswersQuestionThree = rightAnswersQuestionThree;
     }
 

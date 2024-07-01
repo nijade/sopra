@@ -392,49 +392,53 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
         Quiz quizOne = new Quiz();
         quizOne.setQuestionOne("Welcher Teil der Pflanze führt die Photosynthese durch?");
         quizOne.setPossibleAnswersQuestionOne(Arrays.asList("Wurzeln", "Stamm", "Blätter", "Blüten"));
-        quizOne.setRightAnswersQuestionOne(Arrays.asList("Blätter"));
+        quizOne.setRightAnswersQuestionOne("Blätter");
         quizOne.setQuestionTwo("Wie nennt man den Prozess, bei dem Pflanzen Wasser über ihre Blätter verlieren?");
         quizOne.setPossibleAnswersQuestionTwo(Arrays.asList("Transpiration", "Atmung", "Photosynthese", "Keimung"));
-        quizOne.setRightAnswersQuestionTwo(Arrays.asList("Transpiration"));
+        quizOne.setRightAnswersQuestionTwo("Transpiration");
         quizOne.setQuestionThree("Welcher Teil der Pflanze ist für die Aufnahme von Wasser und Nährstoffen aus dem Boden verantwortlich?");
         quizOne.setPossibleAnswersQuestionThree(Arrays.asList("Wurzeln", "Stamm", "Blätter", "Blüten"));
-        quizOne.setRightAnswersQuestionThree(Arrays.asList("Wurzeln"));
+        quizOne.setRightAnswersQuestionThree("Wurzeln");
+        quizOne.setIsChosen(true);
         quizService.saveQuiz(quizOne);
 
         Quiz quizTwo = new Quiz();
         quizTwo.setQuestionOne("Welcher Teil der Pflanze enthält Chlorophyll?");
         quizTwo.setPossibleAnswersQuestionOne(Arrays.asList("Wurzeln", "Stamm", "Blätter", "Blüten"));
-        quizTwo.setRightAnswersQuestionOne(Arrays.asList("Blätter"));
+        quizTwo.setRightAnswersQuestionOne("Blätter");
         quizTwo.setQuestionTwo("Wie nennt man den Vorgang, bei dem Samen auskeimen?");
         quizTwo.setPossibleAnswersQuestionTwo(Arrays.asList("Keimung", "Blüte", "Bestäubung", "Befruchtung"));
-        quizTwo.setRightAnswersQuestionTwo(Arrays.asList("Keimung"));
+        quizTwo.setRightAnswersQuestionTwo("Keimung");
         quizTwo.setQuestionThree("Welcher Teil der Blume produziert Pollen?");
         quizTwo.setPossibleAnswersQuestionThree(Arrays.asList("Staubblätter", "Fruchtknoten", "Blütenblätter", "Narbe"));
-        quizTwo.setRightAnswersQuestionThree(Arrays.asList("Staubblätter"));
+        quizTwo.setRightAnswersQuestionThree("Staubblätter");
+        quizOne.setIsChosen(false);
         quizService.saveQuiz(quizTwo);
 
         Quiz quizThree = new Quiz();
         quizThree.setQuestionOne("Welcher Prozess wandelt Kohlendioxid und Wasser in Glukose und Sauerstoff um?");
         quizThree.setPossibleAnswersQuestionOne(Arrays.asList("Photosynthese", "Transpiration", "Atmung", "Fermentation"));
-        quizThree.setRightAnswersQuestionOne(Arrays.asList("Photosynthese"));
+        quizThree.setRightAnswersQuestionOne("Photosynthese");
         quizThree.setQuestionTwo("Welcher Pflanzenteil ist hauptsächlich für den Transport von Wasser und Nährstoffen verantwortlich?");
         quizThree.setPossibleAnswersQuestionTwo(Arrays.asList("Xylem", "Phloem", "Wurzeln", "Blätter"));
-        quizThree.setRightAnswersQuestionTwo(Arrays.asList("Xylem"));
+        quizThree.setRightAnswersQuestionTwo("Xylem");
         quizThree.setQuestionThree("Welcher Teil der Pflanze wächst in Richtung Licht?");
         quizThree.setPossibleAnswersQuestionThree(Arrays.asList("Blätter", "Stamm", "Wurzeln", "Blüten"));
-        quizThree.setRightAnswersQuestionThree(Arrays.asList("Stamm"));
+        quizThree.setRightAnswersQuestionThree("Stamm");
+        quizOne.setIsChosen(false);
         quizService.saveQuiz(quizThree);
 
         Quiz quizFour = new Quiz();
         quizFour.setQuestionOne("Wie nennt man die männlichen Fortpflanzungsorgane von Blütenpflanzen?");
         quizFour.setPossibleAnswersQuestionOne(Arrays.asList("Staubblätter", "Fruchtblätter", "Blütenblätter", "Kelchblätter"));
-        quizFour.setRightAnswersQuestionOne(Arrays.asList("Staubblätter"));
+        quizFour.setRightAnswersQuestionOne("Staubblätter");
         quizFour.setQuestionTwo("Welcher Prozess beschreibt die Umwandlung von Sonnenlicht in chemische Energie?");
         quizFour.setPossibleAnswersQuestionTwo(Arrays.asList("Photosynthese", "Atmung", "Fermentation", "Transpiration"));
-        quizFour.setRightAnswersQuestionTwo(Arrays.asList("Photosynthese"));
+        quizFour.setRightAnswersQuestionTwo("Photosynthese");
         quizFour.setQuestionThree("Welcher Teil der Pflanze ist für die Reproduktion verantwortlich?");
         quizFour.setPossibleAnswersQuestionThree(Arrays.asList("Blüten", "Blätter", "Stamm", "Wurzeln"));
-        quizFour.setRightAnswersQuestionThree(Arrays.asList("Blüten"));
+        quizFour.setRightAnswersQuestionThree("Blüten");
+        quizOne.setIsChosen(false);
         quizService.saveQuiz(quizFour);
 
 

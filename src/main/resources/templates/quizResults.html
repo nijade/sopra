@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="de">
+<head>
+    <th:block th:insert="~{fragments/htmlHead :: head}"></th:block>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Ergebnisse</title>
+    <style>
+        .container {
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            width: 80%;
+            max-width: 600px; /* Nach Bedarf anpassen */
+        }
+        .correct {
+            color: green;
+            font-weight: bold;
+        }
+        .incorrect {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<!-- Anzeige der Quiz Ergebnisse -->
+<div class="container">
+    <h2>Quiz Ergebnisse</h2>
+    <!-- Frage 1 Ergebnis -->
+    <div>
+        <h4 th:text="'Frage 1: ' + ${chosenQuiz.questionOne}">Frage 1</h4>
+        <p>Deine Antwort: <span th:text="${answerQuestionOne}"></span></p>
+        <p>            <span th:if="${!questionOneResult}">Die korrekte Antwort ist: <span th:text="${rightAnswerQuestionOne}"></span></span></p>
+        <p>Ergebnis:
+            <span th:if="${questionOneResult}" class="correct">Richtig</span>
+            <span th:if="${!questionOneResult}" class="incorrect">Falsch</span>
+        </p>
+    </div>
+    <!-- Frage 2 Ergebnis -->
+    <div>
+        <h4 th:text="'Frage 2: ' + ${chosenQuiz.questionTwo}">Frage 2</h4>
+        <p>Deine Antwort: <span th:text="${answerQuestionTwo}"></span></p>
+        <p><span th:if="${!questionTwoResult}">Die korrekte Antwort ist: <span th:text="${rightAnswerQuestionTwo}"></span></span></p>
+        <p>Ergebnis:
+            <span th:if="${questionTwoResult}" class="correct">Richtig</span>
+            <span th:if="${!questionTwoResult}" class="incorrect">Falsch</span>
+        </p>
+    </div>
+    <!-- Frage 3 Ergebnis -->
+    <div>
+        <h4 th:text="'Frage 3: ' + ${chosenQuiz.questionThree}">Frage 3</h4>
+        <p>Deine Antwort: <span th:text="${answerQuestionThree}"></span></p>
+        <p><span th:if="${!questionThreeResult}">Die korrekte Antwort ist: <span th:text="${rightAnswerQuestionThree}"></span></span></p>
+        <p>Ergebnis:
+            <span th:if="${questionThreeResult}" class="correct">Richtig</span>
+            <span th:if="${!questionThreeResult}" class="incorrect">Falsch</span>
+        </p>
+    </div>
+</div>
+</body>
+</html>
