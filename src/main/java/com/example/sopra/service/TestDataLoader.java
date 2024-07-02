@@ -1,6 +1,8 @@
 package com.example.sopra.service;
 
+import com.example.sopra.entity.CareInstruction;
 import com.example.sopra.entity.Plant;
+import com.example.sopra.entity.Quiz;
 import com.example.sopra.entity.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,6 +29,12 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
     @Autowired
     private PlantService plantService;
 
+    @Autowired
+    private QuizService quizService;
+
+    @Autowired
+    private CareInstructionService careInstructionService;
+
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
         logger.info("Initialisiere Testdaten auf Datenbank...");
@@ -35,17 +43,23 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
         User user1 = new User();
         user1.setUsername("user1");
         user1.setPassword(passwordEncoder.encode("1234"));
+        user1.setSales(7);
+        user1.setLevel(15);
         userService.saveUser(user1);
+
         // Nutzer 2
         User user2 = new User();
         user2.setUsername("user2");
         user2.setPassword(passwordEncoder.encode("5678"));
+        user2.setSales(8);
+        user2.setBuys(4);
         userService.saveUser(user2);
 
         // Nutzer 3
         User user3 = new User();
         user3.setUsername("user3");
         user3.setPassword(passwordEncoder.encode("abcd"));
+        user3.setSales(12);
         userService.saveUser(user3);
 
         // Nutzer 4
@@ -100,7 +114,7 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
         tulip.setDescription("Eine bunte Tulpe, ideal für den Frühlingsgarten.");
         tulip.setPotCircumference(0.0);
         tulip.setPlantCircumference(10.0);
-        tulip.setTags(Arrays.asList("Blume", "Frühling", "Garten"));
+        tulip.setTags(Arrays.asList("Blume", "Fruehling", "Garten"));
         tulip.setSeller(user2);
         plantService.savePlant(tulip);
 
@@ -114,25 +128,25 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
         tulipMedium.setDescription("Eine bunte medium Tulpe, ideal für den Frühlingsgarten.");
         tulipMedium.setPotCircumference(0.0);
         tulipMedium.setPlantCircumference(10.0);
-        tulipMedium.setTags(Arrays.asList("Blume", "Frühling", "Garten"));
+        tulipMedium.setTags(Arrays.asList("Blume", "Fruehling", "Garten"));
         tulipMedium.setSeller(user2);
         plantService.savePlant(tulipMedium);
 
         // Weiße Spätblühende Tulpe
         Plant tulipThree = new Plant();
-        tulipThree.setTitle("Weiße Spätblühende Tulpe");
+        tulipThree.setTitle("Weiße Spaetbluehende Tulpe");
         tulipThree.setPhotos(Arrays.asList("tulip.jpg"));
         tulipThree.setHeight(45);
         tulipThree.setPrice(12.99);
         tulipThree.setHasPlanter(true);
-        tulipThree.setDescription("Eine spätblühende weiße Tulpe, perfekt für den Spätsommergarten.");
+        tulipThree.setDescription("Eine spaetbluehende weiße Tulpe, perfekt für den Spätsommergarten.");
         tulipThree.setPotCircumference(12.0); // Beispiel für den Pflanztopfumfang
         tulipThree.setPlantCircumference(13.5);
         tulipThree.setTags(Arrays.asList("Blume", "Sommer", "Garten"));
         tulipThree.setSeller(user1);
         plantService.savePlant(tulipThree);
 
-       // Pinkfarbene Zwergtulpe
+        // Pinkfarbene Zwergtulpe
         Plant tulipFour = new Plant();
         tulipFour.setTitle("Pinkfarbene Zwergtulpe");
         tulipFour.setPhotos(Arrays.asList("tulip.jpg"));
@@ -142,7 +156,7 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
         tulipFour.setDescription("Eine niedrige pinkfarbene Zwergtulpe, ideal für den Vorgarten.");
         tulipFour.setPotCircumference(8.0); // Beispiel für den Pflanztopfumfang
         tulipFour.setPlantCircumference(8.0);
-        tulipFour.setTags(Arrays.asList("Blume", "Frühling", "Zwiebel- und Knollenpflanzen"));
+        tulipFour.setTags(Arrays.asList("Blume", "Fruehling", "Zwiebel- und Knollenpflanzen"));
         tulipFour.setSeller(user2);
         plantService.savePlant(tulipFour);
 
@@ -156,13 +170,13 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
         tulipFive.setDescription("Eine kräftige orangefarbene Darwin-Tulpe, die im Frühling aufblüht.");
         tulipFive.setPotCircumference(0.0);
         tulipFive.setPlantCircumference(11.0);
-        tulipFive.setTags(Arrays.asList("Blume", "Frühling", "Garten"));
+        tulipFive.setTags(Arrays.asList("Blume", "Fruehling", "Garten"));
         tulipFive.setSeller(user1);
         plantService.savePlant(tulipFive);
 
         // Gefüllte Lilien-Tulpe
         Plant tulipSix = new Plant();
-        tulipSix.setTitle("Gefüllte Lilien-Tulpe");
+        tulipSix.setTitle("Gefuellte Lilien-Tulpe");
         tulipSix.setPhotos(Arrays.asList("tulip.jpg"));
         tulipSix.setHeight(32);
         tulipSix.setPrice(9.99);
@@ -170,7 +184,7 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
         tulipSix.setDescription("Eine prächtige gefüllte Lilien-Tulpe, die im Frühling besonders schön blüht.");
         tulipSix.setPotCircumference(10.0); // Beispiel für den Pflanztopfumfang
         tulipSix.setPlantCircumference(10.5);
-        tulipSix.setTags(Arrays.asList("Blume", "Frühling", "Zwiebel- und Knollenpflanzen"));
+        tulipSix.setTags(Arrays.asList("Blume", "Fruehling", "Zwiebel- und Knollenpflanzen"));
         tulipSix.setSeller(user2);
         plantService.savePlant(tulipSix);
 
@@ -198,7 +212,7 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
         tulipEight.setDescription("Eine spektakuläre gefranste Papageien-Tulpe, die im Frühling für Aufsehen sorgt.");
         tulipEight.setPotCircumference(12.0); // Beispiel für den Pflanztopfumfang
         tulipEight.setPlantCircumference(12.5);
-        tulipEight.setTags(Arrays.asList("Blume", "Frühling", "Zwiebel- und Knollenpflanzen"));
+        tulipEight.setTags(Arrays.asList("Blume", "Fruehling", "Zwiebel- und Knollenpflanzen"));
         tulipEight.setSeller(user2);
         plantService.savePlant(tulipEight);
 
@@ -212,13 +226,13 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
         tulipNine.setDescription("Eine leuchtende gelbe Triumph-Tulpe, die im April blüht.");
         tulipNine.setPotCircumference(0.0);
         tulipNine.setPlantCircumference(10.0);
-        tulipNine.setTags(Arrays.asList("Blume", "Frühling", "Gemüse"));
+        tulipNine.setTags(Arrays.asList("Blume", "Fruehling", "Gemuese"));
         tulipNine.setSeller(user1);
         plantService.savePlant(tulipNine);
 
         // Weiße Gefüllte Viridiflora-Tulpe
         Plant tulipTen = new Plant();
-        tulipTen.setTitle("Weiße Gefüllte Viridiflora-Tulpe");
+        tulipTen.setTitle("Weiße Gefuellte Viridiflora-Tulpe");
         tulipTen.setPhotos(Arrays.asList("tulip.jpg"));
         tulipTen.setHeight(35);
         tulipTen.setPrice(10.49);
@@ -226,7 +240,7 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
         tulipTen.setDescription("Eine elegante weiße gefüllte Viridiflora-Tulpe mit grünen Akzenten.");
         tulipTen.setPotCircumference(10.0); // Beispiel für den Pflanztopfumfang
         tulipTen.setPlantCircumference(11.0);
-        tulipTen.setTags(Arrays.asList("Blume", "Frühling", "Zwiebel- und Knollenpflanzen"));
+        tulipTen.setTags(Arrays.asList("Blume", "Fruehling", "Zwiebel- und Knollenpflanzen"));
         tulipTen.setSeller(user2);
         plantService.savePlant(tulipTen);
 
@@ -240,7 +254,7 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
         cactus.setDescription("");
         cactus.setPotCircumference(30.0);
         cactus.setPlantCircumference(20.0);
-        cactus.setTags(Arrays.asList("Kübelpflanzen", "Sommerblumen", "Zimmerpflanzen"));
+        cactus.setTags(Arrays.asList("Kuebelpflanzen", "Sommerblumen", "Zimmerpflanzen"));
         cactus.setSeller(user3);
         plantService.savePlant(cactus);
 
@@ -254,12 +268,182 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
         palme.setDescription("Die Studenten-Pflanze: Pflegeleicht und prachtvoll.");
         palme.setPotCircumference(36.0);
         palme.setPlantCircumference(70.0);
-        palme.setTags(Arrays.asList("Bäume und Sträucher", "Sommerblumen", "Zimmerpflanzen"));
+        palme.setTags(Arrays.asList("Baeume und Straeucher", "Sommerblumen", "Zimmerpflanzen"));
         palme.setSeller(hans);
         plantService.savePlant(palme);
 
 
+        //*******************
+        //Care Instruction
+        CareInstruction summerPlantInstruction = new CareInstruction();
+        summerPlantInstruction.setTagTitle("Sommerblumen");
+        summerPlantInstruction.setWater("Sommerblumen regelmäßig gießen, die Erde sollte stets leicht feucht bleiben.");
+        summerPlantInstruction.setFertilize("Wöchentlich mit einem Blühpflanzendünger düngen, um eine reiche Blüte zu fördern.");
+        summerPlantInstruction.setLocation("Ein sonniger bis halbschattiger Platz fördert das Blühen und die Gesundheit der Pflanzen.");
+        careInstructionService.save(summerPlantInstruction);
+
+        CareInstruction balconyFlowerInstruction = new CareInstruction();
+        balconyFlowerInstruction.setTagTitle("Balkonblumen");
+        balconyFlowerInstruction.setWater("Balkonblumen regelmäßig gießen, besonders während heißer und trockener Perioden.");
+        balconyFlowerInstruction.setFertilize("Einmal pro Woche mit einem flüssigen Blumendünger düngen.");
+        balconyFlowerInstruction.setLocation("Einen sonnigen bis halbschattigen Standort wählen, der vor starkem Wind geschützt ist.");
+        careInstructionService.save(balconyFlowerInstruction);
+
+        CareInstruction medicinalPlantInstruction = new CareInstruction();
+        medicinalPlantInstruction.setTagTitle("Heilpflanzen");
+        medicinalPlantInstruction.setWater("Heilpflanzen nur mäßig gießen, die Erde zwischen den Wassergaben leicht antrocknen lassen.");
+        medicinalPlantInstruction.setFertilize("Im Frühjahr und Sommer alle zwei Wochen mit einem organischen Dünger versorgen.");
+        medicinalPlantInstruction.setLocation("Ein heller, sonniger Standort fördert das Wachstum und die Wirkstoffbildung.");
+        careInstructionService.save(medicinalPlantInstruction);
+
+        CareInstruction wildPlantInstruction = new CareInstruction();
+        wildPlantInstruction.setTagTitle("Wildpflanzen");
+        wildPlantInstruction.setWater("Wildpflanzen benötigen meist nur wenig zusätzliche Bewässerung, je nach Art.");
+        wildPlantInstruction.setFertilize("Düngen ist selten notwendig, natürliche Böden bieten oft genug Nährstoffe.");
+        wildPlantInstruction.setLocation("Ein naturnaher Standort mit ausreichend Licht und Platz zur Ausbreitung ist ideal.");
+        careInstructionService.save(wildPlantInstruction);
+
+        CareInstruction treeAndShrubInstruction = new CareInstruction();
+        treeAndShrubInstruction.setTagTitle("Bäume und Sträucher");
+        treeAndShrubInstruction.setWater("In den ersten Jahren nach der Pflanzung regelmäßig gießen, später nur bei langer Trockenheit.");
+        treeAndShrubInstruction.setFertilize("Im Frühjahr mit einem organischen Langzeitdünger düngen.");
+        treeAndShrubInstruction.setLocation("Ein Standort mit ausreichend Platz und Licht ist wichtig für ein gesundes Wachstum.");
+        careInstructionService.save(treeAndShrubInstruction);
+
+        CareInstruction climbingPlantInstruction = new CareInstruction();
+        climbingPlantInstruction.setTagTitle("Kletterpflanzen");
+        climbingPlantInstruction.setWater("Kletterpflanzen gleichmäßig feucht halten, aber Staunässe vermeiden.");
+        climbingPlantInstruction.setFertilize("Im Frühling und Sommer alle zwei Wochen mit einem stickstoffreichen Dünger versorgen.");
+        climbingPlantInstruction.setLocation("Einen sonnigen bis halbschattigen Standort mit einer stabilen Kletterhilfe wählen.");
+        careInstructionService.save(climbingPlantInstruction);
+
+        CareInstruction herbInstruction = new CareInstruction();
+        herbInstruction.setTagTitle("Kräuter");
+        herbInstruction.setWater("Kräuter regelmäßig gießen, aber Staunässe vermeiden, die Erde sollte gut durchlässig sein.");
+        herbInstruction.setFertilize("Während der Wachstumsperiode alle vier bis sechs Wochen leicht düngen.");
+        herbInstruction.setLocation("Ein sonniger bis halbschattiger Platz fördert das Aroma und das Wachstum.");
+        careInstructionService.save(herbInstruction);
+
+        CareInstruction containerPlantInstruction = new CareInstruction();
+        containerPlantInstruction.setTagTitle("Kübelpflanzen");
+        containerPlantInstruction.setWater("Kübelpflanzen regelmäßig gießen, besonders im Sommer, die Erde sollte gleichmäßig feucht bleiben.");
+        containerPlantInstruction.setFertilize("Wöchentlich mit einem flüssigen Kübelpflanzendünger versorgen.");
+        containerPlantInstruction.setLocation("Ein heller Standort, der den Bedürfnissen der spezifischen Pflanze entspricht, ist ideal.");
+        careInstructionService.save(containerPlantInstruction);
+
+        CareInstruction roseInstruction = new CareInstruction();
+        roseInstruction.setTagTitle("Rosen");
+        roseInstruction.setWater("Rosen regelmäßig gießen, insbesondere bei Trockenheit, aber nicht über die Blätter.");
+        roseInstruction.setFertilize("Im Frühjahr und Sommer mit speziellem Rosendünger alle vier bis sechs Wochen düngen.");
+        roseInstruction.setLocation("Ein sonniger und luftiger Platz, der vor starkem Wind geschützt ist, ist ideal.");
+        careInstructionService.save(roseInstruction);
+
+        CareInstruction perennialInstruction = new CareInstruction();
+        perennialInstruction.setTagTitle("Stauden");
+        perennialInstruction.setWater("Stauden regelmäßig gießen, besonders während trockener Perioden im Sommer.");
+        perennialInstruction.setFertilize("Im Frühjahr und Sommer mit einem Langzeitdünger versorgen.");
+        perennialInstruction.setLocation("Ein sonniger bis halbschattiger Standort, der den speziellen Bedürfnissen der Staude entspricht, ist ideal.");
+        careInstructionService.save(perennialInstruction);
+
+        CareInstruction waterPlantInstruction = new CareInstruction();
+        waterPlantInstruction.setTagTitle("Wasserpflanzen");
+        waterPlantInstruction.setWater("Wasserpflanzen brauchen keine zusätzliche Bewässerung, solange sie im Wasser stehen.");
+        waterPlantInstruction.setFertilize("Im Frühjahr mit einem speziellen Wasserpflanzendünger düngen.");
+        waterPlantInstruction.setLocation("Ein sonniger bis halbschattiger Platz im Teich oder Wasserbecken ist ideal.");
+        careInstructionService.save(waterPlantInstruction);
+
+        CareInstruction ornamentalGrasInstruction = new CareInstruction();
+        ornamentalGrasInstruction.setTagTitle("Ziergräser");
+        ornamentalGrasInstruction.setWater("Ziergräser regelmäßig gießen, besonders in Trockenperioden.");
+        ornamentalGrasInstruction.setFertilize("Im Frühjahr mit einem Langzeitdünger versorgen.");
+        ornamentalGrasInstruction.setLocation("Ein sonniger bis halbschattiger Standort fördert das Wachstum und die Farbentwicklung.");
+        careInstructionService.save(ornamentalGrasInstruction);
+
+        CareInstruction housePlantInstruction = new CareInstruction();
+        housePlantInstruction.setTagTitle("Zimmerpflanzen");
+        housePlantInstruction.setWater("Zimmerpflanzen regelmäßig gießen, die Erde leicht feucht halten und Staunässe vermeiden.");
+        housePlantInstruction.setFertilize("Alle zwei Wochen mit einem Zimmerpflanzendünger düngen.");
+        housePlantInstruction.setLocation("Ein heller Platz ohne direkte Mittagssonne ist ideal für die meisten Zimmerpflanzen.");
+        careInstructionService.save(housePlantInstruction);
+
+        CareInstruction onionPlantInstruction = new CareInstruction();
+        onionPlantInstruction.setTagTitle("Zwiebel- und Knollenpflanzen");
+        onionPlantInstruction.setWater("Während der Wachstumsperiode regelmäßig gießen, die Erde sollte nicht austrocknen.");
+        onionPlantInstruction.setFertilize("Im Frühjahr und Sommer mit einem speziellen Zwiebel- und Knollendünger versorgen.");
+        onionPlantInstruction.setLocation("Ein sonniger bis halbschattiger Platz fördert die Blüte und das Wachstum.");
+        careInstructionService.save(onionPlantInstruction);
+
+        CareInstruction vegetablesInstruction = new CareInstruction();
+        vegetablesInstruction.setTagTitle("Gemüse");
+        vegetablesInstruction.setWater("Gemüse regelmäßig gießen, die Erde sollte stets gleichmäßig feucht bleiben.");
+        vegetablesInstruction.setFertilize("Alle zwei Wochen mit einem Gemüsedünger düngen, um das Wachstum zu unterstützen.");
+        vegetablesInstruction.setLocation("Ein sonniger Platz mit gut durchlässigem Boden ist ideal.");
+        careInstructionService.save(vegetablesInstruction);
+
+        CareInstruction fruitInstruction = new CareInstruction();
+        fruitInstruction.setTagTitle("Obst");
+        fruitInstruction.setWater("Obstpflanzen regelmäßig gießen, besonders während der Fruchtbildung.");
+        fruitInstruction.setFertilize("Im Frühjahr mit einem organischen Dünger versorgen.");
+        fruitInstruction.setLocation("Ein sonniger Standort fördert eine reiche Ernte und gesunde Pflanzen.");
+        careInstructionService.save(fruitInstruction);
         //*********************************************************************************
+
+        // Test Quizze
+        Quiz quizOne = new Quiz();
+        quizOne.setQuestionOne("Welcher Teil der Pflanze führt die Photosynthese durch?");
+        quizOne.setPossibleAnswersQuestionOne(Arrays.asList("Wurzeln", "Stamm", "Blätter", "Blüten"));
+        quizOne.setRightAnswersQuestionOne("Blätter");
+        quizOne.setQuestionTwo("Wie nennt man den Prozess, bei dem Pflanzen Wasser über ihre Blätter verlieren?");
+        quizOne.setPossibleAnswersQuestionTwo(Arrays.asList("Transpiration", "Atmung", "Photosynthese", "Keimung"));
+        quizOne.setRightAnswersQuestionTwo("Transpiration");
+        quizOne.setQuestionThree("Welcher Teil der Pflanze ist für die Aufnahme von Wasser und Nährstoffen aus dem Boden verantwortlich?");
+        quizOne.setPossibleAnswersQuestionThree(Arrays.asList("Wurzeln", "Stamm", "Blätter", "Blüten"));
+        quizOne.setRightAnswersQuestionThree("Wurzeln");
+        quizOne.setIsChosen(true);
+        quizService.saveQuiz(quizOne);
+
+        Quiz quizTwo = new Quiz();
+        quizTwo.setQuestionOne("Welcher Teil der Pflanze enthält Chlorophyll?");
+        quizTwo.setPossibleAnswersQuestionOne(Arrays.asList("Wurzeln", "Stamm", "Blätter", "Blüten"));
+        quizTwo.setRightAnswersQuestionOne("Blätter");
+        quizTwo.setQuestionTwo("Wie nennt man den Vorgang, bei dem Samen auskeimen?");
+        quizTwo.setPossibleAnswersQuestionTwo(Arrays.asList("Keimung", "Blüte", "Bestäubung", "Befruchtung"));
+        quizTwo.setRightAnswersQuestionTwo("Keimung");
+        quizTwo.setQuestionThree("Welcher Teil der Blume produziert Pollen?");
+        quizTwo.setPossibleAnswersQuestionThree(Arrays.asList("Staubblätter", "Fruchtknoten", "Blütenblätter", "Narbe"));
+        quizTwo.setRightAnswersQuestionThree("Staubblätter");
+        quizOne.setIsChosen(false);
+        quizService.saveQuiz(quizTwo);
+
+        Quiz quizThree = new Quiz();
+        quizThree.setQuestionOne("Welcher Prozess wandelt Kohlendioxid und Wasser in Glukose und Sauerstoff um?");
+        quizThree.setPossibleAnswersQuestionOne(Arrays.asList("Photosynthese", "Transpiration", "Atmung", "Fermentation"));
+        quizThree.setRightAnswersQuestionOne("Photosynthese");
+        quizThree.setQuestionTwo("Welcher Pflanzenteil ist hauptsächlich für den Transport von Wasser und Nährstoffen verantwortlich?");
+        quizThree.setPossibleAnswersQuestionTwo(Arrays.asList("Xylem", "Phloem", "Wurzeln", "Blätter"));
+        quizThree.setRightAnswersQuestionTwo("Xylem");
+        quizThree.setQuestionThree("Welcher Teil der Pflanze wächst in Richtung Licht?");
+        quizThree.setPossibleAnswersQuestionThree(Arrays.asList("Blätter", "Stamm", "Wurzeln", "Blüten"));
+        quizThree.setRightAnswersQuestionThree("Stamm");
+        quizOne.setIsChosen(false);
+        quizService.saveQuiz(quizThree);
+
+        Quiz quizFour = new Quiz();
+        quizFour.setQuestionOne("Wie nennt man die männlichen Fortpflanzungsorgane von Blütenpflanzen?");
+        quizFour.setPossibleAnswersQuestionOne(Arrays.asList("Staubblätter", "Fruchtblätter", "Blütenblätter", "Kelchblätter"));
+        quizFour.setRightAnswersQuestionOne("Staubblätter");
+        quizFour.setQuestionTwo("Welcher Prozess beschreibt die Umwandlung von Sonnenlicht in chemische Energie?");
+        quizFour.setPossibleAnswersQuestionTwo(Arrays.asList("Photosynthese", "Atmung", "Fermentation", "Transpiration"));
+        quizFour.setRightAnswersQuestionTwo("Photosynthese");
+        quizFour.setQuestionThree("Welcher Teil der Pflanze ist für die Reproduktion verantwortlich?");
+        quizFour.setPossibleAnswersQuestionThree(Arrays.asList("Blüten", "Blätter", "Stamm", "Wurzeln"));
+        quizFour.setRightAnswersQuestionThree("Blüten");
+        quizOne.setIsChosen(false);
+        quizService.saveQuiz(quizFour);
+
+
+
+
     }
 
     @Override

@@ -36,6 +36,9 @@ public class Plant {
     @ElementCollection
     private List<String> tags;
 
+    @ManyToOne
+    private User buyerFinal;
+
     public Plant(){
         // empty constructor for Hibernate
     }
@@ -134,5 +137,13 @@ public class Plant {
 
     public String getTagsAsString(){
         return String.join(", ", tags);
+    }
+
+    public User getBuyerFinal() {
+        return buyerFinal;
+    }
+
+    public void setBuyerFinal(User buyerFinal) {
+        this.buyerFinal = buyerFinal;
     }
 }

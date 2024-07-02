@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="de">
 <head>
   <th:block th:insert="~{fragments/htmlHead :: head}"></th:block>
   <meta charset="UTF-8">
@@ -10,9 +10,120 @@
       height: 100%;
       margin: 0;
       font-family: Arial, sans-serif;
+      background-color: #bdd6ac;
+    }
+    .main-container {
+      display: flex;
+      min-height: 100vh; /* Fills the viewport height */
+      margin-top: 60px; /* Adjust this value if navbar height changes */
+    }
+    .filter-container {
+      width: 20%;
+      padding: 20px;
+      background-color: #f4f4f4;
+      border-right: 1px solid #ddd;
+      z-index: 100; /* Ensure filter is above content */
+      min-height: 100%; /* Ensure the filter container stretches to match height */
+    }
+    .filter-container h3 {
+      margin-top: 0;
+    }
+    .filter-options {
+      list-style-type: none;
+      padding: 0;
+    }
+    .filter-options li {
+      margin-bottom: 10px;
+    }
+    /* Hide the actual checkbox */
+    .filter-options input[type="checkbox"] {
+      display: none;
+    }
+    /* Style for the custom checkbox */
+    .filter-options label {
+      display: block;
+      position: relative;
+      padding-left: 35px;
+      cursor: pointer;
+      font-size: 18px;
+    }
+    /* Custom checkbox design */
+    .filter-options label:before {
+      content: "";
+      display: inline-block;
+      width: 25px;
+      height: 25px;
+      position: absolute;
+      left: 0;
+      top: 1px;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+    }
+    /* Checked state of the custom checkbox */
+    .filter-options input[type="checkbox"]:checked + label:before {
+      content: "\2713"; /* Unicode character for checkmark */
+      font-size: 22px;
+      color: #007bff; /* Color of the checkmark */
+      text-align: center;
+      line-height: 25px; /* Center the checkmark vertically */
+    }
+    .buttons-container {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      margin-top: auto; /* Push buttons to the bottom */
+      margin-bottom: 20px; /* Add margin at the bottom of buttons */
+    }
+    .buttons-container button {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      margin-bottom: 10px;
+      transition: background-color 0.3s ease;
+    }
+    .buttons-container button:hover {
+      background-color: #0056b3;
     }
     .container {
       padding: 20px;
+      width: 80%; /* Adjusted width */
+      overflow-y: auto; /* Allow container to scroll */
+    }
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start; /* Align items to the start */
+      width: 100%;
+      flex-direction: column; /* Display header content in column */
+    }
+    .header-container h2, .header-container h4 {
+      margin: 0;
+      text-align: left; /* Align text to the left */
+    }
+    .sort-container {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end; /* Align to the right */
+      margin-top: 10px; /* Add margin for separation */
+    }
+    .sort-container p {
+      margin-right: 10px;
+    }
+    .select-container {
+      background-color: #f4f4f4;
+      border: 1px solid #ddd;
+      padding: 5px;
+      z-index: 99; /* Ensure it's above content */
+    }
+    .select-container select {
+      width: auto;
+      padding: 5px;
+      font-size: 16px;
     }
     .plant {
       position: relative;
@@ -51,31 +162,122 @@
       width: 100%;
       text-decoration: none;
     }
+    .tags {
+      margin-top: 10px;
+    }
+    .tags span {
+      background-color: #e0e0e0;
+      border-radius: 3px;
+      padding: 5px;
+      margin-right: 5px;
+    }
+    /* Adjustments for input fields */
+    .form-label {
+      margin-top: 10px;
+    }
+    .form-control {
+      width: calc(50% - 10px); /* Adjusted width for two inputs */
+      margin-right: 10px;
+      padding: 8px;
+      font-size: 14px;
+    }
+    /* Added CSS for the no-plant message */
+    .no-plants-message {
+      margin-top: 20px; /* Add margin to separate from sorted message */
+      font-size: 16px;
+      color: #ff0000; /* Optional: Add color to make it stand out */
+    }
   </style>
 </head>
 <body>
-<div th:replace="fragments/header :: header"> </div>
-<div class="container">
-  <h2>Suchergebnisse</h2>
-  <div th:if="${plants != null && !plants.isEmpty()}">
-    <div th:each="plant : ${plants}" class="plant">
-      <a class="searchResultDivFiller" style="color:black" th:href="@{/plants/{id}(id=${plant.plantID})}"></a>
-      <img th:if="${!plant.photos.isEmpty()}" th:src="'images/' + ${plant.photos.get(0)}" alt="Plant Photo">
-      <div class="plant-info">
-        <h3 class="plant-title" th:text="${plant.title}">Pflanzen Name</h3>
-        <div class="plant-details">
-          <p><strong>Anzahl an Bildern:</strong> <span th:text="${plant.photos.size()}">Anzahl an Bildern</span></p>
-          <p><strong>Höhe:</strong> <span th:text="${plant.height}">Höhe</span></p>
-          <p><strong>Preis:</strong> <span th:text="${plant.price}">Preis</span></p>
+<div th:replace="fragments/header :: header"></div>
+<div class="main-container">
+  <div class="filter-container">
+    <h3>Filteroptionen</h3>
+    <ul class="filter-options">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+        <label class="form-check-label" for="flexCheckDefault"> Übertopf </label>
+      </div>
+    </ul>
+    <form th:action="@{/searchPlantsAdditionalFilters}" method="get">
+      <!-- Sichtbares Eingabefeld für den Titel -->
+      <div class="sort-container">
+        <p>Sortieren nach:</p>
+        <div class="select-container">
+          <select id="selectOption" name="selectedOption">
+            <option value="noSorting">Keine Sortierung</option>
+            <option value="priceASC">Günstigste Zuerst</option>
+            <option value="priceDSC">Teuerste Zuerst</option>
+          </select>
+        </div>
+      </div>
+      <!-- Verstecktes Feld für die Kategorie -->
+      <input type="hidden" name="category" th:value="${category}">
+      <input type="hidden" name="title" th:value="${searchTerm}">
+      <!-- Weitere Filteroptionen -->
+      <div>
+        <label for="priceMin" class="form-label">Preis von</label>
+        <input type="number" class="form-control" id="priceMin" name="priceMin" min="0" max="100" value="0" placeholder="Min">
+      </div>
+      <div>
+        <label for="priceMax" class="form-label">Preis bis</label>
+        <input type="number" class="form-control" id="priceMax" name="priceMax" min="0" max="100" placeholder="Max">
+      </div>
+      <div>
+        <label for="heightMin" class="form-label">Höhe von</label>
+        <input type="number" class="form-control" id="heightMin" name="heightMin" min="0" max="100" value="0" placeholder="Min">
+      </div>
+      <div>
+        <label for="heightMax" class="form-label">Höhe bis</label>
+        <input type="number" class="form-control" id="heightMax" name="heightMax" min="0" max="100" placeholder="Max">
+      </div>
+      <div>
+        <label for="circumferenceMin" class="form-label">Umfang von</label>
+        <input type="hidden" name="circumferenceMin" value="10"> <!-- Verstecktes Feld für Standardwert -->
+        <input type="number" class="form-control" id="circumferenceMin" name="circumferenceMinVisible" min="0" max="100" value="0" placeholder="Min">
+      </div>
+      <div>
+        <label for="circumferenceMax" class="form-label">Umfang bis</label>
+        <input type="hidden" name="circumferenceMax" value="50"> <!-- Verstecktes Feld für Standardwert -->
+        <input type="number" class="form-control" id="circumferenceMax" name="circumferenceMaxVisible" min="0" max="100" placeholder="Max">
+      </div>
+      <div class="buttons-container">
+        <!-- Thymeleaf-generierter Link für den Submit-Button -->
+        <button type="submit" class="btn btn-primary">Filter anwenden</button>
+      </div>
+    </form>
+  </div>
+  <div class="container">
+    <div class="header-container">
+      <h2>Suchergebnisse für "<span th:text="${searchTerm}">Suchbegriff</span>" in "<span th:text="${category}">Kategorie</span>"</h2>
+      <h4>Sortiert nach: "<span th:text="${chosenSorting}">Sortierart</span>"</h4>
+    </div>
+    <div th:if="${plants != null && !plants.isEmpty()}">
+      <div th:each="plant, index : ${plants}" class="plant">
+        <a class="searchResultDivFiller" style="color:black" th:href="@{/plants/{id}(id=${plant.plantID})}"></a>
+        <img th:if="${!plant.photos.isEmpty()}" th:src="'images/' + ${plant.photos.get(0)}" alt="Plant Photo">
+        <div class="plant-info">
+          <h3 class="plant-title" th:text="${plant.title}">Pflanzen Name</h3>
+          <div class="plant-details">
+            <p><strong>Höhe:</strong> <span th:text="${plant.height}">Höhe</span> cm</p>
+            <p><strong>Preis:</strong> <span th:text="${plant.price}">Preis</span> €</p>
+            <p><strong>Mit Topf:</strong> <span th:text="${plant.hasPlanter ? 'Ja, ' : 'Nein'}">Mit Topf</span></p>
+            <p th:if="${plant.hasPlanter} == true">
+              <strong>Topfumfang:</strong> <span th:text="${plant.potCircumference}">Topfumfang</span> cm
+            </p>
+            <div class="tags">
+              <strong>Tags:</strong>
+              <span th:each="tag : ${plant.tags}" th:text="${tag}">Tag</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <div th:if="${plants == null || plants.isEmpty()}">
-    <p>Keine Pflanze mit diesem Titel gefunden.</p>
+    <div th:if="${plants == null || plants.isEmpty()}">
+      <p class="no-plants-message">Keine Pflanze mit diesem Titel in dieser Kategorie gefunden.</p>
+    </div>
   </div>
 </div>
 </body>
 </html>
-
-

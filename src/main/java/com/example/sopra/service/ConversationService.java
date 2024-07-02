@@ -113,4 +113,16 @@ public class ConversationService {
        return conversationRepository.findConversationByPlantAndBuyer(plant, user);
     }
 
+    /**
+     * Methode um die zur entsprechenden Konversation gehörenden Pflanze zu verkaufen
+     *
+     * @param conversation
+     */
+    public void sellPlantBasedOnConversation(Conversation conversation){
+        Plant plantToSell = conversation.getPlant();
+        User buyer = conversation.getBuyer();
+        plantToSell.setBuyerFinal(buyer);
+        plantRepository.save(plantToSell);
+    }
+
 }

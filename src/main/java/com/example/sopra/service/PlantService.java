@@ -1,5 +1,4 @@
 package com.example.sopra.service;
-
 import com.example.sopra.entity.Plant;
 import com.example.sopra.entity.User;
 import com.example.sopra.repository.PlantRepository;
@@ -7,7 +6,6 @@ import com.example.sopra.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
-
 import java.util.Arrays;
 import java.util.List;
 
@@ -55,7 +53,7 @@ public class PlantService {
                               String description,
                               Double potCircumference,
                               Double plantCircumference,
-                              String tags,
+                              List<String> tags,
                               Model model) {
         if(photos == null || photos.isEmpty()){
             model.addAttribute("errorMessage", "Bitte wählen Sie mindestens ein Bild aus!");
@@ -67,6 +65,7 @@ public class PlantService {
             setAllPlantValues(plant, title, photos, height, price, hasPlanter, description, potCircumference, plantCircumference, tags, user);
 
             plantRepository.save(plant);
+            userService.addXp(userService.getCurrentUser(), 20);
             model.addAttribute("successMessage", "Ihr Inserat wurde erfolgreich erstellt!");
             return "success";
         } catch (Exception e) {
@@ -132,16 +131,6 @@ public class PlantService {
     }
 
     /**
-     * Sucht nach Pflanzen anhand des Titels (case-insensitive).
-     *
-     * @param title der Titel der Pflanze
-     * @return List<Plant> die Liste der gefundenen Pflanzen
-     */
-    public List<Plant> searchPlantsByTitleContainingIgnoreCase(String title) {
-        return plantRepository.findByTitleContainingIgnoreCase(title);
-    }
-
-    /**
      * Findet alle Pflanzeninserate eines Benutzers.
      *
      * @return List<Plant> die Liste der Pflanzeninserate des Benutzers
@@ -175,7 +164,7 @@ public class PlantService {
                             String description,
                             Double potCircumference,
                             Double plantCircumference,
-                            String tags,
+                            List<String> tags,
                             Model model) {
         if(photos == null || photos.isEmpty()){
             model.addAttribute("errorMessage", "Bitte wählen Sie mindestens ein Bild aus!");
@@ -189,7 +178,7 @@ public class PlantService {
                 model.addAttribute("errorMessage", "Sie konnten nicht als Anbieter authentifiziert werden!");
                 return "errorCustom";
             }
-            //Entfernen der Pflanze und erneutes Hinzufügen nach Änderung der Attributeum Aktualisierung zu garantieren
+            //Entfernen der Pflanze und erneutes Hinzufügen nach Änderung der Attribute, um Aktualisierung zu garantieren
             deletePlant(id, model);
             setAllPlantValues(plant, title, photos, height, price, hasPlanter, description, potCircumference, plantCircumference, tags, user);
             savePlant(plant);
@@ -218,7 +207,7 @@ public class PlantService {
      * @param tags              die Tags des Inserats
      * @param user              der Benutzer, der das Inserat erstellt
      */
-    private void setAllPlantValues(Plant plant, String title, List<String> photos, Integer height, Double price, Boolean hasPlanter, String description, Double potCircumference, Double plantCircumference, String tags, User user) {
+    private void setAllPlantValues(Plant plant, String title, List<String> photos, Integer height, Double price, Boolean hasPlanter, String description, Double potCircumference, Double plantCircumference, List<String> tags, User user) {
         plant.setTitle(title);
         plant.setPhotos(photos);
         plant.setHeight(height);
@@ -227,7 +216,7 @@ public class PlantService {
         plant.setDescription(description);
         plant.setPotCircumference(potCircumference);
         plant.setPlantCircumference(plantCircumference);
-        plant.setTags(Arrays.asList(tags.split(",")));
+        plant.setTags(tags);
         plant.setSeller(user);
     }
 
@@ -256,4 +245,45 @@ public class PlantService {
         }
     }
 
+
+
+    //Search Methods
+
+    /**
+     * Sucht nach Pflanzen anhand des Titels (case-insensitive).
+     *
+     * @param title der Titel der Pflanze
+     * @return List<Plant> die Liste der gefundenen Pflanzen
+     */
+    public List<Plant> searchPlantsByTitleContainingIgnoreCase(String title) {
+        return plantRepository.findByTitleContainingIgnoreCase(title);
+    }
+
+    public List<Plant> searchPlantsByTitleContainingIgnoreCaseSpecificCategory(String title, String category) {
+        return plantRepository.findByTitleContainingIgnoreCaseSpecificCategory(title, category);
+    }
+
+    public List<Plant> searchPlantsByTitleContainingIgnoreCaseAdditionalFilters(String title, Double priceMin, Double priceMax, Integer heightMin, Integer heightMax, Double circumferenceMin, Double circumferenceMax) {
+        return plantRepository.searchPlantsByTitleContainingIgnoreCaseAdditionalFilters(title, priceMin, priceMax, heightMin ,heightMax, circumferenceMin, circumferenceMax);
+    }
+
+    public List<Plant> searchPlantsByTitleContainingIgnoreCaseAdditionalFiltersPriceASC(String title, Double priceMinQueryReady, Double priceMaxQueryReady, Integer heightMinQueryReady, Integer heightMaxQueryReady, Double circumferenceMinQueryReady, Double circumferenceMaxQueryReady) {
+        return plantRepository.searchPlantsByTitleContainingIgnoreCaseAdditionalFiltersPriceASC(title, priceMinQueryReady, priceMaxQueryReady, heightMinQueryReady, heightMaxQueryReady, circumferenceMinQueryReady, circumferenceMaxQueryReady);
+    }
+
+    public List<Plant> searchPlantsByTitleContainingIgnoreCaseAdditionalFiltersPriceDSC(String title, Double priceMinQueryReady, Double priceMaxQueryReady, Integer heightMinQueryReady, Integer heightMaxQueryReady, Double circumferenceMinQueryReady, Double circumferenceMaxQueryReady) {
+        return plantRepository.searchPlantsByTitleContainingIgnoreCaseAdditionalFiltersPriceDSC(title, priceMinQueryReady, priceMaxQueryReady, heightMinQueryReady, heightMaxQueryReady, circumferenceMinQueryReady, circumferenceMaxQueryReady);
+    }
+
+    public List<Plant> searchPlantsByTitleContainingIgnoreCaseSpecificCategoryAdditionalFiltersSpecificCategory(String title, String category, Double priceMinQueryReady, Double priceMaxQueryReady, Integer heightMinQueryReady, Integer heightMaxQueryReady, Double circumferenceMinQueryReady, Double circumferenceMaxQueryReady) {
+        return plantRepository.searchPlantsByTitleContainingIgnoreCaseAdditionalFiltersSpecificCategory(title, category, priceMinQueryReady, priceMaxQueryReady, heightMinQueryReady, heightMaxQueryReady, circumferenceMinQueryReady, circumferenceMaxQueryReady);
+    }
+
+    public List<Plant> searchPlantsByTitleContainingIgnoreCaseAdditionalFiltersSpecificCategoryPriceASC(String title, String category, Double priceMinQueryReady, Double priceMaxQueryReady, Integer heightMinQueryReady, Integer heightMaxQueryReady, Double circumferenceMinQueryReady, Double circumferenceMaxQueryReady) {
+        return plantRepository.searchPlantsByTitleContainingIgnoreCaseAdditionalFiltersSpecificCategoryASC(title, category, priceMinQueryReady, priceMaxQueryReady, heightMinQueryReady, heightMaxQueryReady, circumferenceMinQueryReady, circumferenceMaxQueryReady);
+    }
+
+    public List<Plant> searchPlantsByTitleContainingIgnoreCaseAdditionalFiltersSpecificCategoryPriceDSC(String title, String category, Double priceMinQueryReady, Double priceMaxQueryReady, Integer heightMinQueryReady, Integer heightMaxQueryReady, Double circumferenceMinQueryReady, Double circumferenceMaxQueryReady) {
+        return plantRepository.searchPlantsByTitleContainingIgnoreCaseAdditionalFiltersSpecificCategoryDSC(title, category, priceMinQueryReady, priceMaxQueryReady, heightMinQueryReady, heightMaxQueryReady, circumferenceMinQueryReady, circumferenceMaxQueryReady);
+    }
 }

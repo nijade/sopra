@@ -1,5 +1,4 @@
 package com.example.sopra.controller;
-
 import com.example.sopra.entity.Plant;
 import com.example.sopra.service.ImageService;
 import com.example.sopra.service.PlantService;
@@ -8,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -49,11 +48,110 @@ public class PlantController {
      * @return der Name der Ansicht für die Suchergebnisse
      */
     @GetMapping("/searchPlants")
-    public String searchResults(@RequestParam String title, Model model) {
-        List<Plant> plants = plantService.searchPlantsByTitleContainingIgnoreCase(title);
+    public String searchResults(@RequestParam String title,String category, Model model) {
+        List<Plant> plants;
+        String chosenSorting = "Am relevantesten";
+        String alternativeSortingOne = "Günstigste Zuerst";
+        String alternativeSortingTwo = "Teuerste Zuerst";
+        if(category.equals("Alle Kategorien")){
+            plants = plantService.searchPlantsByTitleContainingIgnoreCase(title);
+        }else{
+            plants = plantService.searchPlantsByTitleContainingIgnoreCaseSpecificCategory(title, category);
+        }
+        model.addAttribute("chosenSorting", chosenSorting);
+        model.addAttribute("alternativeSortingOne",alternativeSortingOne);
+        model.addAttribute("alternativeSortingTwo",alternativeSortingTwo);
         model.addAttribute("plants", plants);
+        model.addAttribute("category", category);
         model.addAttribute("searchTerm", title);
         return "searchPlants";
+    }
+
+    // Methode zum Suchen nach Pflanzen mit Anwendung von Filtern
+    @GetMapping("/searchPlantsAdditionalFilters")
+    public String searchResultsAdditionalFilters(@RequestParam String title,
+                                                 @RequestParam String category,
+                                                 @RequestParam("selectedOption") String selectedOption,
+                                                 @RequestParam(required = false) String priceMin,
+                                                 @RequestParam(required = false) String priceMax,
+                                                 @RequestParam(required = false) String heightMin,
+                                                 @RequestParam(required = false) String heightMax,
+                                                 @RequestParam(required = false) String circumferenceMin,
+                                                 @RequestParam(required = false) String circumferenceMax,
+                                                 Model model) {
+
+        //Überprüfen der Maximalwerte um null zu vermeiden
+        List<String> maxValues = new ArrayList<>();
+        maxValues.add(priceMax);
+        maxValues.add(heightMax);
+        maxValues.add(circumferenceMax);
+        for(int i= 0 ; i< maxValues.size(); i++){
+            if(maxValues.get(i) == ""){
+                maxValues.set(i, "2147483647");
+            }
+        }
+        priceMax = maxValues.get(0);
+        heightMax = maxValues.get(1);
+        circumferenceMax = maxValues.get(2);
+
+        //parsing RequestParameters to match QuerySpecifications
+        Double priceMinQueryReady = Double.parseDouble(priceMin);
+        Double priceMaxQueryReady = Double.parseDouble(priceMax);
+        Integer heightMinQueryReady = Integer.parseInt(heightMin);
+        Integer heightMaxQueryReady = Integer.parseInt(heightMax);
+        Double  circumferenceMinQueryReady = Double.parseDouble(circumferenceMin);
+        Double circumferenceMaxQueryReady = Double.parseDouble(circumferenceMax);
+
+        // Verarbeitung der Parameter und Rückgabe der Suchergebnisse
+        List<Plant> plants;
+        String chosenSorting = "Am relevantesten";
+        String alternativeSortingOne = "Günstigste Zuerst";
+        String alternativeSortingTwo = "Teuerste Zuerst";
+
+
+        if(category.equals("Alle Kategorien")){
+            //Alle Kategorien
+            if(selectedOption.equals("noSorting")){
+                //Pflanzen ohne Sortierung - Alle Kategorien
+                plants = plantService.searchPlantsByTitleContainingIgnoreCaseAdditionalFilters(title, priceMinQueryReady, priceMaxQueryReady, heightMinQueryReady, heightMaxQueryReady, circumferenceMinQueryReady, circumferenceMaxQueryReady);
+            }else if(selectedOption.equals("priceASC")){
+                //Pflanzen nach aufsteigendem Preis sortieren - Alle Kategorien
+                plants = plantService.searchPlantsByTitleContainingIgnoreCaseAdditionalFiltersPriceASC(title, priceMinQueryReady, priceMaxQueryReady, heightMinQueryReady, heightMaxQueryReady, circumferenceMinQueryReady, circumferenceMaxQueryReady);
+            }else{
+                //Pflanzen nach absteigendem Preis sortieren - Alle Kategorien
+                plants = plantService.searchPlantsByTitleContainingIgnoreCaseAdditionalFiltersPriceDSC(title, priceMinQueryReady, priceMaxQueryReady, heightMinQueryReady, heightMaxQueryReady, circumferenceMinQueryReady, circumferenceMaxQueryReady);
+            }
+            // alle anderen Kategorien
+        } else {
+            if(selectedOption.equals("noSorting")){
+                //Pflanzen ohne Sortierung - Spezifische Kategorie
+                plants = plantService.searchPlantsByTitleContainingIgnoreCaseSpecificCategoryAdditionalFiltersSpecificCategory(title, category, priceMinQueryReady, priceMaxQueryReady, heightMinQueryReady, heightMaxQueryReady, circumferenceMinQueryReady, circumferenceMaxQueryReady);
+            }else if(selectedOption.equals("priceASC")){
+                //Pflanzen nach aufsteigendem Preis sortieren(günstigste zuerst) - Spezifische Kategorie
+                plants = plantService.searchPlantsByTitleContainingIgnoreCaseAdditionalFiltersSpecificCategoryPriceASC(title, category, priceMinQueryReady, priceMaxQueryReady, heightMinQueryReady, heightMaxQueryReady, circumferenceMinQueryReady, circumferenceMaxQueryReady);
+            }else{
+                //Pflanzen nach absteigendem Preis sortieren (tuerste zuerst) - Spezifische Kategorie
+                plants = plantService.searchPlantsByTitleContainingIgnoreCaseAdditionalFiltersSpecificCategoryPriceDSC(title, category, priceMinQueryReady, priceMaxQueryReady, heightMinQueryReady, heightMaxQueryReady, circumferenceMinQueryReady, circumferenceMaxQueryReady);
+            }
+        }
+
+        model.addAttribute("chosenSorting", chosenSorting);
+        model.addAttribute("alternativeSortingOne",alternativeSortingOne);
+        model.addAttribute("alternativeSortingTwo",alternativeSortingTwo);
+        model.addAttribute("plants", plants);
+        model.addAttribute("category", category);
+        model.addAttribute("searchTerm", title);
+        model.addAttribute("selectOption", selectedOption);
+
+        //Attribute des Filter-Forms
+        model.addAttribute("priceMinimum", priceMin);
+        model.addAttribute("priceMaximum", priceMax);
+        model.addAttribute("heightMinimum", heightMin);
+        model.addAttribute("heightMaximum", heightMax);
+        model.addAttribute("circumferenceMaximum", circumferenceMax);
+        model.addAttribute("circumferenceMinimum", circumferenceMin);
+
+        return "searchPlants"; // Die View, in der die Suchergebnisse angezeigt werden
     }
 
     /**
@@ -93,7 +191,7 @@ public class PlantController {
                               @RequestParam(required = false) String description,
                               @RequestParam(required = false) Double potCircumference,
                               @RequestParam(required = false) Double plantCircumference,
-                              @RequestParam(required = false) String tags,
+                              @RequestParam(required = false) List<String> tags,
                               Model model) {
         return plantService.createPlant(title, photos, height, price, hasPlanter, description, potCircumference, plantCircumference, tags, model);
     }
@@ -140,7 +238,7 @@ public class PlantController {
                               @RequestParam(required = false) String description,
                               @RequestParam(required = false) Double potCircumference,
                               @RequestParam(required = false) Double plantCircumference,
-                              @RequestParam(required = false) String tags,
+                              @RequestParam(required = false) List<String> tags,
                               Model model) {
         return plantService.updatePlant(id, title, photos, height, price, hasPlanter, description, potCircumference, plantCircumference, tags, model);
     }

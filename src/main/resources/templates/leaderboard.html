@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Rangliste</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+        }
+        .leaderboard-switch {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .leaderboard-switch button {
+            margin: 0 10px;
+        }
+        .current-user, .leaderboard-item {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: #fff;
+            display: flex;
+            align-items: center;
+        }
+        .current-user {
+            background-color: #e0ffe0;
+        }
+        .highlight {
+            background-color: #e0ffe0;
+        }
+        .leaderboard-item .profile-img-wrapper, .current-user .profile-img-wrapper {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+        .leaderboard-item .profile-img, .current-user .profile-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .rank {
+            font-size: 18px;
+            font-weight: bold;
+            margin-right: 20px;
+            color: #666;
+            flex-shrink: 0;
+            width: 50px;
+            text-align: center;
+        }
+        .user-details {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .user-details h4, .user-details p {
+            margin: 5px 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .user-details p span {
+            font-weight: bold;
+        }
+        .user-details .level {
+            font-size: 14px;
+            color: #666;
+        }
+        .user-sales {
+            font-weight: bold;
+            font-size: 16px;
+            text-align: right;
+            flex-shrink: 0;
+            width: 60px;
+        }
+        .divider {
+            border-bottom: 2px solid #ddd;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<div class="container">
+    <h1 class="text-center">Rangliste</h1>
+    <div class="leaderboard-switch">
+        <button id="salesButton" class="btn btn-outline-success" onclick="showSales()">Verkäufe</button>
+        <button id="buysButton" class="btn btn-outline-success" onclick="showBuys()">Käufe</button>
+    </div>
+
+    <!-- Current User View for Sales -->
+    <div id="salesLeaderboard">
+        <div th:if="${currentUser != null}" class="current-user">
+            <div class="rank">
+                <span th:text="${salesRank + '.'}"></span>
+            </div>
+            <div class="profile-img-wrapper">
+                <img th:src="@{'/images/profiles/' + ${currentUser.profileImage}}" alt="Profilbild" class="profile-img">
+            </div>
+            <div class="user-details">
+                <h4 th:text="${currentUser.username}"></h4>
+                <p><span th:text="${currentUser.getTitle()}"></span> - Lvl. <span th:text="${currentUser.level}"></span></p>
+            </div>
+            <div class="user-sales">
+                <span th:text="${currentUser.sales}"></span>
+            </div>
+        </div>
+        <div class="divider"></div>
+
+        <!-- Main Leaderboard for Sales -->
+        <div th:each="user, iterStat : ${usersBySales}" th:classappend="${user.userId == currentUser.userId} ? 'highlight' : ''" class="leaderboard-item">
+            <div class="rank">
+                <span th:text="${iterStat.index + 1 + '.'}"></span>
+            </div>
+            <div class="profile-img-wrapper">
+                <img th:src="@{'/images/profiles/' + ${user.profileImage}}" alt="Profilbild" class="profile-img">
+            </div>
+            <div class="user-details">
+                <h4 th:text="${user.username}"></h4>
+                <p><span th:text="${user.getTitle()}"></span> - Lvl. <span th:text="${user.level}"></span></p>
+            </div>
+            <div class="user-sales">
+                <span th:text="${user.sales}"></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Current User View for Buys -->
+    <div id="buysLeaderboard" style="display: none;">
+        <div th:if="${currentUser != null}" class="current-user">
+            <div class="rank">
+                <span th:text="${buysRank + '.'}"></span>
+            </div>
+            <div class="profile-img-wrapper">
+                <img th:src="@{'/images/profiles/' + ${currentUser.profileImage}}" alt="Profilbild" class="profile-img">
+            </div>
+            <div class="user-details">
+                <h4 th:text="${currentUser.username}"></h4>
+                <p><span th:text="${currentUser.getTitle()}"></span> - Lvl. <span th:text="${currentUser.level}"></span></p>
+            </div>
+            <div class="user-sales">
+                <span th:text="${currentUser.buys}"></span>
+            </div>
+        </div>
+        <div class="divider"></div>
+
+        <!-- Main Leaderboard for Buys -->
+        <div th:each="user, iterStat : ${usersByBuys}" th:classappend="${user.userId == currentUser.userId} ? 'highlight' : ''" class="leaderboard-item">
+            <div class="rank">
+                <span th:text="${iterStat.index + 1 + '.'}"></span>
+            </div>
+            <div class="profile-img-wrapper">
+                <img th:src="@{'/images/profiles/' + ${user.profileImage}}" alt="Profilbild" class="profile-img">
+            </div>
+            <div class="user-details">
+                <h4 th:text="${user.username}"></h4>
+                <p><span th:text="${user.getTitle()}"></span> - Lvl. <span th:text="${user.level}"></span></p>
+            </div>
+            <div class="user-sales">
+                <span th:text="${user.buys}"></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function showSales() {
+        document.getElementById('salesLeaderboard').style.display = 'block';
+        document.getElementById('buysLeaderboard').style.display = 'none';
+        document.getElementById('salesButton').classList.add('btn-success');
+        document.getElementById('salesButton').classList.remove('btn-outline-success');
+        document.getElementById('buysButton').classList.remove('btn-success');
+        document.getElementById('buysButton').classList.add('btn-outline-success');
+    }
+
+    function showBuys() {
+        document.getElementById('salesLeaderboard').style.display = 'none';
+        document.getElementById('buysLeaderboard').style.display = 'block';
+        document.getElementById('buysButton').classList.add('btn-success');
+        document.getElementById('buysButton').classList.remove('btn-outline-success');
+        document.getElementById('salesButton').classList.remove('btn-success');
+        document.getElementById('salesButton').classList.add('btn-outline-success');
+    }
+
+    // Initialize the page to show sales leaderboard
+    showSales();
+</script>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

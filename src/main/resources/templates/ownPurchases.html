@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:insert="~{fragments/htmlHead :: head}"></th:block>
+    <meta charset="UTF-8">
+    <title>Kaufanzeige</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-color: #bdd6ac;
+        }
+
+        .container {
+            padding: 20px;
+        }
+
+        h2 {
+            margin: 20px 0 10px 10px; /* Match the margin with the first container */
+        }
+        h3 {
+            margin: 20px 0 10px 10px; /* Match the margin with the h2 and first container */
+        }
+
+        .searchResultDivFiller {
+            position: absolute;
+            display: block;
+            height: 100%;
+            width: 100%;
+            text-decoration: none;
+        }
+
+        .plant-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: flex-start; /* Align items to the start of each row */
+        }
+
+        .plant img {
+            width: 100%; /* Make images responsive */
+            height: auto; /* Maintain aspect ratio */
+            max-height: 200px; /* Limit image height */
+            display: block; /* Ensure the image is treated as a block element */
+            object-fit: contain; /* Ensure the image covers the box without distortion */
+            border-radius: 5px; /* Match the border-radius of the container */
+        }
+
+        .image-container {
+            height: 200px; /* Set a fixed height for image containers */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<div class="container">
+    <h2>Meine gekauften Pflanzen</h2>
+    <div class="plant-container">
+        <div th:each="plant : ${ownPlants}" class="plant">
+            <div class="container" style="background-color: white">
+                <a class="searchResultDivFiller" style="color:black" th:href="@{/careInstruction(plantId=${plant.getPlantID()})}"></a>
+                <h3 th:text="${plant.title}">Pflanzen Name</h3>
+                <div class="image-container" th:if="${!plant.photos.isEmpty()}">
+                    <img th:src="'/images/' + ${plant.photos.get(0)}" alt="Plant Photo">
+                </div>
+                <p><strong>Höhe:</strong> <span th:text="${plant.height}">Höhe</span></p>
+                <p><strong>Preis:</strong> <span th:text="${plant.price}">Preis</span></p>
+                <a th:href="@{/careInstruction(plantId=${plant.getPlantID()})}" class="btn btn-success my-2 my-sm-0" type="button">Pflegetipps einsehen</a>
+
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

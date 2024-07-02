@@ -2,6 +2,7 @@ package com.example.sopra.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
@@ -9,19 +10,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
-import org.springframework.web.servlet.LocaleResolver;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
-import org.springframework.web.servlet.i18n.SessionLocaleResolver;
-
-import java.util.Locale;
-
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfiguration implements WebMvcConfigurer {
+@EnableScheduling
+public class SecurityConfiguration {
 
 
     @Bean
@@ -30,7 +23,7 @@ public class SecurityConfiguration implements WebMvcConfigurer {
                 .authorizeHttpRequests(
                         // define all URLs which should be accessible without login
                         auth -> auth
-                                .requestMatchers("/register", "/login", "/","/searchPlants/**").permitAll()
+                                .requestMatchers("/register", "/login", "/","/searchPlants/**", "searchPlantsPriceAscending", "searchPlantsAdditionalFilters", "showQuiz").permitAll()
                                 // define all URLs which require an authenticated user with a certain role
                                 // NOTE: Spring Security automatically adds "ROLE_" while performing this check. For this reason we do not
                                 // have to use "ROLE_ADMIN" here, which we define in the TestDatabaseLoader.
@@ -76,24 +69,5 @@ public class SecurityConfiguration implements WebMvcConfigurer {
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
-    }
-
-    @Bean
-    public LocaleResolver localeResolver() {
-        var resolver = new SessionLocaleResolver();
-        resolver.setDefaultLocale(Locale.GERMAN);
-        return resolver;
-    }
-
-    @Bean
-    public LocaleChangeInterceptor localeChangeInterceptor() {
-        var lci = new LocaleChangeInterceptor();
-        lci.setParamName("lang");
-        return lci;
-    }
-
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(localeChangeInterceptor());
     }
 }

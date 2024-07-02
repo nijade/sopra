@@ -13,10 +13,34 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
     <!-- Suchleiste linksbündig -->
+
     <form class="form-inline mr-auto" action="/searchPlants" method="get">
-      <input class="form-control mr-sm-2" type="text" name="title" placeholder="Nach Pflanze Suchen..." aria-label="Search">
+      <input class="form-control mr-sm-2" type="text" name="title" placeholder="Suchen in..." aria-label="Search">
+      <select class="custom-select mr-sm-2" name="category">
+        <option value="Alle Kategorien">Alle Kategorien</option>
+        <option value="Balkonblumen">Balkonblumen</option>
+        <option value="Heilpflanzen">Heilpflanzen</option>
+        <option value="Wildpflanzen">Wildpflanzen</option>
+        <option value="Bäume und Sträucher">Bäume und Sträucher</option>
+        <option value="Kletterpflanzen">Kletterpflanzen</option>
+        <option value="Kübelpflanzen">Kübelpflanzen</option>
+        <option value="Rosen">Rosen</option>
+        <option value="Sommerblumen">Sommerblumen</option>
+        <option value="Stauden">Stauden</option>
+        <option value="Wasserpflanzen">Wasserpflanzen</option>
+        <option value="Zimmerpflanzen">Zimmerpflanzen</option>
+        <option value="Zwiebel- und Knollenpflanzen">Zwiebel- und Knollenpflanzen</option>
+        <option value="Gemüse">Gemuese</option>
+        <option value="Obst">Obst</option>
+
+
+        <!-- Weitere Optionen nach Bedarf -->
+      </select>
+
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit" style="background-color: #ffffff">Suchen</button>
     </form>
+
+
     <!-- Navigationslinks rechtsbündig -->
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
@@ -29,12 +53,14 @@
         <a th:href="@{/ownConversations}" class="nav-link" style="color: #ffffff" type="button">Meine Nachrichten</a>
       </li>
       <li class="nav-item">
+        <a th:href="@{/ownPurchases}" class="nav-link" style="color: #ffffff" type="button">Meine Käufe</a>
+      </li>
+      <li class="nav-item">
         <a class="nav-link" th:href="@{/profile/view}">Mein Profil</a>
       </li>
     </ul>
   </div>
 </nav>
-
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

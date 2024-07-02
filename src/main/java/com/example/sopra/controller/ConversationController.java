@@ -62,6 +62,7 @@ public class ConversationController {
     public String showExistingChatPage(@RequestParam("conversationId") Integer conversationId, Model model) {
         Conversation conversation = conversationService.getConversationById(conversationId);
         model.addAttribute("specificConversation", conversation);
+        model.addAttribute("currentUsername", userService.getCurrentUser().getUsername());
         return "conversation";
     }
 
@@ -107,6 +108,8 @@ public class ConversationController {
             Message message = conversationService.sendMessage(currentUser.getUserId(), messageInput);
             conversation = conversationService.addMessageToConversation(conversationId, message);
             messageSent = true;
+
+            userService.addXp(userService.getCurrentUser(), 5);
         }
         model.addAttribute("specificConversation", conversation);
         model.addAttribute("messageSent", messageSent);

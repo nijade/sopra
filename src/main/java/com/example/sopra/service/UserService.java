@@ -15,8 +15,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -140,6 +142,30 @@ public class UserService implements UserDetailsService {
             currentUser.setProfileDescription(updatedUser.getProfileDescription());
         }
         updateUser(currentUser);
+    }
+
+    @Transactional
+    public List<User> sortBySales(List<User> users) {
+        return users.stream()
+                .sorted(Comparator.comparingInt(User::getSales).reversed())
+                .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public List<User> sortByBuys(List<User> users) {
+        return users.stream()
+                .sorted(Comparator.comparingInt(User::getBuys).reversed())
+                .collect(Collectors.toList());
+    }
+
+    public void addXp(User user, Integer xp){
+        user.xp += xp;
+        if(user.xp > user.xpToNextLevel){
+            user.xp = user.xp - user.xpToNextLevel;
+            user.level++;
+            user.xpToNextLevel = user.calculateXpToNextLevel();
+        }
+        userRepository.save(user);
     }
 
 }

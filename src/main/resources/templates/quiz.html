@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="de">
+<head>
+    <th:block th:insert="~{fragments/htmlHead :: head}"></th:block>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+    <style>
+        .container {
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            width: 80%;
+            max-width: 600px; /* Adjust max-width as needed */
+        }
+        button {
+            background-color: blue;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px; /* Rounded corners */
+        }
+    </style>
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<!-- Anzeige des Quizzes -->
+<div class="container">
+    <h2>Quiz der Woche</h2>
+    <div th:if="${chosenQuiz != null}">
+        <form th:action="@{/showQuiz/Results}" method="get">
+            <!-- Frage 1 -->
+            <div>
+                <h4 th:text="'Frage 1: ' + ${chosenQuiz.questionOne}">Frage 1</h4>
+                <p>Mögliche Antworten:</p>
+                <ul>
+                    <li th:each="answer, iterStat : ${chosenQuiz.possibleAnswersQuestionOne}">
+                        <input type="radio" th:name="'frage1'" th:value="${answer}" th:id="'frage1_' + ${iterStat.index}" />
+                        <label th:for="'frage1_' + ${iterStat.index}" th:text="${answer}">Antwort</label>
+                    </li>
+                </ul>
+            </div>
+            <!-- Frage 2 -->
+            <div>
+                <h4 th:text="'Frage 2: ' + ${chosenQuiz.questionTwo}">Frage 2</h4>
+                <p>Mögliche Antworten:</p>
+                <ul>
+                    <li th:each="answer, iterStat : ${chosenQuiz.possibleAnswersQuestionTwo}">
+                        <input type="radio" th:name="'frage2'" th:value="${answer}" th:id="'frage2_' + ${iterStat.index}" />
+                        <label th:for="'frage2_' + ${iterStat.index}" th:text="${answer}">Antwort</label>
+                    </li>
+                </ul>
+            </div>
+            <!-- Frage 3 -->
+            <div>
+                <h4 th:text="'Frage 3: ' + ${chosenQuiz.questionThree}">Frage 3</h4>
+                <p>Mögliche Antworten:</p>
+                <ul>
+                    <li th:each="answer, iterStat : ${chosenQuiz.possibleAnswersQuestionThree}">
+                        <input type="radio" th:name="'frage3'" th:value="${answer}" th:id="'frage3_' + ${iterStat.index}" />
+                        <label th:for="'frage3_' + ${iterStat.index}" th:text="${answer}">Antwort</label>
+                    </li>
+                </ul>
+            </div>
+            <button type="submit">Quiz auswerten</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

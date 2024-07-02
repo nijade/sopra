@@ -49,8 +49,9 @@
             white-space: nowrap;
             padding: 0.375rem 0.75rem;
         }
-        body,html{
-            background-color: #9fc2aa;
+
+        body, html {
+            background-color: #bdd6ac;
         }
 
     </style>
@@ -58,6 +59,8 @@
 <body>
 <div th:replace="fragments/header :: header"></div>
 <div class="container">
+<div class="card">
+    <div class="card-body">
     <div id="messages" style="height: auto" th:each="message: ${specificConversation.getMessageList()}">
         <p th:text="'Nachricht von: ' + ${message.getSender().getUsername()}"></p>
         <p th:text="${message.getContent()}"></p>
@@ -71,12 +74,20 @@
             Nachricht senden
         </button>
     </form>
+        </div>
+    <div class="card-footer">
+        <div class="flex-box justify-content-between">
+            <a th:href="@{/endConversation}" class="btn btn-danger my-2 my-sm-0" type="button">Konversation
+                verlassen</a>
 
+            <a th:if="${specificConversation.getPlant().getSeller().getUsername().equals(currentUsername) and specificConversation.getPlant().getBuyerFinal() == null}"
+               th:href="@{/sold(conversationId=${specificConversation.getId()})}" class="btn btn-success my-2 my-sm-0" type="button">Verkaufe Pflanze an diesen Nutzer</a>
+        </div>
+    </div>
 </div>
-<div class="footer">
-    <a th:href="@{/endConversation}" class="btn btn-danger my-2 my-sm-0" type="button">Konversation
-        beenden</a>
 </div>
+
+
 
 <script th:inline="javascript">
     /*<![CDATA[*/

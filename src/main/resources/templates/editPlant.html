@@ -6,9 +6,7 @@
   <title>Edit Plant</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <style>
-    body {
-      background-color: #f8f9fa;
-    }
+
     .container {
       margin-top: 50px;
     }
@@ -53,28 +51,31 @@
     .gallery-item .photo-name {
       margin-top: 10px;
     }
+    body, html {
+      background-color: #bdd6ac;
+    }
   </style>
 </head>
 <body>
 <div th:replace="fragments/header :: header"> </div>
 <div class="container">
-  <h1 class="text-center">Edit Plant</h1>
+  <h1 class="text-center">Pflanze bearbeiten</h1>
   <form th:action="@{/edit/{id}(id=${plant.plantID})}" method="post" class="mt-4">
     <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
     <input type="hidden" id="plantID" name="plantID" th:value="${plant.plantID}"/>
 
     <div class="form-group">
-      <label for="title">Title:</label>
+      <label for="title">Titel:</label>
       <input type="text" id="title" name="title" class="form-control" th:value="${plant.title}" required>
     </div>
 
     <div class="form-group">
-      <label for="photos">Photos:</label>
+      <label for="photos">Fotos:</label>
       <div class="gallery">
         <div th:each="photo, iterStat : ${photos}" class="gallery-item">
           <img th:src="@{'/images/' + ${photo}}" th:alt="${photo}">
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" th:id="${'photo_' + iterStat.index}" th:name="photos" th:value="${photo}">
+            <input class="form-check-input" type="checkbox" th:id="${'photo_' + iterStat.index}" th:name="photos" th:value="${photo}" th:checked="${plant.photos.contains(photo)}">
           </div>
           <div class="photo-name" th:text="${photo}"></div>
         </div>
@@ -82,41 +83,58 @@
     </div>
 
     <div class="form-group">
-      <label for="height">Height (cm):</label>
+      <label for="tags">Tags:</label>
+      <select id="tags" name="tags" class="selectpicker form-control" multiple data-live-search="true" title="Tags auswählen" required>
+        <option value="Balkonblumen" th:selected="${plant.tags.contains('Balkonblumen')}">Balkonblumen</option>
+        <option value="Heilpflanzen" th:selected="${plant.tags.contains('Heilpflanzen')}">Heilpflanzen</option>
+        <option value="Wildpflanzen" th:selected="${plant.tags.contains('Wildpflanzen')}">Wildpflanzen</option>
+        <option value="Bäume und Sträucher" th:selected="${plant.tags.contains('Bäume und Sträucher')}">Bäume und Sträucher</option>
+        <option value="Kletterpflanzen" th:selected="${plant.tags.contains('Kletterpflanzen')}">Kletterpflanzen</option>
+        <option value="Kübelpflanzen" th:selected="${plant.tags.contains('Kübelpflanzen')}">Kübelpflanzen</option>
+        <option value="Rosen" th:selected="${plant.tags.contains('Rosen')}">Rosen</option>
+        <option value="Sommerblumen" th:selected="${plant.tags.contains('Sommerblumen')}">Sommerblumen</option>
+        <option value="Stauden" th:selected="${plant.tags.contains('Stauden')}">Stauden</option>
+        <option value="Wasserpflanzen" th:selected="${plant.tags.contains('Wasserpflanzen')}">Wasserpflanzen</option>
+        <option value="Zimmerpflanzen" th:selected="${plant.tags.contains('Zimmerpflanzen')}">Zimmerpflanzen</option>
+        <option value="Zwiebel- und Knollenpflanzen" th:selected="${plant.tags.contains('Zwiebel- und Knollenpflanzen')}">Zwiebel- und Knollenpflanzen</option>
+        <option value="Gemüse" th:selected="${plant.tags.contains('Gemüse')}">Gemüse</option>
+        <option value="Obst" th:selected="${plant.tags.contains('Obst')}">Obst</option>
+      </select>
+    </div>
+
+
+    <div class="form-group">
+      <label for="height">Höhe (cm):</label>
       <input type="number" id="height" name="height" class="form-control" th:value="${plant.height}" step="0.01" required>
     </div>
 
     <div class="form-group">
-      <label for="price">Price (€):</label>
+      <label for="price">Preis (€):</label>
       <input type="number" id="price" name="price" class="form-control" th:value="${plant.price}" step="0.01" required>
     </div>
 
     <div class="form-group form-check">
       <input type="checkbox" id="hasPlanter" name="hasPlanter" class="form-check-input" th:checked="${plant.hasPlanter}">
-      <label for="hasPlanter" class="form-check-label">Has Planter</label>
+      <label for="hasPlanter" class="form-check-label">Übertopf vorhanden? (Optional)</label>
     </div>
 
     <div class="form-group">
-      <label for="description">Description:</label>
+      <label for="description">Beschreibung (Optional):</label>
       <textarea id="description" name="description" class="form-control" th:text="${plant.description}"></textarea>
     </div>
 
     <div class="form-group">
-      <label for="potCircumference">Pot Circumference (cm):</label>
+      <label for="potCircumference">Umfang des Topfes (cm) (Optional):</label>
       <input type="number" id="potCircumference" name="potCircumference" class="form-control" th:value="${plant.potCircumference}" step="0.01">
     </div>
 
     <div class="form-group">
-      <label for="plantCircumference">Plant Circumference (cm):</label>
+      <label for="plantCircumference">Umfang der Pflanze (cm) (Optional):</label>
       <input type="number" id="plantCircumference" name="plantCircumference" class="form-control" th:value="${plant.plantCircumference}" step="0.01">
     </div>
 
-    <div class="form-group">
-      <label for="tags">Tags (comma separated):</label>
-      <input type="text" id="tags" name="tags" class="form-control" th:value="${plant.getTagsAsString()}">
-    </div>
 
-    <button type="submit" class="btn btn-primary btn-block">Update Plant</button>
+    <button type="submit" class="btn btn-primary btn-block">Bearbeitung abschließen</button>
   </form>
 </div>
 
@@ -127,8 +145,18 @@
   <p th:text="${param.errorMessage}"></p>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta2/css/bootstrap-select.min.css" integrity="sha512-mR/b5Y7FRsKqrYZou7uysnOdCIJib/7r5QeJMFvLNHNhtye3xJp1TdJVPLtetkukFn227nKpXD9OjUc09lx97Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta2/js/bootstrap-select.min.js" integrity="sha512-FHZVRMUW9FsXobt+ONiix6Z0tIkxvQfxtCSirkKc5Sb4TKHmqq1dZa8DphF0XqKb3ldLu/wgMa8mT6uXiLlRlw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script>
+  $(document).ready(function() {
+    $('.selectpicker').selectpicker();
+  });
+</script>
+
 </body>
 </html>
