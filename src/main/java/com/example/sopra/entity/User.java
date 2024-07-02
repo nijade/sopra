@@ -31,7 +31,7 @@ public class User {
 
     private Integer age;
 
-    private String gender;
+    private Gender gender;
 
     private String profileDescription;
 
@@ -154,11 +154,11 @@ public class User {
         this.age = age;
     }
 
-    public String getGender() {
+    public Gender getGender() {
         return gender;
     }
 
-    public void setGender(String gender) {
+    public void setGender(Gender gender) {
         this.gender = gender;
     }
 

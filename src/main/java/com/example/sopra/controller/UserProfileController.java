@@ -7,7 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.ui.Model;
+import org.springframework.context.MessageSource;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Locale;
 
 /**
  * Der Controller für die Verlinkung der HTML-Seiten zu "profile", bzw. dem Userprofil.
@@ -19,19 +22,27 @@ public class UserProfileController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private MessageSource messageSource;
+
     /**
-     * Nimmt die Anfrage zur Profilübersicht entgegen und gibt die entsprechende Seite zurück. Wenn der/die
-     * Benutzer*in noch nicht angemeldet ist, wird diese*r an die login-Seite geleitet.
+     * Nimmt die Anfrage "/view", zur Profilansicht, entgegen und gibt die entsprechende Seite zurück. Wenn der/die
+     * Benutzer*in noch nicht angemeldet ist, wird diese*r an die login-Seite geleitet. Ansonsten wird das aktuelle
+     * Benutzerobjekt und die übersetzte Geschlechtsbezeichnung dem Modell hinzugefügt und die Profilansicht angezeigt.
      * @param model model, das user übergibt
-     * @return die zu erscheinende html-Seite
+     * @param locale aktuelle Lokalisierung, um die richtige Übersetzung zu laden
+     * @return die zu erscheinende html-Seite, also die Profilansicht
      */
     @GetMapping("/view")
-    public String viewProfile(Model model) {
+    public String viewProfile(Model model, Locale locale) {
         User currentUser = userService.getCurrentUser();
         if (currentUser == null) {
             return "redirect:/login";
         }
         model.addAttribute("user", currentUser);
+        String genderKey = "profile." + currentUser.getGender().name().toLowerCase();
+        String gender = messageSource.getMessage(genderKey, null, locale);
+        model.addAttribute("translatedGender", gender);
         return "profile/view";
     }
 

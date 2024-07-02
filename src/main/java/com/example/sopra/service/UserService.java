@@ -135,7 +135,7 @@ public class UserService implements UserDetailsService {
         if (updatedUser.getAge() != null) {
             currentUser.setAge(updatedUser.getAge());
         }
-        if (updatedUser.getGender() != null && !updatedUser.getGender().isEmpty()) {
+        if (updatedUser.getGender() != null) {
             currentUser.setGender(updatedUser.getGender());
         }
         if (updatedUser.getProfileDescription() != null && !updatedUser.getProfileDescription().isEmpty()) {

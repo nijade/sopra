@@ -1,9 +1,6 @@
 package com.example.sopra.service;
 
-import com.example.sopra.entity.CareInstruction;
-import com.example.sopra.entity.Plant;
-import com.example.sopra.entity.Quiz;
-import com.example.sopra.entity.User;
+import com.example.sopra.entity.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,7 +78,7 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
         hans.setName("Hans Bauer");
         hans.setEmail("bauer@exmaple.com");
         hans.setAge(33);
-        hans.setGender("M\u00e4nnlich");
+        hans.setGender(Gender.MALE);
         hans.setProfileDescription("aufgewachsen in stuttgart, Sicherheitsingenieur, Naturfreund");
         hans.setProfileImage("profilbild_schafStrecktZunge.jpeg");
         userService.saveUser(hans);
