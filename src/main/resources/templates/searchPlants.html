@@ -18,12 +18,15 @@
       margin-top: 60px; /* Adjust this value if navbar height changes */
     }
     .filter-container {
+
       width: 20%;
+      position: relative;
+      top:90px;
       padding: 20px;
       background-color: #f4f4f4;
       border-right: 1px solid #ddd;
       z-index: 100; /* Ensure filter is above content */
-      min-height: 100%; /* Ensure the filter container stretches to match height */
+      height: 500px; /* Automatically adjusts height to content */
     }
     .filter-container h3 {
       margin-top: 0;
@@ -72,7 +75,7 @@
       display: flex;
       flex-direction: column;
       align-items: flex-start;
-      margin-top: auto; /* Push buttons to the bottom */
+      margin-top: 20px; /* Push buttons to the bottom */
       margin-bottom: 20px; /* Add margin at the bottom of buttons */
     }
     .buttons-container button {
@@ -90,12 +93,21 @@
       background-color: #0056b3;
     }
     .container {
+
+
       padding: 20px;
+      position: relative;
+      top: -40px;
       width: 80%; /* Adjusted width */
       overflow-y: auto; /* Allow container to scroll */
     }
     .header-container {
+
       display: flex;
+      position: relative;
+
+      left: -20px;
+      padding: 20px;
       justify-content: space-between;
       align-items: flex-start; /* Align items to the start */
       width: 100%;
@@ -133,6 +145,7 @@
       border-radius: 5px;
       display: flex;
       align-items: flex-start;
+      background-color: #FFFFFF;
     }
     .plant img {
       flex-shrink: 0;
@@ -175,10 +188,20 @@
     .form-label {
       margin-top: 10px;
     }
+    .form-group {
+      display: flex;
+      width: 250px;
+      flex-wrap: wrap;
+      gap: 1px;
+      margin-bottom: 10px;
+    }
+    .form-sub-group{
+    width: 120px;
+    }
     .form-control {
       width: calc(50% - 10px); /* Adjusted width for two inputs */
-      margin-right: 10px;
       padding: 8px;
+      width: 80px;
       font-size: 14px;
     }
     /* Added CSS for the no-plant message */
@@ -194,12 +217,6 @@
 <div class="main-container">
   <div class="filter-container">
     <h3>Filteroptionen</h3>
-    <ul class="filter-options">
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-        <label class="form-check-label" for="flexCheckDefault"> Übertopf </label>
-      </div>
-    </ul>
     <form th:action="@{/searchPlantsAdditionalFilters}" method="get">
       <!-- Sichtbares Eingabefeld für den Titel -->
       <div class="sort-container">
@@ -216,31 +233,37 @@
       <input type="hidden" name="category" th:value="${category}">
       <input type="hidden" name="title" th:value="${searchTerm}">
       <!-- Weitere Filteroptionen -->
-      <div>
-        <label for="priceMin" class="form-label">Preis von</label>
-        <input type="number" class="form-control" id="priceMin" name="priceMin" min="0" max="100" value="0" placeholder="Min">
+      <div class="form-group">
+        <div class="form-sub-group">
+          <label for="priceMin" class="form-label">Preis von</label>
+          <input type="number" class="form-control" id="priceMin" name="priceMin" min="0" max="100" value="0" placeholder="Min">
+        </div>
+        <div class="form-sub-group">
+          <label for="priceMax" class="form-label">Preis bis</label>
+          <input type="number" class="form-control" id="priceMax" name="priceMax" min="0" max="100" placeholder="Max">
+        </div>
       </div>
-      <div>
-        <label for="priceMax" class="form-label">Preis bis</label>
-        <input type="number" class="form-control" id="priceMax" name="priceMax" min="0" max="100" placeholder="Max">
+      <div class="form-group">
+        <div class="form-sub-group">
+          <label for="heightMin" class="form-label">Höhe von</label>
+          <input type="number" class="form-control" id="heightMin" name="heightMin" min="0" max="100" value="0" placeholder="Min">
+        </div>
+        <div class="form-sub-group">
+          <label for="heightMax" class="form-label">Höhe bis</label>
+          <input type="number" class="form-control" id="heightMax" name="heightMax" min="0" max="100" placeholder="Max">
+        </div>
       </div>
-      <div>
-        <label for="heightMin" class="form-label">Höhe von</label>
-        <input type="number" class="form-control" id="heightMin" name="heightMin" min="0" max="100" value="0" placeholder="Min">
-      </div>
-      <div>
-        <label for="heightMax" class="form-label">Höhe bis</label>
-        <input type="number" class="form-control" id="heightMax" name="heightMax" min="0" max="100" placeholder="Max">
-      </div>
-      <div>
-        <label for="circumferenceMin" class="form-label">Umfang von</label>
-        <input type="hidden" name="circumferenceMin" value="10"> <!-- Verstecktes Feld für Standardwert -->
-        <input type="number" class="form-control" id="circumferenceMin" name="circumferenceMinVisible" min="0" max="100" value="0" placeholder="Min">
-      </div>
-      <div>
-        <label for="circumferenceMax" class="form-label">Umfang bis</label>
-        <input type="hidden" name="circumferenceMax" value="50"> <!-- Verstecktes Feld für Standardwert -->
-        <input type="number" class="form-control" id="circumferenceMax" name="circumferenceMaxVisible" min="0" max="100" placeholder="Max">
+      <div class="form-group">
+        <div class="form-sub-group">
+          <label for="circumferenceMin" class="form-label">Umfang von</label>
+          <input type="hidden" name="circumferenceMin" value="10"> <!-- Verstecktes Feld für Standardwert -->
+          <input type="number" class="form-control" id="circumferenceMin" name="circumferenceMinVisible" min="0" max="100" value="0" placeholder="Min">
+        </div>
+        <div class="form-sub-group">
+          <label for="circumferenceMax" class="form-label">Umfang bis</label>
+          <input type="hidden" name="circumferenceMax" value="50"> <!-- Verstecktes Feld für Standardwert -->
+          <input type="number" class="form-control" id="circumferenceMax" name="circumferenceMaxVisible" min="0" max="100" placeholder="Max">
+        </div>
       </div>
       <div class="buttons-container">
         <!-- Thymeleaf-generierter Link für den Submit-Button -->
@@ -262,14 +285,6 @@
           <div class="plant-details">
             <p><strong>Höhe:</strong> <span th:text="${plant.height}">Höhe</span> cm</p>
             <p><strong>Preis:</strong> <span th:text="${plant.price}">Preis</span> €</p>
-            <p><strong>Mit Topf:</strong> <span th:text="${plant.hasPlanter ? 'Ja, ' : 'Nein'}">Mit Topf</span></p>
-            <p th:if="${plant.hasPlanter} == true">
-              <strong>Topfumfang:</strong> <span th:text="${plant.potCircumference}">Topfumfang</span> cm
-            </p>
-            <div class="tags">
-              <strong>Tags:</strong>
-              <span th:each="tag : ${plant.tags}" th:text="${tag}">Tag</span>
-            </div>
           </div>
         </div>
       </div>

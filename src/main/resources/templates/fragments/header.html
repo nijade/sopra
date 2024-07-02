@@ -13,34 +13,28 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
     <!-- Suchleiste linksbündig -->
-
     <form class="form-inline mr-auto" action="/searchPlants" method="get">
-      <input class="form-control mr-sm-2" type="text" name="title" placeholder="Suchen in..." aria-label="Search">
+      <input class="form-control mr-sm-2" type="text" name="title" placeholder="Suchen in..." aria-label="Search" th:value="${searchTerm}">
       <select class="custom-select mr-sm-2" name="category">
-        <option value="Alle Kategorien">Alle Kategorien</option>
-        <option value="Balkonblumen">Balkonblumen</option>
-        <option value="Heilpflanzen">Heilpflanzen</option>
-        <option value="Wildpflanzen">Wildpflanzen</option>
-        <option value="Bäume und Sträucher">Bäume und Sträucher</option>
-        <option value="Kletterpflanzen">Kletterpflanzen</option>
-        <option value="Kübelpflanzen">Kübelpflanzen</option>
-        <option value="Rosen">Rosen</option>
-        <option value="Sommerblumen">Sommerblumen</option>
-        <option value="Stauden">Stauden</option>
-        <option value="Wasserpflanzen">Wasserpflanzen</option>
-        <option value="Zimmerpflanzen">Zimmerpflanzen</option>
-        <option value="Zwiebel- und Knollenpflanzen">Zwiebel- und Knollenpflanzen</option>
-        <option value="Gemüse">Gemuese</option>
-        <option value="Obst">Obst</option>
-
-
+        <option value="Alle Kategorien" th:selected="${category == 'Alle Kategorien'}">Alle Kategorien</option>
+        <option value="Balkonblumen" th:selected="${category == 'Balkonblumen'}">Balkonblumen</option>
+        <option value="Heilpflanzen" th:selected="${category == 'Heilpflanzen'}">Heilpflanzen</option>
+        <option value="Wildpflanzen" th:selected="${category == 'Wildpflanzen'}">Wildpflanzen</option>
+        <option value="Bäume und Sträucher" th:selected="${category == 'Bäume und Sträucher'}">Bäume und Sträucher</option>
+        <option value="Kletterpflanzen" th:selected="${category == 'Kletterpflanzen'}">Kletterpflanzen</option>
+        <option value="Kübelpflanzen" th:selected="${category == 'Kübelpflanzen'}">Kübelpflanzen</option>
+        <option value="Rosen" th:selected="${category == 'Rosen'}">Rosen</option>
+        <option value="Sommerblumen" th:selected="${category == 'Sommerblumen'}">Sommerblumen</option>
+        <option value="Stauden" th:selected="${category == 'Stauden'}">Stauden</option>
+        <option value="Wasserpflanzen" th:selected="${category == 'Wasserpflanzen'}">Wasserpflanzen</option>
+        <option value="Zimmerpflanzen" th:selected="${category == 'Zimmerpflanzen'}">Zimmerpflanzen</option>
+        <option value="Zwiebel- und Knollenpflanzen" th:selected="${category == 'Zwiebel- und Knollenpflanzen'}">Zwiebel- und Knollenpflanzen</option>
+        <option value="Gemüse" th:selected="${category == 'Gemüse'}">Gemuese</option>
+        <option value="Obst" th:selected="${category == 'Obst'}">Obst</option>
         <!-- Weitere Optionen nach Bedarf -->
       </select>
-
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit" style="background-color: #ffffff">Suchen</button>
     </form>
-
-
     <!-- Navigationslinks rechtsbündig -->
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
