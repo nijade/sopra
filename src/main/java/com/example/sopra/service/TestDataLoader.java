@@ -67,7 +67,7 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
         hans.setName("Hans Bauer");
         hans.setEmail("bauer@exmaple.com");
         hans.setAge(33);
-        hans.setGender("Male");
+        hans.setGender("M\u00e4nnlich");
         hans.setProfileDescription("aufgewachsen in stuttgart, Sicherheitsingenieur, Naturfreund");
         hans.setProfileImage("profilbild_schafStrecktZunge.jpeg");
         userService.saveUser(hans);
