@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Edit Plant</title>
+  <title th:text="#{plant.edit.title}">Pflanze bearbeiten</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta2/css/bootstrap-select.min.css" integrity="sha512-mR/b5Y7FRsKqrYZou7uysnOdCIJib/7r5QeJMFvLNHNhtye3xJp1TdJVPLtetkukFn227nKpXD9OjUc09lx97Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <style>
@@ -59,18 +59,18 @@
 <body>
 <div th:replace="fragments/header :: header"> </div>
 <div class="container">
-  <h1 class="text-center">Pflanze bearbeiten</h1>
+  <h1 class="text-center" th:text="#{plant.edit.heading}">Pflanze bearbeiten</h1>
   <form th:action="@{/edit/{id}(id=${plant.plantID})}" method="post" class="mt-4">
     <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
     <input type="hidden" id="plantID" name="plantID" th:value="${plant.plantID}"/>
 
     <div class="form-group">
-      <label for="title">Titel:</label>
+      <label for="title" th:text="#{plant.title.label}">Titel:</label>
       <input type="text" id="title" name="title" class="form-control" th:value="${plant.title}" required>
     </div>
 
     <div class="form-group">
-      <label for="photos">Fotos:</label>
+      <label for="photos" th:text="#{plant.photos.label}">Fotos:</label>
       <div class="gallery">
         <div th:each="photo, iterStat : ${photos}" class="gallery-item">
           <img th:src="@{'/images/' + ${photo}}" th:alt="${photo}">
@@ -83,60 +83,60 @@
     </div>
 
     <div class="form-group">
-      <label for="tags">Tags:</label>
-      <select id="tags" name="tags" class="selectpicker form-control" multiple data-live-search="true" title="Tags auswählen" required>
-        <option value="Balkonblumen" th:selected="${plant.tags.contains('Balkonblumen')}">Balkonblumen</option>
-        <option value="Heilpflanzen" th:selected="${plant.tags.contains('Heilpflanzen')}">Heilpflanzen</option>
-        <option value="Wildpflanzen" th:selected="${plant.tags.contains('Wildpflanzen')}">Wildpflanzen</option>
-        <option value="Bäume und Sträucher" th:selected="${plant.tags.contains('Bäume und Sträucher')}">Bäume und Sträucher</option>
-        <option value="Kletterpflanzen" th:selected="${plant.tags.contains('Kletterpflanzen')}">Kletterpflanzen</option>
-        <option value="Kübelpflanzen" th:selected="${plant.tags.contains('Kübelpflanzen')}">Kübelpflanzen</option>
-        <option value="Rosen" th:selected="${plant.tags.contains('Rosen')}">Rosen</option>
-        <option value="Sommerblumen" th:selected="${plant.tags.contains('Sommerblumen')}">Sommerblumen</option>
-        <option value="Stauden" th:selected="${plant.tags.contains('Stauden')}">Stauden</option>
-        <option value="Wasserpflanzen" th:selected="${plant.tags.contains('Wasserpflanzen')}">Wasserpflanzen</option>
-        <option value="Zimmerpflanzen" th:selected="${plant.tags.contains('Zimmerpflanzen')}">Zimmerpflanzen</option>
-        <option value="Zwiebel- und Knollenpflanzen" th:selected="${plant.tags.contains('Zwiebel- und Knollenpflanzen')}">Zwiebel- und Knollenpflanzen</option>
-        <option value="Gemüse" th:selected="${plant.tags.contains('Gemüse')}">Gemüse</option>
-        <option value="Obst" th:selected="${plant.tags.contains('Obst')}">Obst</option>
+      <label for="tags" th:text="#{plant.tags.label}">Tags:</label>
+      <select id="tags" name="tags" class="selectpicker form-control" multiple data-live-search="true" th:title="#{plant.tags.select}" required>
+        <option value="Balkonblumen" th:selected="${plant.tags.contains('Balkonblumen')}" th:text="#{plant.tags.balconyFlowers}">Balkonblumen</option>
+        <option value="Heilpflanzen" th:selected="${plant.tags.contains('Heilpflanzen')}" th:text="#{plant.tags.medicinalPlants}">Heilpflanzen</option>
+        <option value="Wildpflanzen" th:selected="${plant.tags.contains('Wildpflanzen')}" th:text="#{plant.tags.wildPlants}">Wildpflanzen</option>
+        <option value="Bäume und Sträucher" th:selected="${plant.tags.contains('Bäume und Sträucher')}" th:text="#{plant.tags.treesAndShrubs}">Bäume und Sträucher</option>
+        <option value="Kletterpflanzen" th:selected="${plant.tags.contains('Kletterpflanzen')}" th:text="#{plant.tags.climbingPlants}">Kletterpflanzen</option>
+        <option value="Kübelpflanzen" th:selected="${plant.tags.contains('Kübelpflanzen')}" th:text="#{plant.tags.containerPlants}">Kübelpflanzen</option>
+        <option value="Rosen" th:selected="${plant.tags.contains('Rosen')}" th:text="#{plant.tags.roses}">Rosen</option>
+        <option value="Sommerblumen" th:selected="${plant.tags.contains('Sommerblumen')}" th:text="#{plant.tags.summerFlowers}">Sommerblumen</option>
+        <option value="Stauden" th:selected="${plant.tags.contains('Stauden')}" th:text="#{plant.tags.perennials}">Stauden</option>
+        <option value="Wasserpflanzen" th:selected="${plant.tags.contains('Wasserpflanzen')}" th:text="#{plant.tags.aquaticPlants}">Wasserpflanzen</option>
+        <option value="Zimmerpflanzen" th:selected="${plant.tags.contains('Zimmerpflanzen')}" th:text="#{plant.tags.indoorPlants}">Zimmerpflanzen</option>
+        <option value="Zwiebel- und Knollenpflanzen" th:selected="${plant.tags.contains('Zwiebel- und Knollenpflanzen')}" th:text="#{plant.tags.bulbsAndTubers}">Zwiebel- und Knollenpflanzen</option>
+        <option value="Gemüse" th:selected="${plant.tags.contains('Gemüse')}" th:text="#{plant.tags.vegetables}">Gemüse</option>
+        <option value="Obst" th:selected="${plant.tags.contains('Obst')}" th:text="#{plant.tags.fruits}">Obst</option>
       </select>
     </div>
 
 
     <div class="form-group">
-      <label for="height">Höhe (cm):</label>
+      <label for="height" th:text="#{plant.height.label}">Höhe (cm):</label>
       <input type="number" min="0" id="height" name="height" class="form-control" th:value="${plant.height}" step="0.01" required>
     </div>
 
     <div class="form-group">
-      <label for="price">Preis (€):</label>
+      <label for="price" th:text="#{plant.price.label} + ' (€):'">Preis (€):</label>
       <input type="number" min="0" id="price" name="price" class="form-control" th:value="${plant.price}" step="0.01" required>
     </div>
 
     <div class="form-group">
-      <label for="hasPlanter">Übertopf vorhanden?</label>
-      <select id="hasPlanter" name="hasPlanter" class="selectpicker form-control" data-live-search="true" title="Bitte auswählen" required>
-        <option value="yes" th:selected="${plant.hasPlanter}">Ja</option>
-        <option value="no" th:selected="${!plant.hasPlanter}">Nein</option>
+      <label for="hasPlanter" th:text="#{plant.hasPlanter.label}">Übertopf vorhanden?</label>
+      <select id="hasPlanter" name="hasPlanter" class="selectpicker form-control" data-live-search="true" th:title="#{plant.hasPlanter.select}" required>
+        <option value="yes" th:selected="${plant.hasPlanter}" th:text="#{plant.hasPlanter.yes}">Ja</option>
+        <option value="no" th:selected="${!plant.hasPlanter}" th:text="#{plant.hasPlanter.no}">Nein</option>
       </select>
     </div>
 
     <div class="form-group">
-      <label for="description">Beschreibung (Optional):</label>
+      <label for="description" th:text="#{plant.description.label}">Beschreibung (Optional):</label>
       <textarea id="description" name="description" class="form-control" th:text="${plant.description}"></textarea>
     </div>
 
     <div class="form-group">
-      <label for="potCircumference">Umfang des Topfes (cm) (Optional):</label>
+      <label for="potCircumference" th:text="#{plant.potCircumference.label}">Umfang des Topfes (cm) (Optional):</label>
       <input type="number" id="potCircumference" name="potCircumference" class="form-control" th:value="${plant.potCircumference}" step="0.01">
     </div>
 
     <div class="form-group">
-      <label for="plantCircumference">Umfang der Pflanze (cm) (Optional):</label>
+      <label for="plantCircumference" th:text="#{plant.plantCircumference.label}">Umfang der Pflanze (cm) (Optional):</label>
       <input type="number" id="plantCircumference" name="plantCircumference" class="form-control" th:value="${plant.plantCircumference}" step="0.01">
     </div>
 
-    <button type="submit" id="submit" class="btn btn-primary btn-block">Bearbeitung abschließen</button>
+    <button type="submit" id="submit" class="btn btn-primary btn-block" th:text="#{plant.submit.button}">Bearbeitung abschließen</button>
   </form>
 </div>
 
