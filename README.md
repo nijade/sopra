@@ -31,7 +31,8 @@ Developer of "SoPra" (GitHub-Username, full name):
 - For Run the project following this procedure:
   - click on the gradle symbol on the top right
   - click "sopra [bootRun]" in the folder "Run Configuration"
-  - open "localhost:8080/" in your browser (good option is firefox or chrome)
+  - open "http://localhost:8080/" in your browser (good option is firefox or chrome)
+  - fun fact: open "http://localhost:8080/?lang=en" for english verion (partly at the moment)
 
  ## Branches
  
