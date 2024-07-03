@@ -53,9 +53,9 @@
             </div>
             <div class="xp-bar">
                 <div class="progress">
-                    <div class="progress-bar" role="progressbar"
+                    <div class="progress-bar" role="progressbar" th:with="titleKey='user.title.' + ${user.getTitle()}"
                          th:style="'width: ' + (${user.xp} / ${user.xpToNextLevel} * 100) + '%;'"
-                         th:text="${user.title} + ' - Level ' + ${user.level} + ' - ' + ${user.xp} + ' / ' + ${user.xpToNextLevel} + ' XP'">
+                         th:text="#{${titleKey}} + ' - Level ' + ${user.level} + ' - ' + ${user.xp} + ' / ' + ${user.xpToNextLevel} + ' XP'">
                     </div>
                 </div>
             </div>
