@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Rangliste</title>
+    <title th:text="#{leaderboard.title}">Leaderboard</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         body {
@@ -95,24 +95,24 @@
 <body>
 <div th:replace="fragments/header :: header"></div>
 <div class="container">
-    <h1 class="text-center">Rangliste</h1>
+    <h1 class="text-center" th:text="#{leaderboard.title}">Leaderboard</h1>
     <div class="leaderboard-switch">
-        <button id="salesButton" class="btn btn-outline-success" onclick="showSales()">Verkäufe</button>
-        <button id="buysButton" class="btn btn-outline-success" onclick="showBuys()">Käufe</button>
+        <button id="salesButton" class="btn btn-outline-success" onclick="showSales()" th:text="#{leaderboard.salesButton}">Sales</button>
+        <button id="buysButton" class="btn btn-outline-success" onclick="showBuys()" th:text="#{leaderboard.buysButton}">Buys</button>
     </div>
 
     <!-- Current User View for Sales -->
     <div id="salesLeaderboard">
-        <div th:if="${currentUser != null}" class="current-user">
+        <div th:if="${currentUser != null}" class="current-user" th:with="titleKey='user.title.' + ${currentUser.getTitle()}">
             <div class="rank">
                 <span th:text="${salesRank + '.'}"></span>
             </div>
             <div class="profile-img-wrapper">
-                <img th:src="@{'/images/profiles/' + ${currentUser.profileImage}}" alt="Profilbild" class="profile-img">
+                <img th:src="@{'/images/profiles/' + ${currentUser.profileImage}}" alt="Profile Image" class="profile-img">
             </div>
             <div class="user-details">
                 <h4 th:text="${currentUser.username}"></h4>
-                <p><span th:text="${currentUser.getTitle()}"></span> - Lvl. <span th:text="${currentUser.level}"></span></p>
+                <p><span th:text="#{${titleKey}}"></span> - Lvl. <span th:text="${currentUser.level}"></span></p>
             </div>
             <div class="user-sales">
                 <span th:text="${currentUser.sales}"></span>
@@ -121,16 +121,16 @@
         <div class="divider"></div>
 
         <!-- Main Leaderboard for Sales -->
-        <div th:each="user, iterStat : ${usersBySales}" th:classappend="${user.userId == currentUser.userId} ? 'highlight' : ''" class="leaderboard-item">
+        <div th:each="user, iterStat : ${usersBySales}" th:classappend="${user.userId == currentUser.userId} ? 'highlight' : ''" th:with="titleKey='user.title.' + ${user.getTitle()}" class="leaderboard-item">
             <div class="rank">
                 <span th:text="${iterStat.index + 1 + '.'}"></span>
             </div>
             <div class="profile-img-wrapper">
-                <img th:src="@{'/images/profiles/' + ${user.profileImage}}" alt="Profilbild" class="profile-img">
+                <img th:src="@{'/images/profiles/' + ${user.profileImage}}" alt="Profile Image" class="profile-img">
             </div>
             <div class="user-details">
                 <h4 th:text="${user.username}"></h4>
-                <p><span th:text="${user.getTitle()}"></span> - Lvl. <span th:text="${user.level}"></span></p>
+                <p><span th:text="#{${titleKey}}"></span> - Lvl. <span th:text="${user.level}"></span></p>
             </div>
             <div class="user-sales">
                 <span th:text="${user.sales}"></span>
@@ -140,16 +140,16 @@
 
     <!-- Current User View for Buys -->
     <div id="buysLeaderboard" style="display: none;">
-        <div th:if="${currentUser != null}" class="current-user">
+        <div th:if="${currentUser != null}" class="current-user" th:with="titleKey='user.title.' + ${currentUser.getTitle()}">
             <div class="rank">
                 <span th:text="${buysRank + '.'}"></span>
             </div>
             <div class="profile-img-wrapper">
-                <img th:src="@{'/images/profiles/' + ${currentUser.profileImage}}" alt="Profilbild" class="profile-img">
+                <img th:src="@{'/images/profiles/' + ${currentUser.profileImage}}" alt="Profile Image" class="profile-img">
             </div>
             <div class="user-details">
                 <h4 th:text="${currentUser.username}"></h4>
-                <p><span th:text="${currentUser.getTitle()}"></span> - Lvl. <span th:text="${currentUser.level}"></span></p>
+                <p><span th:text="#{${titleKey}}"></span> - Lvl. <span th:text="${currentUser.level}"></span></p>
             </div>
             <div class="user-sales">
                 <span th:text="${currentUser.buys}"></span>
@@ -158,16 +158,16 @@
         <div class="divider"></div>
 
         <!-- Main Leaderboard for Buys -->
-        <div th:each="user, iterStat : ${usersByBuys}" th:classappend="${user.userId == currentUser.userId} ? 'highlight' : ''" class="leaderboard-item">
+        <div th:each="user, iterStat : ${usersByBuys}" th:classappend="${user.userId == currentUser.userId} ? 'highlight' : ''" th:with="titleKey='user.title.' + ${user.getTitle()}" class="leaderboard-item">
             <div class="rank">
                 <span th:text="${iterStat.index + 1 + '.'}"></span>
             </div>
             <div class="profile-img-wrapper">
-                <img th:src="@{'/images/profiles/' + ${user.profileImage}}" alt="Profilbild" class="profile-img">
+                <img th:src="@{'/images/profiles/' + ${user.profileImage}}" alt="Profile Image" class="profile-img">
             </div>
             <div class="user-details">
                 <h4 th:text="${user.username}"></h4>
-                <p><span th:text="${user.getTitle()}"></span> - Lvl. <span th:text="${user.level}"></span></p>
+                <p><span th:text="#{${titleKey}}"></span> - Lvl. <span th:text="${user.level}"></span></p>
             </div>
             <div class="user-sales">
                 <span th:text="${user.buys}"></span>

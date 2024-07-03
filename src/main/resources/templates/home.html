@@ -29,10 +29,12 @@
       margin: 10px;
       padding: 10px;
       border-radius: 5px;
-      flex: 1 0 30%; /* Flex-grow, flex-shrink, flex-basis */
+      width:340px;
+
       box-sizing: border-box;
       max-width: 340px; /* Set maximum width */
-      max-height: 600px; /* Set maximum height */
+      height: 390px;
+
       overflow: hidden; /* Ensure content does not overflow */
     }
     .searchResultDivFiller {
@@ -89,14 +91,24 @@
         margin-top: 20px;
         margin-right: 20px;
     }
+    .plant-price{
+        padding: 8px;
+    }
+    .welcome-message{
+        position: relative;
+        left: 10px;
+    }
+
     </style>
 </head>
 <body>
 <div th:replace="fragments/header :: header"> </div>
 <div class="container">
-    <h2>Willkommen bei PlantBay24!</h2>
-    <a href="/showQuiz" class="blink-button">Quiz der Woche</a>
-    <h3>Aktuelle Inserate:</h3>
+    <div class = "welcome-message">
+        <h2>Willkommen bei PlantBay24!</h2>
+        <a href="/showQuiz" class="blink-button">Quiz der Woche</a>
+        <h3>Aktuelle Inserate:</h3>
+    </div>
     <div th:if="${plants != null && !plants.isEmpty()}" class="plant-container">
         <div th:each="plant : ${plants}" class="plant">
             <a class="searchResultDivFiller" style="color:black" th:href="@{/plants/{id}(id=${plant.plantID})}"></a>
@@ -104,9 +116,7 @@
             <div class="image-container" th:if="${!plant.photos.isEmpty()}">
                 <img th:src="'/images/' + ${plant.photos.get(0)}" alt="Plant Photo">
             </div>
-            <p><strong>Anzahl an Bildern:</strong> <span th:text="${plant.photos.size()}"></span></p>
-            <p><strong>Höhe:</strong> <span th:text="${plant.height}">Höhe</span></p>
-            <p><strong>Preis:</strong> <span th:text="${plant.price}">Preis</span></p>
+            <p class="plant-price"><strong>Preis:</strong> <span th:text="${plant.price}">Preis</span></p>
         </div>
     </div>
     <div th:if="${plants == null || plants.isEmpty()}">
