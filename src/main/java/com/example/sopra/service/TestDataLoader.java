@@ -36,42 +36,7 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
     public void onApplicationEvent(ContextRefreshedEvent event) {
         logger.info("Initialisiere Testdaten auf Datenbank...");
 
-        // Nutzer 1
-        User user1 = new User();
-        user1.setUsername("user1");
-        user1.setPassword(passwordEncoder.encode("1234"));
-        user1.setSales(7);
-        user1.setLevel(15);
-        userService.saveUser(user1);
-
-        // Nutzer 2
-        User user2 = new User();
-        user2.setUsername("user2");
-        user2.setPassword(passwordEncoder.encode("5678"));
-        user2.setSales(8);
-        user2.setBuys(4);
-        userService.saveUser(user2);
-
-        // Nutzer 3
-        User user3 = new User();
-        user3.setUsername("user3");
-        user3.setPassword(passwordEncoder.encode("abcd"));
-        user3.setSales(12);
-        userService.saveUser(user3);
-
-        // Nutzer 4
-        User user4 = new User();
-        user4.setUsername("user4");
-        user4.setPassword(passwordEncoder.encode("efgh"));
-        userService.saveUser(user4);
-
-        // Nutzer 5
-        User user5 = new User();
-        user5.setUsername("user5");
-        user5.setPassword(passwordEncoder.encode("ijkl"));
-        userService.saveUser(user5);
-
-        // Nutzer 6
+        // Beispielnutzer
         User hans = new User();
         hans.setUsername("Hans");
         hans.setPassword(passwordEncoder.encode("0987"));
@@ -82,6 +47,56 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
         hans.setProfileDescription("aufgewachsen in stuttgart, Sicherheitsingenieur, Naturfreund");
         hans.setProfileImage("profilbild_schafStrecktZunge.jpeg");
         userService.saveUser(hans);
+
+        // Nutzer 1
+        User user1 = new User();
+        user1.setUsername("user1");
+        user1.setPassword(passwordEncoder.encode("1234"));
+        user1.setName("erster User");
+        user1.setEmail("user1@example.com");
+        user1.setGender(Gender.OTHER);
+        user1.setSales(7);
+        user1.setLevel(15);
+        userService.saveUser(user1);
+
+        // Nutzer 2
+        User user2 = new User();
+        user2.setUsername("user2");
+        user2.setPassword(passwordEncoder.encode("5678"));
+        user1.setName("zweiter User");
+        user1.setEmail("user2@example.com");
+        user1.setGender(Gender.OTHER);
+        user2.setSales(8);
+        user2.setBuys(4);
+        userService.saveUser(user2);
+
+        // Nutzer 3
+        User user3 = new User();
+        user3.setUsername("user3");
+        user3.setPassword(passwordEncoder.encode("abcd"));
+        user1.setName("dritter User");
+        user1.setEmail("user3@example.com");
+        user1.setGender(Gender.OTHER);
+        user3.setSales(12);
+        userService.saveUser(user3);
+
+        // Nutzer 4
+        User user4 = new User();
+        user4.setUsername("user4");
+        user4.setPassword(passwordEncoder.encode("efgh"));
+        user1.setName("vierter User");
+        user1.setEmail("user4@example.com");
+        user1.setGender(Gender.OTHER);
+        userService.saveUser(user4);
+
+        // Nutzer 5
+        User user5 = new User();
+        user5.setUsername("user5");
+        user5.setPassword(passwordEncoder.encode("ijkl"));
+        user1.setName("fünfter User");
+        user1.setEmail("user5@example.com");
+        user1.setGender(Gender.OTHER);
+        userService.saveUser(user5);
 
 
         //Beispielpflanzen ***********************************************************************+
