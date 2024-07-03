@@ -78,6 +78,12 @@
                 </div>
             </div>
             <div class="form-group row">
+                <label class="col-sm-2 col-form-label" th:text="#{profile.age}">Age</label>
+                <div class="col-sm-10">
+                    <p class="form-control-plaintext" th:text="${user.age}">Age</p>
+                </div>
+            </div>
+            <div class="form-group row">
                 <label class="col-sm-2 col-form-label" th:text="#{profile.gender}">Gender</label>
                 <div class="col-sm-10">
                     <p class="form-control-plaintext" th:text="${translatedGender}">Gender</p>
