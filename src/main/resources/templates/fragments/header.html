@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>Meine Anwendung</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <th:block th:insert="~{fragments/htmlHead :: head}"></th:block>
+  <style>
+    .dropdown-menu {
+      margin-left: -100px; /* Dropdown-Menü im header so positionieren, dass es den header rechts nicht überschreitet */
+    }
+  </style>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light " style="background-color: #58845a" th:fragment="header">
@@ -37,26 +40,22 @@
     </form>
     <!-- Navigationslinks rechtsbündig -->
     <ul class="navbar-nav ml-auto">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="meinsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #ffffff">
+          Meins
+        </a>
+        <div class="dropdown-menu" aria-labelledby="meinsDropdown">
+          <a class="dropdown-item" th:href="@{/ownConversations}">Meine Nachrichten</a>
+          <a class="dropdown-item" th:href="@{/myplants}">Meine Inserate</a>
+          <a class="dropdown-item" th:href="@{/ownPurchases}">Meine Käufe</a>
+          <a class="dropdown-item" th:href="@{/profile/view}" th:text="#{profile.title}">Mein Profil</a>
+        </div>
+      </li>
       <li class="nav-item">
         <strong><a class="nav-link" style="color: #edcf8a" th:href="@{/create}">Inserat erstellen</a></strong>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" style="color: #ffffff" th:href="@{/myplants}">Meine Inserate</a>
-      </li>
-      <li class="nav-item">
-        <a th:href="@{/ownConversations}" class="nav-link" style="color: #ffffff" type="button">Meine Nachrichten</a>
-      </li>
-      <li class="nav-item">
-        <a th:href="@{/ownPurchases}" class="nav-link" style="color: #ffffff" type="button">Meine Käufe</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" th:href="@{/profile/view}">Mein Profil</a>
       </li>
     </ul>
   </div>
 </nav>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
