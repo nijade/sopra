@@ -2,8 +2,6 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <th:block th:insert="~{fragments/htmlHead :: head}"></th:block>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Suchergebnisse</title>
     <style>
     body, html {
@@ -102,7 +100,7 @@
     </style>
 </head>
 <body>
-<div th:replace="~{fragments/header :: header}"> </div>
+<div th:replace="fragments/header :: header"> </div>
 <div class="container">
     <div class = "welcome-message">
         <h2>Willkommen bei PlantBay24!</h2>
