@@ -11,6 +11,23 @@
             object-fit: cover;
             margin-right: 20px;
         }
+        .profile-completion-board {
+            display: flex;
+            align-items: center;
+            width: 400px;
+            margin-left: 20px;
+        }
+
+        .profile-completion-board .progress {
+            height: 20px;
+            width: 100%;
+            background-color: #e9ecef; /* Light gray background */
+        }
+
+        .profile-completion-board .progress-bar {
+            background-color: #007bff; /* Blue color for progress bar */
+            color: white; /* White text color for visibility */
+        }
         .xp-bar {
             width: 80%;
             margin-top: 20px;
@@ -41,10 +58,19 @@
 <div class="container mt-5">
     <div class="card">
         <div class="card-body">
-            <div class="d-flex align-items-center justify-content-start">
-                <img th:src="@{'/images/profiles/' + ${user.profileImage}}" alt="Profile Image" class="profile-image">
-                <div>
-                    <h4 class="card-title" th:text="#{profile.title}">User Profile</h4>
+            <div class="d-flex align-items-center justify-content-between">
+                <div class="d-flex align-items-center">
+                    <img th:src="@{'/images/profiles/' + ${user.profileImage}}" alt="Profile Image" class="profile-image">
+                    <div>
+                        <h4 class="card-title" th:text="#{profile.title}">User Profile</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="profile-completion-board">
+                <h5 th:text="#{profile.completion}" style="margin-right: 10px;">Profile Completion</h5>
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" th:style="'width: ' + ${profileCompletion} + '%;'"
+                         th:text="${profileCompletion} + '%'"></div>
                 </div>
             </div>
             <div class="xp-bar">

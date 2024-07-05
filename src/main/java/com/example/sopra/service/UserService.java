@@ -1,6 +1,7 @@
 package com.example.sopra.service;
 
 
+import com.example.sopra.entity.Gender;
 import com.example.sopra.entity.User;
 import com.example.sopra.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -156,6 +157,26 @@ public class UserService implements UserDetailsService {
         return users.stream()
                 .sorted(Comparator.comparingInt(User::getBuys).reversed())
                 .collect(Collectors.toList());
+    }
+
+    /**
+     * Diese Methode berechnet die Profilvollständigkeit anhand der bereits eingegebenen Daten des Nutzers.
+     * Zu beachten gilt, das username und email nicht geprüft werden, da diese Pflicht sind, dass ein neuer acc existiert.
+     *
+     * @param user der User auf den die Profilvollständigkeit geprüft wird
+     * @return die Profilvollständigkeit wird als ganze Zahl in Prozent zurückgegeben
+     */
+    public int calculateProfileCompletion(User user) {
+        int totalFields = 5;
+        int completedFields = 0;
+
+        if (user.getName() != null && !user.getName().isEmpty()) completedFields++;
+        if (user.getAge() != null) completedFields++;
+        if (user.getGender() != Gender.EMPTY) completedFields++;
+        if (user.getProfileDescription() != null && !user.getProfileDescription().isEmpty()) completedFields++;
+        if (user.getProfileImage() != null && !user.getProfileImage().equals("default.jpg")) completedFields++;
+
+        return (completedFields * 100) / totalFields;
     }
 
     public void addXp(User user, Integer xp){

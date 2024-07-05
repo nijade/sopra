@@ -28,7 +28,8 @@ public class UserProfileController {
     /**
      * Nimmt die Anfrage "/view", zur Profilansicht, entgegen und gibt die entsprechende Seite zurück. Wenn der/die
      * Benutzer*in noch nicht angemeldet ist, wird diese*r an die login-Seite geleitet. Ansonsten wird das aktuelle
-     * Benutzerobjekt und die übersetzte Geschlechtsbezeichnung dem Modell hinzugefügt und die Profilansicht angezeigt.
+     * Benutzerobjekt; die übersetzte Geschlechtsbezeichnung und die Profilvollständigkeit dem Modell hinzugefügt und
+     * die Profilansicht angezeigt.
      * @param model model, das user übergibt
      * @param locale aktuelle Lokalisierung, um die richtige Übersetzung zu laden
      * @return die zu erscheinende html-Seite, also die Profilansicht
@@ -39,10 +40,16 @@ public class UserProfileController {
         if (currentUser == null) {
             return "redirect:/login";
         }
+
         model.addAttribute("user", currentUser);
+
         String genderKey = "profile." + currentUser.getGender().name().toLowerCase();
         String gender = messageSource.getMessage(genderKey, null, locale);
         model.addAttribute("translatedGender", gender);
+
+        int profileCompletion = userService.calculateProfileCompletion(currentUser);
+        model.addAttribute("profileCompletion", profileCompletion);
+
         return "profile/view";
     }
 
