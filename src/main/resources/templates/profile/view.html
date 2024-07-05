@@ -51,6 +51,48 @@
         body, html {
             background-color: #bdd6ac;
         }
+        .xp-info-btn {
+            color: #007bff;
+            text-decoration: underline;
+            cursor: pointer;
+            margin-top: 10px;
+            display: inline-block;
+            font-size: 0.9rem;
+        }
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto; /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%; /* Could be more or less, depending on screen size */
+        }
+        .modal-body {
+            white-space: pre-line; /* Enable \n for new lines */
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -81,6 +123,7 @@
                     </div>
                 </div>
             </div>
+            <a href="#" class="xp-info-btn" th:text="#{profile.xpInfo}" onclick="showXpInfo()">How to earn XP?</a>
             <div class="form-group row mt-4">
                 <label class="col-sm-2 col-form-label" th:text="#{profile.username}">Username</label>
                 <div class="col-sm-10">
@@ -126,5 +169,40 @@
         </div>
     </div>
 </div>
+
+<!-- XP Info Modal -->
+<div class="modal" tabindex="-1" role="dialog" id="xpInfoModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" th:text="#{profile.xpInfoTitle}">How to earn XP?</h5>
+                <span class="close" onclick="hideXpInfo()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <p th:text="#{profile.xpInfoDescription}" style="white-space: pre-line;">You can earn XP by completing tasks, participating in events, and more!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function showXpInfo() {
+        var xpInfoModal = document.getElementById('xpInfoModal');
+        xpInfoModal.style.display = 'block';
+    }
+
+    function hideXpInfo() {
+        var xpInfoModal = document.getElementById('xpInfoModal');
+        xpInfoModal.style.display = 'none';
+    }
+
+    // Close the modal when the user clicks anywhere outside of it
+    window.onclick = function(event) {
+        var xpInfoModal = document.getElementById('xpInfoModal');
+        if (event.target === xpInfoModal) {
+            xpInfoModal.style.display = 'none';
+        }
+    }
+</script>
 </body>
 </html>
