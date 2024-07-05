@@ -2,10 +2,6 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <th:block th:insert="~{fragments/htmlHead :: head}"></th:block>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-          crossorigin="anonymous"/>
     <link rel="stylesheet" href="/css/styles.css">
     <title th:text="#{profile.title}">User Profile</title>
     <style>
@@ -53,9 +49,9 @@
             </div>
             <div class="xp-bar">
                 <div class="progress">
-                    <div class="progress-bar" role="progressbar"
+                    <div class="progress-bar" role="progressbar" th:with="titleKey='user.title.' + ${user.getTitle()}"
                          th:style="'width: ' + (${user.xp} / ${user.xpToNextLevel} * 100) + '%;'"
-                         th:text="${user.title} + ' - Level ' + ${user.level} + ' - ' + ${user.xp} + ' / ' + ${user.xpToNextLevel} + ' XP'">
+                         th:text="#{${titleKey}} + ' - Level ' + ${user.level} + ' - ' + ${user.xp} + ' / ' + ${user.xpToNextLevel} + ' XP'">
                     </div>
                 </div>
             </div>
