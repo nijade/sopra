@@ -1,5 +1,5 @@
 package com.example.sopra.entity;
 
 public enum Gender {
-    MALE, FEMALE, DIVERSE, OTHER
+    MALE, FEMALE, DIVERSE, OTHER, EMPTY
 }

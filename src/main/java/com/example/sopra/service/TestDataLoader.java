@@ -54,9 +54,10 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
         user1.setPassword(passwordEncoder.encode("1234"));
         user1.setName("erster User");
         user1.setEmail("user1@example.com");
-        user1.setGender(Gender.OTHER);
+        user1.setGender(Gender.EMPTY);
         user1.setSales(7);
         user1.setLevel(15);
+        user1.setProfileImage("profilbild_schafStrecktZunge.jpeg");
         userService.saveUser(user1);
 
         // Nutzer 2
@@ -65,7 +66,7 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
         user2.setPassword(passwordEncoder.encode("5678"));
         user2.setName("zweiter User");
         user2.setEmail("user2@example.com");
-        user2.setGender(Gender.OTHER);
+        user2.setGender(Gender.EMPTY);
         user2.setSales(8);
         user2.setBuys(4);
         userService.saveUser(user2);
@@ -76,7 +77,7 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
         user3.setPassword(passwordEncoder.encode("abcd"));
         user3.setName("dritter User");
         user3.setEmail("user3@example.com");
-        user3.setGender(Gender.OTHER);
+        user3.setGender(Gender.EMPTY);
         user3.setSales(12);
         userService.saveUser(user3);
 
@@ -86,7 +87,7 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
         user4.setPassword(passwordEncoder.encode("efgh"));
         user4.setName("vierter User");
         user4.setEmail("user4@example.com");
-        user4.setGender(Gender.OTHER);
+        user4.setGender(Gender.EMPTY);
         userService.saveUser(user4);
 
         // Nutzer 5
@@ -95,7 +96,7 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
         user5.setPassword(passwordEncoder.encode("ijkl"));
         user5.setName("fünfter User");
         user5.setEmail("user5@example.com");
-        user5.setGender(Gender.OTHER);
+        user5.setGender(Gender.EMPTY);
         userService.saveUser(user5);
 
 
