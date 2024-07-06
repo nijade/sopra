@@ -69,13 +69,14 @@ public class QuizController {
         model.addAttribute("questionThreeResult", questionThreeResult);
         model.addAttribute("chosenQuiz", chosenQuiz);
 
-        int rightAnswers = 0;
-        if(questionOneResult){rightAnswers++;}
-        if(questionTwoResult){rightAnswers++;}
-        if(questionThreeResult){rightAnswers++;}
+        if(userService.getCurrentUser() != null){
+            int rightAnswers = 0;
+            if(questionOneResult){rightAnswers++;}
+            if(questionTwoResult){rightAnswers++;}
+            if(questionThreeResult){rightAnswers++;}
 
-        userService.addXp(userService.getCurrentUser(), rightAnswers * 20);
-
+            userService.addXp(userService.getCurrentUser(), rightAnswers * 20);
+        }
 
         return "quizResults";
     }
