@@ -50,51 +50,57 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
 
         // Nutzer 1
         User user1 = new User();
-        user1.setUsername("user1");
+        user1.setUsername("AnnaGrün");
         user1.setPassword(passwordEncoder.encode("1234"));
-        user1.setName("erster User");
+        user1.setName("Anna Müller");
         user1.setEmail("user1@example.com");
         user1.setGender(Gender.EMPTY);
         user1.setSales(7);
         user1.setLevel(15);
-        user1.setProfileImage("profilbild_schafStrecktZunge.jpeg");
+        user1.setProfileImage("pb1.jpg");
         userService.saveUser(user1);
 
         // Nutzer 2
         User user2 = new User();
-        user2.setUsername("user2");
+        user2.setUsername("Paul86");
         user2.setPassword(passwordEncoder.encode("5678"));
-        user2.setName("zweiter User");
+        user2.setName("Paul K.");
         user2.setEmail("user2@example.com");
         user2.setGender(Gender.EMPTY);
         user2.setSales(8);
         user2.setBuys(4);
+        user2.setLevel(10);
         userService.saveUser(user2);
 
         // Nutzer 3
         User user3 = new User();
-        user3.setUsername("user3");
+        user3.setUsername("GrünerDaumen123");
         user3.setPassword(passwordEncoder.encode("abcd"));
-        user3.setName("dritter User");
+        user3.setName("Tom");
         user3.setEmail("user3@example.com");
         user3.setGender(Gender.EMPTY);
         user3.setSales(12);
+        user3.setLevel(33);
+        user3.setProfileImage("pb2.jpg");
         userService.saveUser(user3);
 
         // Nutzer 4
         User user4 = new User();
-        user4.setUsername("user4");
+        user4.setUsername("FelixDerFlorist");
         user4.setPassword(passwordEncoder.encode("efgh"));
-        user4.setName("vierter User");
+        user4.setName("Felix Felicis");
         user4.setEmail("user4@example.com");
         user4.setGender(Gender.EMPTY);
+        user4.setSales(1);
+        user4.setBuys(2);
+        user4.setLevel(5);
         userService.saveUser(user4);
 
         // Nutzer 5
         User user5 = new User();
-        user5.setUsername("user5");
+        user5.setUsername("Someone");
         user5.setPassword(passwordEncoder.encode("ijkl"));
-        user5.setName("fünfter User");
+        user5.setName("A. L.");
         user5.setEmail("user5@example.com");
         user5.setGender(Gender.EMPTY);
         userService.saveUser(user5);
