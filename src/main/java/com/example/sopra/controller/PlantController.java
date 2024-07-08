@@ -50,7 +50,7 @@ public class PlantController {
     @GetMapping("/searchPlants")
     public String searchResults(@RequestParam String title,String category, Model model) {
         List<Plant> plants;
-        String chosenSorting = "Am relevantesten";
+        String selectedOption = "Am relevantesten";
         String alternativeSortingOne = "Günstigste Zuerst";
         String alternativeSortingTwo = "Teuerste Zuerst";
         if(category.equals("Alle Kategorien")){
@@ -58,7 +58,8 @@ public class PlantController {
         }else{
             plants = plantService.searchPlantsByTitleContainingIgnoreCaseSpecificCategory(title, category);
         }
-        model.addAttribute("chosenSorting", chosenSorting);
+
+        model.addAttribute("selectOption", selectedOption);
         model.addAttribute("alternativeSortingOne",alternativeSortingOne);
         model.addAttribute("alternativeSortingTwo",alternativeSortingTwo);
         model.addAttribute("plants", plants);
@@ -111,10 +112,10 @@ public class PlantController {
 
         if(category.equals("Alle Kategorien")){
             //Alle Kategorien
-            if(selectedOption.equals("noSorting")){
+            if(selectedOption.equals("Am relevantesten")){
                 //Pflanzen ohne Sortierung - Alle Kategorien
                 plants = plantService.searchPlantsByTitleContainingIgnoreCaseAdditionalFilters(title, priceMinQueryReady, priceMaxQueryReady, heightMinQueryReady, heightMaxQueryReady, circumferenceMinQueryReady, circumferenceMaxQueryReady);
-            }else if(selectedOption.equals("priceASC")){
+            }else if(selectedOption.equals("Guenstigste Zuerst")){
                 //Pflanzen nach aufsteigendem Preis sortieren - Alle Kategorien
                 plants = plantService.searchPlantsByTitleContainingIgnoreCaseAdditionalFiltersPriceASC(title, priceMinQueryReady, priceMaxQueryReady, heightMinQueryReady, heightMaxQueryReady, circumferenceMinQueryReady, circumferenceMaxQueryReady);
             }else{
@@ -123,10 +124,10 @@ public class PlantController {
             }
             // alle anderen Kategorien
         } else {
-            if(selectedOption.equals("noSorting")){
+            if(selectedOption.equals("Am relevantesten")){
                 //Pflanzen ohne Sortierung - Spezifische Kategorie
                 plants = plantService.searchPlantsByTitleContainingIgnoreCaseSpecificCategoryAdditionalFiltersSpecificCategory(title, category, priceMinQueryReady, priceMaxQueryReady, heightMinQueryReady, heightMaxQueryReady, circumferenceMinQueryReady, circumferenceMaxQueryReady);
-            }else if(selectedOption.equals("priceASC")){
+            }else if(selectedOption.equals("Guenstigste Zuerst")){
                 //Pflanzen nach aufsteigendem Preis sortieren(günstigste zuerst) - Spezifische Kategorie
                 plants = plantService.searchPlantsByTitleContainingIgnoreCaseAdditionalFiltersSpecificCategoryPriceASC(title, category, priceMinQueryReady, priceMaxQueryReady, heightMinQueryReady, heightMaxQueryReady, circumferenceMinQueryReady, circumferenceMaxQueryReady);
             }else{

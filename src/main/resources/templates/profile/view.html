@@ -48,6 +48,14 @@
             background-color: #218838; /* Slightly darker green on hover */
             border-color: #1e7e34;
         }
+        .logout-btn {
+            background-color: #dc3545; /* Red background for button */
+            border-color: #dc3545;
+        }
+        .logout-btn:hover {
+            background-color: #c82333; /* Slightly darker red on hover */
+            border-color: #bd2130;
+        }
         body, html {
             background-color: #bdd6ac;
         }
@@ -162,9 +170,7 @@
             </div>
             <div class="btn-group">
                 <a href="/profile/edit" class="btn edit-profile-btn mr-2" th:text="#{profile.editButton}">Edit Profile</a>
-                <form th:action="@{/logout}" method="POST" style="display:inline;">
-                    <button type="submit" class="btn btn-secondary" th:text="#{profile.logoutButton}">Logout</button>
-                </form>
+                <a href="/logout" class="btn logout-btn mr-2" th:text="#{profile.logoutButton}">Logout</a>
             </div>
         </div>
     </div>

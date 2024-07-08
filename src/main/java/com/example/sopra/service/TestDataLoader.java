@@ -133,7 +133,7 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
         tulip.setDescription("Eine bunte Tulpe, ideal für den Frühlingsgarten.");
         tulip.setPotCircumference(0.0);
         tulip.setPlantCircumference(10.0);
-        tulip.setTags(Arrays.asList("Blume", "Fruehling", "Garten"));
+        tulip.setTags(Arrays.asList("Sommerblumen", "Blume", "Fruehling", "Garten"));
         tulip.setSeller(user2);
         plantService.savePlant(tulip);
 

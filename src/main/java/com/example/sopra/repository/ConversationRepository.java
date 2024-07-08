@@ -15,4 +15,6 @@ public interface ConversationRepository extends JpaRepository<Conversation, Inte
     public List<Conversation> findAllByPlantSellerUserId(Integer id);
 
     public Conversation findConversationByPlantAndBuyer(Plant plant, User buyer);
+
+    public List<Conversation> findConversationByPlant(Plant plant);
 }

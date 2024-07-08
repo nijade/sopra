@@ -1,6 +1,8 @@
 package com.example.sopra.service;
+import com.example.sopra.entity.Conversation;
 import com.example.sopra.entity.Plant;
 import com.example.sopra.entity.User;
+import com.example.sopra.repository.ConversationRepository;
 import com.example.sopra.repository.PlantRepository;
 import com.example.sopra.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,9 @@ public class PlantService {
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    ConversationRepository conversationRepository;
 
     @Autowired
     UserService userService;
@@ -113,6 +118,10 @@ public class PlantService {
         if (plant != null && userService.getCurrentUser().getUserId().equals(plant.getSeller().getUserId())) {
             try {
                 removePlantFromAllFaves(id);
+                List<Conversation> conversationsAboutPlant = conversationRepository.findConversationByPlant(plant);
+                for(Conversation conversation : conversationsAboutPlant){
+                    conversationRepository.delete(conversation);
+                }
                 plantRepository.deleteById(id);
                 model.addAttribute("successMessage","Das Inserat wurde erfolgreich gelöscht!");
                 return "success";
