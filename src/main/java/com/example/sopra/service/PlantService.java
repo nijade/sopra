@@ -112,6 +112,7 @@ public class PlantService {
         //Überprüfung ob Nutzer berechtigt ist, um die Pflanze zu löschen
         if (plant != null && userService.getCurrentUser().getUserId().equals(plant.getSeller().getUserId())) {
             try {
+                removePlantFromAllFaves(id);
                 plantRepository.deleteById(id);
                 model.addAttribute("successMessage","Das Inserat wurde erfolgreich gelöscht!");
                 return "success";
@@ -122,6 +123,22 @@ public class PlantService {
         }
         model.addAttribute("errorMessage", "Das Inserat existiert nicht oder wurde nicht von Ihnen erstellt!");
         return "errorCustom";
+    }
+
+    /**
+     * Entfernt eine Pflanze aus allen Merklisten.
+     *
+     * @param plantId die ID der Pflanze
+     */
+    protected void removePlantFromAllFaves(int plantId) {
+        List<User> users = userRepository.findAll();
+        Plant plant = findPlantByID(plantId);
+        for (User user : users) {
+            if (user.getFaves().contains(plant)) {
+                user.getFaves().remove(plant);
+                userRepository.save(user);
+            }
+        }
     }
 
 
