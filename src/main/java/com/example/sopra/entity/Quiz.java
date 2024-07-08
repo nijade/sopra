@@ -5,10 +5,14 @@ import jakarta.persistence.*;
 
 import java.util.List;
 
+import org.springframework.data.annotation.Id;
+
+
 @Entity
-@Table(name = "Quiz")
+@Table(name = "QUIZ")
 public class Quiz {
 
+    @jakarta.persistence.Id
     @Id
     @GeneratedValue
     private Integer quizID;
@@ -36,6 +40,15 @@ public class Quiz {
     private String rightAnswersQuestionThree;
     private List<String> possibleAnswersQuestionThree;
 
+
+
+    public void setQuizID(Integer quizID) {
+        this.quizID = quizID;
+    }
+
+    public Integer getQuizID(){return quizID;}
+
+
     public void setIsChosen(boolean chosen){
         this.isChosen = chosen;
 
@@ -45,12 +58,6 @@ public class Quiz {
         return isChosen;
 
     }
-
-    public void setQuizID(Integer quizID) {
-        this.quizID = quizID;
-    }
-
-    public Integer getQuizID(){return quizID;}
 
     // Getter und Setter für questionOne
     public String getQuestionOne() {
