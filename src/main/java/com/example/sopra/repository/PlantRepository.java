@@ -26,8 +26,14 @@ public interface PlantRepository extends JpaRepository<Plant, Integer> {
     @Query("SELECT p FROM Plant p")
     List<Plant> findAll();
 
+    @Query("SELECT p FROM Plant p WHERE p.plantID IN :plantIds")
+    List<Plant> findAllByIdIn(@Param("plantIds") List<Integer> plantIds);
+
     @Query("SELECT p FROM Plant p WHERE p.seller = :currentUser")
     List<Plant> findPlantsByUser(@Param("currentUser") User user);
+
+    @Query("SELECT p FROM Plant p WHERE p.plantID IN :favePlantIds")
+    List<Plant> findAllByFavePlantIds(@Param("favePlantIds") List<Integer> favePlantIds);
 
     @Query("SELECT p FROM Plant p WHERE UPPER(p.title) LIKE UPPER(CONCAT('%', :title, '%'))" +
             " AND (:priceMin IS NULL OR p.price >= :priceMin)" +

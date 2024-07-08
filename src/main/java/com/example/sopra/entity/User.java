@@ -7,6 +7,7 @@ import org.springframework.data.annotation.Id;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.ManyToMany;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -49,6 +50,14 @@ public class User {
 
     @ElementCollection
     private List<Integer> reviews;
+
+    @ManyToMany
+    @JoinTable(
+            name = "faves",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "plant_id")
+    )
+    private List<Plant> faves = new ArrayList<>(); //List filled with plantIDs'
 
 
     public User() {
@@ -194,4 +203,30 @@ public class User {
     public int getLevel() { return level;}
 
     public void setLevel(int level) { this.level = level;}
+
+    public List<Plant> getFaves() {
+        return faves;
+    }
+
+    public void setFaves(List<Plant> faves) {
+        this.faves = faves;
+    }
+
+    public void addToFavorites(Plant plant) {
+        this.faves.add(plant);
+        plant.getFavoritedBy().add(this);
+    }
+
+    public void removeFromFavorites(Plant plant) {
+        this.faves.remove(plant);
+        plant.getFavoritedBy().remove(this);
+    }
+
+    public List<Plant> getFavoritePlants() {
+        return faves;
+    }
+
+    public void setFavoritePlants(List<Plant> favoritePlants) {
+        this.faves = favoritePlants;
+    }
 }

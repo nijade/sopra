@@ -60,6 +60,15 @@
       <p><strong>Beschreibung:</strong> <span th:text="${plant.description}"></span></p>
       <p><strong>Tags:</strong> <span th:text="${plant.getTagsAsString()}"></span></p>
       <a th:href="@{/conversation(plantId=${plant.plantID})}" class="btn btn-primary" id="startConversationButton" >Nachricht schreiben</a>
+
+      <form th:if="${!isOnFavesList}" th:action="@{/addToFaves/{id}(id=${plant.plantID})}" method="post">
+        <button type="submit" class="btn btn-success">Zur Merkliste hinzufügen</button>
+      </form>
+
+      <form th:if="${isOnFavesList}" th:action="@{/removeFromFaves/{id}(id=${plant.plantID})}" method="post">
+        <button type="submit" class="btn btn-danger">Von Merkliste entfernen</button>
+      </form>
+
     </div>
   </div>
 </div>

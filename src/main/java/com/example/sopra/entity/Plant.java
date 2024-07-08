@@ -2,6 +2,7 @@ package com.example.sopra.entity;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -38,6 +39,9 @@ public class Plant {
 
     @ManyToOne
     private User buyerFinal;
+
+    @ManyToMany(mappedBy = "faves")
+    private List<User> favoritedBy = new ArrayList<>();
 
     public Plant(){
         // empty constructor for Hibernate
@@ -145,5 +149,13 @@ public class Plant {
 
     public void setBuyerFinal(User buyerFinal) {
         this.buyerFinal = buyerFinal;
+    }
+
+    public List<User> getFavoritedBy() {
+        return favoritedBy;
+    }
+
+    public void setFavoritedBy(List<User> favoritedBy) {
+        this.favoritedBy = favoritedBy;
     }
 }

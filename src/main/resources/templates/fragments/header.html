@@ -6,38 +6,52 @@
     .dropdown-menu {
       margin-left: -100px; /* Dropdown-Menü im header so positionieren, dass es den header rechts nicht überschreitet */
     }
+    .navbar-nav .nav-item a.nav-link {
+      padding: 10px 15px; /* Gleiche Höhe für beide Links */
+    }
+    .form-inline .form-control, .form-inline .custom-select, .form-inline .btn {
+      margin-right: 5px; /* Abstand zwischen den Elementen im Formular */
+    }
+    .navbar-nav {
+      align-items: center; /* Zentriere die Navigationselemente */
+    }
   </style>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light " style="background-color: #58845a" th:fragment="header">
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #58845a" th:fragment="header">
   <a class="navbar-brand" style="color: #edcf8a; font-family: Futura" th:href="@{/}">PlantBay24</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
     <!-- Suchleiste linksbündig -->
-    <form class="form-inline mr-auto" action="/searchPlants" method="get">
-      <input class="form-control mr-sm-2" type="text" name="title" placeholder="Suchen in..." aria-label="Search" th:value="${searchTerm}">
-      <select class="custom-select mr-sm-2" name="category">
+    <form class="form-inline mr-2" action="/searchPlants" method="get">
+      <input class="form-control" type="text" name="title" placeholder="Suchen in..." aria-label="Search" th:value="${searchTerm}">
+      <select class="custom-select" name="category">
         <option value="Alle Kategorien" th:selected="${category == 'Alle Kategorien'}">Alle Kategorien</option>
         <option value="Balkonblumen" th:selected="${category == 'Balkonblumen'}">Balkonblumen</option>
         <option value="Heilpflanzen" th:selected="${category == 'Heilpflanzen'}">Heilpflanzen</option>
         <option value="Wildpflanzen" th:selected="${category == 'Wildpflanzen'}">Wildpflanzen</option>
-        <option value="Bäume und Sträucher" th:selected="${category == 'Bäume und Sträucher'}">Bäume und Sträucher</option>
+        <option value="Baeume und Straeucher" th:selected="${category == 'Baeume und Straeucher'}">Bäume und Sträucher</option>
         <option value="Kletterpflanzen" th:selected="${category == 'Kletterpflanzen'}">Kletterpflanzen</option>
-        <option value="Kübelpflanzen" th:selected="${category == 'Kübelpflanzen'}">Kübelpflanzen</option>
+        <option value="Kuebelpflanzen" th:selected="${category == 'Kuebelpflanzen'}">Kübelpflanzen</option>
         <option value="Rosen" th:selected="${category == 'Rosen'}">Rosen</option>
         <option value="Sommerblumen" th:selected="${category == 'Sommerblumen'}">Sommerblumen</option>
         <option value="Stauden" th:selected="${category == 'Stauden'}">Stauden</option>
         <option value="Wasserpflanzen" th:selected="${category == 'Wasserpflanzen'}">Wasserpflanzen</option>
         <option value="Zimmerpflanzen" th:selected="${category == 'Zimmerpflanzen'}">Zimmerpflanzen</option>
         <option value="Zwiebel- und Knollenpflanzen" th:selected="${category == 'Zwiebel- und Knollenpflanzen'}">Zwiebel- und Knollenpflanzen</option>
-        <option value="Gemüse" th:selected="${category == 'Gemüse'}">Gemuese</option>
+        <option value="Gemuese" th:selected="${category == 'Gemuese'}">Gemuese</option>
         <option value="Obst" th:selected="${category == 'Obst'}">Obst</option>
         <!-- Weitere Optionen nach Bedarf -->
       </select>
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit" style="background-color: #ffffff">Suchen</button>
+      <button class="btn btn-outline-success" type="submit" style="background-color: #ffffff">Suchen</button>
     </form>
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <strong><a class="nav-link" style="color: #edcf8a" th:href="@{/myFaves}" th:text="#{faves.title}">Merkliste</a></strong>
+      </li>
+    </ul>
     <!-- Navigationslinks rechtsbündig -->
     <ul class="navbar-nav ml-auto">
       <li class="nav-item dropdown">

@@ -5,6 +5,7 @@ import com.example.sopra.repository.PlantRepository;
 import com.example.sopra.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import java.util.Arrays;
 import java.util.List;
@@ -21,14 +22,17 @@ public class PlantService {
     UserRepository userRepository;
 
     @Autowired
-    PlantRepository plantRepository;
-
-    @Autowired
     UserService userService;
 
     @Autowired
     ImageService imageService;
 
+    private final PlantRepository plantRepository;
+
+    @Autowired
+    public PlantService(PlantRepository plantRepository) {
+        this.plantRepository = plantRepository;
+    }
 
     /**
      * Erstellt ein neues Pflanzeninserat.
@@ -85,6 +89,17 @@ public class PlantService {
     }
 
     /**
+     * Findet Pflanzen anhand ihrer IDs.
+     *
+     * @param plantIds die IDs der gesuchten Pflanzen
+     * @return List<Plant> die Liste aller gesuchten Pflanzen
+     */
+    @Transactional
+    public List<Plant> getPlantsByIds(List<Integer> plantIds) {
+        return plantRepository.findAllByIdIn(plantIds);
+    }
+
+    /**
      * Löscht ein Pflanzeninserat.
      *
      * @param id    die ID des Inserats
@@ -130,6 +145,11 @@ public class PlantService {
 
     }
 
+    @Transactional
+    public List<Plant> findAllByFavePlantIds(List<Integer> favePlantIds) {
+        return plantRepository.findAllById(favePlantIds);
+    }
+
     /**
      * Findet alle Pflanzeninserate eines Benutzers.
      *
@@ -138,6 +158,7 @@ public class PlantService {
     public List<Plant> findPlantsByUser(){
         return plantRepository.findPlantsByUser(userService.getCurrentUser());
     }
+
 
     /**
      * Aktualisiert ein bestehendes Pflanzeninserat.
@@ -234,6 +255,11 @@ public class PlantService {
             return "errorCustom";
         }
         model.addAttribute("plant", plant);
+
+        User currentUser = userService.getCurrentUser();
+        boolean isOnFavesList = currentUser.getFaves().contains(plant);
+        model.addAttribute("isOnFavesList", isOnFavesList);
+
         List<String> photos =imageService.getImageNames();
         model.addAttribute("photos", photos);
 

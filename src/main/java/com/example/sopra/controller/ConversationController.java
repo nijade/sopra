@@ -24,12 +24,15 @@ public class ConversationController {
     @Autowired
     private ConversationService conversationService;
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
 
     @Autowired
     private PlantService plantService;
 
+    @Autowired
+    public ConversationController(UserService userService) {
+        this.userService = userService;
+    }
 
     /**
      * Zeigt eine spezifische Konversation zugehörig zum User und überprüft, das User keine

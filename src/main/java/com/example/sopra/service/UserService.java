@@ -2,9 +2,12 @@ package com.example.sopra.service;
 
 
 import com.example.sopra.entity.Gender;
+import com.example.sopra.entity.Plant;
 import com.example.sopra.entity.User;
+import com.example.sopra.repository.PlantRepository;
 import com.example.sopra.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.core.GrantedAuthority;
 
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -15,18 +18,86 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
 @Service
 public class UserService implements UserDetailsService {
 
+    private final UserRepository userRepository;
+    private final PlantService plantService;
+
     @Autowired
-    private UserRepository userRepository;
+    private PlantRepository plantRepository;
+
+    /**
+     * Konstruktor, der das Abhängigkeitsproblem löst, damit Spring die Merkliste verarbeiten kann.
+     *
+     * @param userRepository das repository zu Nutzer
+     * @param plantService den Service für plants, wird mit @Lazy verzögert damit Abhängigkeit richtig laden kann
+     */
+    @Autowired
+    public UserService(UserRepository userRepository, @Lazy PlantService plantService) {
+        this.userRepository = userRepository;
+        this.plantService = plantService;
+    }
+
+    /**
+     * Gibt die Pflanzen in der Merkliste des übergebenen Users zurück und wirft exception falls user nicht gefunden wird.
+     *
+     * @param userId User, von dem die Merkliste abgefragt wird
+     * @return verlinkt zu PlantService, der Logik enthält
+     */
+    @Transactional
+    public List<Plant> getFavoritePlants(Integer userId) {
+        User user = userRepository.findById(userId).orElse(null);
+        if (user == null) {
+            throw new IllegalArgumentException("User with id " + userId + " not found.");
+        }
+        List<Integer> favePlantIds = user.getFaves().stream().map(Plant::getPlantID).collect(Collectors.toList());
+        return plantService.findAllByFavePlantIds(favePlantIds);
+    }
+
+    /**
+     * Fügt eine Pflanze in die Merkliste eines Nutzers.
+     *
+     * @param userId User, zu dessen Merkliste etwas hinzugefügt wird
+     * @param plantId Pflanze, die zur Merkliste hinzugefügt wird
+     */
+    @Transactional
+    public void addToFavorites(Integer userId, Integer plantId) {
+        User user = userRepository.findByUserId(userId);
+        if (user != null) {
+            Plant plant = plantService.findPlantByID(plantId); // Annahme: Methode findPlantById im PlantService vorhanden
+            if (plant != null) {
+                user.addToFavorites(plant);
+                userRepository.save(user);
+            } else {
+                throw new IllegalArgumentException("Plant with id " + plantId + " not found.");
+            }
+        } else {
+            throw new IllegalArgumentException("User with id " + userId + " not found.");
+        }
+    }
+
+    /**
+     * Entfernt eine Pflanze von der Merkliste eines Nutzers.
+     *
+     * @param userId User, von dessen Merkliste etwas entfernt wird
+     * @param plantId Pflanze, die von der Merkliste entfernt wird
+     */
+    @Transactional
+    public void removeFromFavorites(Integer userId, Integer plantId) {
+        User user = userRepository.findByUserId(userId);
+        if (user != null) {
+            Optional<Plant> plant = user.getFavoritePlants().stream().filter(p -> p.getPlantID().equals(plantId)).findFirst();
+            plant.ifPresent(user::removeFromFavorites);
+            userRepository.save(user);
+        } else {
+            throw new IllegalArgumentException("User with id " + userId + " not found.");
+        }
+    }
 
     /**
      * Fügt einen Benutzer zur Datenbank hinzu. (Entwickler-Option)
