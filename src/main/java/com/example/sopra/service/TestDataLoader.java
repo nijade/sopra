@@ -317,7 +317,7 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
         careInstructionService.save(wildPlantInstruction);
 
         CareInstruction treeAndShrubInstruction = new CareInstruction();
-        treeAndShrubInstruction.setTagTitle("Bäume und Sträucher");
+        treeAndShrubInstruction.setTagTitle("Baeume und Straeucher");
         treeAndShrubInstruction.setWater("In den ersten Jahren nach der Pflanzung regelmäßig gießen, später nur bei langer Trockenheit.");
         treeAndShrubInstruction.setFertilize("Im Frühjahr mit einem organischen Langzeitdünger düngen.");
         treeAndShrubInstruction.setLocation("Ein Standort mit ausreichend Platz und Licht ist wichtig für ein gesundes Wachstum.");
@@ -331,14 +331,14 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
         careInstructionService.save(climbingPlantInstruction);
 
         CareInstruction herbInstruction = new CareInstruction();
-        herbInstruction.setTagTitle("Kräuter");
+        herbInstruction.setTagTitle("Kraeuter");
         herbInstruction.setWater("Kräuter regelmäßig gießen, aber Staunässe vermeiden, die Erde sollte gut durchlässig sein.");
         herbInstruction.setFertilize("Während der Wachstumsperiode alle vier bis sechs Wochen leicht düngen.");
         herbInstruction.setLocation("Ein sonniger bis halbschattiger Platz fördert das Aroma und das Wachstum.");
         careInstructionService.save(herbInstruction);
 
         CareInstruction containerPlantInstruction = new CareInstruction();
-        containerPlantInstruction.setTagTitle("Kübelpflanzen");
+        containerPlantInstruction.setTagTitle("Kuebelpflanzen");
         containerPlantInstruction.setWater("Kübelpflanzen regelmäßig gießen, besonders im Sommer, die Erde sollte gleichmäßig feucht bleiben.");
         containerPlantInstruction.setFertilize("Wöchentlich mit einem flüssigen Kübelpflanzendünger versorgen.");
         containerPlantInstruction.setLocation("Ein heller Standort, der den Bedürfnissen der spezifischen Pflanze entspricht, ist ideal.");
@@ -366,7 +366,7 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
         careInstructionService.save(waterPlantInstruction);
 
         CareInstruction ornamentalGrasInstruction = new CareInstruction();
-        ornamentalGrasInstruction.setTagTitle("Ziergräser");
+        ornamentalGrasInstruction.setTagTitle("Ziergraeser");
         ornamentalGrasInstruction.setWater("Ziergräser regelmäßig gießen, besonders in Trockenperioden.");
         ornamentalGrasInstruction.setFertilize("Im Frühjahr mit einem Langzeitdünger versorgen.");
         ornamentalGrasInstruction.setLocation("Ein sonniger bis halbschattiger Standort fördert das Wachstum und die Farbentwicklung.");
@@ -387,7 +387,7 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
         careInstructionService.save(onionPlantInstruction);
 
         CareInstruction vegetablesInstruction = new CareInstruction();
-        vegetablesInstruction.setTagTitle("Gemüse");
+        vegetablesInstruction.setTagTitle("Gemuese");
         vegetablesInstruction.setWater("Gemüse regelmäßig gießen, die Erde sollte stets gleichmäßig feucht bleiben.");
         vegetablesInstruction.setFertilize("Alle zwei Wochen mit einem Gemüsedünger düngen, um das Wachstum zu unterstützen.");
         vegetablesInstruction.setLocation("Ein sonniger Platz mit gut durchlässigem Boden ist ideal.");
