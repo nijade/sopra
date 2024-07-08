@@ -24,8 +24,8 @@ public class Scheduler {
     private QuizService quizService;
 
 
-    @Scheduled(fixedRate = 120000)   // Setting for testing
-    //@Scheduled(cron = "0 0 0 * * MON") // Setting for deployment
+    // @Scheduled(fixedRate = 120000)   // Setting for testing
+    @Scheduled(cron = "0 0 0 * * MON") // Setting for deployment
     public void scheduledQuiz(){
         List<Quiz> quizzes = quizService.findAll();
 
