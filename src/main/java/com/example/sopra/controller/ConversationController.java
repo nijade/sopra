@@ -13,7 +13,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Conversation-Klasse zur Festlegung der Conversation-Funktionalität und
@@ -88,8 +90,17 @@ public class ConversationController {
     @GetMapping("/ownConversations")
     public String showOwnConversations(Model model) {
         User currentUser = userService.getCurrentUser();
-        List<Conversation> conservationsOfUser = conversationService.getAllConversationsOfUser(currentUser);
-        model.addAttribute("conversations", conservationsOfUser);
+        List<Conversation> conversationsOfUser = conversationService.getAllConversationsOfUser(currentUser);
+
+        // Retrieve the last message for each conversation
+        Map<Integer, Message> lastMessages = new HashMap<>();
+        for (Conversation conversation : conversationsOfUser) {
+            Message lastMessage = conversationService.getLastMessage(conversation.getConversationId());
+            lastMessages.put(conversation.getConversationId(), lastMessage);
+        }
+
+        model.addAttribute("conversations", conversationsOfUser);
+        model.addAttribute("lastMessages", lastMessages);
         return "ownConversations";
     }
 
@@ -118,6 +129,4 @@ public class ConversationController {
         model.addAttribute("messageSent", messageSent);
         return "conversation";
     }
-
-
 }

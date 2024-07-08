@@ -130,4 +130,10 @@ public class ConversationService {
         plantService.removePlantFromAllFaves(plantToSell.getPlantID());
     }
 
+    public Message getLastMessage(Integer conversationId) {
+        Conversation conversation = conversationRepository.findConversationById(conversationId);
+        List<Message> messages = conversation.getMessageList();
+        return messages.isEmpty() ? null : messages.get(messages.size() - 1);
+    }
+
 }

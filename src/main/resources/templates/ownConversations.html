@@ -4,72 +4,42 @@
     <th:block th:insert="~{fragments/htmlHead :: head}"></th:block>
     <title>Nachrichtenanzeige</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
+        body, html {
+            height: 100%;
             margin: 0;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
+            font-family: Arial, sans-serif;
             background-color: #F3F3FB;
         }
-
         .container {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            position: relative;
-            margin-top: 20px; /* Add margin-top to create space from the navbar */
+            padding: 20px;
         }
-
-        .container {
-            position: relative;
-            height: 100vh;
-            width: 100vw;
-        }
-
-        .container::after {
-            content: '';
-            position: absolute;
-            left: 33.33%;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background-color: black;
-        }
-
-        .col-8 {
-            position: absolute;
-            left: 34%;
-            width: 66%;
-        }
-
         .card {
+            position: relative;
+            border: 1px solid #ddd;
             background-color: white;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
         }
-
         .card-body {
             display: flex;
-            flex-direction: column;
-            padding: 15px;
+            justify-content: space-between;
+            align-items: center;
         }
-
         .clickable {
             display: block;
             text-decoration: none;
             color: inherit;
         }
-
         .clickable:hover, .clickable:focus, .clickable:active {
             text-decoration: none;
         }
-
-        .clickable .card-body p {
-            margin: 0;
-            color: black; /* Ensures the text is black and not styled as a link */
-        }
-
-        .clickable .card-body p:hover {
-            text-decoration: none; /* Ensures no underline on hover */
+        .message-preview {
+            max-width: 50%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin-left: 20px;
         }
     </style>
 </head>
@@ -77,19 +47,23 @@
 <div th:replace="fragments/header :: header"></div>
 
 <div class="container">
-    <div class="col-4"></div>
-    <div class="col-8">
-        <div th:each="conversation : ${conversations}">
-            <a class="clickable" th:href="@{/showConversation(conversationId=${conversation.getConversationId()})}">
-                <div class="card">
-                    <div class="card-body">
+    <h2>Nachrichtenanzeige</h2>
+    <div th:if="${conversations.size() == 0}">
+        <p>Es gibt keine Nachrichten</p>
+    </div>
+    <div th:each="conversation : ${conversations}">
+        <a class="clickable" th:href="@{/showConversation(conversationId=${conversation.getConversationId()})}">
+            <div class="card">
+                <div class="card-body">
+                    <div>
                         <p th:text="'Pflanze: ' + ${conversation.getPlant().getTitle()}"></p>
                         <p th:text="'Käufer: ' + ${conversation.getBuyer().getUsername()}"></p>
                         <p th:text="'Verkäufer: ' + ${conversation.getPlant().getSeller().getUsername()}"></p>
                     </div>
+                    <div class="message-preview" th:text="${lastMessages[conversation.getConversationId()]?.content ?: 'Keine Nachrichten'}"></div>
                 </div>
-            </a>
-        </div>
+            </div>
+        </a>
     </div>
 </div>
 </body>
