@@ -16,10 +16,9 @@
       margin-top: 60px; /* Adjust this value if navbar height changes */
     }
     .filter-container {
-
       width: 20%;
       position: relative;
-      top:90px;
+      top: 90px;
       padding: 20px;
       background-color: #f4f4f4;
       border-right: 1px solid #ddd;
@@ -91,8 +90,6 @@
       background-color: #0056b3;
     }
     .container {
-
-
       padding: 20px;
       position: relative;
       top: -40px;
@@ -100,10 +97,8 @@
       overflow-y: auto; /* Allow container to scroll */
     }
     .header-container {
-
       display: flex;
       position: relative;
-
       left: -20px;
       padding: 20px;
       justify-content: space-between;
@@ -193,8 +188,8 @@
       gap: 1px;
       margin-bottom: 10px;
     }
-    .form-sub-group{
-    width: 120px;
+    .form-sub-group {
+      width: 120px;
     }
     .form-control {
       width: calc(50% - 10px); /* Adjusted width for two inputs */
@@ -220,10 +215,10 @@
       <div class="sort-container">
         <p>Sortieren nach:</p>
         <div class="select-container">
-          <select id="selectOption" name="selectedOption">
-            <option value="noSorting">Keine Sortierung</option>
-            <option value="priceASC">Günstigste Zuerst</option>
-            <option value="priceDSC">Teuerste Zuerst</option>
+          <select id="selectOption" name="selectedOption" th:value="${selectOption}">
+            <option value="noSorting" th:selected="${selectOption == 'noSorting'}">Keine Sortierung</option>
+            <option value="priceASC" th:selected="${selectOption == 'priceASC'}">Günstigste Zuerst</option>
+            <option value="priceDSC" th:selected="${selectOption == 'priceDSC'}">Teuerste Zuerst</option>
           </select>
         </div>
       </div>
@@ -234,33 +229,31 @@
       <div class="form-group">
         <div class="form-sub-group">
           <label for="priceMin" class="form-label">Preis von</label>
-          <input type="number" class="form-control" id="priceMin" name="priceMin" min="0" max="100" value="0" placeholder="Min">
+          <input type="number" class="form-control" id="priceMin" name="priceMin" min="0" max="2147483647" th:value="${priceMinimum != null ? priceMinimum : 0}" placeholder="Min">
         </div>
-        <div class="form-sub-group">
+        <div class="form-sub-group" th:if="${priceMaximum != 2147483647}">
           <label for="priceMax" class="form-label">Preis bis</label>
-          <input type="number" class="form-control" id="priceMax" name="priceMax" min="0" max="100" placeholder="Max">
+          <input type="number" class="form-control" id="priceMax" name="priceMax" min="0" max="2147483647" th:value="${priceMaximum}" placeholder="Max">
         </div>
       </div>
       <div class="form-group">
         <div class="form-sub-group">
           <label for="heightMin" class="form-label">Höhe von</label>
-          <input type="number" class="form-control" id="heightMin" name="heightMin" min="0" max="100" value="0" placeholder="Min">
+          <input type="number" class="form-control" id="heightMin" name="heightMin" min="0" max="2147483647" th:value="${heightMinimum != null ? heightMinimum : 0}" placeholder="Min">
         </div>
-        <div class="form-sub-group">
+        <div class="form-sub-group" th:if="${heightMaximum != 2147483647}">
           <label for="heightMax" class="form-label">Höhe bis</label>
-          <input type="number" class="form-control" id="heightMax" name="heightMax" min="0" max="100" placeholder="Max">
+          <input type="number" class="form-control" id="heightMax" name="heightMax" min="0" max="2147483647" th:value="${heightMaximum}" placeholder="Max">
         </div>
       </div>
       <div class="form-group">
         <div class="form-sub-group">
           <label for="circumferenceMin" class="form-label">Umfang von</label>
-          <input type="hidden" name="circumferenceMin" value="10"> <!-- Verstecktes Feld für Standardwert -->
-          <input type="number" class="form-control" id="circumferenceMin" name="circumferenceMinVisible" min="0" max="100" value="0" placeholder="Min">
+          <input type="number" class="form-control" id="circumferenceMin" name="circumferenceMin" min="0" max="2147483647" th:value="${circumferenceMinimum != null ? circumferenceMinimum : 0}" placeholder="Min">
         </div>
-        <div class="form-sub-group">
+        <div class="form-sub-group" th:if="${circumferenceMaximum != 2147483647}">
           <label for="circumferenceMax" class="form-label">Umfang bis</label>
-          <input type="hidden" name="circumferenceMax" value="50"> <!-- Verstecktes Feld für Standardwert -->
-          <input type="number" class="form-control" id="circumferenceMax" name="circumferenceMaxVisible" min="0" max="100" placeholder="Max">
+          <input type="number" class="form-control" id="circumferenceMax" name="circumferenceMax" min="0" max="2147483647" th:value="${circumferenceMaximum}" placeholder="Max">
         </div>
       </div>
       <div class="buttons-container">

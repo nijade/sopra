@@ -12,12 +12,13 @@ public interface PlantRepository extends JpaRepository<Plant, Integer> {
 
     //Queries without specified category
     //Standard Query for finding Plants by searching for their title
-    @Query("SELECT p FROM Plant p WHERE UPPER(p.title) LIKE UPPER(CONCAT('%', :title, '%'))")
+    @Query("SELECT p FROM Plant p WHERE UPPER(p.title) LIKE UPPER(CONCAT('%', :title, '%'))" +
+            "AND (p.buyerFinal IS NULL) ")
     List<Plant> findByTitleContainingIgnoreCase(@Param("title") String title);
 
     //Specific category queries
     //Standard Query for finding Plants by searching for their title and Category
-    @Query("SELECT p FROM Plant p WHERE UPPER(p.title) LIKE UPPER(CONCAT('%', :title, '%')) AND :category MEMBER OF p.tags")
+    @Query("SELECT p FROM Plant p WHERE UPPER(p.title) LIKE UPPER(CONCAT('%', :title, '%')) AND :category MEMBER OF p.tags AND p.buyerFinal IS NULL")
     List<Plant> findByTitleContainingIgnoreCaseSpecificCategory(@Param("title") String title, @Param("category") String category);
 
     @Query("SELECT p FROM Plant p WHERE p.plantID = :plantID")
@@ -35,7 +36,7 @@ public interface PlantRepository extends JpaRepository<Plant, Integer> {
     @Query("SELECT p FROM Plant p WHERE p.plantID IN :favePlantIds")
     List<Plant> findAllByFavePlantIds(@Param("favePlantIds") List<Integer> favePlantIds);
 
-    @Query("SELECT p FROM Plant p WHERE UPPER(p.title) LIKE UPPER(CONCAT('%', :title, '%'))" +
+    @Query("SELECT p FROM Plant p WHERE UPPER(p.title) LIKE UPPER(CONCAT('%', :title, '%')) AND p.buyerFinal IS NULL" +
             " AND (:priceMin IS NULL OR p.price >= :priceMin)" +
             " AND (:priceMax IS NULL OR p.price < :priceMax)" +
             " AND (:heightMin IS NULL OR p.height >= :heightMin)" +
@@ -51,7 +52,7 @@ public interface PlantRepository extends JpaRepository<Plant, Integer> {
             @Param("circumferenceMin") Double circumferenceMin,
             @Param("circumferenceMax") Double circumferenceMax);
 
-    @Query("SELECT p FROM Plant p WHERE UPPER(p.title) LIKE UPPER(CONCAT('%', :title, '%'))" +
+    @Query("SELECT p FROM Plant p WHERE UPPER(p.title) LIKE UPPER(CONCAT('%', :title, '%')) AND p.buyerFinal IS NULL" +
             " AND (:priceMinQueryReady IS NULL OR p.price >= :priceMinQueryReady)" +
             " AND (:priceMaxQueryReady IS NULL OR p.price < :priceMaxQueryReady)" +
             " AND (:heightMinQueryReady IS NULL OR p.height >= :heightMinQueryReady)" +
@@ -68,7 +69,7 @@ public interface PlantRepository extends JpaRepository<Plant, Integer> {
             @Param("circumferenceMinQueryReady") Double circumferenceMinQueryReady,
             @Param("circumferenceMaxQueryReady") Double circumferenceMaxQueryReady);
 
-    @Query("SELECT p FROM Plant p WHERE UPPER(p.title) LIKE UPPER(CONCAT('%', :title, '%'))" +
+    @Query("SELECT p FROM Plant p WHERE UPPER(p.title) LIKE UPPER(CONCAT('%', :title, '%')) AND p.buyerFinal IS NULL" +
             " AND (:priceMinQueryReady IS NULL OR p.price >= :priceMinQueryReady)" +
             " AND (:priceMaxQueryReady IS NULL OR p.price < :priceMaxQueryReady)" +
             " AND (:heightMinQueryReady IS NULL OR p.height >= :heightMinQueryReady)" +
@@ -85,7 +86,7 @@ public interface PlantRepository extends JpaRepository<Plant, Integer> {
             @Param("circumferenceMinQueryReady") Double circumferenceMinQueryReady,
             @Param("circumferenceMaxQueryReady") Double circumferenceMaxQueryReady);
 
-    @Query("SELECT p FROM Plant p WHERE UPPER(p.title) LIKE UPPER(CONCAT('%', :title, '%'))" +
+    @Query("SELECT p FROM Plant p WHERE UPPER(p.title) LIKE UPPER(CONCAT('%', :title, '%')) AND p.buyerFinal IS NULL" +
             " AND (:category IS NULL OR :category MEMBER OF p.tags)" +
             " AND (:priceMinQueryReady IS NULL OR p.price >= :priceMinQueryReady)" +
             " AND (:priceMaxQueryReady IS NULL OR p.price < :priceMaxQueryReady)" +
@@ -103,7 +104,7 @@ public interface PlantRepository extends JpaRepository<Plant, Integer> {
             @Param("circumferenceMinQueryReady") Double circumferenceMinQueryReady,
             @Param("circumferenceMaxQueryReady") Double circumferenceMaxQueryReady);
 
-    @Query("SELECT p FROM Plant p WHERE UPPER(p.title) LIKE UPPER(CONCAT('%', :title, '%'))" +
+    @Query("SELECT p FROM Plant p WHERE UPPER(p.title) LIKE UPPER(CONCAT('%', :title, '%')) AND p.buyerFinal IS NULL" +
             " AND (:category IS NULL OR :category MEMBER OF p.tags)" +
             " AND (:priceMinQueryReady IS NULL OR p.price >= :priceMinQueryReady)" +
             " AND (:priceMaxQueryReady IS NULL OR p.price < :priceMaxQueryReady)" +
@@ -123,6 +124,7 @@ public interface PlantRepository extends JpaRepository<Plant, Integer> {
             @Param("circumferenceMaxQueryReady") Double circumferenceMaxQueryReady);
 
     @Query("SELECT p FROM Plant p WHERE UPPER(p.title) LIKE UPPER(CONCAT('%', :title, '%'))" +
+            "AND (p.buyerFinal IS NULL) " +
             " AND (:category IS NULL OR :category MEMBER OF p.tags)" +
             " AND (:priceMinQueryReady IS NULL OR p.price >= :priceMinQueryReady)" +
             " AND (:priceMaxQueryReady IS NULL OR p.price < :priceMaxQueryReady)" +
