@@ -216,9 +216,9 @@
         <p>Sortieren nach:</p>
         <div class="select-container">
           <select id="selectOption" name="selectedOption" th:value="${selectOption}">
-            <option value="noSorting" th:selected="${selectOption == 'noSorting'}">Keine Sortierung</option>
-            <option value="priceASC" th:selected="${selectOption == 'priceASC'}">Günstigste Zuerst</option>
-            <option value="priceDSC" th:selected="${selectOption == 'priceDSC'}">Teuerste Zuerst</option>
+            <option value="Am relevantesten" th:selected="${selectOption == 'Am relevantesten'}">Am relevantesten</option>
+            <option value="Guenstigste Zuerst" th:selected="${selectOption == 'Guenstigste Zuerst'}">Günstigste Zuerst</option>
+            <option value="Teuerste Zuerst" th:selected="${selectOption == 'Teuerste Zuerst'}">Teuerste Zuerst</option>
           </select>
         </div>
       </div>
@@ -265,7 +265,7 @@
   <div class="container">
     <div class="header-container">
       <h2>Suchergebnisse für "<span th:text="${searchTerm}">Suchbegriff</span>" in "<span th:text="${category}">Kategorie</span>"</h2>
-      <h4>Sortiert nach: "<span th:text="${chosenSorting}">Sortierart</span>"</h4>
+      <h4>Sortiert nach: "<span th:text="${selectOption}">Sortierart</span>"</h4>
     </div>
     <div th:if="${plants != null && !plants.isEmpty()}">
       <div th:each="plant, index : ${plants}" class="plant">

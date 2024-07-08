@@ -23,11 +23,11 @@ public class Scheduler {
     @Autowired
     private QuizService quizService;
 
-    //@Scheduled(cron = "0 0 0 * * MON")
-    @Scheduled(fixedRate = 120000)
+
+    @Scheduled(fixedRate = 120000)   // Setting for testing
+    //@Scheduled(cron = "0 0 0 * * MON") // Setting for deployment
     public void scheduledQuiz(){
         List<Quiz> quizzes = quizService.findAll();
-
 
         // Findet das aktuelle Quiz, das als true markiert ist
         Quiz currentChosenQuiz = quizzes.stream()
