@@ -9,7 +9,7 @@
       height: 100%;
       margin: 0;
       font-family: Arial, sans-serif;
-      background-color: #bdd6ac;
+      background-color: #F3F3FB;
     }
     .container {
       padding: 20px;
@@ -42,7 +42,6 @@
       <h3 th:text="${plant.title}">Pflanzen Name</h3>
 
       <p th:if="${!plant.photos.isEmpty()}">
-        <strong>Foto:</strong>
         <img style="height: 15rem" th:src="'images/' + ${plant.photos.get(0)}" alt="Plant Photo">
       </p>
       <p><strong>Anzahl an Bildern</strong></p>
