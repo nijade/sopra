@@ -127,6 +127,7 @@ public class ConversationController {
         }
         model.addAttribute("specificConversation", conversation);
         model.addAttribute("messageSent", messageSent);
+        model.addAttribute("currentUsername", userService.getCurrentUser().getUsername());
         return "conversation";
     }
 }
