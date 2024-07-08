@@ -4,107 +4,169 @@
     <th:block th:insert="~{fragments/htmlHead :: head}"></th:block>
     <title>Suchergebnisse</title>
     <style>
-    body, html {
-      height: 100%;
-      margin: 0;
-      font-family: Arial, sans-serif;
-    }
-    .container {
-      padding: 20px;
-      position: relative;
-    }
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #bdd6ac;
+        }
+        .container {
+            padding: 20px;
+            position: relative;
+        }
 
-    h2 {
-      margin: 20px 0 10px 0px; /* Match the margin with the first container */
-    }
-    h3 {
-      margin: 20px 0 10px 0px; /* Match the margin with the h2 and first container */
-    }
-    .plant {
-      position: relative;
-      background-color: white;
-      border: 1px solid #ddd;
-      margin: 10px;
-      padding: 10px;
-      border-radius: 5px;
-      width:340px;
+        h2, h3 {
+            margin: 20px 0 10px 0px;
+        }
 
-      box-sizing: border-box;
-      max-width: 340px; /* Set maximum width */
-      height: 390px;
+        .plant {
+            position: relative;
+            background-color: white;
+            border: 1px solid #ddd;
+            margin: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            width: 340px;
+            box-sizing: border-box;
+            max-width: 340px;
+            height: 390px;
+            overflow: hidden;
+        }
 
-      overflow: hidden; /* Ensure content does not overflow */
-    }
-    .searchResultDivFiller {
-      position: absolute;
-      display: block;
-      height: 100%;
-      width: 100%;
-      text-decoration: none;
-    }
-    .plant-container {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      justify-content: flex-start; /* Align items to the start of each row */
-    }
-    .plant img {
-      width: 100%; /* Make images responsive */
-      height: auto; /* Maintain aspect ratio */
-      max-height: 200px; /* Limit image height */
-      display: block; /* Ensure the image is treated as a block element */
-      object-fit: contain; /* Ensure the image covers the box without distortion */
-      border-radius: 5px; /* Match the border-radius of the container */
-    }
-    .image-container {
-      height: 200px; /* Set a fixed height for image containers */
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+        .searchResultDivFiller {
+            position: absolute;
+            display: block;
+            height: 100%;
+            width: 100%;
+            text-decoration: none;
+        }
 
-    body, html {
-        background-color: #bdd6ac;
-    }
+        .plant-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: flex-start;
+        }
 
-    /* New CSS for blinking button */
-    @keyframes color-change {
-        0% { background-color: #0000ff; }
-        50% { background-color: #ffd700; }
-        100% { background-color: #0000ff; }
-    }
-    .blink-button {
-        display: inline-block;
-        padding: 10px 20px;
-        font-size: 16px;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        text-decoration: none;
-        text-align: center;
-        animation: color-change 2s infinite;
-        position: absolute;
-        top: 0;
-        right: 0;
-        margin-top: 20px;
-        margin-right: 20px;
-    }
-    .plant-price{
-        padding: 8px;
-    }
-    .welcome-message{
-        position: relative;
-        left: 10px;
-    }
+        .plant img {
+            width: 100%;
+            height: auto;
+            max-height: 200px;
+            display: block;
+            object-fit: contain;
+            border-radius: 5px;
+        }
 
+        .image-container {
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .text-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 10px;
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        .plant-price {
+            padding: 8px;
+        }
+
+        .welcome-message {
+            position: relative;
+            left: 10px;
+        }
+
+        .top-boxes {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .top-box {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: 340px;
+            height: 195px;
+            padding: 0;
+            box-sizing: border-box;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .top-box a {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            text-decoration: none;
+            color: black;
+            height: 100%;
+            width: 100%;
+            position: relative;
+        }
+
+        .top-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .top-box p {
+            margin: 0;
+            padding: 10px;
+            width: 100%;
+            box-sizing: border-box;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+        }
     </style>
 </head>
 <body>
 <div th:replace="fragments/header :: header"> </div>
 <div class="container">
-    <div class = "welcome-message">
+    <div class="welcome-message">
         <h2>Willkommen bei PlantBay24!</h2>
-        <a href="/showQuiz" class="blink-button">Quiz der Woche</a>
+    </div>
+    <div class="top-boxes">
+        <div class="top-box">
+            <a th:href="@{'/leaderboard'}">
+                <img src="/images/home/leaderboard.jpg" alt="Image 1">
+                <p th:text="#{home.leaderboard}"></p>
+            </a>
+        </div>
+        <div class="top-box">
+            <a th:href="@{'/showQuiz'}">
+                <img src="/images/home/quiz.jpg" alt="Image 2">
+                <p th:text="#{home.quiz}"></p>
+            </a>
+        </div>
+        <div class="top-box">
+            <a th:href="@{'/profile/view'}">
+                <img src="/images/home/level.jpg" alt="Image 3">
+                <p th:text="#{home.view}"></p>
+            </a>
+        </div>
+    </div>
+    <div class="welcome-message">
         <h3>Aktuelle Inserate:</h3>
     </div>
     <div th:if="${plants != null && !plants.isEmpty()}" class="plant-container">
