@@ -28,6 +28,8 @@ public class ConversationService {
     private PlantRepository plantRepository;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private PlantService plantService;
 
     /**
      * Methode zum Starten einer KOnversation
@@ -114,7 +116,8 @@ public class ConversationService {
     }
 
     /**
-     * Methode um die zur entsprechenden Konversation gehörenden Pflanze zu verkaufen
+     * Methode um die zur entsprechenden Konversation gehörenden Pflanze zu verkaufen.
+     * Löscht die Pflanze auch es den bestehenden Merklisten aller User
      *
      * @param conversation
      */
@@ -123,6 +126,8 @@ public class ConversationService {
         User buyer = conversation.getBuyer();
         plantToSell.setBuyerFinal(buyer);
         plantRepository.save(plantToSell);
+
+        plantService.removePlantFromAllFaves(plantToSell.getPlantID());
     }
 
 }
