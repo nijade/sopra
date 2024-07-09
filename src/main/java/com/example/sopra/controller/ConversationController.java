@@ -8,7 +8,6 @@ import com.example.sopra.service.ConversationService;
 import com.example.sopra.service.PlantService;
 import com.example.sopra.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -100,6 +99,7 @@ public class ConversationController {
         }
 
         model.addAttribute("conversations", conversationsOfUser);
+        model.addAttribute("currentUsername", currentUser.getUsername());
         model.addAttribute("lastMessages", lastMessages);
         return "ownConversations";
     }

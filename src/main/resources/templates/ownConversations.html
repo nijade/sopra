@@ -13,23 +13,46 @@
         .container {
             padding: 20px;
         }
+        .conversation-wrapper {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .profile-img-container {
+            width: 100px;
+            height: 100px;
+            overflow: hidden;
+            border-radius: 50%;
+            margin-right: 10px;
+            flex-shrink: 0;
+        }
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
         .card {
             position: relative;
             border: 1px solid #ddd;
             background-color: white;
-            margin-bottom: 10px;
             padding: 10px;
             border-radius: 5px;
+            flex: 1;
+            display: flex;
+            align-items: center;
         }
         .card-body {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            width: 100%;
         }
         .clickable {
             display: block;
             text-decoration: none;
             color: inherit;
+            width: 100%;
         }
         .clickable:hover, .clickable:focus, .clickable:active {
             text-decoration: none;
@@ -52,18 +75,34 @@
         <p>Es gibt keine Nachrichten</p>
     </div>
     <div th:each="conversation : ${conversations}">
-        <a class="clickable" th:href="@{/showConversation(conversationId=${conversation.getConversationId()})}">
-            <div class="card">
-                <div class="card-body">
-                    <div>
-                        <p th:text="'Pflanze: ' + ${conversation.getPlant().getTitle()}"></p>
-                        <p th:text="'Käufer: ' + ${conversation.getBuyer().getUsername()}"></p>
-                        <p th:text="'Verkäufer: ' + ${conversation.getPlant().getSeller().getUsername()}"></p>
-                    </div>
-                    <div class="message-preview" th:text="${lastMessages[conversation.getConversationId()]?.content ?: 'Keine Nachrichten'}"></div>
+        <div class="conversation-wrapper">
+            <div th:if="${currentUsername != conversation.getBuyer().getUsername()}">
+                <div class="profile-img-container">
+                    <a th:href="@{/profile/public(username=${conversation.getBuyer().getUsername()})}">
+                        <img th:src="@{'/images/profiles/' + ${conversation.getBuyer().getProfileImage()}}" alt="Profilbild" class="profile-img"/>
+                    </a>
                 </div>
             </div>
-        </a>
+            <div th:if="${currentUsername != conversation.getPlant().getSeller().getUsername()}">
+                <div class="profile-img-container">
+                    <a th:href="@{/profile/public(username=${conversation.getPlant().getSeller().getUsername()})}">
+                        <img th:src="@{'/images/profiles/' + ${conversation.getPlant().getSeller().getProfileImage()}}" alt="Profilbild" class="profile-img"/>
+                    </a>
+                </div>
+            </div>
+            <a class="clickable" th:href="@{/showConversation(conversationId=${conversation.getConversationId()})}">
+                <div class="card">
+                    <div class="card-body">
+                        <div>
+                            <p th:text="'Pflanze: ' + ${conversation.getPlant().getTitle()}"></p>
+                            <p th:text="'Käufer: ' + ${conversation.getBuyer().getUsername()}"></p>
+                            <p th:text="'Verkäufer: ' + ${conversation.getPlant().getSeller().getUsername()}"></p>
+                        </div>
+                        <div class="message-preview" th:text="${lastMessages[conversation.getConversationId()]?.content ?: 'Keine Nachrichten'}"></div>
+                    </div>
+                </div>
+            </a>
+        </div>
     </div>
 </div>
 </body>

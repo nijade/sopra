@@ -260,4 +260,16 @@ public class UserService implements UserDetailsService {
         userRepository.save(user);
     }
 
+    /**
+     * Hiermit wird aktualisiert, welches Attribut öffentlich sichtbar sein soll.
+     *
+     * @param username User bei dem es aktualisiert wird
+     * @param visibleAttributes neue Liste, die die alte überschreiben soll
+     */
+    public void updateVisibleAttributes(String username, List<String> visibleAttributes) {
+        User user = userRepository.findByUsername(username);
+        user.setVisibleAttributes(visibleAttributes);
+        userRepository.save(user);
+    }
+
 }

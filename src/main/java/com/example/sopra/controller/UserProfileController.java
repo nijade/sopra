@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.context.MessageSource;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -71,17 +72,44 @@ public class UserProfileController {
 
     /**
      * Nimmt die Anfrage zum Speichern der neuen Profildaten entgegen und gibt wieder die Profilansicht zurück. Wenn
-     * der/die Benutzer*in noch nicht angemeldet ist, wird diese*r an die login-Seite geleitet.
+     * der/die Benutzer*in noch nicht angemeldet ist, wird diese*r an die login-Seite geleitet. In jedem Fall werden
+     * die neuen Attribute, die öffentlich sichtbar sein sollen aktualisiert.
+     *
      * @param updatedUser Nachstellung eines Nutzers mit den geänderten Attributen
+     * @param visibleAttributes Jedes angekreuzte Feld, was sichtbar sein soll wird als Liste übergeben, egal ob neu oder nicht
      * @return die zu erscheinende html-Seite
      */
     @PostMapping("/edit")
-    public String saveProfile(@ModelAttribute("user") User updatedUser) {
+    public String saveProfile(@ModelAttribute("user") User updatedUser, @RequestParam List<String> visibleAttributes) {
         User currentUser = userService.getCurrentUser();
         if (currentUser == null) {
             return "redirect:/login";
         }
         userService.updateUserProfile(currentUser, updatedUser);
+        userService.updateVisibleAttributes(currentUser.getUsername(), visibleAttributes);
         return "redirect:/profile/view";
+    }
+
+    /**
+     * Nimmt die Anfrage zum Öffnen eines öffentlichen Profils entgegen und gibt wieder die Profilansicht zu dem Profil,
+     * das als Parameter übergeben wird zurück. Wenn der/die Benutzer*in noch nicht angemeldet ist, wird diese*r an die login-Seite geleitet.
+     *
+     * @param username Username des öffentlichen Profils, das aufgerufen werden soll
+     * @param model model, das user übergibt
+     * @return html-Seite zum öffentlichen Profil
+     */
+    @GetMapping("/public")
+    public String publicProfile(@RequestParam String username, Model model, Locale locale) {
+        User user = userService.getUserByUsername(username);
+        if (user == null) {
+            return "redirect:/login";
+        }
+        model.addAttribute("user", user);
+
+        String genderKey = "profile." + user.getGender().name().toLowerCase();
+        String gender = messageSource.getMessage(genderKey, null, locale);
+        model.addAttribute("translatedGender", gender);
+
+        return "profile/public";
     }
 }

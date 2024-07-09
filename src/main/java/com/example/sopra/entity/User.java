@@ -59,6 +59,8 @@ public class User {
     )
     private List<Plant> faves = new ArrayList<>(); //List filled with plantIDs'
 
+    @ElementCollection
+    private List<String> visibleAttributes = new ArrayList<>();
 
     public User() {
         // empty constructor for Hibernate
@@ -228,5 +230,13 @@ public class User {
 
     public void setFavoritePlants(List<Plant> favoritePlants) {
         this.faves = favoritePlants;
+    }
+
+    public List<String> getVisibleAttributes() {
+        return visibleAttributes;
+    }
+
+    public void setVisibleAttributes(List<String> visibleAttributes) {
+        this.visibleAttributes = visibleAttributes;
     }
 }

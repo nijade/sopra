@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <th:block th:insert="~{fragments/htmlHead :: head}"></th:block>
+  <title th:text="#{profile.publicTitle}">Public Profile</title>
+  <style>
+    body, html {
+      background-color: #f5f5f5;
+    }
+  </style>
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<div class="container mt-5">
+  <div class="card">
+    <div class="card-body">
+      <h4 class="card-title" th:text="#{profile.publicTitleOf}">Public Profile of...</h4>
+      <div class="form-group row">
+        <label for="username" class="col-sm-2 col-form-label" th:text="#{profile.username}">Username</label>
+        <div class="col-sm-10">
+          <p id="username" th:text="${user.username}"></p>
+        </div>
+      </div>
+      <div class="form-group row" th:if="${user.visibleAttributes.contains('name')}">
+        <label for="name" class="col-sm-2 col-form-label" th:text="#{profile.name}">Name</label>
+        <div class="col-sm-10">
+          <p id="name" th:text="${user.name}"></p>
+        </div>
+      </div>
+      <div class="form-group row" th:if="${user.visibleAttributes.contains('email')}">
+        <label for="email" class="col-sm-2 col-form-label" th:text="#{profile.email}">Email</label>
+        <div class="col-sm-10">
+          <p id="email" th:text="${user.email}"></p>
+        </div>
+      </div>
+      <div class="form-group row" th:if="${user.visibleAttributes.contains('age')}">
+        <label for="age" class="col-sm-2 col-form-label" th:text="#{profile.age}">Age</label>
+        <div class="col-sm-10">
+          <p id="age" th:text="${user.age}"></p>
+        </div>
+      </div>
+      <div class="form-group row" th:if="${user.visibleAttributes.contains('gender')}">
+        <label for="gender" class="col-sm-2 col-form-label" th:text="#{profile.gender}">Gender</label>
+        <div class="col-sm-10">
+          <p id="gender" th:text="${translatedGender}">Gender</p>
+        </div>
+      </div>
+      <div class="form-group row" th:if="${user.visibleAttributes.contains('profileDescription')}">
+        <label for="profileDescription" class="col-sm-2 col-form-label" th:text="#{profile.description}">Profile Description</label>
+        <div class="col-sm-10">
+          <p id="profileDescription" th:text="${user.profileDescription}"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
