@@ -4,7 +4,12 @@
     <th:block th:insert="~{fragments/htmlHead :: head}"></th:block>
     <title>Quiz Ergebnisse</title>
     <style>
+        body{
+            background-color: #F3F3FB;
+        }
         .container {
+            background-color: #FFFFFF;
+            border-radius: 10px;
             margin: 20px auto;
             padding: 20px;
             border: 1px solid #ccc;
@@ -18,6 +23,17 @@
         .incorrect {
             color: red;
             font-weight: bold;
+        }
+        .homeButton{
+            position: relative;
+            left: 30rem;
+            width: 20px;
+        }
+        .profileButton{
+            position: relative;
+            left: 22rem;
+            top: -2.3rem;
+            width: 120px;
         }
     </style>
 </head>
@@ -55,6 +71,12 @@
             <span th:if="${questionThreeResult}" class="correct">Richtig</span>
             <span th:if="${!questionThreeResult}" class="incorrect">Falsch</span>
         </p>
+    </div>
+    <div class="homeButton">
+        <a href="/" style="background-color: #F3F3FB; color:#354733; border-color:#354733" class="btn btn-primary">Home</a>
+    </div>
+    <div class = "profileButton">
+        <a href="/profile/view" style="background-color: #354733; color: #F3F3FB; border-color:#354733" class="btn btn-primary">Mein Profil</a>
     </div>
 </div>
 </body>

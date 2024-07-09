@@ -8,7 +8,7 @@
       height: 100%;
       margin: 0;
       font-family: Arial, sans-serif;
-      background-color: #bdd6ac;
+      background-color: #F3F3FB;
     }
     .main-container {
       display: flex;
@@ -16,12 +16,17 @@
       margin-top: 60px; /* Adjust this value if navbar height changes */
     }
     .filter-container {
+      border-radius: 10px;
       width: 20%;
       position: relative;
-      top: 90px;
+      top: 48px;
+      left: 30px;
       padding: 20px;
-      background-color: #f4f4f4;
-      border-right: 1px solid #ddd;
+      background-color: #FFFFFF;
+      border-style: solid;
+      border-color: #354733;
+      border-width: thin;
+
       z-index: 100; /* Ensure filter is above content */
       height: 500px; /* Automatically adjusts height to content */
     }
@@ -79,20 +84,20 @@
       padding: 10px 20px;
       font-size: 16px;
       cursor: pointer;
-      background-color: #007bff;
-      color: #fff;
+      background-color: #354733;
+      color: #F3F3FB;
       border: none;
       border-radius: 5px;
       margin-bottom: 10px;
       transition: background-color 0.3s ease;
     }
     .buttons-container button:hover {
-      background-color: #0056b3;
+      background-color: #8A9B6E;
     }
     .container {
       padding: 20px;
       position: relative;
-      top: -40px;
+      top: -80px;
       width: 80%; /* Adjusted width */
       overflow-y: auto; /* Allow container to scroll */
     }
@@ -120,8 +125,7 @@
       margin-right: 10px;
     }
     .select-container {
-      background-color: #f4f4f4;
-      border: 1px solid #ddd;
+      background-color: #FFFFFF;
       padding: 5px;
       z-index: 99; /* Ensure it's above content */
     }
@@ -131,6 +135,9 @@
       font-size: 16px;
     }
     .plant {
+      border-style: solid;
+      border-color: #354733;
+      border-width: thin;
       position: relative;
       border: 1px solid #ddd;
       margin-bottom: 10px;
@@ -203,6 +210,14 @@
       font-size: 16px;
       color: #ff0000; /* Optional: Add color to make it stand out */
     }
+    .selectOption{
+      background-color: #F3F3FB;
+    }
+    .plant-container{
+      border-style: solid;
+      border-color: #354733;
+      border-width: thin;
+    }
   </style>
 </head>
 <body>
@@ -215,7 +230,7 @@
       <div class="sort-container">
         <p>Sortieren nach:</p>
         <div class="select-container">
-          <select id="selectOption" name="selectedOption" th:value="${selectOption}">
+          <select class="select-option" id="selectOption" name="selectedOption" th:value="${selectOption}">
             <option value="Am relevantesten" th:selected="${selectOption == 'Am relevantesten'}">Am relevantesten</option>
             <option value="Guenstigste Zuerst" th:selected="${selectOption == 'Guenstigste Zuerst'}">Günstigste Zuerst</option>
             <option value="Teuerste Zuerst" th:selected="${selectOption == 'Teuerste Zuerst'}">Teuerste Zuerst</option>
@@ -267,8 +282,8 @@
       <h2>Suchergebnisse für "<span th:text="${searchTerm}">Suchbegriff</span>" in "<span th:text="${category}">Kategorie</span>"</h2>
       <h4>Sortiert nach: "<span th:text="${selectOption}">Sortierart</span>"</h4>
     </div>
-    <div th:if="${plants != null && !plants.isEmpty()}">
-      <div th:each="plant, index : ${plants}" class="plant">
+    <div  th:if="${plants != null && !plants.isEmpty()}">
+      <div  th:each="plant, index : ${plants}" class="plant">
         <a class="searchResultDivFiller" style="color:black" th:href="@{/plants/{id}(id=${plant.plantID})}"></a>
         <img th:if="${!plant.photos.isEmpty()}" th:src="'images/' + ${plant.photos.get(0)}" alt="Plant Photo">
         <div class="plant-info">
