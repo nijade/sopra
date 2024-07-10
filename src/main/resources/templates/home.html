@@ -178,7 +178,7 @@
             <div class="image-container" th:if="${!plant.photos.isEmpty()}">
                 <img th:src="'/images/' + ${plant.photos.get(0)}" alt="Plant Photo">
             </div>
-            <p class="plant-price"><strong>Preis:</strong> <span th:text="${plant.price}">Preis</span></p>
+            <p class="plant-price"><strong>Preis:</strong> <span th:text="${plant.price}">Preis</span> €</p>
         </div>
     </div>
     <div th:if="${plants == null || plants.isEmpty()}">
