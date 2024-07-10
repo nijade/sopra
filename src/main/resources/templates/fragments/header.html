@@ -1,94 +1,160 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="de">
 <head>
-  <th:block th:insert="~{fragments/htmlHead :: head}"></th:block>
-  <style>
-    .nav-color{
-      background-color: #3366FF;
-    }
-    .dropdown-menu {
-      margin-left: -100px; /* Dropdown-Menü im header so positionieren, dass es den header rechts nicht überschreitet */
-    }
-    .navbar-nav .nav-item a.nav-link {
-      padding: 10px 15px; /* Gleiche Höhe für beide Links */
-    }
-    .form-inline .form-control, .form-inline .custom-select, .form-inline .btn {
-      margin-right: 5px; /* Abstand zwischen den Elementen im Formular */
-    }
-    .navbar-nav {
-      align-items: center; /* Zentriere die Navigationselemente */
-    }
-    .btn btn-outline-success{
-      color:
-      position: absolute;
-      left: 10px;
-    }
-    .myFaves{
-      position: absolute;
-      left: 1100px;
-    }
+    <th:block th:insert="~{fragments/htmlHead :: head}"></th:block>
+    <title th:text="#{searchPlants.title}">Suchergebnisse</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #F3F3FB;
+        }
+        .filter-container h3 {
+            margin-top: 0;
+        }
+        .filter-options li {
+            margin-bottom: 10px;
+        }
+        /* Hide the actual checkbox */
+        .filter-options input[type="checkbox"] {
+            display: none;
+        }
+        /* Style for the custom checkbox */
+        .filter-options label {
+            display: block;
+            position: relative;
+            padding-left: 35px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+        .buttons-container button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #354733;
+            color: #F3F3FB;
+            border: none;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            transition: background-color 0.3s ease;
+        }
+        .buttons-container button:hover {
+            background-color: #8A9B6E;
+        }
+        .header-container h2, .header-container h4 {
+            margin: 0;
+            text-align: left; /* Align text to the left */
+        }
+        .sort-container p {
+            margin-right: 10px;
+        }
+        .select-container select {
+            width: auto;
+            padding: 5px;
+            font-size: 16px;
+        }
+        .plant img {
+            flex-shrink: 0;
+            height: 15rem;
+            margin-right: 20px;
+            align-self: center;
+        }
+        .tags span {
+            background-color: #e0e0e0;
+            border-radius: 3px;
+            padding: 5px;
+            margin-right: 5px;
+        }
+        .form-control {
+            width: calc(50% - 10px); /* Adjusted width for two inputs */
+            padding: 8px;
+            width: 80px;
+            font-size: 14px;
+        }
+        .nav-color{
+            background-color: #3366FF;
+        }
+        .dropdown-menu {
+            margin-left: -100px; /* Dropdown-Menü im header so positionieren, dass es den header rechts nicht überschreitet */
+        }
+        .navbar-nav .nav-item a.nav-link {
+            padding: 10px 15px; /* Gleiche Höhe für beide Links */
+        }
+        .form-inline .form-control, .form-inline .custom-select, .form-inline .btn {
+            margin-right: 5px; /* Abstand zwischen den Elementen im Formular */
+        }
+        .navbar-nav {
+            align-items: center; /* Zentriere die Navigationselemente */
+        }
+        .btn btn-outline-success{
+            color:
+            position: absolute;
+            left: 10px;
+        }
 
-  </style>
+    </style>
 </head>
 <body>
 <div class="nav-color">
-  <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #8A9B6E" th:fragment="header">
-    <a class="navbar-brand" style="color: #354733; font-weight: bold; font-family: Futura" th:href="@{/}">PlantBay24</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <!-- Suchleiste linksbündig -->
-      <form class="form-inline mr-2" action="/searchPlants" method="get">
-        <input class="form-control" type="text" name="title" th:placeholder="#{header.searchWith}" aria-label="Search" th:value="${searchTerm}">
-        <select class="custom-select" name="category">
-          <option value="Alle Kategorien" th:selected="${category == 'Alle Kategorien'}" th:text="#{header.allCategories}">Alle Kategorien</option>
-          <option value="Balkonblumen" th:selected="${category == 'Balkonblumen'}" th:text="#{plant.tags.balconyFlowers}">Balkonblumen</option>
-          <option value="Heilpflanzen" th:selected="${category == 'Heilpflanzen'}" th:text="#{plant.tags.medicinalPlants}">Heilpflanzen</option>
-          <option value="Wildpflanzen" th:selected="${category == 'Wildpflanzen'}" th:text="#{plant.tags.wildPlants}">Wildpflanzen</option>
-          <option value="Baeume und Straeucher" th:selected="${category == 'Baeume und Straeucher'}" th:text="#{plant.tags.treesAndShrubs}">Bäume und Sträucher</option>
-          <option value="Kletterpflanzen" th:selected="${category == 'Kletterpflanzen'}" th:text="#{plant.tags.climbingPlants}">Kletterpflanzen</option>
-          <option value="Kuebelpflanzen" th:selected="${category == 'Kuebelpflanzen'}" th:text="#{plant.tags.containerPlants}">Kübelpflanzen</option>
-          <option value="Rosen" th:selected="${category == 'Rosen'}" th:text="#{plant.tags.roses}">Rosen</option>
-          <option value="Sommerblumen" th:selected="${category == 'Sommerblumen'}" th:text="#{plant.tags.summerFlowers}">Sommerblumen</option>
-          <option value="Stauden" th:selected="${category == 'Stauden'}" th:text="#{plant.tags.perennials}">Stauden</option>
-          <option value="Wasserpflanzen" th:selected="${category == 'Wasserpflanzen'}" th:text="#{plant.tags.aquaticPlants}">Wasserpflanzen</option>
-          <option value="Zimmerpflanzen" th:selected="${category == 'Zimmerpflanzen'}" th:text="#{plant.tags.indoorPlants}">Zimmerpflanzen</option>
-          <option value="Zwiebel- und Knollenpflanzen" th:selected="${category == 'Zwiebel- und Knollenpflanzen'}" th:text="#{plant.tags.bulbsAndTubers}">Zwiebel- und Knollenpflanzen</option>
-          <option value="Gemuese" th:selected="${category == 'Gemuese'}" th:text="#{plant.tags.vegetables}">Gemüse</option>
-          <option value="Obst" th:selected="${category == 'Obst'}" th:text="#{plant.tags.fruits}">Obst</option>
-          <!-- Weitere Optionen nach Bedarf -->
-        </select>
-        <button class="btn btn-outline-success" type="submit" style="background-color: #354733; color: #F3F3FB; border-color: #354733;" th:text="#{header.search}">Suchen</button>
-      </form>
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #8A9B6E" th:fragment="header">
+        <a class="navbar-brand" style="color: #354733; font-weight: bold; font-family: Futura" th:href="@{/}">PlantBay24</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <!-- Suchleiste linksbündig -->
+            <form class="form-inline mr-2" action="/searchPlants" method="get">
+                <input class="form-control" type="text" name="title" th:placeholder="#{header.searchWith}" aria-label="Search" th:value="${searchTerm}">
+                <select class="custom-select" name="category">
+                    <option value="Alle Kategorien" th:selected="${category == 'Alle Kategorien'}" th:text="#{header.allCategories}">Alle Kategorien</option>
+                    <option value="Balkonblumen" th:selected="${category == 'Balkonblumen'}" th:text="#{plant.tags.balconyFlowers}">Balkonblumen</option>
+                    <option value="Heilpflanzen" th:selected="${category == 'Heilpflanzen'}" th:text="#{plant.tags.medicinalPlants}">Heilpflanzen</option>
+                    <option value="Wildpflanzen" th:selected="${category == 'Wildpflanzen'}" th:text="#{plant.tags.wildPlants}">Wildpflanzen</option>
+                    <option value="Baeume und Straeucher" th:selected="${category == 'Baeume und Straeucher'}" th:text="#{plant.tags.treesAndShrubs}">Bäume und Sträucher</option>
+                    <option value="Kletterpflanzen" th:selected="${category == 'Kletterpflanzen'}" th:text="#{plant.tags.climbingPlants}">Kletterpflanzen</option>
+                    <option value="Kuebelpflanzen" th:selected="${category == 'Kuebelpflanzen'}" th:text="#{plant.tags.containerPlants}">Kübelpflanzen</option>
+                    <option value="Rosen" th:selected="${category == 'Rosen'}" th:text="#{plant.tags.roses}">Rosen</option>
+                    <option value="Sommerblumen" th:selected="${category == 'Sommerblumen'}" th:text="#{plant.tags.summerFlowers}">Sommerblumen</option>
+                    <option value="Stauden" th:selected="${category == 'Stauden'}" th:text="#{plant.tags.perennials}">Stauden</option>
+                    <option value="Wasserpflanzen" th:selected="${category == 'Wasserpflanzen'}" th:text="#{plant.tags.aquaticPlants}">Wasserpflanzen</option>
+                    <option value="Zimmerpflanzen" th:selected="${category == 'Zimmerpflanzen'}" th:text="#{plant.tags.indoorPlants}">Zimmerpflanzen</option>
+                    <option value="Zwiebel- und Knollenpflanzen" th:selected="${category == 'Zwiebel- und Knollenpflanzen'}" th:text="#{plant.tags.bulbsAndTubers}">Zwiebel- und Knollenpflanzen</option>
+                    <option value="Gemuese" th:selected="${category == 'Gemuese'}" th:text="#{plant.tags.vegetables}">Gemüse</option>
+                    <option value="Obst" th:selected="${category == 'Obst'}" th:text="#{plant.tags.fruits}">Obst</option>
+                    <!-- Weitere Optionen nach Bedarf -->
+                </select>
+                <button class="btn btn-outline-success" type="submit" style="background-color: #354733; color: #F3F3FB; border-color: #354733;" th:text="#{header.search}">Suchen</button>
+            </form>
 
-      <!-- Navigationslinks rechtsbündig -->
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="meinsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #ffffff; font-weight: bold;" th:text="#{header.me}">
-          </a>
-          <div class="dropdown-menu" aria-labelledby="meinsDropdown">
-            <a class="dropdown-item" th:href="@{/ownConversations}" th:text="#{header.messages}">Meine Nachrichten</a>
-            <a class="dropdown-item" th:href="@{/myplants}" th:text="#{header.myPlants}">Meine Inserate</a>
-            <a class="dropdown-item" th:href="@{/ownPurchases}" th:text="#{header.purchases}">Meine Käufe</a>
-            <a class="dropdown-item" th:href="@{/profile/view}" th:text="#{profile.title}">Mein Profil</a>
-          </div>
-        </li>
-        <li class="nav-item">
-          <div class="myFaves">
-            <strong><a class="btn btn-outline-success" style="background-color:#8A9B6E  ;color:#FFFFFF;  font-weight: bold;   border-color: #8A9B6E;" th:href="@{/myFaves}" th:text="#{faves.title}">Merkliste</a></strong>
-          </div>
-        </li>
-        <li class="nav-item">
-          <strong><a class="nav-link" style="color: #FFFFFF" th:href="@{/create}" th:text="#{header.createPlant}">Inserat erstellen</a></strong>
-        </li>
-        <li class="nav-item">
-          <a class="btn btn-outline-success" href="?lang=de" style="background-color: #354733; color: #FFFFFF; margin-right: 10px;">de</a>
-          <a class="btn btn-outline-success" href="?lang=en" style="background-color: #354733; color: #FFFFFF;">en</a>
-        </li>
-      </ul>
-    </div>
-  </nav>
+            <!-- Navigationslinks rechtsbündig -->
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="meinsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #ffffff; font-weight: bold;" th:text="#{header.me}">
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="meinsDropdown">
+                        <a class="dropdown-item" th:href="@{/ownConversations}" th:text="#{header.messages}">Meine Nachrichten</a>
+                        <a class="dropdown-item" th:href="@{/myplants}" th:text="#{header.myPlants}">Meine Inserate</a>
+                        <a class="dropdown-item" th:href="@{/ownPurchases}" th:text="#{header.purchases}">Meine Käufe</a>
+                        <a class="dropdown-item" th:href="@{/profile/view}" th:text="#{profile.title}">Mein Profil</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <div class="myFaves">
+                        <strong><a class="btn btn-outline-success" style="background-color:#8A9B6E  ;color:#FFFFFF;  font-weight: bold;   border-color: #8A9B6E;" th:href="@{/myFaves}" th:text="#{faves.title}">Merkliste</a></strong>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <strong><a class="nav-link" style="color: #FFFFFF" th:href="@{/create}" th:text="#{header.createPlant}">Inserat erstellen</a></strong>
+                </li>
+                <li class="nav-item">
+                <li class="nav-item">
+                    <a class="btn btn-outline-success" href="/" style="background-color: #354733; color: #FFFFFF; margin-right: 10px;">de | en select at home</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
 </div>
+
 </body>
 </html>
