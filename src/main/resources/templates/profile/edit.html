@@ -5,7 +5,10 @@
   <title th:text="#{profile.editTitle}">Edit Profile</title>
   <style>
     body, html {
-      background-color: #bdd6ac;
+      height: 100%;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #F8F9FB;
     }
   </style>
 </head>
@@ -88,7 +91,7 @@
         </div>
 
         <div class="card-footer">
-          <button type="submit" class="btn btn-primary" th:text="#{profile.saveButton}" >Save Changes</button>
+          <button type="submit" class="btn btn-primary" th:text="#{profile.saveButton}" style="background-color: #354733; color: #F3F3FB; border-color: #354733;">Save Changes</button>
         </div>
       </form>
     </div>
