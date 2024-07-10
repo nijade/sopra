@@ -122,8 +122,7 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
         rose.setSeller(user1);
         plantService.savePlant(rose);
 
-        // Tulpen
-        // Tulpe groß
+        // Tulpe
         Plant tulip = new Plant();
         tulip.setTitle("Tulpe");
         tulip.setPhotos(Arrays.asList("tulip.jpg"));
@@ -137,135 +136,9 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
         tulip.setSeller(user2);
         plantService.savePlant(tulip);
 
-        // Tulpe medium
-        Plant tulipMedium = new Plant();
-        tulipMedium.setTitle("Tulpe Medium");
-        tulipMedium.setPhotos(Arrays.asList("tulip.jpg"));
-        tulipMedium.setHeight(20);
-        tulipMedium.setPrice(8.99);
-        tulipMedium.setHasPlanter(false);
-        tulipMedium.setDescription("Eine bunte medium Tulpe, ideal für den Frühlingsgarten.");
-        tulipMedium.setPotCircumference(0.0);
-        tulipMedium.setPlantCircumference(10.0);
-        tulipMedium.setTags(Arrays.asList("Blume", "Fruehling", "Garten"));
-        tulipMedium.setSeller(user2);
-        plantService.savePlant(tulipMedium);
-
-        // Weiße Spätblühende Tulpe
-        Plant tulipThree = new Plant();
-        tulipThree.setTitle("Weiße Spaetbluehende Tulpe");
-        tulipThree.setPhotos(Arrays.asList("tulip.jpg"));
-        tulipThree.setHeight(45);
-        tulipThree.setPrice(12.99);
-        tulipThree.setHasPlanter(true);
-        tulipThree.setDescription("Eine spaetbluehende weiße Tulpe, perfekt für den Spätsommergarten.");
-        tulipThree.setPotCircumference(12.0); // Beispiel für den Pflanztopfumfang
-        tulipThree.setPlantCircumference(13.5);
-        tulipThree.setTags(Arrays.asList("Blume", "Sommer", "Garten"));
-        tulipThree.setSeller(user1);
-        plantService.savePlant(tulipThree);
-
-        // Pinkfarbene Zwergtulpe
-        Plant tulipFour = new Plant();
-        tulipFour.setTitle("Pinkfarbene Zwergtulpe");
-        tulipFour.setPhotos(Arrays.asList("tulip.jpg"));
-        tulipFour.setHeight(20);
-        tulipFour.setPrice(7.49);
-        tulipFour.setHasPlanter(true);
-        tulipFour.setDescription("Eine niedrige pinkfarbene Zwergtulpe, ideal für den Vorgarten.");
-        tulipFour.setPotCircumference(8.0); // Beispiel für den Pflanztopfumfang
-        tulipFour.setPlantCircumference(8.0);
-        tulipFour.setTags(Arrays.asList("Blume", "Fruehling", "Zwiebel- und Knollenpflanzen"));
-        tulipFour.setSeller(user2);
-        plantService.savePlant(tulipFour);
-
-        // Orangene Darwin-Tulpe
-        Plant tulipFive = new Plant();
-        tulipFive.setTitle("Orangene Darwin-Tulpe");
-        tulipFive.setPhotos(Arrays.asList("tulip.jpg"));
-        tulipFive.setHeight(38);
-        tulipFive.setPrice(11.29);
-        tulipFive.setHasPlanter(false);
-        tulipFive.setDescription("Eine kräftige orangefarbene Darwin-Tulpe, die im Frühling aufblüht.");
-        tulipFive.setPotCircumference(0.0);
-        tulipFive.setPlantCircumference(11.0);
-        tulipFive.setTags(Arrays.asList("Blume", "Fruehling", "Garten"));
-        tulipFive.setSeller(user1);
-        plantService.savePlant(tulipFive);
-
-        // Gefüllte Lilien-Tulpe
-        Plant tulipSix = new Plant();
-        tulipSix.setTitle("Gefuellte Lilien-Tulpe");
-        tulipSix.setPhotos(Arrays.asList("tulip.jpg"));
-        tulipSix.setHeight(32);
-        tulipSix.setPrice(9.99);
-        tulipSix.setHasPlanter(true);
-        tulipSix.setDescription("Eine prächtige gefüllte Lilien-Tulpe, die im Frühling besonders schön blüht.");
-        tulipSix.setPotCircumference(10.0); // Beispiel für den Pflanztopfumfang
-        tulipSix.setPlantCircumference(10.5);
-        tulipSix.setTags(Arrays.asList("Blume", "Fruehling", "Zwiebel- und Knollenpflanzen"));
-        tulipSix.setSeller(user2);
-        plantService.savePlant(tulipSix);
-
-        // Zweifarbige Rembrandt-Tulpe
-        Plant tulipSeven = new Plant();
-        tulipSeven.setTitle("Zweifarbige Rembrandt-Tulpe");
-        tulipSeven.setPhotos(Arrays.asList("tulip.jpg"));
-        tulipSeven.setHeight(40);
-        tulipSeven.setPrice(10.79);
-        tulipSeven.setHasPlanter(false);
-        tulipSeven.setDescription("Eine elegante zweifarbige Rembrandt-Tulpe, die im Mai blüht.");
-        tulipSeven.setPotCircumference(0.0);
-        tulipSeven.setPlantCircumference(12.0);
-        tulipSeven.setTags(Arrays.asList("Blume", "Sommerblumen", "Garten"));
-        tulipSeven.setSeller(user1);
-        plantService.savePlant(tulipSeven);
-
-        // Gefranste Papageien-Tulpe
-        Plant tulipEight = new Plant();
-        tulipEight.setTitle("Gefranste Papageien-Tulpe");
-        tulipEight.setPhotos(Arrays.asList("tulip.jpg"));
-        tulipEight.setHeight(36);
-        tulipEight.setPrice(11.59);
-        tulipEight.setHasPlanter(true);
-        tulipEight.setDescription("Eine spektakuläre gefranste Papageien-Tulpe, die im Frühling für Aufsehen sorgt.");
-        tulipEight.setPotCircumference(12.0); // Beispiel für den Pflanztopfumfang
-        tulipEight.setPlantCircumference(12.5);
-        tulipEight.setTags(Arrays.asList("Blume", "Fruehling", "Zwiebel- und Knollenpflanzen"));
-        tulipEight.setSeller(user2);
-        plantService.savePlant(tulipEight);
-
-        // Gelbe Triumph-Tulpe
-        Plant tulipNine = new Plant();
-        tulipNine.setTitle("Gelbe Triumph-Tulpe");
-        tulipNine.setPhotos(Arrays.asList("tulip.jpg"));
-        tulipNine.setHeight(30);
-        tulipNine.setPrice(9.79);
-        tulipNine.setHasPlanter(false);
-        tulipNine.setDescription("Eine leuchtende gelbe Triumph-Tulpe, die im April blüht.");
-        tulipNine.setPotCircumference(0.0);
-        tulipNine.setPlantCircumference(10.0);
-        tulipNine.setTags(Arrays.asList("Blume", "Fruehling", "Gemuese"));
-        tulipNine.setSeller(user1);
-        plantService.savePlant(tulipNine);
-
-        // Weiße Gefüllte Viridiflora-Tulpe
-        Plant tulipTen = new Plant();
-        tulipTen.setTitle("Weiße Gefuellte Viridiflora-Tulpe");
-        tulipTen.setPhotos(Arrays.asList("tulip.jpg"));
-        tulipTen.setHeight(35);
-        tulipTen.setPrice(10.49);
-        tulipTen.setHasPlanter(true);
-        tulipTen.setDescription("Eine elegante weiße gefüllte Viridiflora-Tulpe mit grünen Akzenten.");
-        tulipTen.setPotCircumference(10.0); // Beispiel für den Pflanztopfumfang
-        tulipTen.setPlantCircumference(11.0);
-        tulipTen.setTags(Arrays.asList("Blume", "Fruehling", "Zwiebel- und Knollenpflanzen"));
-        tulipTen.setSeller(user2);
-        plantService.savePlant(tulipTen);
-
         // Kaktus
         Plant cactus = new Plant();
-        cactus.setTitle("Kakteen Echinopsis Lobivia cacti hybrid Lobivia cactus");
+        cactus.setTitle("Echinopsis Lobivia Kaktus");
         cactus.setPhotos(Arrays.asList("cactus.jpg", "cactus2.jpg"));
         cactus.setHeight(40);
         cactus.setPrice(90.49);
@@ -320,7 +193,7 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
 
         Plant pothos = new Plant();
         pothos.setTitle("Pothos");
-        pothos.setPhotos(Arrays.asList("pothos.jpg"));
+        pothos.setPhotos(Arrays.asList("epipremnum.jpg"));
         pothos.setHeight(60);
         pothos.setPrice(19.99);
         pothos.setHasPlanter(false);
@@ -333,7 +206,7 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
 
         Plant snakePlant = new Plant();
         snakePlant.setTitle("Bogenhanf");
-        snakePlant.setPhotos(Arrays.asList("sansevieria.jpg"));
+        snakePlant.setPhotos(Arrays.asList("bogenhanf.jpg"));
         snakePlant.setHeight(70);
         snakePlant.setPrice(24.99);
         snakePlant.setHasPlanter(true);
@@ -346,7 +219,7 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
 
         Plant peaceLily = new Plant();
         peaceLily.setTitle("Einblatt");
-        peaceLily.setPhotos(Arrays.asList("spathiphyllum.jpg"));
+        peaceLily.setPhotos(Arrays.asList("einblatt.jpg"));
         peaceLily.setHeight(50);
         peaceLily.setPrice(21.99);
         peaceLily.setHasPlanter(true);
