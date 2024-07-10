@@ -111,7 +111,7 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
 
         Plant rose = new Plant();
         rose.setTitle("Rote Rose");
-        rose.setPhotos(Arrays.asList("rose.jpg"));
+        rose.setPhotos(Arrays.asList("rose2.jpg"));
         rose.setHeight(50);
         rose.setPrice(15.99);
         rose.setHasPlanter(true);
@@ -138,15 +138,15 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
 
         // Kaktus
         Plant cactus = new Plant();
-        cactus.setTitle("Echinopsis Lobivia Kaktus");
-        cactus.setPhotos(Arrays.asList("cactus.jpg", "cactus2.jpg"));
+        cactus.setTitle("Echinopsis Kaktus");
+        cactus.setPhotos(Arrays.asList("kaktus.jpg"));
         cactus.setHeight(40);
         cactus.setPrice(90.49);
         cactus.setHasPlanter(true);
         cactus.setDescription("");
         cactus.setPotCircumference(30.0);
         cactus.setPlantCircumference(20.0);
-        cactus.setTags(Arrays.asList("Kuebelpflanzen", "Sommerblumen", "Zimmerpflanzen"));
+        cactus.setTags(Arrays.asList("Zimmerpflanzen", "Sommerblumen", "Kuebelpflanzen"));
         cactus.setSeller(user3);
         plantService.savePlant(cactus);
 
