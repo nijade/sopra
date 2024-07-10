@@ -110,7 +110,7 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
         // Beispielpflanze: Rose
 
         Plant rose = new Plant();
-        rose.setTitle("rote Rose");
+        rose.setTitle("Rote Rose");
         rose.setPhotos(Arrays.asList("rose.jpg"));
         rose.setHeight(50);
         rose.setPrice(15.99);
@@ -407,7 +407,7 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
         careInstructionService.save(fruitInstruction);
         //*********************************************************************************
 
-        // Test Quizze
+        // Quizze
         Quiz quizOne = new Quiz();
         quizOne.setQuestionOne("Welcher Teil der Pflanze führt die Photosynthese durch?");
         quizOne.setPossibleAnswersQuestionOne(Arrays.asList("Wurzeln", "Stamm", "Blätter", "Blüten"));
@@ -459,6 +459,111 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
         quizFour.setRightAnswersQuestionThree("Blüten");
         quizOne.setIsChosen(false);
         quizService.saveQuiz(quizFour);
+
+        Quiz quizFive = new Quiz();
+        quizFive.setQuestionOne("Wie nennt man den Teil der Pflanze, der sie im Boden verankert?");
+        quizFive.setPossibleAnswersQuestionOne(Arrays.asList("Wurzeln", "Stamm", "Blätter", "Blüten"));
+        quizFive.setRightAnswersQuestionOne("Wurzeln");
+        quizFive.setQuestionTwo("Welche Substanz absorbiert Licht für die Photosynthese?");
+        quizFive.setPossibleAnswersQuestionTwo(Arrays.asList("Chlorophyll", "Wasser", "Kohlenstoffdioxid", "Sauerstoff"));
+        quizFive.setRightAnswersQuestionTwo("Chlorophyll");
+        quizFive.setQuestionThree("Welcher Teil der Pflanze wird oft als Nahrungsmittel verwendet und speichert Stärke?");
+        quizFive.setPossibleAnswersQuestionThree(Arrays.asList("Wurzeln", "Blätter", "Blüten", "Früchte"));
+        quizFive.setRightAnswersQuestionThree("Wurzeln");
+        quizFive.setIsChosen(false);
+        quizService.saveQuiz(quizFive);
+
+        Quiz quizSix = new Quiz();
+        quizSix.setQuestionOne("Welche Pflanzenteile sind hauptsächlich für die Fortpflanzung verantwortlich?");
+        quizSix.setPossibleAnswersQuestionOne(Arrays.asList("Blüten", "Wurzeln", "Blätter", "Stamm"));
+        quizSix.setRightAnswersQuestionOne("Blüten");
+        quizSix.setQuestionTwo("Welcher Teil der Pflanze unterstützt die Blätter und transportiert Wasser und Nährstoffe?");
+        quizSix.setPossibleAnswersQuestionTwo(Arrays.asList("Stamm", "Wurzeln", "Blüten", "Früchte"));
+        quizSix.setRightAnswersQuestionTwo("Stamm");
+        quizSix.setQuestionThree("Was produzieren Pflanzen durch Photosynthese?");
+        quizSix.setPossibleAnswersQuestionThree(Arrays.asList("Glukose und Sauerstoff", "Wasser und Kohlenstoffdioxid", "Proteine und Mineralien", "Vitamine und Fette"));
+        quizSix.setRightAnswersQuestionThree("Glukose und Sauerstoff");
+        quizSix.setIsChosen(false);
+        quizService.saveQuiz(quizSix);
+
+        Quiz quizSeven = new Quiz();
+        quizSeven.setQuestionOne("Welcher Teil der Pflanze ist für die Herstellung von Samen verantwortlich?");
+        quizSeven.setPossibleAnswersQuestionOne(Arrays.asList("Blüten", "Blätter", "Stamm", "Wurzeln"));
+        quizSeven.setRightAnswersQuestionOne("Blüten");
+        quizSeven.setQuestionTwo("Welche Art von Blättern verlieren die meisten Pflanzen im Winter?");
+        quizSeven.setPossibleAnswersQuestionTwo(Arrays.asList("Laubblätter", "Nadeln", "Blütenblätter", "Fruchtblätter"));
+        quizSeven.setRightAnswersQuestionTwo("Laubblätter");
+        quizSeven.setQuestionThree("Welcher Teil der Pflanze enthält Samen?");
+        quizSeven.setPossibleAnswersQuestionThree(Arrays.asList("Früchte", "Blätter", "Wurzeln", "Stamm"));
+        quizSeven.setRightAnswersQuestionThree("Früchte");
+        quizSeven.setIsChosen(false);
+        quizService.saveQuiz(quizSeven);
+
+        Quiz quizEight = new Quiz();
+        quizEight.setQuestionOne("Wie nennt man den Wachstumsprozess von Pflanzen in Richtung der Schwerkraft?");
+        quizEight.setPossibleAnswersQuestionOne(Arrays.asList("Gravitropismus", "Phototropismus", "Hydrotropismus", "Thigmotropismus"));
+        quizEight.setRightAnswersQuestionOne("Gravitropismus");
+        quizEight.setQuestionTwo("Welche Funktion haben die Blütenblätter einer Pflanze?");
+        quizEight.setPossibleAnswersQuestionTwo(Arrays.asList("Anlocken von Bestäubern", "Photosynthese", "Wasseraufnahme", "Nährstoffspeicherung"));
+        quizEight.setRightAnswersQuestionTwo("Anlocken von Bestäubern");
+        quizEight.setQuestionThree("Welcher Teil der Pflanze schützt die Samen und hilft bei ihrer Verbreitung?");
+        quizEight.setPossibleAnswersQuestionThree(Arrays.asList("Früchte", "Wurzeln", "Blätter", "Stamm"));
+        quizEight.setRightAnswersQuestionThree("Früchte");
+        quizEight.setIsChosen(false);
+        quizService.saveQuiz(quizEight);
+
+        Quiz quizNine = new Quiz();
+        quizNine.setQuestionOne("Wie nennt man den Prozess, bei dem Pflanzen von einer Blüte zur anderen Pollen übertragen?");
+        quizNine.setPossibleAnswersQuestionOne(Arrays.asList("Bestäubung", "Befruchtung", "Keimung", "Vermehrung"));
+        quizNine.setRightAnswersQuestionOne("Bestäubung");
+        quizNine.setQuestionTwo("Welche Pflanzenart bleibt das ganze Jahr über grün?");
+        quizNine.setPossibleAnswersQuestionTwo(Arrays.asList("Immergrün", "Laubabwerfend", "Blütenpflanzen", "Gräser"));
+        quizNine.setRightAnswersQuestionTwo("Immergrün");
+        quizNine.setQuestionThree("Welcher Teil der Pflanze wächst normalerweise unter der Erde?");
+        quizNine.setPossibleAnswersQuestionThree(Arrays.asList("Wurzeln", "Stamm", "Blätter", "Blüten"));
+        quizNine.setRightAnswersQuestionThree("Wurzeln");
+        quizNine.setIsChosen(false);
+        quizService.saveQuiz(quizNine);
+
+        Quiz quizTen = new Quiz();
+        quizTen.setQuestionOne("Welche Pflanzenart verliert ihre Blätter im Winter?");
+        quizTen.setPossibleAnswersQuestionOne(Arrays.asList("Laubbäume", "Nadelbäume", "Immergrün", "Gräser"));
+        quizTen.setRightAnswersQuestionOne("Laubbäume");
+        quizTen.setQuestionTwo("Wie nennt man die kleinsten, oft farbenfrohen Teile einer Blume, die die Samen schützen?");
+        quizTen.setPossibleAnswersQuestionTwo(Arrays.asList("Blütenblätter", "Staubblätter", "Kelchblätter", "Fruchtknoten"));
+        quizTen.setRightAnswersQuestionTwo("Blütenblätter");
+        quizTen.setQuestionThree("Welcher Teil der Pflanze nimmt Lichtenergie auf?");
+        quizTen.setPossibleAnswersQuestionThree(Arrays.asList("Blätter", "Stamm", "Wurzeln", "Blüten"));
+        quizTen.setRightAnswersQuestionThree("Blätter");
+        quizTen.setIsChosen(false);
+        quizService.saveQuiz(quizTen);
+
+        Quiz quizEleven = new Quiz();
+        quizEleven.setQuestionOne("Wie nennt man den Prozess, bei dem Pflanzen aus Samen wachsen?");
+        quizEleven.setPossibleAnswersQuestionOne(Arrays.asList("Keimung", "Bestäubung", "Befruchtung", "Photosynthese"));
+        quizEleven.setRightAnswersQuestionOne("Keimung");
+        quizEleven.setQuestionTwo("Welche Pflanzenart bildet Zapfen zur Fortpflanzung?");
+        quizEleven.setPossibleAnswersQuestionTwo(Arrays.asList("Nadelbäume", "Laubbäume", "Gräser", "Blütenpflanzen"));
+        quizEleven.setRightAnswersQuestionTwo("Nadelbäume");
+        quizEleven.setQuestionThree("Welcher Teil der Pflanze ist oft essbar und enthält Samen?");
+        quizEleven.setPossibleAnswersQuestionThree(Arrays.asList("Früchte", "Blätter", "Wurzeln", "Stamm"));
+        quizEleven.setRightAnswersQuestionThree("Früchte");
+        quizEleven.setIsChosen(false);
+        quizService.saveQuiz(quizEleven);
+
+        Quiz quizTwelve = new Quiz();
+        quizTwelve.setQuestionOne("Welche Pflanzenart hat Blätter, die sich im Winter verfärben und abfallen?");
+        quizTwelve.setPossibleAnswersQuestionOne(Arrays.asList("Laubbäume", "Nadelbäume", "Immergrün", "Gräser"));
+        quizTwelve.setRightAnswersQuestionOne("Laubbäume");
+        quizTwelve.setQuestionTwo("Wie nennt man den Prozess, bei dem Pflanzen CO2 in die Atmosphäre freisetzen?");
+        quizTwelve.setPossibleAnswersQuestionTwo(Arrays.asList("Atmung", "Photosynthese", "Transpiration", "Fermentation"));
+        quizTwelve.setRightAnswersQuestionTwo("Atmung");
+        quizTwelve.setQuestionThree("Welcher Teil der Pflanze wird oft als Gemüse gegessen und enthält viele Vitamine?");
+        quizTwelve.setPossibleAnswersQuestionThree(Arrays.asList("Blätter", "Wurzeln", "Blüten", "Stamm"));
+        quizTwelve.setRightAnswersQuestionThree("Blätter");
+        quizTwelve.setIsChosen(false);
+        quizService.saveQuiz(quizTwelve);
+
 
 
 
