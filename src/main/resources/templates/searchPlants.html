@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="de">
 <head>
   <th:block th:insert="~{fragments/htmlHead :: head}"></th:block>
-  <title>Suchergebnisse</title>
+  <title th:text="#{searchPlants.title}">Suchergebnisse</title>
   <style>
     body, html {
       height: 100%;
@@ -19,14 +19,13 @@
       border-radius: 10px;
       width: 20%;
       position: relative;
-      top: 48px;
+      top: 22px;
       left: 30px;
       padding: 20px;
       background-color: #FFFFFF;
       border-style: solid;
       border-color: #354733;
       border-width: thin;
-
       z-index: 100; /* Ensure filter is above content */
       height: 500px; /* Automatically adjusts height to content */
     }
@@ -218,22 +217,113 @@
       border-color: #354733;
       border-width: thin;
     }
+    .button-blocker{
+      position: relative;
+      background-color: blue;
+      top: -55rem;
+      left: 20rem;
+      height: 20rem;
+      width: 20rem;
+    }
+        .nav-color{
+      background-color: #3366FF;
+    }
+    .dropdown-menu {
+      margin-left: -100px; /* Dropdown-Menü im header so positionieren, dass es den header rechts nicht überschreitet */
+    }
+    .navbar-nav .nav-item a.nav-link {
+      padding: 10px 15px; /* Gleiche Höhe für beide Links */
+    }
+    .form-inline .form-control, .form-inline .custom-select, .form-inline .btn {
+      margin-right: 5px; /* Abstand zwischen den Elementen im Formular */
+    }
+    .navbar-nav {
+      align-items: center; /* Zentriere die Navigationselemente */
+    }
+    .btn btn-outline-success{
+      color:
+      position: absolute;
+      left: 10px;
+    }
+    .myFaves{
+      position: absolute;
+      left: 950px;
+      top: 12px;
+    }
   </style>
 </head>
 <body>
-<div th:replace="fragments/header :: header"></div>
+<div class="nav-color">
+  <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #8A9B6E" th:fragment="header">
+    <a class="navbar-brand" style="color: #354733; font-weight: bold; font-family: Futura" th:href="@{/}">PlantBay24</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <!-- Suchleiste linksbündig -->
+      <form class="form-inline mr-2" action="/searchPlants" method="get">
+        <input class="form-control" type="text" name="title" th:placeholder="#{header.searchWith}" aria-label="Search" th:value="${searchTerm}">
+        <select class="custom-select" name="category">
+          <option value="Alle Kategorien" th:selected="${category == 'Alle Kategorien'}" th:text="#{header.allCategories}">Alle Kategorien</option>
+          <option value="Balkonblumen" th:selected="${category == 'Balkonblumen'}" th:text="#{plant.tags.balconyFlowers}">Balkonblumen</option>
+          <option value="Heilpflanzen" th:selected="${category == 'Heilpflanzen'}" th:text="#{plant.tags.medicinalPlants}">Heilpflanzen</option>
+          <option value="Wildpflanzen" th:selected="${category == 'Wildpflanzen'}" th:text="#{plant.tags.wildPlants}">Wildpflanzen</option>
+          <option value="Baeume und Straeucher" th:selected="${category == 'Baeume und Straeucher'}" th:text="#{plant.tags.treesAndShrubs}">Bäume und Sträucher</option>
+          <option value="Kletterpflanzen" th:selected="${category == 'Kletterpflanzen'}" th:text="#{plant.tags.climbingPlants}">Kletterpflanzen</option>
+          <option value="Kuebelpflanzen" th:selected="${category == 'Kuebelpflanzen'}" th:text="#{plant.tags.containerPlants}">Kübelpflanzen</option>
+          <option value="Rosen" th:selected="${category == 'Rosen'}" th:text="#{plant.tags.roses}">Rosen</option>
+          <option value="Sommerblumen" th:selected="${category == 'Sommerblumen'}" th:text="#{plant.tags.summerFlowers}">Sommerblumen</option>
+          <option value="Stauden" th:selected="${category == 'Stauden'}" th:text="#{plant.tags.perennials}">Stauden</option>
+          <option value="Wasserpflanzen" th:selected="${category == 'Wasserpflanzen'}" th:text="#{plant.tags.aquaticPlants}">Wasserpflanzen</option>
+          <option value="Zimmerpflanzen" th:selected="${category == 'Zimmerpflanzen'}" th:text="#{plant.tags.indoorPlants}">Zimmerpflanzen</option>
+          <option value="Zwiebel- und Knollenpflanzen" th:selected="${category == 'Zwiebel- und Knollenpflanzen'}" th:text="#{plant.tags.bulbsAndTubers}">Zwiebel- und Knollenpflanzen</option>
+          <option value="Gemuese" th:selected="${category == 'Gemuese'}" th:text="#{plant.tags.vegetables}">Gemüse</option>
+          <option value="Obst" th:selected="${category == 'Obst'}" th:text="#{plant.tags.fruits}">Obst</option>
+          <!-- Weitere Optionen nach Bedarf -->
+        </select>
+        <button class="btn btn-outline-success" type="submit" style="background-color: #354733; color: #F3F3FB; border-color: #354733;" th:text="#{header.search}">Suchen</button>
+      </form>
+
+      <!-- Navigationslinks rechtsbündig -->
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="meinsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #ffffff; font-weight: bold;" th:text="#{header.me}">
+          </a>
+          <div class="dropdown-menu" aria-labelledby="meinsDropdown">
+            <a class="dropdown-item" th:href="@{/ownConversations}" th:text="#{header.messages}">Meine Nachrichten</a>
+            <a class="dropdown-item" th:href="@{/myplants}" th:text="#{header.myPlants}">Meine Inserate</a>
+            <a class="dropdown-item" th:href="@{/ownPurchases}" th:text="#{header.purchases}">Meine Käufe</a>
+            <a class="dropdown-item" th:href="@{/profile/view}" th:text="#{profile.title}">Mein Profil</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <div class="myFaves">
+            <strong><a class="btn btn-outline-success" style="background-color:#8A9B6E  ;color:#FFFFFF;  font-weight: bold;   border-color: #8A9B6E;" th:href="@{/myFaves}" th:text="#{faves.title}">Merkliste</a></strong>
+          </div>
+        </li>
+        <li class="nav-item">
+          <strong><a class="nav-link" style="color: #FFFFFF" th:href="@{/create}" th:text="#{header.createPlant}">Inserat erstellen</a></strong>
+        </li>
+        <li class="nav-item">
+          <a class="btn btn-outline-success" href="/" style="background-color: #354733; color: #FFFFFF; margin-right: 10px;">language selection at home</a>
+
+        </li>
+      </ul>
+    </div>
+  </nav>
+</div>
 <div class="main-container">
   <div class="filter-container">
-    <h3>Filteroptionen</h3>
+    <h3 th:text="#{searchPlants.filterOptions}">Filteroptionen</h3>
     <form th:action="@{/searchPlantsAdditionalFilters}" method="get">
       <!-- Sichtbares Eingabefeld für den Titel -->
       <div class="sort-container">
-        <p>Sortieren nach:</p>
+        <p th:text="#{searchPlants.sortBy}">Sortieren nach:</p>
         <div class="select-container">
           <select class="select-option" id="selectOption" name="selectedOption" th:value="${selectOption}">
-            <option value="Am relevantesten" th:selected="${selectOption == 'Am relevantesten'}">Am relevantesten</option>
-            <option value="Guenstigste Zuerst" th:selected="${selectOption == 'Guenstigste Zuerst'}">Günstigste Zuerst</option>
-            <option value="Teuerste Zuerst" th:selected="${selectOption == 'Teuerste Zuerst'}">Teuerste Zuerst</option>
+            <option value="Am relevantesten" th:text="#{searchPlants.mostRelevant}" th:selected="${selectOption == 'Am relevantesten'}">Am relevantesten</option>
+            <option value="Guenstigste Zuerst" th:text="#{searchPlants.lowestPriceFirst}" th:selected="${selectOption == 'Guenstigste Zuerst'}">Günstigste Zuerst</option>
+            <option value="Teuerste Zuerst" th:text="#{searchPlants.highestPriceFirst}" th:selected="${selectOption == 'Teuerste Zuerst'}">Teuerste Zuerst</option>
           </select>
         </div>
       </div>
@@ -243,60 +333,59 @@
       <!-- Weitere Filteroptionen -->
       <div class="form-group">
         <div class="form-sub-group">
-          <label for="priceMin" class="form-label">Preis von</label>
+          <label for="priceMin" class="form-label" th:text="#{searchPlants.priceFrom}">Preis von</label>
           <input type="number" class="form-control" id="priceMin" name="priceMin" min="0" max="2147483647" th:value="${priceMinimum != null ? priceMinimum : 0}" placeholder="Min">
         </div>
         <div class="form-sub-group" th:if="${priceMaximum != 2147483647}">
-          <label for="priceMax" class="form-label">Preis bis</label>
+          <label for="priceMax" class="form-label" th:text="#{searchPlants.priceTo}">Preis bis</label>
           <input type="number" class="form-control" id="priceMax" name="priceMax" min="0" max="2147483647" th:value="${priceMaximum}" placeholder="Max">
         </div>
       </div>
       <div class="form-group">
         <div class="form-sub-group">
-          <label for="heightMin" class="form-label">Höhe von</label>
+          <label for="heightMin" class="form-label" th:text="#{searchPlants.heightFrom}">Höhe von</label>
           <input type="number" class="form-control" id="heightMin" name="heightMin" min="0" max="2147483647" th:value="${heightMinimum != null ? heightMinimum : 0}" placeholder="Min">
         </div>
         <div class="form-sub-group" th:if="${heightMaximum != 2147483647}">
-          <label for="heightMax" class="form-label">Höhe bis</label>
+          <label for="heightMax" class="form-label" th:text="#{searchPlants.heightTo}">Höhe bis</label>
           <input type="number" class="form-control" id="heightMax" name="heightMax" min="0" max="2147483647" th:value="${heightMaximum}" placeholder="Max">
         </div>
       </div>
       <div class="form-group">
         <div class="form-sub-group">
-          <label for="circumferenceMin" class="form-label">Umfang von</label>
+          <label for="circumferenceMin" class="form-label" th:text="#{searchPlants.circumferenceFrom}">Umfang von</label>
           <input type="number" class="form-control" id="circumferenceMin" name="circumferenceMin" min="0" max="2147483647" th:value="${circumferenceMinimum != null ? circumferenceMinimum : 0}" placeholder="Min">
         </div>
         <div class="form-sub-group" th:if="${circumferenceMaximum != 2147483647}">
-          <label for="circumferenceMax" class="form-label">Umfang bis</label>
+          <label for="circumferenceMax" class="form-label" th:text="#{searchPlants.circumferenceTo}">Umfang bis</label>
           <input type="number" class="form-control" id="circumferenceMax" name="circumferenceMax" min="0" max="2147483647" th:value="${circumferenceMaximum}" placeholder="Max">
         </div>
       </div>
       <div class="buttons-container">
         <!-- Thymeleaf-generierter Link für den Submit-Button -->
-        <button type="submit" class="btn btn-primary">Filter anwenden</button>
+        <button type="submit" class="btn btn-primary" th:text="#{searchPlants.applyFilter}">Filter anwenden</button>
       </div>
     </form>
   </div>
   <div class="container">
     <div class="header-container">
-      <h2>Suchergebnisse für "<span th:text="${searchTerm}">Suchbegriff</span>" in "<span th:text="${category}">Kategorie</span>"</h2>
-      <h4>Sortiert nach: "<span th:text="${selectOption}">Sortierart</span>"</h4>
+      <h2 th:text="#{searchPlants.SearchResults}">Suchergebnisse"</h2>
     </div>
-    <div  th:if="${plants != null && !plants.isEmpty()}">
-      <div  th:each="plant, index : ${plants}" class="plant">
+    <div th:if="${plants != null && !plants.isEmpty()}">
+      <div th:each="plant, index : ${plants}" class="plant">
         <a class="searchResultDivFiller" style="color:black" th:href="@{/plants/{id}(id=${plant.plantID})}"></a>
         <img th:if="${!plant.photos.isEmpty()}" th:src="'images/' + ${plant.photos.get(0)}" alt="Plant Photo">
         <div class="plant-info">
           <h3 class="plant-title" th:text="${plant.title}">Pflanzen Name</h3>
           <div class="plant-details">
-            <p><strong>Höhe:</strong> <span th:text="${plant.height}">Höhe</span> cm</p>
-            <p><strong>Preis:</strong> <span th:text="${plant.price}">Preis</span> €</p>
+            <p><strong th:text="#{searchPlants.height}">Höhe:</strong> <span th:text="${plant.height}">Höhe</span> cm</p>
+            <p><strong th:text="#{searchPlants.price}">Preis:</strong> <span th:text="${plant.price}">Preis</span> €</p>
           </div>
         </div>
       </div>
     </div>
     <div th:if="${plants == null || plants.isEmpty()}">
-      <p class="no-plants-message">Keine Pflanze mit diesem Titel in dieser Kategorie gefunden.</p>
+      <p th:text="#{searchPlants.noPlantWithThatTitle}" class="no-plants-message">Keine Pflanze mit diesem Titel in dieser Kategorie gefunden.</p>
     </div>
   </div>
 </div>
