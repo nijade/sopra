@@ -252,7 +252,7 @@ public class UserService implements UserDetailsService {
 
     public void addXp(User user, Integer xp){
         user.xp += xp;
-        if(user.xp > user.xpToNextLevel){
+        if(user.xp >= user.xpToNextLevel){
             user.xp = user.xp - user.xpToNextLevel;
             user.level++;
             user.xpToNextLevel = user.calculateXpToNextLevel();

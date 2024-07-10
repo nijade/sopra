@@ -57,6 +57,7 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
         user1.setGender(Gender.EMPTY);
         user1.setSales(7);
         user1.setLevel(15);
+        user1.xpToNextLevel = user1.calculateXpToNextLevel();
         user1.setProfileImage("pb1.jpg");
         userService.saveUser(user1);
 
@@ -70,6 +71,7 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
         user2.setSales(8);
         user2.setBuys(4);
         user2.setLevel(10);
+        user2.xpToNextLevel = user1.calculateXpToNextLevel();
         userService.saveUser(user2);
 
         // Nutzer 3
@@ -81,6 +83,7 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
         user3.setGender(Gender.EMPTY);
         user3.setSales(12);
         user3.setLevel(33);
+        user3.xpToNextLevel = user1.calculateXpToNextLevel();
         user3.setProfileImage("pb2.jpg");
         userService.saveUser(user3);
 
@@ -94,6 +97,7 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
         user4.setSales(1);
         user4.setBuys(2);
         user4.setLevel(5);
+        user4.xpToNextLevel = user1.calculateXpToNextLevel();
         userService.saveUser(user4);
 
         // Nutzer 5
