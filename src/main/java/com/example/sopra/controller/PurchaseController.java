@@ -59,7 +59,7 @@ public class PurchaseController {
     public String sellPlantToUser(@RequestParam("conversationId") Integer conversationId){
         Conversation conversationToSell = conversationService.getConversationById(conversationId);
         conversationService.sellPlantBasedOnConversation(conversationToSell);
-        userService.addXp(userService.getCurrentUser(), 50);
+        userService.addXp(conversationToSell.getPlant().getSeller(), 50);
         userService.addXp(conversationToSell.getBuyer(), 50);
         return "redirect:/showConversation?conversationId=" + conversationToSell.getConversationId();
     }
