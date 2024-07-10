@@ -80,13 +80,14 @@ public class UserProfileController {
      * @return die zu erscheinende html-Seite
      */
     @PostMapping("/edit")
-    public String saveProfile(@ModelAttribute("user") User updatedUser, @RequestParam List<String> visibleAttributes) {
+    public String saveProfile(@ModelAttribute("user") User updatedUser, @RequestParam(required=false) List<String> visibleAttributes) {
         User currentUser = userService.getCurrentUser();
         if (currentUser == null) {
             return "redirect:/login";
         }
         userService.updateUserProfile(currentUser, updatedUser);
         userService.updateVisibleAttributes(currentUser.getUsername(), visibleAttributes);
+
         return "redirect:/profile/view";
     }
 
