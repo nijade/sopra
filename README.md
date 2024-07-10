@@ -7,8 +7,8 @@ Abgabe Version auf main branch.
   Login u.a. mit folgenden Accounts möglich:
 
 - Benutzername: Hans , Passwort:0987
-- Benutzername: User1 , Passwort:1234
-- Benutzername: User2 , Passwort:5678
+- Benutzername: AnnaGrün , Passwort:1234
+- Benutzername: Paul86 , Passwort:5678
 
  Sonstiges:
 
