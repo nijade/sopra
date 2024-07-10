@@ -41,38 +41,37 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <!-- Suchleiste linksbündig -->
       <form class="form-inline mr-2" action="/searchPlants" method="get">
-        <input class="form-control" type="text" name="title" placeholder="Suchen in..." aria-label="Search" th:value="${searchTerm}">
+        <input class="form-control" type="text" name="title" th:placeholder="#{header.searchWith}" aria-label="Search" th:value="${searchTerm}">
         <select class="custom-select" name="category">
-          <option value="Alle Kategorien" th:selected="${category == 'Alle Kategorien'}">Alle Kategorien</option>
-          <option value="Balkonblumen" th:selected="${category == 'Balkonblumen'}">Balkonblumen</option>
-          <option value="Heilpflanzen" th:selected="${category == 'Heilpflanzen'}">Heilpflanzen</option>
-          <option value="Wildpflanzen" th:selected="${category == 'Wildpflanzen'}">Wildpflanzen</option>
-          <option value="Baeume und Straeucher" th:selected="${category == 'Baeume und Straeucher'}">Bäume und Sträucher</option>
-          <option value="Kletterpflanzen" th:selected="${category == 'Kletterpflanzen'}">Kletterpflanzen</option>
-          <option value="Kuebelpflanzen" th:selected="${category == 'Kuebelpflanzen'}">Kübelpflanzen</option>
-          <option value="Rosen" th:selected="${category == 'Rosen'}">Rosen</option>
-          <option value="Sommerblumen" th:selected="${category == 'Sommerblumen'}">Sommerblumen</option>
-          <option value="Stauden" th:selected="${category == 'Stauden'}">Stauden</option>
-          <option value="Wasserpflanzen" th:selected="${category == 'Wasserpflanzen'}">Wasserpflanzen</option>
-          <option value="Zimmerpflanzen" th:selected="${category == 'Zimmerpflanzen'}">Zimmerpflanzen</option>
-          <option value="Zwiebel- und Knollenpflanzen" th:selected="${category == 'Zwiebel- und Knollenpflanzen'}">Zwiebel- und Knollenpflanzen</option>
-          <option value="Gemuese" th:selected="${category == 'Gemuese'}">Gemuese</option>
-          <option value="Obst" th:selected="${category == 'Obst'}">Obst</option>
+          <option value="Alle Kategorien" th:selected="${category == 'Alle Kategorien'}" th:text="#{header.allCategories}">Alle Kategorien</option>
+          <option value="Balkonblumen" th:selected="${category == 'Balkonblumen'}" th:text="#{plant.tags.balconyFlowers}">Balkonblumen</option>
+          <option value="Heilpflanzen" th:selected="${category == 'Heilpflanzen'}" th:text="#{plant.tags.medicinalPlants}">Heilpflanzen</option>
+          <option value="Wildpflanzen" th:selected="${category == 'Wildpflanzen'}" th:text="#{plant.tags.wildPlants}">Wildpflanzen</option>
+          <option value="Baeume und Straeucher" th:selected="${category == 'Baeume und Straeucher'}" th:text="#{plant.tags.treesAndShrubs}">Bäume und Sträucher</option>
+          <option value="Kletterpflanzen" th:selected="${category == 'Kletterpflanzen'}" th:text="#{plant.tags.climbingPlants}">Kletterpflanzen</option>
+          <option value="Kuebelpflanzen" th:selected="${category == 'Kuebelpflanzen'}" th:text="#{plant.tags.containerPlants}">Kübelpflanzen</option>
+          <option value="Rosen" th:selected="${category == 'Rosen'}" th:text="#{plant.tags.roses}">Rosen</option>
+          <option value="Sommerblumen" th:selected="${category == 'Sommerblumen'}" th:text="#{plant.tags.summerFlowers}">Sommerblumen</option>
+          <option value="Stauden" th:selected="${category == 'Stauden'}" th:text="#{plant.tags.perennials}">Stauden</option>
+          <option value="Wasserpflanzen" th:selected="${category == 'Wasserpflanzen'}" th:text="#{plant.tags.aquaticPlants}">Wasserpflanzen</option>
+          <option value="Zimmerpflanzen" th:selected="${category == 'Zimmerpflanzen'}" th:text="#{plant.tags.indoorPlants}">Zimmerpflanzen</option>
+          <option value="Zwiebel- und Knollenpflanzen" th:selected="${category == 'Zwiebel- und Knollenpflanzen'}" th:text="#{plant.tags.bulbsAndTubers}">Zwiebel- und Knollenpflanzen</option>
+          <option value="Gemuese" th:selected="${category == 'Gemuese'}" th:text="#{plant.tags.vegetables}">Gemüse</option>
+          <option value="Obst" th:selected="${category == 'Obst'}" th:text="#{plant.tags.fruits}">Obst</option>
           <!-- Weitere Optionen nach Bedarf -->
         </select>
-        <button class="btn btn-outline-success" type="submit" style="background-color: #354733; color: #F3F3FB; border-color: #354733;">Suchen</button>
+        <button class="btn btn-outline-success" type="submit" style="background-color: #354733; color: #F3F3FB; border-color: #354733;" th:text="#{header.search}">Suchen</button>
       </form>
 
       <!-- Navigationslinks rechtsbündig -->
       <ul class="navbar-nav ml-auto">
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="meinsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #ffffff; font-weight: bold;">
-            Meins
+          <a class="nav-link dropdown-toggle" href="#" id="meinsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #ffffff; font-weight: bold;" th:text="#{header.me}">
           </a>
           <div class="dropdown-menu" aria-labelledby="meinsDropdown">
-            <a class="dropdown-item" th:href="@{/ownConversations}">Meine Nachrichten</a>
-            <a class="dropdown-item" th:href="@{/myplants}">Meine Inserate</a>
-            <a class="dropdown-item" th:href="@{/ownPurchases}">Meine Käufe</a>
+            <a class="dropdown-item" th:href="@{/ownConversations}" th:text="#{header.messages}">Meine Nachrichten</a>
+            <a class="dropdown-item" th:href="@{/myplants}" th:text="#{header.myPlants}">Meine Inserate</a>
+            <a class="dropdown-item" th:href="@{/ownPurchases}" th:text="#{header.purchases}">Meine Käufe</a>
             <a class="dropdown-item" th:href="@{/profile/view}" th:text="#{profile.title}">Mein Profil</a>
           </div>
         </li>
@@ -82,7 +81,7 @@
           </div>
         </li>
         <li class="nav-item">
-          <strong><a class="nav-link" style="color: #FFFFFF" th:href="@{/create}">Inserat erstellen</a></strong>
+          <strong><a class="nav-link" style="color: #FFFFFF" th:href="@{/create}" th:text="#{header.createPlant}">Inserat erstellen</a></strong>
         </li>
         <li class="nav-item">
           <a class="btn btn-outline-success" href="?lang=de" style="background-color: #354733; color: #FFFFFF; margin-right: 10px;">de</a>
