@@ -319,7 +319,7 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
         plantService.savePlant(ficus);
 
         Plant pothos = new Plant();
-        pothos.setTitle("Epipremnum aureum (Pothos)");
+        pothos.setTitle("Pothos");
         pothos.setPhotos(Arrays.asList("pothos.jpg"));
         pothos.setHeight(60);
         pothos.setPrice(19.99);
@@ -332,7 +332,7 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
         plantService.savePlant(pothos);
 
         Plant snakePlant = new Plant();
-        snakePlant.setTitle("Sansevieria trifasciata (Bogenhanf)");
+        snakePlant.setTitle("Bogenhanf");
         snakePlant.setPhotos(Arrays.asList("sansevieria.jpg"));
         snakePlant.setHeight(70);
         snakePlant.setPrice(24.99);
@@ -345,7 +345,7 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
         plantService.savePlant(snakePlant);
 
         Plant peaceLily = new Plant();
-        peaceLily.setTitle("Spathiphyllum (Einblatt)");
+        peaceLily.setTitle("Einblatt");
         peaceLily.setPhotos(Arrays.asList("spathiphyllum.jpg"));
         peaceLily.setHeight(50);
         peaceLily.setPrice(21.99);
