@@ -70,9 +70,9 @@
 <div th:replace="fragments/header :: header"></div>
 
 <div class="container">
-    <h2>Nachrichtenanzeige</h2>
+    <h2 th:text="#{conversation.title}">Nachrichtenanzeige</h2>
     <div th:if="${conversations.size() == 0}">
-        <p>Es gibt keine Nachrichten</p>
+        <p th:text="#{conversation.noMessages}">Es gibt keine Nachrichten</p>
     </div>
     <div th:each="conversation : ${conversations}">
         <div class="conversation-wrapper">
@@ -94,9 +94,9 @@
                 <div class="card">
                     <div class="card-body">
                         <div>
-                            <p th:text="'Pflanze: ' + ${conversation.getPlant().getTitle()}"></p>
-                            <p th:text="'Käufer: ' + ${conversation.getBuyer().getUsername()}"></p>
-                            <p th:text="'Verkäufer: ' + ${conversation.getPlant().getSeller().getUsername()}"></p>
+                            <p th:text="#{conversation.plantName} + ': ' + ${conversation.getPlant().getTitle()}"></p>
+                            <p th:text="#{conversation.buyerName} + ': ' + ${conversation.getBuyer().getUsername()}"></p>
+                            <p th:text="#{conversation.sellerName} + ': ' + ${conversation.getPlant().getSeller().getUsername()}"></p>
                         </div>
                         <div class="message-preview" th:text="${lastMessages[conversation.getConversationId()]?.content ?: 'Keine Nachrichten'}"></div>
                     </div>

@@ -59,7 +59,7 @@
 <body>
 <div th:replace="fragments/header :: header"></div>
 <div class="container">
-    <h2>Meine gekauften Pflanzen</h2>
+    <h2 th:text="#{purchase.title}">Meine gekauften Pflanzen</h2>
     <div class="plant-container">
         <div th:each="plant : ${ownPlants}" class="plant">
             <div class="container" style="background-color: white">
