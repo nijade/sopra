@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <th:block th:insert="~{fragments/htmlHead :: head}"></th:block>
-    <title>Suchergebnisse</title>
+    <title th:text="#{searchPlants.title}">Suchergebnisse</title>
     <style>
         body, html {
             height: 100%;
@@ -169,7 +169,7 @@
         </div>
     </div>
     <div class="welcome-message">
-        <h3>Aktuelle Inserate:</h3>
+        <h3 th:text="#{home.currentAdverts}">Aktuelle Inserate:</h3>
     </div>
     <div th:if="${plants != null && !plants.isEmpty()}" class="plant-container">
         <div th:each="plant : ${plants}" class="plant">
@@ -178,11 +178,11 @@
             <div class="image-container" th:if="${!plant.photos.isEmpty()}">
                 <img th:src="'/images/' + ${plant.photos.get(0)}" alt="Plant Photo">
             </div>
-            <p class="plant-price"><strong>Preis:</strong> <span th:text="${plant.price}">Preis</span> €</p>
+            <p th:class="plant-price"><strong th:text="#{searchPlants.price}">Preis:</strong> <span th:text="${plant.price}">Preis</span> €</p>
         </div>
     </div>
     <div th:if="${plants == null || plants.isEmpty()}">
-        <p>Keine Pflanzen gefunden.</p>
+        <p th:text="#{home.noPlantsFound}">Keine Pflanzen gefunden.</p>
     </div>
 </div>
 </body>
