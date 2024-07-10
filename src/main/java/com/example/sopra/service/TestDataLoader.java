@@ -291,6 +291,73 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
         palme.setSeller(hans);
         plantService.savePlant(palme);
 
+        //Zimmerpflanzen
+        Plant monstera = new Plant();
+        monstera.setTitle("Monstera Deliciosa");
+        monstera.setPhotos(Arrays.asList("monstera.jpg"));
+        monstera.setHeight(80);
+        monstera.setPrice(29.99);
+        monstera.setHasPlanter(false);
+        monstera.setDescription("Eine trendige Zimmerpflanze mit auffälligen Blättern.");
+        monstera.setPotCircumference(25.0);
+        monstera.setPlantCircumference(40.0);
+        monstera.setTags(Arrays.asList("Zimmerpflanzen", "Tropisch", "Blattschmuck"));
+        monstera.setSeller(user1);
+        plantService.savePlant(monstera);
+
+        Plant ficus = new Plant();
+        ficus.setTitle("Ficus Benjamina");
+        ficus.setPhotos(Arrays.asList("ficus.jpg"));
+        ficus.setHeight(100);
+        ficus.setPrice(34.99);
+        ficus.setHasPlanter(true);
+        ficus.setDescription("Ein klassischer Ficus mit eleganten, glänzenden Blättern.");
+        ficus.setPotCircumference(30.0);
+        ficus.setPlantCircumference(50.0);
+        ficus.setTags(Arrays.asList("Zimmerpflanzen", "Ficus", "Bäume"));
+        ficus.setSeller(user1);
+        plantService.savePlant(ficus);
+
+        Plant pothos = new Plant();
+        pothos.setTitle("Epipremnum aureum (Pothos)");
+        pothos.setPhotos(Arrays.asList("pothos.jpg"));
+        pothos.setHeight(60);
+        pothos.setPrice(19.99);
+        pothos.setHasPlanter(false);
+        pothos.setDescription("Eine pflegeleichte Hängepflanze mit herzförmigen Blättern.");
+        pothos.setPotCircumference(20.0);
+        pothos.setPlantCircumference(35.0);
+        pothos.setTags(Arrays.asList("Zimmerpflanzen", "Rankpflanzen", "Pflegeleicht"));
+        pothos.setSeller(user1);
+        plantService.savePlant(pothos);
+
+        Plant snakePlant = new Plant();
+        snakePlant.setTitle("Sansevieria trifasciata (Bogenhanf)");
+        snakePlant.setPhotos(Arrays.asList("sansevieria.jpg"));
+        snakePlant.setHeight(70);
+        snakePlant.setPrice(24.99);
+        snakePlant.setHasPlanter(true);
+        snakePlant.setDescription("Eine robuste Pflanze mit schwertförmigen, aufrechten Blättern.");
+        snakePlant.setPotCircumference(22.0);
+        snakePlant.setPlantCircumference(38.0);
+        snakePlant.setTags(Arrays.asList("Zimmerpflanzen", "Sukkulenten", "Pflegeleicht"));
+        snakePlant.setSeller(user1);
+        plantService.savePlant(snakePlant);
+
+        Plant peaceLily = new Plant();
+        peaceLily.setTitle("Spathiphyllum (Einblatt)");
+        peaceLily.setPhotos(Arrays.asList("spathiphyllum.jpg"));
+        peaceLily.setHeight(50);
+        peaceLily.setPrice(21.99);
+        peaceLily.setHasPlanter(true);
+        peaceLily.setDescription("Eine elegante Pflanze mit weißen Blüten und glänzenden Blättern.");
+        peaceLily.setPotCircumference(25.0);
+        peaceLily.setPlantCircumference(45.0);
+        peaceLily.setTags(Arrays.asList("Zimmerpflanzen", "Blütenpflanzen", "Pflegeleicht"));
+        peaceLily.setSeller(user1);
+        plantService.savePlant(peaceLily);
+
+
 
         //*******************
         //Care Instruction
