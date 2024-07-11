@@ -46,21 +46,33 @@
     </div>
     <div class="col-md-8">
       <h2 th:text="${plant.title}"></h2>
-      <p><strong>Preis:</strong> <span th:text="${plant.price}"></span></p>
-      <p><strong>Höhe:</strong> <span th:text="${plant.height}"></span></p>
       <p>
-        <strong>Mit Topf:</strong>
-        <span th:text="${plant.hasPlanter ? 'Ja, ' : 'Nein'}">Mit Topf</span>
-        <span th:if="${plant.hasPlanter} == true">Topfumfang:</span>
-        <span th:if="${plant.hasPlanter} == true"   th:text="${plant.potCircumference}">Topfumfang</span>
-        <span th:if="${plant.hasPlanter} == true"> cm</span></span>
+        <strong th:text="#{advert.price}">Preis:</strong>
+        <span th:text="${plant.price}"></span>
       </p>
-      <p><strong>Umfang der Pflanze:</strong> <span th:text="${plant.plantCircumference}"></span></p>
-      <p><strong>Beschreibung:</strong> <span th:text="${plant.description}"></span></p>
+      <p>
+        <strong th:text="#{advert.height}">Höhe:</strong>
+        <span th:text="${plant.height}"></span>
+      </p>
+      <p>
+        <strong th:text="#{advert.withPot}">Mit Topf:</strong>
+        <span th:text="${plant.hasPlanter ? 'Ja, ' : 'Nein'}">Mit Topf</span>
+        <span th:if="${plant.hasPlanter} == true" th:text="#{advert.potCircumference}">Topfumfang:</span>
+        <span th:if="${plant.hasPlanter} == true" th:text="${plant.potCircumference}">Topfumfang</span>
+        <span th:if="${plant.hasPlanter} == true"> cm</span>
+      </p>
+      <p>
+        <strong th:text="#{advert.plantCircumference}">Umfang der Pflanze:</strong>
+        <span th:text="${plant.plantCircumference}"></span>
+      </p>
+      <p>
+        <strong th:text="#{advert.description}">Beschreibung:</strong>
+        <span th:text="${plant.description}"></span>
+      </p>
       <p><strong>Tags:</strong> <span th:text="${plant.getTagsAsString()}"></span></p>
-      <a th:href="@{'/edit/' + ${plant.plantID}}" class="btn btn-secondary" style="border-color: #354733; background-color: #354733; color:#F3F3FB">Inserat bearbeiten</a>
+      <a th:href="@{'/edit/' + ${plant.plantID}}" class="btn btn-secondary" style="border-color: #354733; background-color: #354733; color:#F3F3FB" th:text="#{advert.editPlant}">Inserat bearbeiten</a>
       <form method="POST" th:action="@{/delete/{id}(id=${plant.plantID})}" style="display: inline" >
-        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this plant?');" style="border-color:#354733; background-color: #F3F3FB; color: #354733">Inserat löschen</button>
+        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this plant?');" style="border-color:#354733; background-color: #F3F3FB; color: #354733" th:text="#{advert.deletePlant}">Inserat löschen</button>
       </form>
     </div>
   </div>

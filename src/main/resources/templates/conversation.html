@@ -69,11 +69,11 @@
     </div>
         <div class="messageInput">
             <form th:action="@{/sendMessage}" method="post" onsubmit="return validateMessage()">
-                <input name="messageInput" id="messageInput" type="text" placeholder="Nachricht eingeben"/>
+                <input name="messageInput" id="messageInput" type="text" th:placeholder="#{conversation.enterMessage}"/>
                 <input name="conversationId" type="hidden" th:value="${specificConversation.getConversationId()}"/>
 
-                <button th:href="@{/sendMessage}" id="sendButton" class="btn btn-outline-success" type="submit" style="background-color: #F3F3FB; color: #354733; border-color: #354733;">
-                    Nachricht senden
+                <button th:href="@{/sendMessage}" id="sendButton" class="btn btn-outline-success" type="submit" style="background-color: #F3F3FB; color: #354733; border-color: #354733;"
+                    th:text="#{advert.sendMessage}">Nachricht senden
                 </button>
             </form>
 
@@ -82,8 +82,8 @@
         </div>
     <div class="card-footer">
         <div class="flex-box justify-content-between">
-            <a th:href="@{/endConversation}" class="btn btn-outline-success" type="button" style="background-color: #354733; color: #F3F3FB; border-color: #354733;">Konversation
-                verlassen</a>
+            <a th:href="@{/endConversation}" class="btn btn-outline-success" type="button" style="background-color: #354733; color: #F3F3FB; border-color: #354733;"
+                th:text="#{conversation.leaveConversation}">Konversation verlassen</a>
 
             <a th:if="${specificConversation.getPlant().getSeller().getUsername().equals(currentUsername) and specificConversation.getPlant().getBuyerFinal() == null}"
                th:href="@{/sold(conversationId=${specificConversation.getId()})}" class="btn btn-outline-success" type="button"

@@ -52,31 +52,31 @@
     <div class="col-md-8">
       <h2 th:text="${plant.title}"></h2>
 
-      <p><strong>Preis:</strong> <span th:text="${plant.price}"></span></p>
-      <p><strong>Höhe:</strong> <span th:text="${plant.height}"></span></p>
+      <p><strong th:text="#{advert.price}">Preis:</strong> <span th:text="${plant.price}"></span></p>
+      <p><strong th:text="#{advert.height}">Höhe:</strong> <span th:text="${plant.height}"></span></p>
       <p>
-        <strong>Mit Topf:</strong>
+        <strong th:text="#{advert.withPot}">Mit Topf:</strong>
         <span th:text="${plant.hasPlanter ? 'Ja, ' : 'Nein'}">Mit Topf</span>
-        <span th:if="${plant.hasPlanter} == true">Topfumfang:</span>
+        <span th:if="${plant.hasPlanter} == true" th:text="#{advert.potCircumference}">Topfumfang:</span>
         <span th:if="${plant.hasPlanter} == true"   th:text="${plant.potCircumference}">Topfumfang</span>
         <span th:if="${plant.hasPlanter} == true"> cm</span></span>
       </p>
-      <p><strong>Umfang der Pflanze:</strong> <span th:text="${plant.plantCircumference}"></span></p>
-      <p><strong>Beschreibung:</strong> <span th:text="${plant.description}"></span></p>
+      <p><strong th:text="#{advert.plantCircumference}">Umfang der Pflanze:</strong> <span th:text="${plant.plantCircumference}"></span></p>
+      <p><strong th:text="#{advert.description}">Beschreibung:</strong> <span th:text="${plant.description}"></span></p>
       <p><strong>Tags:</strong> <span th:text="${plant.getTagsAsString()}"></span></p>
 
-      <a th:href="@{/conversation(plantId=${plant.plantID})}" class="btn btn-primary" id="startConversationButton" style="border-color: #354733; background-color: #354733; color:#F3F3FB">Nachricht schreiben</a>
+      <a th:href="@{/conversation(plantId=${plant.plantID})}" class="btn btn-primary" id="startConversationButton" style="border-color: #354733; background-color: #354733; color:#F3F3FB" th:text="#{advert.writeMessage}">Nachricht schreiben</a>
 
       <div class = "favButton">
         <form th:if="${!isOnFavesList}" th:action="@{/addToFaves/{id}(id=${plant.plantID})}" method="post">
-          <button type="submit" class="btn btn-success" style="border-color:#354733; background-color: #F3F3FB; color: #354733">Zur Merkliste hinzufügen</button>
+          <button type="submit" class="btn btn-success" style="border-color:#354733; background-color: #F3F3FB; color: #354733" th:text="#{advert.addToFaves}">Zur Merkliste hinzufügen</button>
         </form>
       </div>
 
 
       <div class="favDeleteButton">
         <form th:if="${isOnFavesList}" th:action="@{/removeFromFaves/{id}(id=${plant.plantID})}" method="post">
-          <button type="submit" class="btn btn-danger" style="border-color:#354733; background-color: #F3F3FB; color: #354733">Von Merkliste entfernen</button>
+          <button type="submit" class="btn btn-danger" style="border-color:#354733; background-color: #F3F3FB; color: #354733" th:text="#{advert.deleteFromFaves}">Von Merkliste entfernen</button>
         </form>
       </div>
 
